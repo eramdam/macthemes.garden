@@ -1,29 +1,25 @@
-import Airtable from "airtable";
+import Airtable, { FieldSet, Records } from "airtable";
 import fs from "fs-extra";
 import async from "async";
+import { AssetCache } from "@11ty/eleventy-fetch";
 
 const base = new Airtable({ apiKey: process.env.AIRTABLE_TOKEN }).base(
   process.env.AIRTABLE_BASE_ID,
 );
 
 (async () => {
-  const records = await base("Kaleidoscope Schemes")
-    .select({
-      maxRecords: 5_000,
-      view: "Grid view",
-    })
-    .all();
+  const records = await grabRawRecords();
   const normalizedRecords = records.map((record) => {
     return {
-      name: record.get("Name") as string,
-      description: record.get("Description") as string,
-      authors: record.get("Author(s)") as string,
-      year: record.get("Year") as string,
-      about: (record.get("About") as Airtable.Attachment[])[0],
-      showcase: (record.get("Showcase") as Airtable.Attachment[])[0],
-      archiveFile: (record.get("Archive file") as Airtable.Attachment[])[0],
+      name: record.fields["Name"] as string,
+      description: record.fields["Description"] as string,
+      authors: record.fields["Author(s)"] as string,
+      year: record.fields["Year"] as string,
+      about: (record.fields["About"] as Airtable.Attachment[])[0],
+      showcase: (record.fields["Showcase"] as Airtable.Attachment[])[0],
+      archiveFile: (record.fields["Archive file"] as Airtable.Attachment[])[0],
       ksaSampler: (
-        record.get("KSA Sampler transparent") as Airtable.Attachment[]
+        record.fields["KSA Sampler transparent"] as Airtable.Attachment[]
       )[0],
     };
   });
@@ -62,6 +58,25 @@ const base = new Airtable({ apiKey: process.env.AIRTABLE_TOKEN }).base(
     "utf-8",
   );
 })();
+
+type Foo = Records<FieldSet>;
+async function grabRawRecords(): Promise<Foo> {
+  const cache = new AssetCache("garden.macthemes.airtable");
+
+  if (cache.isCacheValid("1d")) {
+    return cache.getCachedValue() as Foo;
+  }
+  const records = await base("Kaleidoscope Schemes")
+    .select({
+      maxRecords: 5_000,
+      view: "Grid view",
+    })
+    .all();
+
+  await cache.save(records, "json");
+
+  return records;
+}
 
 async function downloadAttachment(
   attachment: Airtable.Attachment,
