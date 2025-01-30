@@ -1,0 +1,84 @@
+import Airtable from "airtable";
+import fs from "fs-extra";
+import async from "async";
+
+const base = new Airtable({ apiKey: process.env.AIRTABLE_TOKEN }).base(
+  process.env.AIRTABLE_BASE_ID,
+);
+
+(async () => {
+  const records = await base("Kaleidoscope Schemes")
+    .select({
+      maxRecords: 5_000,
+      view: "Grid view",
+    })
+    .all();
+  const normalizedRecords = records.map((record) => {
+    return {
+      name: record.get("Name") as string,
+      description: record.get("Description") as string,
+      authors: record.get("Author(s)") as string,
+      year: record.get("Year") as string,
+      about: (record.get("About") as Airtable.Attachment[])[0],
+      showcase: (record.get("Showcase") as Airtable.Attachment[])[0],
+      archiveFile: (record.get("Archive file") as Airtable.Attachment[])[0],
+      ksaSampler: (
+        record.get("KSA Sampler transparent") as Airtable.Attachment[]
+      )[0],
+    };
+  });
+  console.log(`Grabbed ${normalizedRecords.length} records`);
+
+  console.log(`Downloading ${normalizedRecords.length * 4} attachments...`);
+  const filePaths = await async.flatMapLimit<
+    (typeof normalizedRecords)[0],
+    { filepath: string; id: string }
+  >(normalizedRecords, 10, async (record: (typeof normalizedRecords)[0]) => {
+    const about = await downloadAttachment(record.about, "about-");
+    const archiveFile = await downloadAttachment(record.archiveFile);
+    const ksaSampler = await downloadAttachment(
+      record.ksaSampler,
+      "ksa-sampler-",
+    );
+    const showcase = await downloadAttachment(record.showcase, "showcase-");
+
+    return [about, archiveFile, ksaSampler, showcase];
+  });
+
+  const normalizedRecordsWithFilePaths = normalizedRecords.map((record) => {
+    return {
+      ...record,
+      showcase: filePaths.find((f) => f.id === record.showcase.id)?.filepath,
+      about: filePaths.find((f) => f.id === record.about.id)?.filepath,
+      archiveFile: filePaths.find((f) => f.id === record.archiveFile.id)
+        ?.filepath,
+      ksaSampler: filePaths.find((f) => f.id === record.ksaSampler.id)
+        ?.filepath,
+    };
+  });
+  await fs.writeFile(
+    "data/airtable.json",
+    JSON.stringify(normalizedRecordsWithFilePaths, null, 2),
+    "utf-8",
+  );
+})();
+
+async function downloadAttachment(
+  attachment: Airtable.Attachment,
+  prefix = "",
+) {
+  const filename = `${prefix}${attachment.id}-${attachment.filename}`;
+  const filepath = `data/attachments/${filename}`;
+
+  if (await fs.exists(filepath)) {
+    console.log(`Cache hit for ${filename}`);
+    return { id: attachment.id, filepath };
+  }
+
+  const response = await fetch(attachment.url);
+  const buffer = await response.arrayBuffer();
+
+  console.log(`Downloaded ${filename}`);
+  await fs.writeFile(filepath, Buffer.from(buffer));
+  return { id: attachment.id, filepath };
+}
