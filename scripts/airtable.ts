@@ -1,7 +1,7 @@
 import Airtable, { FieldSet, Records } from "airtable";
-import fs from "fs-extra";
 import async from "async";
-import { AssetCache } from "@11ty/eleventy-fetch";
+import fs from "fs-extra";
+import { airtableCache } from "./caches";
 
 const base = new Airtable({ apiKey: process.env.AIRTABLE_TOKEN }).base(
   process.env.AIRTABLE_BASE_ID || "",
@@ -79,10 +79,8 @@ async function downloadAttachment(
 }
 
 async function grabRawRecords(): Promise<Records<FieldSet>> {
-  const cache = new AssetCache("garden.macthemes.airtable");
-
-  if (cache.isCacheValid("1d")) {
-    return cache.getCachedValue() as Records<FieldSet>;
+  if (airtableCache.isCacheValid("1d")) {
+    return airtableCache.getCachedValue() as Records<FieldSet>;
   }
   const records = await base("Kaleidoscope Schemes")
     .select({
@@ -91,7 +89,7 @@ async function grabRawRecords(): Promise<Records<FieldSet>> {
     })
     .all();
 
-  await cache.save(records, "json");
+  await airtableCache.save(records, "json");
 
   return records;
 }
