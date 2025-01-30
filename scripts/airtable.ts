@@ -4,7 +4,7 @@ import async from "async";
 import { AssetCache } from "@11ty/eleventy-fetch";
 
 const base = new Airtable({ apiKey: process.env.AIRTABLE_TOKEN }).base(
-  process.env.AIRTABLE_BASE_ID,
+  process.env.AIRTABLE_BASE_ID || "",
 );
 
 (async () => {
