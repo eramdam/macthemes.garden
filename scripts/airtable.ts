@@ -12,7 +12,6 @@ const base = new Airtable({ apiKey: process.env.AIRTABLE_TOKEN }).base(
   const normalizedRecords = records.map((record) => {
     return {
       name: record.fields["Name"] as string,
-      description: record.fields["Description"] as string,
       authors: record.fields["Author(s)"] as string,
       year: record.fields["Year"] as string,
       about: (record.fields["About"] as Airtable.Attachment[])[0],
@@ -59,25 +58,6 @@ const base = new Airtable({ apiKey: process.env.AIRTABLE_TOKEN }).base(
   );
 })();
 
-type Foo = Records<FieldSet>;
-async function grabRawRecords(): Promise<Foo> {
-  const cache = new AssetCache("garden.macthemes.airtable");
-
-  if (cache.isCacheValid("1d")) {
-    return cache.getCachedValue() as Foo;
-  }
-  const records = await base("Kaleidoscope Schemes")
-    .select({
-      maxRecords: 5_000,
-      view: "Grid view",
-    })
-    .all();
-
-  await cache.save(records, "json");
-
-  return records;
-}
-
 async function downloadAttachment(
   attachment: Airtable.Attachment,
   prefix = "",
@@ -96,4 +76,22 @@ async function downloadAttachment(
   console.log(`Downloaded ${filename}`);
   await fs.writeFile(filepath, Buffer.from(buffer));
   return { id: attachment.id, filepath };
+}
+
+async function grabRawRecords(): Promise<Records<FieldSet>> {
+  const cache = new AssetCache("garden.macthemes.airtable");
+
+  if (cache.isCacheValid("1d")) {
+    return cache.getCachedValue() as Records<FieldSet>;
+  }
+  const records = await base("Kaleidoscope Schemes")
+    .select({
+      maxRecords: 5_000,
+      view: "Grid view",
+    })
+    .all();
+
+  await cache.save(records, "json");
+
+  return records;
 }
