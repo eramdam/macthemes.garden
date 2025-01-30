@@ -1,7 +1,6 @@
 [
   {
     "name": "BeBox",
-    "description": "Be a Beauty. Be a Beast. Just Be.",
     "authors": "Greg Landweber, Ben Mackin, Stefan Anthony & Jon Alexander",
     "year": "2001",
     "about": "data/attachments/about-attdYRSLc2iL6hF0j-image.png",
@@ -11,7 +10,6 @@
   },
   {
     "name": "Antique",
-    "description": "A warm scheme that should put you in mind of that beautiful armoire at the antique store.",
     "authors": "Arlo Rose",
     "year": "2001",
     "about": "data/attachments/about-attA0R0Viww0pBIXq-image.png",
@@ -21,7 +19,6 @@
   },
   {
     "name": "Ice",
-    "description": "Brrrrr... Someone close that window!",
     "authors": "Arlo Rose",
     "year": "2001",
     "about": "data/attachments/about-attdKRSZdqHE2AfLL-image.png",
@@ -31,7 +28,6 @@
   },
   {
     "name": "Onyx",
-    "description": "A dark smooth industrial scheme that will make you gasp for air! ",
     "authors": "Arlo Rose",
     "year": "2001",
     "about": "data/attachments/about-attpHNBpNzbjFxnsO-image.png",
@@ -41,7 +37,6 @@
   },
   {
     "name": "Scherzo!",
-    "description": "This funky little scheme is here to put you in mind of a better place where just looking at your feet makes you smile.",
     "authors": "Arlo Rose",
     "year": "2001",
     "about": "data/attachments/about-attlrIENBgrvXaAPJ-image.png",
@@ -51,7 +46,6 @@
   },
   {
     "name": "Sherbet",
-    "description": "Remember that yummy orange sherbet when you were a kid? Let this scheme remind you of those days!",
     "authors": "Arlo Rose",
     "year": "2001",
     "about": "data/attachments/about-attU28UCi5AUOdm4h-image.png",
@@ -61,7 +55,6 @@
   },
   {
     "name": "System 7",
-    "description": "For that old fashioned look ",
     "authors": "Gregory D. Landweber",
     "year": "2001",
     "about": "data/attachments/about-attrZDFWVgQfw11YH-image.png",
@@ -71,7 +64,6 @@
   },
   {
     "name": "Apple Platinum",
-    "description": "The standard Mac OS 8 appearance",
     "authors": "Gregory D. Landweber and Arlo Rose",
     "year": "2001",
     "about": "data/attachments/about-atte0gF9oeEI4MVRz-image.png",
@@ -81,7 +73,6 @@
   },
   {
     "name": "doldrum",
-    "description": "visit my pathetic web site: http://home.earthlink.net/~hardc0rp ...humor me",
     "authors": "hardc0rp",
     "year": "1997",
     "about": "data/attachments/about-attQTKfshTKTJW8lW-image.png",
@@ -91,7 +82,6 @@
   },
   {
     "name": "Flag Waver",
-    "description": "Flag Waver! An attempt to Legitimize the captain America color scheme",
     "authors": "Centuri0n, Calcorp Comics, Jim H., Albie Wong and Scott Hunter",
     "year": "1998",
     "about": "data/attachments/about-atth3lzqIGgwhJGme-image.png",
@@ -101,7 +91,6 @@
   },
   {
     "name": "Lovetto 1.5",
-    "description": "をお使いいただきありがとうございます。 このスキームについてのご連絡は下記まで 暇してますのでお気軽にどうぞ、 このソフトについて当方は責任を負いかねます。 ご了承ください。 ",
     "authors": "Junichi Tabuchi / 樹日 田淵",
     "year": "1998",
     "about": "data/attachments/about-attl1ZP2FALRN4WG5-image.png",
@@ -111,7 +100,6 @@
   },
   {
     "name": "Grrlz!",
-    "description": "Grrlz! 1.1 makes your Mac crazy girly. Not recommended for serious users...!",
     "authors": "Tomomi Imura",
     "year": "1998",
     "about": "data/attachments/about-att4bMipRTqMVHTkp-image.png",
@@ -355,7 +343,6 @@
   },
   {
     "name": "Platinum Sand",
-    "description": "Mac OS 8 at the beach",
     "authors": "Scott Hunter and Antietam DesignWorks",
     "year": "2000",
     "about": "data/attachments/about-attBMNzJkW3HY4kWa-image.png",
@@ -392,7 +379,6 @@
   },
   {
     "name": "Snow Queen",
-    "description": "Happy Winter!",
     "authors": "Waynne Warren",
     "year": "2001",
     "about": "data/attachments/about-att2QlmdhSRRGwvU6-image.png",
@@ -411,7 +397,6 @@
   },
   {
     "name": "The 60's",
-    "description": "for Kaleidoscope 1.5",
     "authors": "B. Shooby",
     "year": "1999",
     "about": "data/attachments/about-attBgg6ZNiPR63oMc-image.png",
@@ -547,7 +532,6 @@
   },
   {
     "name": "!work",
-    "description": "!work is inspired by Celtic knots. It is based on Apple Greyscale, which was created by Greg Landweber and Frederick J. Bass.",
     "authors": "John Williams",
     "year": "1999",
     "about": "data/attachments/about-attz1L7tGu5laXVrE-image.png",
@@ -557,7 +541,6 @@
   },
   {
     "name": "Burrr",
-    "description": "OS 8 savvy",
     "authors": "Stephen K. Crocker",
     "year": "1997",
     "about": "data/attachments/about-attU2juetG519wAF7-image.png",
@@ -567,7 +550,6 @@
   },
   {
     "name": "Hardware",
-    "description": "Hardware uses familiar forms found in your home town hardware store.\n",
     "authors": "Todd Childers",
     "year": "1997",
     "about": "data/attachments/about-attMNgr4RYCwlZIzB-image.png",
@@ -586,7 +568,6 @@
   },
   {
     "name": "\"Mystery\"",
-    "description": "I saw a \"Desktop Theme\" on a Wintel machine and was actually impressed. Ine \"theme\" was titled \"Mystery\" and was really very cool, so I went home and made an equivalent for the Mac. I Just wish we could use sounds, too..",
     "authors": "Terry Duncan",
     "year": "1999",
     "about": "data/attachments/about-attmTPFoNz6D3tvA1-image.png",
@@ -632,7 +613,6 @@
   },
   {
     "name": "The Buck Stops Here",
-    "description": "Mac OS 8.1 Savvy!\n",
     "authors": "Stephen K. Crocker",
     "year": "1998",
     "about": "data/attachments/about-attRWPd3uRvnnDfkS-image.png",
@@ -840,7 +820,6 @@
   },
   {
     "name": "Co-Pilot",
-    "description": "Power in the palm of your hand",
     "authors": "Duncan Cowan",
     "year": "1999-2000",
     "about": "data/attachments/about-attfy4iEOsZlscpHb-image.png",
@@ -931,7 +910,6 @@
   },
   {
     "name": "Iridium (Original Blue)",
-    "description": "This is my second Kaleidoscope scheme to be unleashed on the world. (\"Stylus\" was the first This is Version 1.0; which has some minor cosmetic bug-fixes and more custom icons. My e-mail is evanthompson@earthlink.net, if you have any questions.",
     "authors": "Evan Thompson",
     "year": "1998",
     "about": "data/attachments/about-attauUOZPuJ4jAxWo-image.png",
@@ -941,7 +919,6 @@
   },
   {
     "name": "Iridium (Copper)",
-    "description": "This is my second Kaleidoscope scheme to be unleashed on the world. (\"Stylus\" was the first This is Version 1.0; which has some minor cosmetic bug-fixes and more custom icons. My e-mail is evanthompson@earthlink.net, if you have any questions.",
     "authors": "Evan Thompson",
     "year": "1998",
     "about": "data/attachments/about-attDqLO03eYbNGHEK-image.png",
@@ -951,7 +928,6 @@
   },
   {
     "name": "Iridium (Lime)",
-    "description": "This is my second Kaleidoscope scheme to be unleashed on the world. (\"Stylus\" was the first This is Version 1.0; which has some minor cosmetic bug-fixes and more custom icons. My e-mail is evanthompson@earthlink.net, if you have any questions.",
     "authors": "Evan Thompson",
     "year": "1998",
     "about": "data/attachments/about-attNIbEs9Xc4eKUqr-image.png",
@@ -961,7 +937,6 @@
   },
   {
     "name": "Iridium (Magenta)",
-    "description": "This is my second Kaleidoscope scheme to be unleashed on the world. (\"Stylus\" was the first This is Version 1.0; which has some minor cosmetic bug-fixes and more custom icons. My e-mail is evanthompson@earthlink.net, if you have any questions.",
     "authors": "Evan Thompson",
     "year": "1998",
     "about": "data/attachments/about-attZ4PsGg4XHC6oSJ-image.png",
@@ -971,7 +946,6 @@
   },
   {
     "name": "Iridium (Violet)",
-    "description": "This is my second Kaleidoscope scheme to be unleashed on the world. (\"Stylus\" was the first This is Version 1.0; which has some minor cosmetic bug-fixes and more custom icons. My e-mail is evanthompson@earthlink.net, if you have any questions.",
     "authors": "Evan Thompson",
     "year": "1998",
     "about": "data/attachments/about-attDXIDWhc9Va0tws-image.png",
@@ -981,7 +955,6 @@
   },
   {
     "name": "Iridium (Frost)",
-    "description": "This is my second Kaleidoscope scheme to be unleashed on the world. (\"Stylus\" was the first This is Version 1.0; which has some minor cosmetic bug-fixes and more custom icons. My e-mail is evanthompson@earthlink.net, if you have any questions.",
     "authors": "Evan Thompson",
     "year": "1998",
     "about": "data/attachments/about-attQrwaH8FtkftAto-image.png",
@@ -991,7 +964,6 @@
   },
   {
     "name": "Iridium (Salmon)",
-    "description": "This is my second Kaleidoscope scheme to be unleashed on the world. (\"Stylus\" was the first This is Version 1.0; which has some minor cosmetic bug-fixes and more custom icons. My e-mail is evanthompson@earthlink.net, if you have any questions.",
     "authors": "Evan Thompson",
     "year": "1998",
     "about": "data/attachments/about-attkBMQhMjSvUcpzh-image.png",
@@ -1001,7 +973,6 @@
   },
   {
     "name": "Iridium (Soft Gold)",
-    "description": "This is my second Kaleidoscope scheme to be unleashed on the world. (\"Stylus\" was the first This is Version 1.0; which has some minor cosmetic bug-fixes and more custom icons. My e-mail is evanthompson@earthlink.net, if you have any questions.",
     "authors": "Evan Thompson",
     "year": "1998",
     "about": "data/attachments/about-attVQVRLt6JhBSoSA-image.png",
@@ -1227,7 +1198,6 @@
   },
   {
     "name": "4 am",
-    "description": "That Hideous hour when the birds won't shut up...\n",
     "authors": "rude lizard graphics",
     "year": "1998",
     "about": "data/attachments/about-atttr3OE52mM1at4O-image.png",
@@ -1237,7 +1207,6 @@
   },
   {
     "name": "4 am black",
-    "description": "That Hideous hour when the birds won't shut up...\n",
     "authors": "rude lizard graphics",
     "year": "1998",
     "about": "data/attachments/about-att6w4LZWvL6Oz1De-image.png",
@@ -1247,7 +1216,6 @@
   },
   {
     "name": "4 am easy",
-    "description": "That Hideous hour when the birds won't shut up...\n",
     "authors": "rude lizard graphics",
     "year": "1998",
     "about": "data/attachments/about-attiJFWGYl5FGNkQG-image.png",
@@ -3169,7 +3137,6 @@
   },
   {
     "name": "Aquamarine",
-    "description": "\n\n\n\n",
     "authors": "Martha Royer",
     "year": "2000",
     "about": "data/attachments/about-attkxxX1AnIc1HvUU-image.png",
@@ -3179,7 +3146,6 @@
   },
   {
     "name": "Aquamarine Ornamental",
-    "description": "\n\n\n\n",
     "authors": "Martha Royer",
     "year": "2000",
     "about": "data/attachments/about-att1mNJJKUoB7HoW9-image.png",
