@@ -14,12 +14,14 @@ const base = new Airtable({ apiKey: process.env.AIRTABLE_TOKEN }).base(
       name: record.fields["Name"] as string,
       authors: record.fields["Author(s)"] as string,
       year: record.fields["Year"] as string,
-      about: (record.fields["About"] as Airtable.Attachment[])[0],
-      showcase: (record.fields["Showcase"] as Airtable.Attachment[])[0],
-      archiveFile: (record.fields["Archive file"] as Airtable.Attachment[])[0],
+      about: (record.fields["About"] as Airtable.Attachment[])?.[0],
+      showcase: (record.fields["Showcase"] as Airtable.Attachment[])?.[0],
+      archiveFile: (
+        record.fields["Archive file"] as Airtable.Attachment[]
+      )?.[0],
       ksaSampler: (
         record.fields["KSA Sampler transparent"] as Airtable.Attachment[]
-      )[0],
+      )?.[0],
     };
   });
   console.log(`Grabbed ${normalizedRecords.length} records`);
@@ -37,7 +39,7 @@ const base = new Airtable({ apiKey: process.env.AIRTABLE_TOKEN }).base(
     );
     const showcase = await downloadAttachment(record.showcase, "showcase-");
 
-    return [about, archiveFile, ksaSampler, showcase];
+    return [about, archiveFile, ksaSampler, showcase].filter((f) => !!f);
   });
 
   const normalizedRecordsWithFilePaths = normalizedRecords.map((record) => {
@@ -59,9 +61,12 @@ const base = new Airtable({ apiKey: process.env.AIRTABLE_TOKEN }).base(
 })();
 
 async function downloadAttachment(
-  attachment: Airtable.Attachment,
+  attachment: Airtable.Attachment | undefined,
   prefix = "",
-) {
+): Promise<{ id: string; filepath: string } | undefined> {
+  if (!attachment) {
+    return undefined;
+  }
   const filename = `${prefix}${attachment.id}-${attachment.filename}`;
   const filepath = `data/attachments/${filename}`;
 
