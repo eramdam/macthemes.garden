@@ -89,7 +89,7 @@ main {
 .themes-grid .single-theme {
   display: grid;
   grid-template-rows: repeat(3, auto);
-  gap: 4px;
+  gap: 2px;
 }
 
 .themes-grid .single-theme img {
