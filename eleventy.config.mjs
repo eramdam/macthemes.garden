@@ -1,3 +1,5 @@
+import pluginWebc from "@11ty/eleventy-plugin-webc";
+
 /** @param {import("@11ty/eleventy").UserConfig} eleventyConfig */
 export default function (eleventyConfig) {
   eleventyConfig.addLiquidFilter("take", function (array, count) {
@@ -8,4 +10,8 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets");
   eleventyConfig.addPassthroughCopy("data/attachments", "/data");
   eleventyConfig.setServerPassthroughCopyBehavior("passthrough");
+  eleventyConfig.addPlugin(pluginWebc, {
+    components: "./src/_components/**/*.webc",
+    useTransform: true,
+  });
 }

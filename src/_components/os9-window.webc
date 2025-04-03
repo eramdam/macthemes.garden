@@ -1,0 +1,10 @@
+<div class="macos9-window">
+  <div class="macos9-window-titlebar">
+    <span></span>
+    <span class="title-text" @text="title"></span>
+    <span></span>
+  </div>
+  <div class="macos9-window-body">
+    <slot></slot>
+  </div>
+</div>

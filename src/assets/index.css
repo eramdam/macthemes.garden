@@ -74,21 +74,77 @@ main {
   }
 }
 
-.macos9-window-title {
+.themes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: auto;
+  gap: 20px;
+}
+
+.themes-grid .single-theme {
+  display: grid;
+  grid-template-rows: repeat(3, auto);
+  gap: 4px;
+  /* outline: 1px solid red; */
+}
+
+.themes-grid .single-theme img {
+  object-fit: contain;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+  max-height: 160px;
+  aspect-ratio: 1;
+}
+
+.macos9-window {
+  /* --padding: 10px;
+  padding: var(--padding); */
+
+  overflow: hidden;
   position: relative;
-  left: calc(var(--padding) * -1);
-  top: calc(var(--padding) * -1);
-  right: calc(var(--padding) * -1);
-  width: calc(100% + var(--padding) * 2);
+  background-color: var(--grays-400);
+  border: 1px solid var(--primary-black);
+  /* box-shadow: 2px 2px var(--primary-black); */
+
+  /* Window inner shadows/borders */
+  &::before {
+    content: "";
+    pointer-events: none;
+    inset: 0;
+    position: absolute;
+    z-index: 1;
+    box-shadow:
+      inset 1px 1px 0 rgb(from var(--primary-black) r g b / 10%),
+      inset -1px -1px 0 rgb(from var(--primary-black) r g b / 40%);
+    /* box-shadow:
+      inset -2px -2px rgba(from var(--primary-black) r g b / 40%),
+      inset 2px 2px var(--primary-white); */
+  }
+}
+
+.macos9-window-body {
+  display: block;
+
+  margin: 4px;
+  margin-top: 0;
+  border: 1px solid var(--primary-black);
+  box-shadow:
+    -1px -1px 0 rgb(from var(--primary-black) r g b / 40%),
+    1px 1px 0 var(--primary-white);
+
+  background-color: var(--primary-white);
+}
+
+.macos9-window-titlebar {
   padding: 2px 4px;
   background-color: var(--grays-400);
-  content: "";
   display: flex;
   gap: 4px;
   align-items: center;
 }
 
-.macos9-window-title > span:not([class]) {
+.macos9-window-titlebar > span:not([class]) {
   flex: 1;
   background-color: #dddddd;
   background-image: linear-gradient(
@@ -131,53 +187,9 @@ main {
   }
 }
 
-.macos9-window-title > span.title-text {
+.macos9-window-titlebar > span.title-text {
   background-color: var(--grays-400);
   height: 100%;
   display: inline-block;
   font-size: 12px;
-}
-
-.macos9-window {
-  --padding: 10px;
-  padding: var(--padding);
-
-  position: relative;
-  background-color: var(--grays-200);
-  outline: solid 1px var(--primary-black);
-  box-shadow: 2px 2px var(--primary-black);
-
-  &::before {
-    content: "";
-    pointer-events: none;
-    inset: 0;
-    position: absolute;
-    z-index: 1;
-    box-shadow:
-      inset -2px -2px rgba(from var(--primary-black) r g b / 40%),
-      inset 2px 2px var(--primary-white);
-  }
-}
-
-.themes-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: auto;
-  gap: 20px;
-}
-
-.themes-grid .single-theme {
-  display: grid;
-  grid-template-rows: repeat(3, auto);
-  gap: 4px;
-  /* outline: 1px solid red; */
-}
-
-.themes-grid .single-theme img {
-  object-fit: contain;
-  object-position: center;
-  width: 100%;
-  height: 100%;
-  max-height: 160px;
-  aspect-ratio: 1;
 }
