@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mac Themes Garden</title>
+  <link rel="stylesheet" href="assets/index.css">
+</head>
+
+<body>
+  <header>
+    <h1>Mac Themes Garden</h1>
+  </header>
+  <main class="macos9-window">
+    <div class="macos9-window-title">
+      <span></span>
+      <span class="title-text">
+        Index
+      </span>
+      <span></span>
+    </div>
+
+    <div class="themes-grid">
+      {% assign classic_themes = themes.classic %}
+      {%- for theme in classic_themes -%}
+      <div class="single-theme">
+        <img loading="lazy" decoding="async" src="/{{ theme.mainThumbnail }}" alt="">
+        <h4>
+          {{theme.name | escape}}
+        </h4>
+        <h5>{{ theme.authors | default: '-' }}</h5>
+        <h6>{{ theme.year | default: '-' }}</h6>
+      </div>
+      {%- endfor -%}
+    </div>
+  </main>
+
+
+</body>
+
+</html>

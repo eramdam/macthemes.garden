@@ -1,0 +1,183 @@
+:root {
+  /* Colors from https://www.figma.com/community/file/966779730364082883 */
+  --link-red: #ff0000;
+  --link: #202a87;
+  --primary-black: #262626;
+  --primary-white: #ffffff;
+  --grays-200: #eeeeee;
+  --grays-300: #dddddd;
+  --grays-400: #cccccc;
+  --grays-500: #bbbbbb;
+  --grays-600: #999999;
+  --grays-700: #808080;
+  --grays-800: #666666;
+  --color-azul: #333399;
+  --color-lavender: #ccccff;
+  --icon-color-azul: #6686b7;
+  --icon-color-bondi: #308f91;
+  --icon-color-copper: #cc6633;
+  --icon-color-crimson: #cc3333;
+  --icon-color-emerald: #339966;
+  --icon-color-french-blue: #666699;
+  --icon-color-gold: #999900;
+  --icon-color-ivy: #336633;
+  --icon-color-lavender: #6666cc;
+  --icon-color-magenta: #993399;
+  --icon-color-nutmeg: #996633;
+  --icon-color-pistachio: #b5e040;
+  --icon-color-plum: #996699;
+  --icon-color-poppy: #f46f19;
+  --icon-color-rose: #996666;
+  --icon-color-sapphire: #3366ff;
+  --icon-color-silver: #777777;
+  --icon-color-sunny: #d0af3e;
+  --icon-color-teal: #477979;
+  --icon-color-turquoise: #0099cc;
+  --icon-color-black: #000000;
+}
+
+::before,
+::after,
+* {
+  box-sizing: border-box;
+}
+
+:is(h1, h2, h3, h4, h5, h6) {
+  margin: 0;
+}
+
+body {
+  font-family:
+    "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  background-color: var(--color-lavender);
+}
+
+h1 {
+  font-family: Charter, "Bitstream Charter", "Sitka Text", Cambria, serif;
+}
+
+header > h1 {
+  text-align: center;
+  margin: 1em 0;
+}
+
+main {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+  main {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+.macos9-window-title {
+  position: relative;
+  left: calc(var(--padding) * -1);
+  top: calc(var(--padding) * -1);
+  right: calc(var(--padding) * -1);
+  width: calc(100% + var(--padding) * 2);
+  padding: 2px 4px;
+  background-color: var(--grays-400);
+  content: "";
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.macos9-window-title > span:not([class]) {
+  flex: 1;
+  background-color: #dddddd;
+  background-image: linear-gradient(
+    transparent,
+    transparent 50%,
+    var(--grays-600) 50%,
+    var(--grays-600)
+  );
+  background-size: 100% 2px;
+  height: 11px;
+
+  position: relative;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 1px;
+    background-size: 100% 2px;
+    display: block;
+  }
+
+  &::before {
+    background-image: linear-gradient(
+      #eeeeee,
+      #eeeeee 50%,
+      var(--grays-600) 50%,
+      var(--grays-600)
+    );
+  }
+  &::after {
+    right: 0;
+    background-image: linear-gradient(
+      #c5c5c5,
+      #c5c5c5 50%,
+      var(--grays-600) 50%,
+      var(--grays-600)
+    );
+  }
+}
+
+.macos9-window-title > span.title-text {
+  background-color: var(--grays-400);
+  height: 100%;
+  display: inline-block;
+  font-size: 12px;
+}
+
+.macos9-window {
+  --padding: 10px;
+  padding: var(--padding);
+
+  position: relative;
+  background-color: var(--grays-200);
+  outline: solid 1px var(--primary-black);
+  box-shadow: 2px 2px var(--primary-black);
+
+  &::before {
+    content: "";
+    pointer-events: none;
+    inset: 0;
+    position: absolute;
+    z-index: 1;
+    box-shadow:
+      inset -2px -2px rgba(from var(--primary-black) r g b / 40%),
+      inset 2px 2px var(--primary-white);
+  }
+}
+
+.themes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: auto;
+  gap: 20px;
+}
+
+.themes-grid .single-theme {
+  display: grid;
+  grid-template-rows: repeat(3, auto);
+  gap: 4px;
+  /* outline: 1px solid red; */
+}
+
+.themes-grid .single-theme img {
+  object-fit: contain;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+  max-height: 160px;
+  aspect-ratio: 1;
+}
