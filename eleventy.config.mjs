@@ -8,7 +8,7 @@ export default function (eleventyConfig) {
   eleventyConfig.setInputDirectory("src");
   eleventyConfig.setOutputDirectory("_site");
   eleventyConfig.addPassthroughCopy("src/assets");
-  eleventyConfig.addPassthroughCopy("data/attachments", "data");
+  eleventyConfig.addPassthroughCopy("src/themes");
   eleventyConfig.addPlugin(pluginWebc, {
     components: "./src/_components/**/*.webc",
     useTransform: true,

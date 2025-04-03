@@ -64,7 +64,7 @@ const base = new Airtable({ apiKey: process.env.AIRTABLE_TOKEN }).base(
     .filter((f) => !!f && Object.values(f).filter((v) => !!v).length);
 
   await fs.writeFile(
-    "data/airtable.json",
+    "src/themes/airtable.json",
     JSON.stringify(normalizedRecordsWithFilePaths, null, 2),
     "utf-8",
   );
@@ -78,7 +78,7 @@ async function downloadAttachment(
     return undefined;
   }
   const filename = `${prefix}${attachment.id}-${attachment.filename}`;
-  const filepath = `data/attachments/${filename}`;
+  const filepath = `src/themes/attachments/${filename}`;
 
   if (await fs.exists(filepath)) {
     console.log(`Cache hit for ${filename}`);
@@ -95,7 +95,7 @@ async function downloadAttachment(
 
 async function grabRawRecords(): Promise<Records<FieldSet>> {
   if (airtableCache.isCacheValid("1d")) {
-    return airtableCache.getCachedValue() as Records<FieldSet>;
+    return airtableCache.getCachedValue() as unknown as Records<FieldSet>;
   }
   const records = await base("Kaleidoscope Schemes")
     .select({

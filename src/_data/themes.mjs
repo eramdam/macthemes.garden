@@ -1,5 +1,5 @@
-import themesKaleidoscopeBot from "../../data/original.json" with { type: "json" };
-import themesKaleidoscopeAirtable from "../../data/airtable.json" with { type: "json" };
+import themesKaleidoscopeBot from "../themes/original.json" with { type: "json" };
+import themesKaleidoscopeAirtable from "../themes/airtable.json" with { type: "json" };
 
 export function classic() {
   const botThemesNotOnAirtableYet = themesKaleidoscopeBot.filter((theme) => {
