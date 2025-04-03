@@ -1,8 +1,11 @@
-<div class="macos9-window">
+<div class="macos9-window" :id="uid">
   <div class="macos9-window-titlebar">
-    <span></span>
+    <button class="button close" data-action="close"></button>
+    <span class="filler"></span>
     <span class="title-text" @text="title"></span>
-    <span></span>
+    <span class="filler"></span>
+    <button class="button zoom" data-action="zoom"></button>
+    <button class="button collapse" data-action="collapse"></button>
   </div>
   <div class="macos9-window-body">
     <slot></slot>
