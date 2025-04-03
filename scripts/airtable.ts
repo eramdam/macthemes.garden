@@ -29,7 +29,7 @@ const base = new Airtable({ apiKey: process.env.AIRTABLE_TOKEN }).base(
   console.log(`Downloading ${normalizedRecords.length * 4} attachments...`);
   const filePaths = await async.flatMapLimit<
     (typeof normalizedRecords)[0],
-    { filepath: string; id: string }
+    { filepath: string; id: string; filename: string }
   >(normalizedRecords, 10, async (record: (typeof normalizedRecords)[0]) => {
     const about = await downloadAttachment(record.about, "about-");
     const archiveFile = await downloadAttachment(record.archiveFile);
@@ -42,17 +42,27 @@ const base = new Airtable({ apiKey: process.env.AIRTABLE_TOKEN }).base(
     return [about, archiveFile, ksaSampler, showcase].filter((f) => !!f);
   });
 
-  const normalizedRecordsWithFilePaths = normalizedRecords.map((record) => {
-    return {
-      ...record,
-      showcase: filePaths.find((f) => f.id === record.showcase.id)?.filepath,
-      about: filePaths.find((f) => f.id === record.about.id)?.filepath,
-      archiveFile: filePaths.find((f) => f.id === record.archiveFile.id)
-        ?.filepath,
-      ksaSampler: filePaths.find((f) => f.id === record.ksaSampler.id)
-        ?.filepath,
-    };
-  });
+  const normalizedRecordsWithFilePaths = normalizedRecords
+    .map((record) => {
+      const maybeArchiveFileBasename = filePaths.find(
+        (f) => f.id === record.archiveFile?.id,
+      )?.filename;
+      return {
+        ...record,
+        showcase: filePaths.find((f) => f.id === record.showcase?.id)?.filepath,
+        about: filePaths.find((f) => f.id === record.about?.id)?.filepath,
+        archiveFile: filePaths.find((f) => f.id === record.archiveFile?.id)
+          ?.filepath,
+        archiveFileBasename:
+          maybeArchiveFileBasename && maybeArchiveFileBasename.endsWith(".sit")
+            ? maybeArchiveFileBasename
+            : undefined,
+        ksaSampler: filePaths.find((f) => f.id === record.ksaSampler?.id)
+          ?.filepath,
+      };
+    })
+    .filter((f) => !!f && Object.values(f).filter((v) => !!v).length);
+
   await fs.writeFile(
     "data/airtable.json",
     JSON.stringify(normalizedRecordsWithFilePaths, null, 2),
@@ -63,7 +73,7 @@ const base = new Airtable({ apiKey: process.env.AIRTABLE_TOKEN }).base(
 async function downloadAttachment(
   attachment: Airtable.Attachment | undefined,
   prefix = "",
-): Promise<{ id: string; filepath: string } | undefined> {
+): Promise<{ id: string; filepath: string; filename: string } | undefined> {
   if (!attachment) {
     return undefined;
   }
@@ -72,7 +82,7 @@ async function downloadAttachment(
 
   if (await fs.exists(filepath)) {
     console.log(`Cache hit for ${filename}`);
-    return { id: attachment.id, filepath };
+    return { id: attachment.id, filepath, filename: attachment.filename };
   }
 
   const response = await fetch(attachment.url);
@@ -80,7 +90,7 @@ async function downloadAttachment(
 
   console.log(`Downloaded ${filename}`);
   await fs.writeFile(filepath, Buffer.from(buffer));
-  return { id: attachment.id, filepath };
+  return { id: attachment.id, filepath, filename: attachment.filename };
 }
 
 async function grabRawRecords(): Promise<Records<FieldSet>> {
