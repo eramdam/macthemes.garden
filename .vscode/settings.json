@@ -1,6 +1,6 @@
 {
   "editor.formatOnSave": true,
   "files.exclude": {
-    "**/.sit": true
+    "**/*.sit": true
   }
 }
