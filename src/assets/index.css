@@ -260,6 +260,14 @@ main {
   /* background-color: red; */
 }
 
+.macos9-generic-block {
+  background-color: var(--grays-300);
+  box-shadow:
+    inset 1px 1px 0 var(--primary-white),
+    inset -1px -1px 0 var(--grays-700);
+  border: 1px solid var(--primary-black);
+}
+
 .macos9-window-genericbar {
   background-color: var(--grays-300);
   min-height: 20px;
