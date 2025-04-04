@@ -1,7 +1,7 @@
 import themesKaleidoscopeBot from "../themes/original.json" with { type: "json" };
 import themesKaleidoscopeAirtable from "../themes/airtable.json" with { type: "json" };
 
-export function classic() {
+function generateClassic() {
   const botThemesNotOnAirtableYet = themesKaleidoscopeBot.filter((theme) => {
     return themesKaleidoscopeAirtable.every((themeAirtable) => {
       return themeAirtable.archiveFileBasename !== theme.archileFilename;
@@ -32,3 +32,5 @@ export function classic() {
   // )
   // .sort((a, b) => a.archiveFile.localeCompare(b))
 }
+
+export const classic = generateClassic();

@@ -9,8 +9,13 @@ export default function (eleventyConfig) {
   eleventyConfig.setOutputDirectory("_site");
   eleventyConfig.addPassthroughCopy("src/assets");
   eleventyConfig.addPassthroughCopy("src/themes");
+  eleventyConfig.setServerPassthroughCopyBehavior("passthrough");
   eleventyConfig.addPlugin(pluginWebc, {
     components: "./src/_components/**/*.webc",
     useTransform: true,
+  });
+
+  eleventyConfig.addFilter("number_locale", (number) => {
+    return Number(number).toLocaleString("en-US");
   });
 }

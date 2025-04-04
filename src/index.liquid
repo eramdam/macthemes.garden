@@ -1,15 +1,26 @@
 ---
 layout: layout.liquid
+pagination:
+  data: themes.classic
+  size: 50
+permalink: '/{% if pagination.pageNumber > 0 %}page/{{ pagination.pageNumber | plus: 1 }}/{% endif %}index.html'
 ---
 
+
 <header>
-  <h1>Mac Themes Garden</h1>
+  <h1>
+    <a href="/">
+      Mac Themes Garden
+    </a>
+  </h1>
 </header>
 <main>
   <os9-window title="Index">
+    <div class="macos9-window-genericbar">
+      {{pagination.items | size | number_locale}} items out of {{ themes.classic | size | number_locale }}
+    </div>
     <div class="themes-grid">
-      {% assign classic_themes = themes.classic %}
-      {%- for theme in classic_themes -%}
+      {%- for theme in pagination.items -%}
       <div class="single-theme">
         <img loading="lazy" decoding="async" src="/{{ theme.mainThumbnail }}" alt="">
         <h4>
