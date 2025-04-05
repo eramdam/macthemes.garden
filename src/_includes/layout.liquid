@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mac Themes Garden</title>
-  <link rel="stylesheet" href="/assets/index.css">
-  <script src="/assets/index.js"></script>
-</head>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mac Themes Garden</title>
+    <link rel="stylesheet" href="/assets/index.css">
+    <script src="/assets/index.js"></script>
+  </head>
 
-<body>
-  {{ content }}
-</body>
+  <body>
+    {{ content }}
+    <footer>
+      {% os9Window "footer" "footer" %}
+        <p>
+          All the themes showcased are the property of their respective authors, website not affiliated with Apple Inc. <br/>
+          {{ site.year }} –
+          <a href="https://damien.zone">Damien Erambert</a>
+        </p>
+      {% endos9Window %}
+    </footer>
+  </body>
 
 </html>

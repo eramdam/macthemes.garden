@@ -20,18 +20,18 @@ permalink: '/{% if pagination.pageNumber > 0 %}page/{{ pagination.pageNumber | p
     {% render 'pagination-bar' pagination: pagination %}
     <div class="themes-grid">
       {%- for theme in pagination.items -%}
-        <div class="single-theme">
+        <a href="#" class="single-theme">
           <img
             loading="lazy"
             decoding="async"
             src="/{{ theme.mainThumbnail }}"
             alt="">
-          <h4>
+          <div class="single-theme-name">
             {{ theme.name | escape }}
-          </h4>
-          <h5>{{ theme.authors | default: '-' }}</h5>
-          <h6>{{ theme.year | default: '-' }}</h6>
-        </div>
+          </div>
+          <div class="single-theme-authors">{{ theme.authors | default: '<em>Unknown</em>' }}</div>
+          <div class="single-theme-year">{{ theme.year | default: '-' }}</div>
+        </a>
       {%- endfor -%}
     </div>
     {% render 'pagination-bar' pagination: pagination %}
