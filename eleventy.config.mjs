@@ -1,4 +1,3 @@
-import pluginWebc from "@11ty/eleventy-plugin-webc";
 import crypto from "node:crypto";
 
 /** @param {import("@11ty/eleventy").UserConfig} eleventyConfig */
