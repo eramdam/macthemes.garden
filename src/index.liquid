@@ -16,18 +16,39 @@ permalink: '/{% if pagination.pageNumber > 0 %}page/{{ pagination.pageNumber | p
 <main>
   <os9-window title="Index">
     <div class="macos9-window-genericbar">
-      {{pagination.items | size | number_locale}} items out of {{ themes.classic | size | number_locale }}
+      {{ pagination.items | size | number_locale }} items out of {{ themes.classic | size | number_locale }}
     </div>
+    {% assign pages = pagination.pages.size %}
+    {% if pages > 1 %}
+      <div class="thems-grid-pagination">
+        <nav>
+          {% if pagination.href.previous %}
+            <a href="{{ pagination.href.previous }}" rel="prev">
+              &LeftArrow;
+            </a>
+          {% endif %}
+          {% if pagination.href.next %}
+            <a href="{{ pagination.href.next }}" rel="next">
+              &RightArrow;
+            </a>
+          {% endif %}
+        </nav>
+      </div>
+    {% endif %}
     <div class="themes-grid">
       {%- for theme in pagination.items -%}
-      <div class="single-theme">
-        <img loading="lazy" decoding="async" src="/{{ theme.mainThumbnail }}" alt="">
-        <h4>
-          {{theme.name | escape}}
-        </h4>
-        <h5>{{ theme.authors | default: '-' }}</h5>
-        <h6>{{ theme.year | default: '-' }}</h6>
-      </div>
+        <div class="single-theme">
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/{{ theme.mainThumbnail }}"
+            alt="">
+          <h4>
+            {{ theme.name | escape }}
+          </h4>
+          <h5>{{ theme.authors | default: '-' }}</h5>
+          <h6>{{ theme.year | default: '-' }}</h6>
+        </div>
       {%- endfor -%}
     </div>
   </os9-window>
