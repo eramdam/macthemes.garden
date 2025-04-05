@@ -34,8 +34,22 @@ permalink: "/themes/{{ theme.urlBase | slugify }}/"
             <dt>Release year:</dt>
             <dd>{{ theme.year | default: '' }}</dd>
 
-          {% comment %} <dt>Download links:</dt>
-                                <dd></dd> {% endcomment %}
+            <dt>Download links:</dt>
+            <dd>
+              <em>{{ theme.archiveFile }} {{ theme.archiveFile | archiveFileSize }}</em>
+              <ul>
+                <li>
+                  <button class="macos9-button">
+                    Download #1 (macthemes.garden)
+                  </button>
+                </li>
+              {% comment %} <li>
+                                  <button class="macos9-button secondary">
+                                    Download #2 (archive.org)
+                                  </button>
+                              </li> {% endcomment %}
+              </ul>
+            </dd>
           </dl>
         </div>
       </div>

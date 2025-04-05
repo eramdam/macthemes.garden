@@ -1,4 +1,5 @@
 @import url("macos9-window.css");
+/* @import url("macos9-button.css"); */
 
 :root {
   /* Colors from https://www.figma.com/community/file/966779730364082883 */
@@ -222,10 +223,35 @@ main {
   margin-inline-start: 20px;
 }
 
+.single-theme-page .infos dd ul {
+  padding-inline-start: 0;
+  line-height: 2;
+  list-style: none;
+}
+
 .single-theme-page .infos dt {
   font-weight: bold;
 }
 
 .single-theme-title {
   text-align: center;
+}
+
+.macos9-button {
+  font-family:
+    "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  height: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  appearance: none;
+  background-color: var(--grays-300);
+  border: none;
+  border: 1px solid var(--primary-black);
+  border-radius: 3px;
+  box-shadow:
+    inset 0 -1px 0 rgb(from var(--grays-700) r g b / 50%),
+    inset -1px -1px 0 rgb(from var(--grays-700) r g b / 50%),
+    inset 0 1px 0 rgb(from var(--primary-white) r g b / 60%),
+    inset 1px 1px 0 rgb(from var(--primary-white) r g b / 60%);
 }

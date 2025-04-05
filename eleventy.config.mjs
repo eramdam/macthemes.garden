@@ -1,4 +1,5 @@
 import crypto from "node:crypto";
+import fs from "node:fs";
 
 /** @param {import("@11ty/eleventy").UserConfig} eleventyConfig */
 export default function (eleventyConfig) {
@@ -44,4 +45,32 @@ export default function (eleventyConfig) {
     `;
     },
   );
+
+  const archives = fs.globSync("src/themes/attachments/*.sit");
+  const formatter = Intl.NumberFormat("en-US", {
+    style: "unit",
+    unit: "kilobyte",
+    unitDisplay: "short",
+    maximumFractionDigits: 1,
+  });
+
+  eleventyConfig.addAsyncFilter("archiveFileSize", async function (value) {
+    try {
+      const matchingArchive = archives.find((a) => a.endsWith(value));
+
+      if (!matchingArchive) {
+        return "";
+      }
+
+      const size = (await fs.promises.stat(matchingArchive)).size;
+      const sizeKilobytes = size / 1024;
+
+      return `(${formatter.format(sizeKilobytes)})`;
+    } catch (e) {
+      console.error(e);
+      return "";
+    }
+  });
+
+  eleventyConfig.setQuietMode(true);
 }
