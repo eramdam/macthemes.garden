@@ -277,5 +277,12 @@ main {
   border-bottom: 1px solid var(--primary-black);
   padding: 4px 0;
   font-size: 12px;
+}
+
+.nav {
+  display: flex;
   text-align: center;
+  justify-content: space-between;
+  padding-left: 10px;
+  padding-right: 10px;
 }

@@ -15,26 +15,41 @@ permalink: '/{% if pagination.pageNumber > 0 %}page/{{ pagination.pageNumber | p
 </header>
 <main>
   <os9-window title="Index">
-    <div class="macos9-window-genericbar">
-      {{ pagination.items | size | number_locale }} items out of {{ themes.classic | size | number_locale }}
-    </div>
     {% assign pages = pagination.pages.size %}
-    {% if pages > 1 %}
-      <div class="thems-grid-pagination">
-        <nav>
+    {% assign pageNumber = pagination.pageNumber | plus: 1 %}
+    <div class="macos9-window-genericbar nav">
+      <div>
+        {% if pages > 1 %}
           {% if pagination.href.previous %}
+            {% if pagination.href.first %}
+              <a href="{{ pagination.href.first }}" rel="first">
+                &Lt; First
+              </a>
+            {% endif %}
             <a href="{{ pagination.href.previous }}" rel="prev">
-              &LeftArrow;
+              &LT; Previous
             </a>
           {% endif %}
+        {% endif %}
+      </div>
+      <div>
+        page {{ pageNumber }} out of {{ pages }}
+      </div>
+      <div>
+        {% if pages > 1 %}
           {% if pagination.href.next %}
             <a href="{{ pagination.href.next }}" rel="next">
-              &RightArrow;
+              Next &GT;
             </a>
+            {% if pagination.href.last %}
+              <a href="{{ pagination.href.last }}" rel="last">
+                Last &Gt;
+              </a>
+            {% endif %}
           {% endif %}
-        </nav>
+        {% endif %}
       </div>
-    {% endif %}
+    </div>
     <div class="themes-grid">
       {%- for theme in pagination.items -%}
         <div class="single-theme">
