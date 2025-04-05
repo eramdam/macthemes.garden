@@ -32,31 +32,25 @@ const base = new Airtable({ apiKey: process.env.AIRTABLE_TOKEN }).base(
     { filepath: string; id: string; filename: string }
   >(normalizedRecords, 10, async (record: (typeof normalizedRecords)[0]) => {
     const about = await downloadAttachment(record.about, "about-");
-    const archiveFile = await downloadAttachment(record.archiveFile);
     const ksaSampler = await downloadAttachment(
       record.ksaSampler,
       "ksa-sampler-",
     );
     const showcase = await downloadAttachment(record.showcase, "showcase-");
 
-    return [about, archiveFile, ksaSampler, showcase].filter((f) => !!f);
+    return [about, ksaSampler, showcase].filter((f) => !!f);
   });
 
   const normalizedRecordsWithFilePaths = normalizedRecords
     .map((record) => {
-      const maybeArchiveFileBasename = filePaths.find(
-        (f) => f.id === record.archiveFile?.id,
-      )?.filename;
       return {
         ...record,
         showcase: filePaths.find((f) => f.id === record.showcase?.id)?.filepath,
         about: filePaths.find((f) => f.id === record.about?.id)?.filepath,
-        archiveFile: filePaths.find((f) => f.id === record.archiveFile?.id)
-          ?.filepath,
-        archiveFileBasename:
-          maybeArchiveFileBasename && maybeArchiveFileBasename.endsWith(".sit")
-            ? maybeArchiveFileBasename
-            : undefined,
+        archiveFile: undefined,
+        archiveFilename: record.archiveFile?.filename.endsWith(".sit")
+          ? record.archiveFile?.filename
+          : undefined,
         ksaSampler: filePaths.find((f) => f.id === record.ksaSampler?.id)
           ?.filepath,
       };

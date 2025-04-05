@@ -34,22 +34,20 @@ permalink: "/themes/{{ theme.urlBase | slugify }}/"
             <dt>Release year:</dt>
             <dd>{{ theme.year | default: '' }}</dd>
 
-            <dt>Download links:</dt>
+            <dt>Download:</dt>
             <dd>
-              <em>{{ theme.archiveFile }} {{ theme.archiveFile | archiveFileSize }}</em>
               <ul>
-                <li>
-                  <button class="macos9-button">
-                    Download #1 (macthemes.garden)
-                  </button>
-                </li>
-              {% comment %} <li>
-                                  <button class="macos9-button secondary">
-                                    Download #2 (archive.org)
-                                  </button>
-                              </li> {% endcomment %}
+                <li><a href="https://files.macthemes.garden/{{ theme.archiveFile }}">#1 (files.macthemes.garden)</a></li>
               </ul>
             </dd>
+            <dd>
+              {{ theme.archiveFile }} {{ theme.archiveFile | archiveFileSize }}
+            </dd>
+            <dd>
+              MD5
+              <a href="https://files.macthemes.garden/{{ theme.archiveFile }}.md5">{{ theme.archiveFile | archiveMd5 }}</a>
+            </dd>
+
           </dl>
         </div>
       </div>

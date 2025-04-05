@@ -1,5 +1,6 @@
 import crypto from "node:crypto";
-import fs from "node:fs";
+
+import archivesData from "./src/themes/archive-data.json" with { type: "json" };
 
 /** @param {import("@11ty/eleventy").UserConfig} eleventyConfig */
 export default function (eleventyConfig) {
@@ -46,7 +47,7 @@ export default function (eleventyConfig) {
     },
   );
 
-  const archives = fs.globSync("src/themes/attachments/*.sit");
+  const archives = Object.keys(archivesData);
   const formatter = Intl.NumberFormat("en-US", {
     style: "unit",
     unit: "kilobyte",
@@ -56,16 +57,30 @@ export default function (eleventyConfig) {
 
   eleventyConfig.addAsyncFilter("archiveFileSize", async function (value) {
     try {
-      const matchingArchive = archives.find((a) => a.endsWith(value));
+      const matchingArchive = archives.find((a) => a === value);
 
       if (!matchingArchive) {
         return "";
       }
 
-      const size = (await fs.promises.stat(matchingArchive)).size;
+      const size = archivesData[matchingArchive].size;
       const sizeKilobytes = size / 1024;
 
       return `(${formatter.format(sizeKilobytes)})`;
+    } catch (e) {
+      console.error(e);
+      return "";
+    }
+  });
+  eleventyConfig.addAsyncFilter("archiveMd5", async function (value) {
+    try {
+      const matchingArchive = archives.find((a) => a === value);
+
+      if (!matchingArchive) {
+        return "";
+      }
+
+      return archivesData[matchingArchive].md5;
     } catch (e) {
       console.error(e);
       return "";

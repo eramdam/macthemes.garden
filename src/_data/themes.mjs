@@ -5,7 +5,7 @@ import themesKaleidoscopeAirtable from "../themes/airtable.json" with { type: "j
 function generateClassic() {
   const botThemesNotOnAirtableYet = themesKaleidoscopeBot.filter((theme) => {
     return themesKaleidoscopeAirtable.every((themeAirtable) => {
-      return themeAirtable.archiveFileBasename !== theme.archiveFilename;
+      return themeAirtable.archiveFilename !== theme.archiveFilename;
     });
   });
 
@@ -14,12 +14,9 @@ function generateClassic() {
       const id = crypto
         .createHash("shake256", { outputLength: 6 })
         .update(
-          [
-            theme.name,
-            theme.authors,
-            theme.year,
-            theme.archiveFileBasename,
-          ].join("-"),
+          [theme.name, theme.authors, theme.year, theme.archiveFilename].join(
+            "-",
+          ),
         )
         .digest("hex");
 
@@ -34,7 +31,7 @@ function generateClassic() {
           t.replace("src/", "/"),
         ),
         mainThumbnail: theme.ksaSampler.replace("src/", "/"),
-        archiveFile: theme.archiveFileBasename,
+        archiveFile: theme.archiveFilename,
         urlBase: `${theme.name}-${id}`,
       };
     })
