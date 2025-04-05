@@ -1,0 +1,32 @@
+{% assign pages = pagination.pages.size %}
+{% assign pageNumber = pagination.pageNumber | plus: 1 %}
+<div class="macos9-window-genericbar nav">
+  <div>
+    {% if pagination.href.previous %}
+      {% if pages > 1 %}
+        <a href="{{ pagination.href.first }}" rel="first">
+          &Lt; First
+        </a>
+        <a href="{{ pagination.href.previous }}" rel="prev">
+          &LT; Previous
+        </a>
+      {% endif %}
+    {% endif %}
+  </div>
+
+  <div>
+    page {{ pageNumber }} out of {{ pages }}
+  </div>
+  <div>
+    {% if pagination.href.next %}
+      {% if pages > 1 %}
+        <a href="{{ pagination.href.next }}" rel="next">
+          Next &GT;
+        </a>
+        <a href="{{ pagination.href.last }}" rel="last">
+          Last &Gt;
+        </a>
+      {% endif %}
+    {% endif %}
+  </div>
+</div>

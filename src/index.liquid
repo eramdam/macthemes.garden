@@ -2,54 +2,22 @@
 layout: layout.liquid
 pagination:
   data: themes.classic
-  size: 50
+  size: 51
 permalink: '/{% if pagination.pageNumber > 0 %}page/{{ pagination.pageNumber | plus: 1 }}/{% endif %}index.html'
 ---
 
 <header>
-  <h1>
-    <a href="/">
-      Mac Themes Garden
-    </a>
-  </h1>
+  {% os9Window "" "header" %}
+    <h1>
+      <a href="/">
+        Mac Themes Garden
+      </a>
+    </h1>
+  {% endos9Window %}
 </header>
 <main>
-  <os9-window title="Index">
-    {% assign pages = pagination.pages.size %}
-    {% assign pageNumber = pagination.pageNumber | plus: 1 %}
-    <div class="macos9-window-genericbar nav">
-      <div>
-        {% if pages > 1 %}
-          {% if pagination.href.previous %}
-            {% if pagination.href.first %}
-              <a href="{{ pagination.href.first }}" rel="first">
-                &Lt; First
-              </a>
-            {% endif %}
-            <a href="{{ pagination.href.previous }}" rel="prev">
-              &LT; Previous
-            </a>
-          {% endif %}
-        {% endif %}
-      </div>
-      <div>
-        page {{ pageNumber }} out of {{ pages }}
-      </div>
-      <div>
-        {% if pages > 1 %}
-          {% if pagination.href.next %}
-            <a href="{{ pagination.href.next }}" rel="next">
-              Next &GT;
-            </a>
-            {% if pagination.href.last %}
-              <a href="{{ pagination.href.last }}" rel="last">
-                Last &Gt;
-              </a>
-            {% endif %}
-          {% endif %}
-        {% endif %}
-      </div>
-    </div>
+  {% os9Window "" %}
+    {% render 'pagination-bar' pagination: pagination %}
     <div class="themes-grid">
       {%- for theme in pagination.items -%}
         <div class="single-theme">
@@ -66,5 +34,6 @@ permalink: '/{% if pagination.pageNumber > 0 %}page/{{ pagination.pageNumber | p
         </div>
       {%- endfor -%}
     </div>
-  </os9-window>
+    {% render 'pagination-bar' pagination: pagination %}
+  {% endos9Window %}
 </main>

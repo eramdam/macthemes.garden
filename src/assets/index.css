@@ -55,6 +55,13 @@ body {
     "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   background-color: var(--color-lavender);
+  background-image: url("/assets/patterns/OS9_Default.png");
+  background-repeat: repeat;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px 0;
 }
 
 h1 {
@@ -109,6 +116,7 @@ main {
   position: relative;
   background-color: var(--grays-400);
   border: 1px solid var(--primary-black);
+  box-shadow: 2px 2px 0 var(--primary-black);
 
   /* Window inner shadows/borders */
   &::before {
@@ -274,15 +282,55 @@ main {
   box-shadow:
     inset 1px 1px 0 var(--primary-white),
     inset -1px -1px 0 var(--grays-700);
-  border-bottom: 1px solid var(--primary-black);
   padding: 4px 0;
   font-size: 12px;
+}
+
+.macos9-window-genericbar:first-child {
+  border-bottom: 1px solid var(--primary-black);
+}
+.macos9-window-genericbar:last-child {
+  border-top: 1px solid var(--primary-black);
 }
 
 .nav {
   display: flex;
   text-align: center;
   justify-content: space-between;
+  align-items: center;
+
+  position: relative;
+}
+
+.nav > div:nth-child(2) {
+  flex: 1;
+}
+
+.nav > div:nth-child(1),
+.nav > div:nth-child(3) {
+  position: absolute;
   padding-left: 10px;
   padding-right: 10px;
+}
+
+.nav > div:nth-child(1) {
+  left: 0;
+}
+
+.nav > div:nth-child(3) {
+  right: 0;
+}
+
+.macos9-window.header .macos9-window-body {
+  text-align: center;
+  padding: 20px 0;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("https://files-social.erambert.me/accounts/headers/113/370/184/750/103/599/original/f79d8c854ca0c84d.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.macos9-window.header .macos9-window-body a {
+  color: white;
 }
