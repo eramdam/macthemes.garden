@@ -15,6 +15,10 @@ export default function (eleventyConfig) {
     return Number(number).toLocaleString("en-US");
   });
 
+  eleventyConfig.setServerOptions({
+    domDiff: false,
+  });
+
   eleventyConfig.addPairedShortcode(
     "os9Window",
     (content, title, className = "") => {
