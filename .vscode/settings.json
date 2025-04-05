@@ -2,5 +2,9 @@
   "editor.formatOnSave": true,
   "files.exclude": {
     "**/*.sit": true
+  },
+  "[liquid]": {
+    "editor.defaultFormatter": "sissel.shopify-liquid",
+    "editor.formatOnSave": true
   }
 }
