@@ -6,25 +6,16 @@ pagination:
 permalink: '/{% if pagination.pageNumber > 0 %}page/{{ pagination.pageNumber | plus: 1 }}/{% endif %}index.html'
 ---
 
-<header>
-  {% os9Window "" "header" %}
-    <h1>
-      <a href="/">
-        Mac Themes Garden
-      </a>
-    </h1>
-  {% endos9Window %}
-</header>
 <main>
-  {% os9Window "" %}
+  {% os9Window "Home" %}
     {% render 'pagination-bar' pagination: pagination %}
     <div class="themes-grid">
       {%- for theme in pagination.items -%}
-        <a href="#" class="single-theme">
+        <a href="/themes/{{ theme.urlBase | slugify }}" class="single-theme">
           <img
             loading="lazy"
             decoding="async"
-            src="/{{ theme.mainThumbnail }}"
+            src="{{ theme.mainThumbnail }}"
             alt="">
           <div class="single-theme-name">
             {{ theme.name | escape }}

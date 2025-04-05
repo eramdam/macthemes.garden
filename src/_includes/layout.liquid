@@ -10,9 +10,18 @@
   </head>
 
   <body>
+    <header>
+      {% os9Window "Header" "header" %}
+        <h1>
+          <a href="/">
+            Mac Themes Garden
+          </a>
+        </h1>
+      {% endos9Window %}
+    </header>
     {{ content }}
     <footer>
-      {% os9Window "footer" "footer" %}
+      {% os9Window "Footer" "footer" %}
         <p>
           All the themes showcased are the property of their respective authors, website not affiliated with Apple Inc. <br/>
           {{ site.year }} –

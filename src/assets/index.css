@@ -173,3 +173,59 @@ main {
 .macos9-window.header .macos9-window-body a {
   color: white;
 }
+
+.single-theme-page {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.single-theme-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.single-theme-grid .infos {
+}
+
+.single-theme-page .gallery {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: auto;
+  overflow: hidden;
+  gap: 10px;
+}
+
+.single-theme-page .gallery-thumbnail {
+  display: inline-block;
+  line-height: 0;
+}
+
+.single-theme-page .gallery-thumbnail:first-child {
+  /* grid-column: 1 / span 2; */
+}
+.single-theme-page .gallery-thumbnail img {
+  max-width: 100%;
+}
+
+.single-theme-page .infos {
+  border-top: 1px solid var(--grays-400);
+}
+
+.single-theme-page .infos dl {
+  line-height: 1.5;
+}
+
+.single-theme-page .infos dd {
+  margin-inline-start: 20px;
+}
+
+.single-theme-page .infos dt {
+  font-weight: bold;
+}
+
+.single-theme-title {
+  text-align: center;
+}

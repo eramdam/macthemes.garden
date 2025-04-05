@@ -1,0 +1,44 @@
+---
+layout: layout.liquid
+pagination:
+  data: themes.classic
+  size: 1
+  alias: theme
+permalink: "/themes/{{ theme.urlBase | slugify }}/"
+---
+<main>
+  {% assign window_title = theme.name %}
+  {% os9Window window_title %}
+    <section class="single-theme-page">
+      <h1 class="single-theme-title">{{ theme.name }}</h1>
+      <div class="single-theme-grid">
+        <div class="gallery">
+          {%- for image in theme.thumbnails -%}
+            <a
+              class="gallery-thumbnail"
+              href="{{image}}"
+              target="_blank"
+              rel="noopener">
+              <img src="{{image}}" alt="">
+            </a>
+          {% endfor %}
+        </div>
+        <div class="infos">
+          <dl>
+            <dt>Name:</dt>
+            <dd>{{ theme.name }}</dd>
+
+            <dt>Author(s):</dt>
+            <dd>{{ theme.authors }}</dd>
+
+            <dt>Release year:</dt>
+            <dd>{{ theme.year | default: '' }}</dd>
+
+          {% comment %} <dt>Download links:</dt>
+                                <dd></dd> {% endcomment %}
+          </dl>
+        </div>
+      </div>
+    </section>
+  {% endos9Window %}
+</main>

@@ -12,7 +12,7 @@ import path from "node:path";
     return {
       name: record.name,
       authors: record.author,
-      archileFilename: path.parse(record.download).base,
+      archiveFilename: path.parse(record.download).base,
       thumbnails: record.thumbnails.map((t) => {
         return `https://raw.githubusercontent.com/eramdam/shapeshifter-themes/refs/heads/master/${t}`;
       }),
