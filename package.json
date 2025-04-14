@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "data:airtable": "tsx --no-warnings --env-file='.env' scripts/airtable.ts",
-    "dev": "npx @11ty/eleventy --serve",
-    "build": "npx @11ty/eleventy"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
   },
   "repository": {
     "type": "git",
