@@ -1,0 +1,36 @@
+---
+import Window from "../components/Window.astro";
+const year = new Date().getUTCFullYear();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mac Themes Garden</title>
+    <link rel="stylesheet" href="/assets/index.css" />
+    <script is:inline src="/assets/index.js"></script>
+  </head>
+
+  <body>
+    <header>
+      <Window title="Header" classname="header">
+        <h1>
+          <a href="/"> Mac Themes Garden </a>
+        </h1>
+      </Window>
+    </header>
+    <slot />
+    <footer>
+      <Window title="Footer" classname="footer">
+        <p>
+          All the themes showcased are the property of their respective authors,
+          website not affiliated with Apple Inc. <br />
+          {{ year }} –
+          <a href="https://damien.zone">Damien Erambert</a>
+        </p>
+      </Window>
+    </footer>
+  </body>
+</html>
