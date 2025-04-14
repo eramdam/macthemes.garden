@@ -30,9 +30,9 @@ export async function themesLoader() {
         authors: theme.authors,
         year: theme.year,
         thumbnails: [theme.ksaSampler, theme.about, theme.showcase].map((t) =>
-          t.replace("src/", "/"),
+          t.replace("public/", "/"),
         ),
-        mainThumbnail: theme.ksaSampler.replace("src/", "/"),
+        mainThumbnail: theme.ksaSampler.replace("public/", "/"),
         archiveFile: theme.archiveFilename,
         urlBase: slugify(`${theme.name}-${id}`),
       };

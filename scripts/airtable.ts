@@ -71,8 +71,9 @@ async function downloadAttachment(
   if (!attachment) {
     return undefined;
   }
-  const filename = `${prefix}${attachment.id}-${attachment.filename}`;
-  const filepath = `src/themes/attachments/${filename}`;
+  const filename =
+    `${prefix}${attachment.id}-${attachment.filename}`.toLowerCase();
+  const filepath = `public/themes/attachments/${filename}`;
 
   if (await fs.exists(filepath)) {
     console.log(`Cache hit for ${filename}`);
