@@ -236,3 +236,11 @@ main {
 .single-theme-title {
   text-align: center;
 }
+
+.single-author-page {
+  padding: 20px 0;
+}
+
+.single-page-title {
+  text-align: center;
+}

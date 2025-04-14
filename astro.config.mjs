@@ -5,4 +5,7 @@ export default defineConfig({
   redirects: {
     "/page/1": "/",
   },
+  devToolbar: {
+    enabled: false,
+  },
 });

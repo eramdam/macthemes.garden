@@ -5,6 +5,7 @@ import { getCollection } from "astro:content";
 import OS9Window from "../../components/OS9Window.astro";
 import { archiveFileSize, archiveMd5 } from "../../helpers";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import AuthorsFormatter from "../../components/AuthorsFormatter.astro";
 export const getStaticPaths = (async () => {
   const themes = await getCollection("themes");
   return themes.map((t) => {
@@ -47,7 +48,9 @@ const theme = Astro.props.theme.data;
               <dd>{theme.name}</dd>
 
               <dt>Author(s):</dt>
-              <dd>{theme.authors}</dd>
+              <dd>
+                <AuthorsFormatter asLinks authors={theme.authors} />
+              </dd>
 
               <dt>Release year:</dt>
               <dd>{theme.year}</dd>

@@ -1,6 +1,6 @@
 import type { Page } from "astro";
+import type { CollectionEntry } from "astro:content";
 import archivesData from "./themes/archive-data.json" with { type: "json" };
-import type { CollectionEntry, CollectionKey } from "astro:content";
 
 const archives = Object.keys(archivesData);
 const formatter = Intl.NumberFormat("en-US", {
