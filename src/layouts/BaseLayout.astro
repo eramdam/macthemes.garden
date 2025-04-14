@@ -1,5 +1,5 @@
 ---
-import Window from "../components/Window.astro";
+import OS9Window from "../components/OS9Window.astro";
 const year = new Date().getUTCFullYear();
 ---
 
@@ -15,22 +15,22 @@ const year = new Date().getUTCFullYear();
 
   <body>
     <header>
-      <Window title="Header" classname="header">
+      <OS9Window title="Header" classname="header">
         <h1>
           <a href="/"> Mac Themes Garden </a>
         </h1>
-      </Window>
+      </OS9Window>
     </header>
     <slot />
     <footer>
-      <Window title="Footer" classname="footer">
+      <OS9Window title="Footer" classname="footer">
         <p>
           All the themes showcased are the property of their respective authors,
           website not affiliated with Apple Inc. <br />
           {{ year }} –
           <a href="https://damien.zone">Damien Erambert</a>
         </p>
-      </Window>
+      </OS9Window>
     </footer>
   </body>
 </html>

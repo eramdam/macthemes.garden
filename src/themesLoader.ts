@@ -1,6 +1,7 @@
 import crypto from "node:crypto";
 import themesKaleidoscopeAirtable from "./themes/airtable.json" with { type: "json" };
 import themesKaleidoscopeBot from "./themes/original.json" with { type: "json" };
+import slugify from "slugify";
 
 export async function themesLoader() {
   const botThemesNotOnAirtableYet = themesKaleidoscopeBot.filter((theme) => {
@@ -33,7 +34,7 @@ export async function themesLoader() {
         ),
         mainThumbnail: theme.ksaSampler.replace("src/", "/"),
         archiveFile: theme.archiveFilename,
-        urlBase: `${theme.name}-${id}`,
+        urlBase: slugify(`${theme.name}-${id}`),
       };
     })
     .concat(
@@ -51,7 +52,7 @@ export async function themesLoader() {
           thumbnails: theme.thumbnails,
           mainThumbnail: theme.thumbnails[0],
           slug: theme.archiveFilename.replace(".sit", ""),
-          urlBase: `${theme.name}-${id}`,
+          urlBase: slugify(`${theme.name}-${id}`),
         };
       }),
     );

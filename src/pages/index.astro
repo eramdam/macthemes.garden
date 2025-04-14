@@ -1,32 +1,8 @@
 ---
 import { getCollection } from "astro:content";
-import Window from "../components/Window.astro";
-import BaseLayout from "../layouts/BaseLayout.astro";
+import IndexPage from "../components/IndexPage.astro";
+import { PAGINATION } from "../helpers";
 const themes = await getCollection("themes");
 ---
 
-<BaseLayout>
-  <main>
-    <Window title="Index">
-      <div class="themes-grid">
-        {
-          themes
-            .map((t) => t.data)
-            .map((theme) => {
-              return (
-                <a href={`/themes/${theme.urlBase}`} class="single-theme">
-                  <img
-                    loading="lazy"
-                    decoding="async"
-                    src={`${theme.mainThumbnail}`}
-                    alt=""
-                  />
-                  <div class="single-theme-name">{theme.name}</div>
-                </a>
-              );
-            })
-        }
-      </div>
-    </Window>
-  </main>
-</BaseLayout>
+<IndexPage page={PAGINATION.basePage(themes)} />

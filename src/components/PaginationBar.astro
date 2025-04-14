@@ -1,0 +1,50 @@
+---
+import type { Page } from "astro";
+
+interface Props {
+  pagination: Pick<Page<unknown>, "url" | "lastPage" | "currentPage">;
+}
+const { pagination } = Astro.props;
+---
+
+<div class="macos9-window-genericbar nav">
+  <div>
+    {
+      pagination.url.prev && (
+        <>
+          {pagination.lastPage > 1 && (
+            <>
+              <a href={pagination.url.first} rel="first">
+                &Lt; First
+              </a>
+              <a href={pagination.url.prev} rel="prev">
+                &LT; Previous
+              </a>
+            </>
+          )}
+        </>
+      )
+    }
+  </div>
+  <div>
+    page {pagination.currentPage} out of {pagination.lastPage}
+  </div>
+  <div>
+    {
+      pagination.url.next && (
+        <>
+          {pagination.lastPage > 1 && (
+            <>
+              <a href={pagination.url.next} rel="next">
+                Next &GT;
+              </a>
+              <a href={pagination.url.last} rel="last">
+                Last &Gt;
+              </a>
+            </>
+          )}
+        </>
+      )
+    }
+  </div>
+</div>

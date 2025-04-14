@@ -1,0 +1,49 @@
+---
+import type { Page } from "astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import OS9Window from "./OS9Window.astro";
+import PaginationBar from "./PaginationBar.astro";
+import type { CollectionConfig } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  page: Pick<
+    Page<CollectionEntry<"themes">>,
+    "url" | "lastPage" | "currentPage" | "data"
+  >;
+}
+
+const { page } = Astro.props;
+---
+
+<BaseLayout>
+  <main>
+    <OS9Window title="Index">
+      <PaginationBar pagination={page} />
+      <div class="themes-grid">
+        {
+          page.data
+            .map((t) => t.data)
+            .map((theme) => {
+              return (
+                <a href={`/themes/${theme.urlBase}`} class="single-theme">
+                  <img
+                    loading="lazy"
+                    decoding="async"
+                    src={`${theme.mainThumbnail}`}
+                    alt=""
+                  />
+                  <div class="single-theme-name">{theme.name}</div>
+                  <div class="single-theme-authors">
+                    {theme.authors || <em>Unknown</em>}
+                  </div>
+                  <div class="single-theme-year">{theme.year || "-"}</div>
+                </a>
+              );
+            })
+        }
+      </div>
+      <PaginationBar pagination={page} />
+    </OS9Window>
+  </main>
+</BaseLayout>
