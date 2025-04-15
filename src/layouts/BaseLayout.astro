@@ -1,6 +1,9 @@
 ---
+import "../styles/index.css";
 import OS9Window from "../components/OS9Window.astro";
 const year = new Date().getUTCFullYear();
+const route = Astro.routePattern;
+console.log({ route });
 ---
 
 <!doctype html>
@@ -9,18 +12,40 @@ const year = new Date().getUTCFullYear();
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mac Themes Garden</title>
-    <link rel="stylesheet" href="/assets/index.css" />
     <script is:inline src="/assets/index.js"></script>
   </head>
 
   <body>
     <header>
-      <OS9Window title="Header" classname="header">
-        <h1>
-          <a href="/"> Mac Themes Garden </a>
-        </h1>
-      </OS9Window>
+      <h1 class="header">
+        <a href="/"> Mac Themes Garden </a>
+      </h1>
     </header>
+    <nav>
+      <OS9Window noButtons title="Menu" classname="main-menu">
+        <ul class="macos9-menu">
+          <li>
+            <a href="/" class="macos9-menu-icon">
+              <img src="/assets/menu/schemes-puzzle.png" alt="" />
+              <span> Schemes index </span>
+            </a>
+          </li>
+          <li>
+            <a href="/authors" class="macos9-menu-icon">
+              <img src="/assets/menu/file-sharing.png" alt="" />
+              <span> Authors </span>
+            </a>
+          </li>
+          <span class="spacer"></span>
+          <li>
+            <a href="#" class="macos9-menu-icon">
+              <img src="/assets/menu/finder-computer.png" alt="" />
+              <span> About </span>
+            </a>
+          </li>
+        </ul>
+      </OS9Window>
+    </nav>
     <slot />
     <footer>
       <OS9Window title="Footer" classname="footer">

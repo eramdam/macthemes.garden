@@ -1,5 +1,4 @@
 @import url("macos9-window.css");
-/* @import url("macos9-button.css"); */
 
 :root {
   /* Colors from https://www.figma.com/community/file/966779730364082883 */
@@ -243,4 +242,79 @@ main {
 
 .single-page-title {
   text-align: center;
+}
+
+.macos9-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  display: flex;
+  justify-content: center;
+  /* background-color: var(--grays-500); */
+  width: 100%;
+}
+
+.macos9-menu li {
+  font-size: 0;
+}
+
+.macos9-menu .spacer {
+  flex: 1;
+}
+
+.macos9-menu-icon {
+  display: inline-flex;
+  font-size: 12px;
+  flex-direction: column;
+  gap: 4px;
+  color: var(--primary-black);
+  text-decoration: none;
+  text-align: center;
+  padding: 10px 6px;
+}
+
+.macos9-menu-icon span {
+  background-color: rgba(from var(--primary-white) r g b / 80%);
+  padding: 2px 3px;
+}
+
+.macos9-menu-icon img {
+  height: 32px;
+  width: 32px;
+  display: block;
+  margin: 0 auto;
+  image-rendering: pixelated;
+}
+
+.macos9-menu-icon:active,
+.macos9-menu-icon:focus {
+  & img {
+    filter: brightness(0.5);
+  }
+  & span {
+    color: white;
+    background-color: rgba(from var(--primary-black) r g b / 80%);
+  }
+}
+
+.macos9-menu-icon.open {
+  & img {
+    filter: brightness(0.5);
+  }
+  & span {
+    color: white;
+    background-color: rgba(from var(--primary-black) r g b / 80%);
+  }
+}
+
+h1.header a {
+  text-decoration: none;
+  color: var(--primary-black);
+  padding: 5px 10px;
+  background-color: rgba(from var(--primary-white) r g b / 80%);
+}
+h1.header a:is(:active, :focus) {
+  color: white;
+  background-color: rgba(from var(--primary-black) r g b / 80%);
 }
