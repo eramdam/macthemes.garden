@@ -1,0 +1,8 @@
+---
+import { getCollection } from "astro:content";
+import IndexPage from "../components/IndexPage.astro";
+import { PAGINATION } from "../helpers";
+const themes = await getCollection("themes");
+---
+
+<IndexPage page={PAGINATION.basePage(themes)} />

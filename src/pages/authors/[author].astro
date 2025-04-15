@@ -1,0 +1,59 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+import AuthorsFormatter from "../../components/AuthorsFormatter.astro";
+import OS9Window from "../../components/OS9Window.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export const getStaticPaths = (async () => {
+  const authors = await getCollection("authors");
+
+  return authors.map((a) => {
+    return {
+      props: { author: a },
+      params: {
+        author: a.data.slug,
+      },
+    };
+  });
+}) satisfies GetStaticPaths;
+const { author } = Astro.props;
+const themesByAuthor = (await getCollection("themes")).filter((t) => {
+  return t.data.authors.some((a) => a.id === author.id);
+});
+---
+
+<BaseLayout>
+  <main>
+    <OS9Window title={`Themes by ${Astro.props.author.data.name}`}>
+      <div class="single-author-page">
+        <h1 class="single-theme-title">
+          Themes by {Astro.props.author.data.name}
+        </h1>
+        <div class="themes-grid">
+          {
+            themesByAuthor
+              .map((t) => t.data)
+              .map(async (theme) => {
+                return (
+                  <a href={`/themes/${theme.urlBase}`} class="single-theme">
+                    <img
+                      loading="lazy"
+                      decoding="async"
+                      src={`${theme.mainThumbnail}`}
+                      alt=""
+                    />
+                    <div class="single-theme-name">{theme.name}</div>
+                    <div class="single-theme-authors">
+                      <AuthorsFormatter authors={theme.authors} />
+                    </div>
+                    <div class="single-theme-year">{theme.year || "-"}</div>
+                  </a>
+                );
+              })
+          }
+        </div>
+      </div>
+    </OS9Window>
+  </main>
+</BaseLayout>

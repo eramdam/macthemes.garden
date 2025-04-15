@@ -1,0 +1,8 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist", "scripts"],
+  "compilerOptions": {
+    "allowJs": true // required, and included with all Astro templates
+  }
+}

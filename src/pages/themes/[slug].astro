@@ -1,0 +1,87 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+
+import OS9Window from "../../components/OS9Window.astro";
+import { archiveFileSize, archiveMd5 } from "../../helpers";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import AuthorsFormatter from "../../components/AuthorsFormatter.astro";
+export const getStaticPaths = (async () => {
+  const themes = await getCollection("themes");
+  return themes.map((t) => {
+    return {
+      props: { theme: t },
+      params: {
+        slug: t.data.urlBase,
+      },
+    };
+  });
+}) satisfies GetStaticPaths;
+const theme = Astro.props.theme.data;
+---
+
+<BaseLayout>
+  <main>
+    <OS9Window title={theme.name}>
+      <section class="single-theme-page">
+        <h1 class="single-theme-title">{theme.name}</h1>
+        <div class="single-theme-grid">
+          <div class="gallery">
+            {
+              theme.thumbnails.map((image) => {
+                return (
+                  <a
+                    class="gallery-thumbnail"
+                    href={image}
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    <img src={image} alt="" />
+                  </a>
+                );
+              })
+            }
+          </div>
+          <div class="infos">
+            <dl>
+              <dt>Name:</dt>
+              <dd>{theme.name}</dd>
+
+              <dt>Author(s):</dt>
+              <dd>
+                <AuthorsFormatter asLinks authors={theme.authors} />
+              </dd>
+
+              <dt>Release year:</dt>
+              <dd>{theme.year}</dd>
+
+              <dt>Download:</dt>
+              <dd>
+                <ul>
+                  <li>
+                    <a
+                      href={`https://files.macthemes.garden/${theme.archiveFile}`}
+                      >#1 (files.macthemes.garden)</a
+                    >
+                  </li>
+                </ul>
+              </dd>
+              <dd>
+                {theme.archiveFile}
+                {archiveFileSize(theme.archiveFile)}
+              </dd>
+              <dd>
+                MD5
+                <a
+                  href={`https://files.macthemes.garden/${theme.archiveFile}.md5`}
+                >
+                  {archiveMd5(theme.archiveFile)}</a
+                >
+              </dd>
+            </dl>
+          </div>
+        </div>
+      </section>
+    </OS9Window>
+  </main>
+</BaseLayout>

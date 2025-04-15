@@ -1,0 +1,25 @@
+---
+import { getCollection } from "astro:content";
+import OS9Window from "../components/OS9Window.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const authors = await getCollection("authors");
+---
+
+<BaseLayout>
+  <main>
+    <OS9Window title="Authors">
+      <ul>
+        {
+          authors.map((author) => {
+            return (
+              <li>
+                <a href={author.data.url}>{author.data.name}</a>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </OS9Window>
+  </main>
+</BaseLayout>

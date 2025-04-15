@@ -1,0 +1,34 @@
+---
+import { getEntries } from "astro:content";
+import type { ReferenceDataEntry } from "astro:content";
+
+interface Props {
+  authors: ReferenceDataEntry<"authors", string>[];
+  asLinks?: true;
+}
+
+const listFormatter = new Intl.ListFormat("en", {
+  style: "long",
+  type: "conjunction",
+});
+
+const authors = await getEntries(Astro.props.authors);
+const authorNames = authors.map((a) => a.data.name);
+---
+
+{
+  (authors.length &&
+    listFormatter.formatToParts(authorNames).map((e) => {
+      if (e.type === "element" && Astro.props.asLinks) {
+        const author = authors.find((a) => a.data.name === e.value);
+
+        return (
+          <a href={author?.data.slug ? author?.data.url : undefined}>
+            {e.value}
+          </a>
+        );
+      }
+
+      return e.value;
+    })) || <em>Unknown</em>
+}

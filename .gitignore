@@ -132,3 +132,4 @@ dist
 data/attachments/*
 
 _site
+.astro

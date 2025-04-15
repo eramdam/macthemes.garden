@@ -1,0 +1,61 @@
+---
+import "../styles/index.css";
+import OS9Window, { WindowButtons } from "../components/OS9Window.astro";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mac Themes Garden</title>
+    <script is:inline src="/assets/index.js"></script>
+  </head>
+
+  <body>
+    <header>
+      <OS9Window
+        title="Mac Themes Garden"
+        classname="header-box"
+        buttons={[WindowButtons.Close, WindowButtons.Collapse]}
+      >
+        <div class="header-image-box">
+          <div class="header-image"></div>
+        </div>
+
+        <nav>
+          <ul class="macos9-menu">
+            <li>
+              <a href="/" class="macos9-menu-icon">
+                <img src="/assets/menu/schemes-puzzle.png" alt="" />
+                <span> Schemes index </span>
+              </a>
+            </li>
+            <li>
+              <a href="/authors" class="macos9-menu-icon">
+                <img src="/assets/menu/file-sharing.png" alt="" />
+                <span> Authors </span>
+              </a>
+            </li>
+            <span class="spacer"></span>
+            <li>
+              <a href="#" class="macos9-menu-icon">
+                <img src="/assets/menu/finder-computer.png" alt="" />
+                <span> About </span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </OS9Window>
+    </header>
+    <slot />
+    <footer>
+      <OS9Window title="Footer" classname="footer">
+        <p>
+          All the themes showcased are the property of their respective authors.
+          Not affiliated with Apple Inc.
+        </p>
+      </OS9Window>
+    </footer>
+  </body>
+</html>
