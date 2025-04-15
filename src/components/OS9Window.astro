@@ -1,8 +1,13 @@
 ---
+export enum WindowButtons {
+  Close,
+  Zoom,
+  Collapse,
+}
 interface Props {
   classname?: string;
   title: string;
-  noButtons?: boolean;
+  buttons?: WindowButtons[];
 }
 
 import crypto from "node:crypto";
@@ -12,17 +17,34 @@ const uid = crypto
   .digest("hex")
   .slice(0, 10);
 
-const { classname, title, noButtons } = Astro.props;
+const { classname, title } = Astro.props;
+const buttons = Astro.props.buttons ?? [
+  WindowButtons.Close,
+  WindowButtons.Collapse,
+  WindowButtons.Zoom,
+];
 ---
 
 <div class={`macos9-window ${classname}`} id={uid}>
   <div class="macos9-window-titlebar">
-    {!noButtons && <button class="button close" data-action="close" />}
+    {
+      buttons.includes(WindowButtons.Close) && (
+        <button class="button close" data-action="close" />
+      )
+    }
     <span class="filler"></span>
     <span class="title-text">{title}</span>
     <span class="filler"></span>
-    {!noButtons && <button class="button zoom" data-action="zoom" />}
-    {!noButtons && <button class="button collapse" data-action="collapse" />}
+    {
+      buttons.includes(WindowButtons.Zoom) && (
+        <button class="button zoom" data-action="zoom" />
+      )
+    }
+    {
+      buttons.includes(WindowButtons.Collapse) && (
+        <button class="button collapse" data-action="collapse" />
+      )
+    }
   </div>
   <div class="macos9-window-body">
     <slot />
