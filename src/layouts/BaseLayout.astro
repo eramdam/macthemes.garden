@@ -16,6 +16,12 @@ const secondLine = themes?.slice(neededThemes / 2, neededThemes);
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mac Themes Garden</title>
     <script is:inline src="/assets/index.js"></script>
+    <link
+      rel="preload"
+      href="/assets/macthemes-garden-header-transparent-1.webp"
+      as="image"
+      type="image/webp"
+    />
   </head>
 
   <body>
@@ -78,35 +84,5 @@ const secondLine = themes?.slice(neededThemes / 2, neededThemes);
         </p>
       </OS9Window>
     </footer>
-    <script define:vars={{ themes: themes }} is:inline>
-      (async () => {
-        const headerImage = document.querySelector(".header-image");
-        if (!headerImage) {
-          return;
-        }
-
-        // for (const theme of themes) {
-        //   console.log(theme);
-        // }
-
-        async function getImageDimensions(imgSrc) {
-          const imageData = await fetch(imgSrc).then((r) => r.blob());
-          const canvas = document.createElement("canvas");
-          const ctx = canvas.getContext("2d");
-          const img = new Image();
-          img.src = URL.createObjectURL(imageData);
-
-          canvas.style = `position: fixed; display: block; background-color: pink;`;
-          document.body.appendChild(canvas);
-
-          img.onload = () => {
-            canvas.width = img.width;
-            canvas.height = img.height;
-            ctx.drawImage(img, 0, 0);
-            console.log(ctx.getImageData(0, 0, canvas.width, canvas.height));
-          };
-        }
-      })();
-    </script>
   </body>
 </html>
