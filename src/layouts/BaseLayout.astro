@@ -1,9 +1,15 @@
 ---
+interface Props {
+  themesImages?: string[];
+}
 import "../styles/index.css";
 import OS9Window, { WindowButtons } from "../components/OS9Window.astro";
+import { neededThemes } from "../components/IndexPage.astro";
+const themes = Astro.props.themesImages;
+const firstLine = themes?.slice(0, neededThemes / 2);
+const secondLine = themes?.slice(neededThemes / 2, neededThemes);
 ---
 
-<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -20,7 +26,22 @@ import OS9Window, { WindowButtons } from "../components/OS9Window.astro";
         buttons={[WindowButtons.Close, WindowButtons.Collapse]}
       >
         <div class="header-image-box">
-          <div class="header-image"></div>
+          <div class="header-image" class:list={{ themes: Boolean(themes) }}>
+            <div>
+              {
+                firstLine?.map((t) => {
+                  return <img src={t} />;
+                })
+              }
+            </div>
+            <div>
+              {
+                secondLine?.map((t) => {
+                  return <img src={t} />;
+                })
+              }
+            </div>
+          </div>
         </div>
 
         <nav>
@@ -57,5 +78,35 @@ import OS9Window, { WindowButtons } from "../components/OS9Window.astro";
         </p>
       </OS9Window>
     </footer>
+    <script define:vars={{ themes: themes }} is:inline>
+      (async () => {
+        const headerImage = document.querySelector(".header-image");
+        if (!headerImage) {
+          return;
+        }
+
+        // for (const theme of themes) {
+        //   console.log(theme);
+        // }
+
+        async function getImageDimensions(imgSrc) {
+          const imageData = await fetch(imgSrc).then((r) => r.blob());
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
+          const img = new Image();
+          img.src = URL.createObjectURL(imageData);
+
+          canvas.style = `position: fixed; display: block; background-color: pink;`;
+          document.body.appendChild(canvas);
+
+          img.onload = () => {
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img, 0, 0);
+            console.log(ctx.getImageData(0, 0, canvas.width, canvas.height));
+          };
+        }
+      })();
+    </script>
   </body>
 </html>

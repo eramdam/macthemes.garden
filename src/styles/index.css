@@ -164,9 +164,6 @@ main {
 .macos9-window.header .macos9-window-body {
   text-align: center;
   padding: 20px 0;
-  background-image:
-    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url("https://files-social.erambert.me/accounts/headers/113/370/184/750/103/599/original/f79d8c854ca0c84d.png");
   background-size: cover;
   background-position: center;
 }
@@ -332,6 +329,56 @@ main {
   background-image: url(/assets/macthemes-garden-header.png);
   background-size: cover;
   background-position: center;
+}
+
+.header-box .header-image.themes {
+  background: none;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    inset: 0;
+    position: absolute;
+    display: block;
+    background-image: url(/assets/macthemes-garden-header-transparent.webp);
+    background-size: cover;
+    background-position: center;
+    z-index: 10;
+  }
+}
+
+.header-box .header-image.themes div {
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  position: absolute;
+
+  --offset-y: 20%;
+  --offset-x: 40%;
+  height: 100%;
+  width: 100%;
+  height: calc(100% + var(--offset-y));
+  width: calc(100% + var(--offset-x));
+  transform: translate(
+    calc(-1 * (var(--offset-x) / 2)),
+    calc(-1 * (var(--offset-y) / 2))
+  );
+  z-index: 1;
+}
+
+.header-box .header-image.themes div:nth-child(2) {
+  z-index: 0;
+  margin-top: -7%;
+}
+
+.header-box .header-image.themes img {
+  object-fit: contain;
+  height: 100%;
+  margin-right: -10%;
 }
 
 .header-box nav {

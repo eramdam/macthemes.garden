@@ -1,6 +1,7 @@
 ---
+import { shuffle, sample, uniq } from "lodash-es";
 import type { Page } from "astro";
-import type { CollectionEntry } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import OS9Window from "./OS9Window.astro";
 import PaginationBar from "./PaginationBar.astro";
@@ -15,9 +16,20 @@ interface Props {
 }
 
 const { page } = Astro.props;
+export const neededThemes = 12;
+const allThemes = await getCollection("themes");
+let themes = shuffle(page.data)
+  .map((t) => t.data.mainThumbnail)
+  .slice(0, neededThemes);
+if (themes.length < neededThemes) {
+  const randomAdditionalThemes = shuffle(
+    allThemes.map((t) => t.data.mainThumbnail)
+  ).slice(0, neededThemes * 2);
+  themes = uniq([...themes, ...randomAdditionalThemes]);
+}
 ---
 
-<BaseLayout>
+<BaseLayout themesImages={themes}>
   <main>
     <OS9Window title="Index">
       <PaginationBar pagination={page} />
