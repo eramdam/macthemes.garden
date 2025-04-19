@@ -1,13 +1,7 @@
 ---
-interface Props {
-  themesImages?: string[];
-}
+interface Props {}
 import "../styles/index.css";
 import OS9Window, { WindowButtons } from "../components/OS9Window.astro";
-import { neededThemes } from "../components/IndexPage.astro";
-const themes = Astro.props.themesImages;
-const firstLine = themes?.slice(0, neededThemes / 2);
-const secondLine = themes?.slice(neededThemes / 2, neededThemes);
 ---
 
 <html lang="en">
@@ -32,22 +26,7 @@ const secondLine = themes?.slice(neededThemes / 2, neededThemes);
         buttons={[WindowButtons.Close, WindowButtons.Collapse]}
       >
         <div class="header-image-box">
-          <div class="header-image" class:list={{ themes: Boolean(themes) }}>
-            <div>
-              {
-                firstLine?.map((t) => {
-                  return <img src={t} />;
-                })
-              }
-            </div>
-            <div>
-              {
-                secondLine?.map((t) => {
-                  return <img src={t} />;
-                })
-              }
-            </div>
-          </div>
+          <div class="header-image"></div>
         </div>
 
         <nav>
