@@ -320,15 +320,16 @@ main {
 }
 
 .header-box .header-image {
-  aspect-ratio: 227 / 40;
-
   box-shadow:
     -1px -1px 0 rgb(from var(--primary-black) r g b / 40%),
     1px 1px 0 var(--primary-white);
   border: 1px solid var(--primary-black);
-  background-image: url(/assets/macthemes-garden-header.png);
-  background-size: cover;
-  background-position: center;
+  line-height: 0;
+}
+
+.header-box .header-image img {
+  width: 100%;
+  height: auto;
 }
 
 .header-box nav {
