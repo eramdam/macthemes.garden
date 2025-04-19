@@ -307,24 +307,38 @@ main {
 }
 
 .header-box .macos9-window-body {
-  background-color: var(--grays-300);
+  background-color: var(--primary-white);
+  margin: 0;
+  border: 0;
 }
 
 .header-box .header-image-box {
-  padding: 5px;
+  padding: 0;
 
-  box-shadow:
+  /* box-shadow:
     inset -1px -1px 0 rgb(from var(--primary-black) r g b / 40%),
-    inset 1px 1px 0 var(--primary-white);
-  border-bottom: 1px solid var(--primary-black);
+    inset 1px 1px 0 var(--primary-white); */
+  /* border-bottom: 1px solid var(--primary-black); */
 }
 
 .header-box .header-image {
-  box-shadow:
+  /* box-shadow:
     -1px -1px 0 rgb(from var(--primary-black) r g b / 40%),
     1px 1px 0 var(--primary-white);
-  border: 1px solid var(--primary-black);
+   */
+  /* border: 1px solid var(--primary-black); */
+  /* border-bottom-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-radius: 20px; */
+  background-image: url(/assets/macthemes-garden-header.png);
+  background-size: contain;
+  background-position: center center;
+  aspect-ratio: 2195 / 510;
+  box-shadow:
+    inset 1px 1px 1px var(--grays-400),
+    inset -2px -2px 2px 1px rgba(0, 0, 0, 0.4);
   line-height: 0;
+  overflow: hidden;
 }
 
 .header-box .header-image img {

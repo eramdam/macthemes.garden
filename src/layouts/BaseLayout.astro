@@ -26,11 +26,12 @@ import OS9Window, { WindowButtons } from "../components/OS9Window.astro";
         buttons={[WindowButtons.Close, WindowButtons.Collapse]}
       >
         <div class="header-image-box">
-          <div class="header-image">
-            <img src="/assets/macthemes-garden-header.png" alt="" />
-          </div>
+          <div class="header-image"></div>
         </div>
-
+      </OS9Window>
+    </header>
+    <div style={{ marginTop: "-15px" }}>
+      <OS9Window title="Controls" classname="menu-box">
         <nav>
           <ul class="macos9-menu">
             <li>
@@ -55,7 +56,7 @@ import OS9Window, { WindowButtons } from "../components/OS9Window.astro";
           </ul>
         </nav>
       </OS9Window>
-    </header>
+    </div>
     <slot />
     <footer>
       <OS9Window title="Footer" classname="footer">
