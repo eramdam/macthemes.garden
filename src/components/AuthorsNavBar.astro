@@ -1,0 +1,36 @@
+---
+const listFormatter = new Intl.ListFormat("en", {
+  style: "short",
+  type: "unit",
+});
+const letters = "abcdefghijklmnopqrstuvwxyz".split("");
+---
+
+<style>
+  .authors-nav {
+    text-align: center;
+    padding: 6px 20px;
+    line-height: 1.8;
+    font-size: 16px;
+  }
+
+  .authors-nav a {
+    margin: 0 0.35ch;
+  }
+</style>
+<nav class="macos9-window-genericbar authors-nav">
+  {"["}{
+    listFormatter.formatToParts(letters).map((e) => {
+      if (e.type === "element") {
+        return (
+          <a
+            href={`/authors/letter/${e.value}`}
+            set:html={e.value.toUpperCase().trim()}
+          />
+        );
+      }
+
+      return "|";
+    })
+  }{"]"}
+</nav>

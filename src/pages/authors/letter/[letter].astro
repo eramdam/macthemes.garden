@@ -1,0 +1,26 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+import AuthorsPage from "../../../components/AuthorsPage.astro";
+
+export const getStaticPaths = (async () => {
+  const authors = await getCollection("authors");
+
+  return "abcdefghijklmnopqrstuvwxyz".split("").map((letter) => {
+    return {
+      props: {
+        authors: authors.filter((a) => {
+          return a.data.name[0].toLowerCase() === letter;
+        }),
+      },
+      params: {
+        letter,
+      },
+    };
+  });
+}) satisfies GetStaticPaths;
+
+const { authors } = Astro.props;
+---
+
+<AuthorsPage authors={authors} />

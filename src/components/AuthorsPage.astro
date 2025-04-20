@@ -1,0 +1,78 @@
+---
+interface Props {
+  authors: Array<CollectionEntry<"authors">>;
+}
+
+import OS9Window from "../components/OS9Window.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getEntries } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import AuthorsNavBar from "./AuthorsNavBar.astro";
+
+const authors = Astro.props.authors;
+const listFormatter = new Intl.ListFormat("en", {
+  style: "short",
+  type: "unit",
+});
+---
+
+<BaseLayout>
+  <style>
+    .authors-list li {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--grays-500);
+    }
+
+    .authors-list .authors-author {
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .authors-list .authors-themes a {
+      color: var(--primary-black);
+      font-size: 14px;
+    }
+  </style>
+  <main>
+    <OS9Window title="Authors">
+      <AuthorsNavBar />
+      <ul class="authors-list">
+        {
+          authors.map(async (author) => {
+            const themesForAuthor = await getEntries(author.data.themes);
+            const themesNames = themesForAuthor.map((t) => t.data.name);
+            return (
+              <li>
+                <div class="authors-author">
+                  <a href={author.data.url}>{author.data.name}</a>
+                </div>
+                <div class="authors-themes">
+                  {listFormatter.formatToParts(themesNames).map((e) => {
+                    if (e.type === "element") {
+                      const theme = themesForAuthor.find(
+                        (t) => t.data.name === e.value
+                      );
+
+                      if (!theme) {
+                        return undefined;
+                      }
+
+                      return (
+                        <a href={`/themes/${theme.data.urlBase}`}>{e.value}</a>
+                      );
+                    }
+
+                    return e.value;
+                  })}
+                </div>
+              </li>
+            );
+          })
+        }
+      </ul>
+      <AuthorsNavBar />
+    </OS9Window>
+  </main>
+</BaseLayout>
