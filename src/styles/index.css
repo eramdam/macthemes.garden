@@ -249,8 +249,10 @@ main {
   line-height: 1;
   display: flex;
   justify-content: center;
-  /* background-color: var(--grays-500); */
+  background-color: var(--grays-300);
   width: 100%;
+  padding: 5px;
+  padding-top: 0;
 }
 
 .macos9-menu li {
@@ -261,19 +263,23 @@ main {
   flex: 1;
 }
 
+.macos9-menu .spacer + li .macos9-menu-icon {
+  border-left: 1px solid var(--grays-200);
+  box-shadow: -1px 0 0 0 var(--grays-700);
+}
+
 .macos9-menu-icon {
-  display: inline-flex;
+  display: flex;
   font-size: 12px;
   flex-direction: column;
-  gap: 4px;
+  gap: 10px;
   color: var(--primary-black);
   text-decoration: none;
   text-align: center;
-  padding: 10px 6px;
+  padding: 10px;
 }
 
 .macos9-menu-icon span {
-  background-color: rgba(from var(--primary-white) r g b / 80%);
   padding: 2px 3px;
 }
 
@@ -312,11 +318,6 @@ main {
 
 .header-box .header-image-box {
   padding: 5px;
-
-  box-shadow:
-    inset -1px -1px 0 rgb(from var(--primary-black) r g b / 40%),
-    inset 1px 1px 0 var(--primary-white);
-  border-bottom: 1px solid var(--primary-black);
 }
 
 .header-box .header-image {
