@@ -62,19 +62,35 @@ export async function themesLoader() {
 }
 
 export async function themeAuthorsLoader() {
+  const themes = themesKaleidoscopeAirtable
+    // @ts-expect-error
+    .concat(themesKaleidoscopeBot);
+
   const airtableAuthors = new Set(
-    themesKaleidoscopeAirtable
-      // @ts-expect-error
-      .concat(themesKaleidoscopeBot)
+    themes
       .flatMap((t) => {
         return makeAuthorsFromAuthorsString(t.authors || "");
       })
       .filter((a) => !!a)
       .sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase())),
   );
+  const authorsWithNumbers = Array.from(airtableAuthors).map((a) => {
+    return {
+      author: a,
+      themes: themes.filter((t) =>
+        makeAuthorsFromAuthorsString(t.authors || "").includes(a),
+      ).length,
+    };
+  });
 
-  return Array.from(airtableAuthors).map((a) => {
-    return { name: a, id: a, slug: slugify(a), url: `/authors/${slugify(a)}` };
+  return Array.from(authorsWithNumbers).map((a) => {
+    return {
+      name: a.author,
+      id: a.author,
+      slug: slugify(a.author),
+      url: `/authors/${slugify(a.author)}`,
+      themes: a.themes,
+    };
   });
 }
 
