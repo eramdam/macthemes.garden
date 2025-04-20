@@ -71,6 +71,12 @@ body {
   padding: 20px 0;
 }
 
+@media (max-width: 480px) {
+  body {
+    font-size: 0.8rem;
+  }
+}
+
 h1 {
   font-family: Charter, "Bitstream Charter", "Sitka Text", Cambria, serif;
 }
@@ -83,7 +89,7 @@ header > h1 {
 footer p {
   margin: 0.5em;
   line-height: 1.6;
-  font-size: 12px;
+  font-size: 0.75rem;
   text-align: center;
 }
 
@@ -100,7 +106,7 @@ main {
 .themes-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-columns: repeat(auto-fill, minmax(268px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   justify-content: center;
   grid-auto-rows: auto;
   gap: 20px;
@@ -117,14 +123,14 @@ main {
 }
 
 .themes-grid .single-theme-name {
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: bold;
 }
 .themes-grid .single-theme-authors {
-  font-size: 13px;
+  font-size: 0.8125rem;
 }
 .themes-grid .single-theme-year {
-  font-size: 10px;
+  font-size: 0.625rem;
 }
 
 .themes-grid .single-theme img {
@@ -192,6 +198,17 @@ main {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
+}
+
+@media (max-width: 480px) {
+  .single-theme-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, auto);
+  }
+
+  .single-theme-grid .infos {
+    grid-row: 1;
+  }
 }
 
 .single-theme-grid .infos {
@@ -279,7 +296,7 @@ main {
 
 .macos9-menu-icon {
   display: flex;
-  font-size: 12px;
+  font-size: 0.75rem;
   flex-direction: column;
   gap: 10px;
   color: var(--primary-black);
@@ -298,6 +315,17 @@ main {
   display: block;
   margin: 0 auto;
   image-rendering: pixelated;
+}
+
+@media (max-width: 480px) {
+  .macos9-menu-icon {
+    font-size: 0.8rem;
+    padding: 6px;
+  }
+  .macos9-menu-icon img {
+    height: 24px;
+    width: 24px;
+  }
 }
 
 .macos9-menu-icon:active,
