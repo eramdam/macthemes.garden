@@ -165,7 +165,7 @@
 }
 
 .macos9-window-genericbar {
-  background-color: var(--grays-300);
+  background-color: var(--grays-200);
   min-height: 20px;
   box-shadow:
     inset 1px 1px 0 var(--primary-white),

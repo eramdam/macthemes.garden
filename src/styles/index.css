@@ -254,7 +254,7 @@ main {
   line-height: 1;
   display: flex;
   justify-content: center;
-  background-color: var(--grays-300);
+  background-color: var(--grays-200);
   width: 100%;
   padding: 5px;
   padding-top: 0;
@@ -318,7 +318,7 @@ main {
 }
 
 .header-box .macos9-window-body {
-  background-color: var(--grays-300);
+  background-color: var(--grays-200);
 }
 
 .header-box .header-image-box {
