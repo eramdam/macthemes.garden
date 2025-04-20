@@ -264,8 +264,8 @@ main {
 }
 
 .macos9-menu .spacer + li .macos9-menu-icon {
-  border-left: 1px solid var(--grays-200);
-  box-shadow: -1px 0 0 0 var(--grays-700);
+  border-left: 1px solid var(--primary-white);
+  box-shadow: -1px 0 0 0 var(--grays-800);
 }
 
 .macos9-menu-icon {
