@@ -4,6 +4,7 @@ import { getCollection } from "astro:content";
 import AuthorsFormatter from "../../components/AuthorsFormatter.astro";
 import OS9Window from "../../components/OS9Window.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getEntries } from "astro:content";
 
 export const getStaticPaths = (async () => {
   const authors = await getCollection("authors");
@@ -18,9 +19,7 @@ export const getStaticPaths = (async () => {
   });
 }) satisfies GetStaticPaths;
 const { author } = Astro.props;
-const themesByAuthor = (await getCollection("themes")).filter((t) => {
-  return t.data.authors.some((a) => a.id === author.id);
-});
+const themesByAuthor = await getEntries(author.data.themes);
 ---
 
 <BaseLayout>

@@ -62,14 +62,12 @@ export async function themesLoader() {
 }
 
 export async function themeAuthorsLoader() {
-  const themes = themesKaleidoscopeAirtable
-    // @ts-expect-error
-    .concat(themesKaleidoscopeBot);
+  const themes = await themesLoader();
 
   const airtableAuthors = new Set(
     themes
       .flatMap((t) => {
-        return makeAuthorsFromAuthorsString(t.authors || "");
+        return t.authors;
       })
       .filter((a) => !!a)
       .sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase())),
@@ -77,9 +75,7 @@ export async function themeAuthorsLoader() {
   const authorsWithNumbers = Array.from(airtableAuthors).map((a) => {
     return {
       author: a,
-      themes: themes.filter((t) =>
-        makeAuthorsFromAuthorsString(t.authors || "").includes(a),
-      ).length,
+      themes: themes.filter((t) => t.authors.includes(a)).map((t) => t.id),
     };
   });
 
@@ -96,7 +92,7 @@ export async function themeAuthorsLoader() {
 
 function makeAuthorsFromAuthorsString(authors: string) {
   return (authors || "")
-    .split(/(?:and |,|&)/)
+    .split(/(?:\sand\s|,|&)/i)
     .map((l) => l.trim().replaceAll(`'`, `"`))
     .filter((a) => !!a);
 }

@@ -23,7 +23,7 @@ const authors = defineCollection({
     name: z.string(),
     slug: z.string(),
     url: z.string(),
-    themes: z.number(),
+    themes: z.array(reference("themes")),
   }),
 });
 // 4. Export a single `collections` object to register your collection(s)
