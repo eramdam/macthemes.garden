@@ -63,7 +63,7 @@ export const PAGINATION: {
       currentPage: 1,
       data: collection.slice(0, Math.ceil(collection.length / pageSize)),
       url: {
-        last: `/themes/${Math.ceil(collection.length / pageSize)}`,
+        last: `/page/${Math.ceil(collection.length / pageSize)}`,
         current: "/",
         first: "/",
         next: "/page/2",
