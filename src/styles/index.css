@@ -1,5 +1,6 @@
 @import url("reset.css");
 @import url("macos9-window.css");
+@import url("platinum.css");
 
 :root {
   /* Colors from https://www.figma.com/community/file/966779730364082883 */
@@ -353,9 +354,62 @@ footer p {
 
 .header-box .header-image img {
   width: 100%;
-  height: auto;
+  height: 150px;
+  object-fit: cover;
 }
 
 .header-box nav {
   background-color: var(--primary-white);
+}
+
+@media (min-width: 640px) {
+  body.fixed-windows {
+    display: grid;
+    grid-template-areas: "header" "main" "footer";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+
+    overflow: hidden;
+    max-height: 100vh;
+    margin: 0;
+
+    & > header {
+      grid-area: header;
+    }
+    & > main {
+      grid-area: main;
+
+      &.macos9-window {
+        display: flex;
+        flex-direction: column;
+      }
+
+      & .macos9-window-body {
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+      }
+
+      & .macos9-window-body > :not(.macos9-window-mainbody) {
+        flex-shrink: 0;
+      }
+
+      & .macos9-window-mainbody {
+        overflow: scroll;
+        overflow-x: hidden;
+        min-height: 0;
+        flex-shrink: 1;
+        display: flex;
+        flex-direction: column;
+        flex-basis: 100vh;
+      }
+
+      & .macos9-window-mainbody + * {
+        display: none;
+      }
+    }
+    & > footer {
+      grid-area: footer;
+    }
+  }
 }
