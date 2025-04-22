@@ -173,6 +173,7 @@ footer p {
 
 .single-theme-page {
   padding: 20px;
+  padding-top: 10px;
   display: flex;
   flex-direction: column;
   gap: 10px;
