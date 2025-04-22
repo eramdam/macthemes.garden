@@ -354,8 +354,7 @@ footer p {
 
 .header-box .header-image img {
   width: 100%;
-  height: 150px;
-  object-fit: cover;
+  height: auto;
 }
 
 .header-box nav {
