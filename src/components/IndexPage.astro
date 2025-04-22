@@ -19,33 +19,31 @@ const { page } = Astro.props;
 ---
 
 <BaseLayout>
-  <main>
-    <OS9Window title="Index">
-      <PaginationBar pagination={page} />
-      <div class="themes-grid">
-        {
-          page.data
-            .map((t) => t.data)
-            .map(async (theme) => {
-              return (
-                <a href={`/themes/${theme.urlBase}`} class="single-theme">
-                  <img
-                    loading="lazy"
-                    decoding="async"
-                    src={`${theme.mainThumbnail}`}
-                    alt=""
-                  />
-                  <div class="single-theme-name">{theme.name}</div>
-                  <div class="single-theme-authors">
-                    <AuthorsFormatter authors={theme.authors} />
-                  </div>
-                  <div class="single-theme-year">{theme.year || "-"}</div>
-                </a>
-              );
-            })
-        }
-      </div>
-      <PaginationBar pagination={page} />
-    </OS9Window>
-  </main>
+  <OS9Window as="main" title="Index">
+    <PaginationBar pagination={page} />
+    <div class="themes-grid">
+      {
+        page.data
+          .map((t) => t.data)
+          .map(async (theme) => {
+            return (
+              <a href={`/themes/${theme.urlBase}`} class="single-theme">
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  src={`${theme.mainThumbnail}`}
+                  alt=""
+                />
+                <div class="single-theme-name">{theme.name}</div>
+                <div class="single-theme-authors">
+                  <AuthorsFormatter authors={theme.authors} />
+                </div>
+                <div class="single-theme-year">{theme.year || "-"}</div>
+              </a>
+            );
+          })
+      }
+    </div>
+    <PaginationBar pagination={page} />
+  </OS9Window>
 </BaseLayout>

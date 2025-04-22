@@ -54,6 +54,10 @@ body {
   padding: 20px 0;
 }
 
+body > * {
+  width: 100%;
+}
+
 @media (max-width: 480px) {
   body {
     font-size: 0.8rem;

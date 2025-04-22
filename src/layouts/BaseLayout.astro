@@ -13,51 +13,48 @@ import OS9Window, { WindowButtons } from "../components/OS9Window.astro";
   </head>
 
   <body>
-    <header>
-      <OS9Window
-        title="Welcome!"
-        classname="header-box"
-        buttons={[WindowButtons.Close, WindowButtons.Collapse]}
-      >
-        <div class="header-image-box">
-          <div class="header-image">
-            <img src="/assets/macthemes-garden-header.png" alt="" />
-          </div>
+    <OS9Window
+      as="header"
+      title="Welcome!"
+      classname="header-box"
+      buttons={[WindowButtons.Close, WindowButtons.Collapse]}
+    >
+      <div class="header-image-box">
+        <div class="header-image">
+          <img src="/assets/macthemes-garden-header.png" alt="" />
         </div>
+      </div>
 
-        <nav>
-          <ul class="macos9-menu">
-            <li>
-              <a href="/" class="macos9-menu-icon">
-                <img src="/assets/menu/schemes-puzzle.png" alt="" />
-                <span> Schemes </span>
-              </a>
-            </li>
-            <li>
-              <a href="/authors" class="macos9-menu-icon">
-                <img src="/assets/menu/file-sharing.png" alt="" />
-                <span> Authors </span>
-              </a>
-            </li>
-            <span class="spacer"></span>
-            <li>
-              <a href="#" class="macos9-menu-icon">
-                <img src="/assets/menu/finder-computer.png" alt="" />
-                <span> About </span>
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </OS9Window>
-    </header>
+      <nav>
+        <ul class="macos9-menu">
+          <li>
+            <a href="/" class="macos9-menu-icon">
+              <img src="/assets/menu/schemes-puzzle.png" alt="" />
+              <span> Schemes </span>
+            </a>
+          </li>
+          <li>
+            <a href="/authors" class="macos9-menu-icon">
+              <img src="/assets/menu/file-sharing.png" alt="" />
+              <span> Authors </span>
+            </a>
+          </li>
+          <span class="spacer"></span>
+          <li>
+            <a href="#" class="macos9-menu-icon">
+              <img src="/assets/menu/finder-computer.png" alt="" />
+              <span> About </span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </OS9Window>
     <slot />
-    <footer>
-      <OS9Window title="Footer" classname="footer">
-        <p>
-          All the themes showcased are the property of their respective authors.
-          Not affiliated with Apple Inc.
-        </p>
-      </OS9Window>
-    </footer>
+    <OS9Window as="footer" title="Footer" classname="footer">
+      <p>
+        All the themes showcased are the property of their respective authors.
+        Not affiliated with Apple Inc.
+      </p>
+    </OS9Window>
   </body>
 </html>
