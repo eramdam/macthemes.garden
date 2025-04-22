@@ -6,7 +6,6 @@ import OS9Window from "./OS9Window.astro";
 import PaginationBar from "./PaginationBar.astro";
 
 import AuthorsFormatter from "./AuthorsFormatter.astro";
-import OS9Button from "./OS9Button.astro";
 
 interface Props {
   page: Pick<
@@ -20,7 +19,7 @@ const { page } = Astro.props;
 
 <BaseLayout>
   <OS9Window as="main" title="Index">
-    <PaginationBar pagination={page} />
+    <PaginationBar slot="before-content" pagination={page} />
     <div class="themes-grid">
       {
         page.data
@@ -44,6 +43,6 @@ const { page } = Astro.props;
           })
       }
     </div>
-    <PaginationBar pagination={page} />
+    <PaginationBar slot="after-content" pagination={page} />
   </OS9Window>
 </BaseLayout>

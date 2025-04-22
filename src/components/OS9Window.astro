@@ -11,7 +11,6 @@ interface Props {
   as?: keyof astroHTML.JSX.DefinedIntrinsicElements;
 }
 
-import { divide } from "lodash-es";
 import crypto from "node:crypto";
 const uid = crypto
   .createHash("sha256")
@@ -28,7 +27,7 @@ const buttons = Astro.props.buttons ?? [
 const Wrapper = Astro.props.as ? Astro.props.as : "div";
 ---
 
-<Wrapper class={`macos9-window ${classname}`} id={uid}>
+<Wrapper id={uid} class:list={["macos9-window", classname]}>
   <div class="macos9-window-titlebar">
     {
       buttons.includes(WindowButtons.Close) && (
@@ -50,6 +49,10 @@ const Wrapper = Astro.props.as ? Astro.props.as : "div";
     }
   </div>
   <div class="macos9-window-body">
-    <slot />
+    <slot name="before-content" />
+    <div class="macos9-window-mainbody platinum-scrollbars">
+      <slot />
+    </div>
+    <slot name="after-content" />
   </div>
 </Wrapper>

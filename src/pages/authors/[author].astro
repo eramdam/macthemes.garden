@@ -23,36 +23,34 @@ const themesByAuthor = await getEntries(author.data.themes);
 ---
 
 <BaseLayout>
-  <main>
-    <OS9Window title={`Themes by ${Astro.props.author.data.name}`}>
-      <div class="single-author-page">
-        <h1 class="single-theme-title">
-          Themes by {Astro.props.author.data.name}
-        </h1>
-        <div class="themes-grid">
-          {
-            themesByAuthor
-              .map((t) => t.data)
-              .map(async (theme) => {
-                return (
-                  <a href={`/themes/${theme.urlBase}`} class="single-theme">
-                    <img
-                      loading="lazy"
-                      decoding="async"
-                      src={`${theme.mainThumbnail}`}
-                      alt=""
-                    />
-                    <div class="single-theme-name">{theme.name}</div>
-                    <div class="single-theme-authors">
-                      <AuthorsFormatter authors={theme.authors} />
-                    </div>
-                    <div class="single-theme-year">{theme.year || "-"}</div>
-                  </a>
-                );
-              })
-          }
-        </div>
+  <OS9Window as="main" title={`Themes by ${Astro.props.author.data.name}`}>
+    <div class="single-author-page">
+      <h1 class="single-theme-title">
+        Themes by {Astro.props.author.data.name}
+      </h1>
+      <div class="themes-grid">
+        {
+          themesByAuthor
+            .map((t) => t.data)
+            .map(async (theme) => {
+              return (
+                <a href={`/themes/${theme.urlBase}`} class="single-theme">
+                  <img
+                    loading="lazy"
+                    decoding="async"
+                    src={`${theme.mainThumbnail}`}
+                    alt=""
+                  />
+                  <div class="single-theme-name">{theme.name}</div>
+                  <div class="single-theme-authors">
+                    <AuthorsFormatter authors={theme.authors} />
+                  </div>
+                  <div class="single-theme-year">{theme.year || "-"}</div>
+                </a>
+              );
+            })
+        }
       </div>
-    </OS9Window>
-  </main>
+    </div>
+  </OS9Window>
 </BaseLayout>

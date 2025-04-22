@@ -45,44 +45,42 @@ const listFormatter = new Intl.ListFormat("en", {
       }
     }
   </style>
-  <main>
-    <OS9Window title="Authors">
-      <AuthorsNavBar />
-      <ul class="authors-list">
-        {
-          authors.map(async (author) => {
-            const themesForAuthor = await getEntries(author.data.themes);
-            const themesNames = themesForAuthor.map((t) => t.data.name);
-            return (
-              <li>
-                <div class="authors-author">
-                  <a href={author.data.url}>{author.data.name}</a>
-                </div>
-                <div class="authors-themes">
-                  {listFormatter.formatToParts(themesNames).map((e) => {
-                    if (e.type === "element") {
-                      const theme = themesForAuthor.find(
-                        (t) => t.data.name === e.value
-                      );
+  <OS9Window as="main" title="Authors">
+    <AuthorsNavBar slot="before-content" />
+    <ul class="authors-list">
+      {
+        authors.map(async (author) => {
+          const themesForAuthor = await getEntries(author.data.themes);
+          const themesNames = themesForAuthor.map((t) => t.data.name);
+          return (
+            <li>
+              <div class="authors-author">
+                <a href={author.data.url}>{author.data.name}</a>
+              </div>
+              <div class="authors-themes">
+                {listFormatter.formatToParts(themesNames).map((e) => {
+                  if (e.type === "element") {
+                    const theme = themesForAuthor.find(
+                      (t) => t.data.name === e.value
+                    );
 
-                      if (!theme) {
-                        return undefined;
-                      }
-
-                      return (
-                        <a href={`/themes/${theme.data.urlBase}`}>{e.value}</a>
-                      );
+                    if (!theme) {
+                      return undefined;
                     }
 
-                    return e.value;
-                  })}
-                </div>
-              </li>
-            );
-          })
-        }
-      </ul>
-      <AuthorsNavBar />
-    </OS9Window>
-  </main>
+                    return (
+                      <a href={`/themes/${theme.data.urlBase}`}>{e.value}</a>
+                    );
+                  }
+
+                  return e.value;
+                })}
+              </div>
+            </li>
+          );
+        })
+      }
+    </ul>
+    <AuthorsNavBar slot="after-content" />
+  </OS9Window>
 </BaseLayout>
