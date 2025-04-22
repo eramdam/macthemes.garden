@@ -1,3 +1,4 @@
+@import url("reset.css");
 @import url("macos9-window.css");
 
 :root {
@@ -38,24 +39,6 @@
   --icon-color-black: #000000;
 }
 
-::before,
-::after,
-* {
-  box-sizing: border-box;
-}
-
-button {
-  padding: 0;
-}
-
-* {
-  background-repeat: no-repeat;
-}
-
-:is(h1, h2, h3, h4, h5, h6) {
-  margin: 0;
-}
-
 body {
   font-family:
     "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
@@ -91,9 +74,6 @@ footer p {
   line-height: 1.6;
   font-size: 0.75rem;
   text-align: center;
-}
-
-main {
 }
 
 @media (max-width: 900px) {
