@@ -2,6 +2,7 @@ import Airtable, { FieldSet, Records } from "airtable";
 import async from "async";
 import fs from "fs-extra";
 import { airtableCache } from "./caches";
+import sharp from "sharp";
 
 const base = new Airtable({ apiKey: process.env.AIRTABLE_TOKEN }).base(
   process.env.AIRTABLE_BASE_ID || "",
@@ -85,7 +86,18 @@ async function downloadAttachment(
   }
 
   const response = await fetch(attachment.url);
-  const buffer = await response.arrayBuffer();
+  let buffer = await response.arrayBuffer();
+
+  if (filename.includes("ksa-sampler")) {
+    const imagedata = await sharp(buffer).metadata();
+    buffer = await sharp(buffer)
+      .resize({
+        width: imagedata!.width! * 4,
+        height: imagedata!.height! * 4,
+        kernel: "nearest",
+      })
+      .toBuffer();
+  }
 
   console.log(`Downloaded ${filename}`);
   await fs.writeFile(filepath, Buffer.from(buffer));
