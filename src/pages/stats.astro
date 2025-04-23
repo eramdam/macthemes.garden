@@ -1,0 +1,20 @@
+---
+import { getCollection } from "astro:content";
+import OS9Window from "../components/OS9Window.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const getStats = async () => {
+  const themes = await getCollection("themes");
+  const authors = await getCollection("authors");
+
+  return `${themes.length.toLocaleString()} themes from ${authors.length.toLocaleString()} authors`;
+};
+---
+
+<BaseLayout title="Statistics">
+  <OS9Window title="Stats">
+    <p>
+      As of {new Date().toLocaleDateString()}, there are {getStats()}
+    </p>
+  </OS9Window>
+</BaseLayout>
