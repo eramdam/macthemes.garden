@@ -48,6 +48,7 @@
   display: flex;
   gap: 4px;
   align-items: center;
+  user-select: none;
 }
 
 .macos9-window-titlebar > span.filler {
