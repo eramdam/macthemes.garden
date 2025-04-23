@@ -5,14 +5,14 @@ import themesKaleidoscopeBot from "./themes/original.json" with { type: "json" }
 
 const mySlugify = (str: string) => slugify(str, { remove: /[*+~.()'"!:@\/]/g });
 
-export async function themesLoader() {
-  const archivesInAirtable = new Set(
-    themesKaleidoscopeAirtable.map((t) => t.archiveFilename),
-  );
-  const botThemesNotOnAirtableYet = themesKaleidoscopeBot.filter((theme) => {
-    return !archivesInAirtable.has(theme.archiveFilename);
-  });
+const archivesInAirtable = new Set(
+  themesKaleidoscopeAirtable.map((t) => t.archiveFilename),
+);
+const botThemesNotOnAirtableYet = themesKaleidoscopeBot.filter((theme) => {
+  return !archivesInAirtable.has(theme.archiveFilename);
+});
 
+export async function themesLoader() {
   const result = themesKaleidoscopeAirtable
     .map((theme) => {
       const id = crypto
@@ -62,7 +62,7 @@ export async function themesLoader() {
 export async function themeAuthorsLoader() {
   const themes = await themesLoader();
 
-  const airtableAuthors = new Set(
+  const baseAuthors = new Set(
     themes
       .flatMap((t) => {
         return t.authors;
@@ -70,7 +70,7 @@ export async function themeAuthorsLoader() {
       .filter((a) => !!a)
       .sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase())),
   );
-  const authorsWithNumbers = Array.from(airtableAuthors).map((a) => {
+  const authorsWithNumbers = Array.from(baseAuthors).map((a) => {
     return {
       author: a,
       themes: themes.filter((t) => t.authors.includes(a)).map((t) => t.id),
