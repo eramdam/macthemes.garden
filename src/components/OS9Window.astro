@@ -11,12 +11,11 @@ interface Props {
   as?: keyof astroHTML.JSX.DefinedIntrinsicElements;
 }
 
-import crypto from "node:crypto";
-const uid = crypto
-  .createHash("sha256")
-  .update(Date.now().toString())
-  .digest("hex")
-  .slice(0, 10);
+// import crypto from "node:crypto";
+// const uid = crypto
+//   .createHash("sha256")
+//   .update(JSON.stringify(Astro.props))
+//   .digest("base64");
 
 const { classname, title } = Astro.props;
 const buttons = Astro.props.buttons ?? [
@@ -27,7 +26,7 @@ const buttons = Astro.props.buttons ?? [
 const Wrapper = Astro.props.as ? Astro.props.as : "div";
 ---
 
-<Wrapper id={uid} class:list={["macos9-window", classname]}>
+<Wrapper class:list={["macos9-window", classname]}>
   <div class="macos9-window-titlebar">
     {
       buttons.includes(WindowButtons.Close) && (
