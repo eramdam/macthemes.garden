@@ -1,26 +1,23 @@
 import crypto from "node:crypto";
+import slugify from "slugify";
 import themesKaleidoscopeAirtable from "./themes/airtable.json" with { type: "json" };
 import themesKaleidoscopeBot from "./themes/original.json" with { type: "json" };
-import slugify from "slugify";
 
 const mySlugify = (str: string) => slugify(str, { remove: /[*+~.()'"!:@\/]/g });
 
 export async function themesLoader() {
+  const archivesInAirtable = new Set(
+    themesKaleidoscopeAirtable.map((t) => t.archiveFilename),
+  );
   const botThemesNotOnAirtableYet = themesKaleidoscopeBot.filter((theme) => {
-    return themesKaleidoscopeAirtable.every((themeAirtable) => {
-      return themeAirtable.archiveFilename !== theme.archiveFilename;
-    });
+    return !archivesInAirtable.has(theme.archiveFilename);
   });
 
   const result = themesKaleidoscopeAirtable
     .map((theme) => {
       const id = crypto
         .createHash("shake256", { outputLength: 6 })
-        .update(
-          [theme.name, theme.authors, theme.year, theme.archiveFilename].join(
-            "-",
-          ),
-        )
+        .update([theme.name, theme.authors, theme.archiveFilename].join("-"))
         .digest("hex");
 
       if (!theme.ksaSampler) {
@@ -58,6 +55,7 @@ export async function themesLoader() {
         };
       }),
     );
+
   return result;
 }
 
