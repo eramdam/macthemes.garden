@@ -1,4 +1,7 @@
 ---
+import { compact, filter, isUndefined, omit } from "lodash-es";
+import crypto from "node:crypto";
+
 export enum WindowButtons {
   Close,
   Zoom,
@@ -11,11 +14,21 @@ interface Props {
   as?: keyof astroHTML.JSX.DefinedIntrinsicElements;
 }
 
-import crypto from "node:crypto";
+const key = filter(
+  [
+    Astro.props.as || "div",
+    Astro.props.classname,
+    ...(Astro.props.buttons || []),
+  ],
+  (f) => !isUndefined(f)
+).join("-");
+
 const id = crypto
-  .createHash("sha256")
-  .update(JSON.stringify(Astro.props))
-  .digest("base64");
+  .createHash("shake256", {
+    outputLength: 4,
+  })
+  .update(key)
+  .digest("hex");
 
 const { classname, title } = Astro.props;
 const buttons = Astro.props.buttons ?? [
