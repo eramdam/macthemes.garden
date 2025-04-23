@@ -43,7 +43,6 @@ body {
   font-family:
     "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-  background-color: var(--color-lavender);
   background-image: url("/assets/patterns/OS9_Default.png");
   background-repeat: repeat;
   background-attachment: fixed;
@@ -358,4 +357,101 @@ footer p {
 
 .header-box nav {
   background-color: var(--primary-white);
+}
+
+.boot-window {
+  --scale: 1;
+  max-width: calc(422px * var(--scale));
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  background-color: var(--grays-400);
+  border: 1px solid var(--primary-black);
+  box-shadow: 2px 2px 0 var(--primary-black);
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+
+  /* Window inner shadows/borders */
+  &::before {
+    content: "";
+    pointer-events: none;
+    inset: 0;
+    position: absolute;
+    z-index: 1;
+    box-shadow:
+      inset -1px -1px 0 var(--grays-700),
+      inset 1px 1px 0 var(--primary-white);
+  }
+}
+
+.boot-window > div {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+  padding-bottom: 20px;
+}
+
+.boot-window img {
+  width: calc(350px * var(--scale));
+
+  margin: 0 auto;
+  margin-top: 30px;
+  box-shadow:
+    -1px -1px 0 rgb(from var(--primary-black) r g b / 40%),
+    1px 1px 0 var(--primary-white);
+  border: 1px solid var(--primary-black);
+}
+
+.boot-window .progress-bar {
+  height: calc(10px * var(--scale));
+  width: calc(160px * var(--scale));
+  border: 1px solid var(--primary-black);
+  background-color: var(--grays-500);
+  position: relative;
+  box-shadow:
+    -1px -1px 0 var(--grays-700),
+    1px 1px 0 var(--primary-white),
+    inset 1px 1px 0 rgb(from var(--primary-black) r g b / 30%),
+    inset -1px -1px 0 rgb(from var(--primary-white) r g b / 40%);
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: 30%;
+    display: block;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    /* background-image: linear-gradient(
+      to bottom,
+      #33339a 0 calc(100% / 9 * 1),
+      #6666cc calc(100% / 9 * 1) calc(100% / 9 * 2),
+      #9999fe calc(100% / 9 * 2) calc(100% / 9 * 3),
+      #ccccfe calc(100% / 9 * 3) calc(100% / 9 * 4),
+      #edeeee calc(100% / 9 * 4) calc(100% / 9 * 5),
+      #ccccfe calc(100% / 9 * 5) calc(100% / 9 * 6),
+      #9999fe calc(100% / 9 * 6) calc(100% / 9 * 7),
+      #6666cc calc(100% / 9 * 7) calc(100% / 9 * 8),
+      #33339a calc(100% / 9 * 8) calc(100% / 9 * 9)
+    ); */
+    background-image: linear-gradient(
+      to bottom,
+      #33339a,
+      #6666cc,
+      #9999fe,
+      #ccccfe,
+      #edeeee,
+      #ccccfe,
+      #9999fe,
+      #6666cc,
+      #33339a
+    );
+    border-right: 1px solid var(--primary-black);
+    box-shadow: 1px 0px 0 #888788;
+  }
 }
