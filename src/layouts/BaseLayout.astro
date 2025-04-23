@@ -4,19 +4,19 @@ import "../styles/index.css";
 import OS9Window, { WindowButtons } from "../components/OS9Window.astro";
 import { getCollection } from "astro:content";
 
-const getStats = async () => {
-  const themes = await getCollection("themes");
-  const authors = await getCollection("authors");
-
-  return `${themes.length.toLocaleString()} themes from ${authors.length.toLocaleString()} authors`;
-};
+interface Props {
+  title?: string;
+}
+const { title } = Astro.props;
 ---
 
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mac Themes Garden</title>
+    <title>
+      {title ? `Mac Themes Garden | ${title}` : `Mac Themes Gardens`}
+    </title>
     <script is:inline src="/assets/index.js"></script>
   </head>
 
@@ -63,7 +63,6 @@ const getStats = async () => {
         All the themes showcased are the property of their respective authors.
         Not affiliated with Apple Inc.
       </p>
-      <p>{getStats()}</p>
     </OS9Window>
   </body>
 </html>
