@@ -19,6 +19,7 @@ const base = new Airtable({ apiKey: process.env.AIRTABLE_TOKEN }).base(
       archiveFile: (
         record.fields["Archive file"] as Airtable.Attachment[]
       )?.[0],
+      archiveFileName2: record.fields["Archive name2"] as string,
       ksaSampler: (
         record.fields["KSA Sampler transparent"] as Airtable.Attachment[]
       )?.[0],
@@ -43,14 +44,17 @@ const base = new Airtable({ apiKey: process.env.AIRTABLE_TOKEN }).base(
 
   const normalizedRecordsWithFilePaths = normalizedRecords
     .map((record) => {
+      const archiveName =
+        (record.archiveFile?.filename?.endsWith(".sit")
+          ? record.archiveFile?.filename
+          : record.archiveFileName2) || undefined;
+
       return {
         ...record,
         showcase: filePaths.find((f) => f.id === record.showcase?.id)?.filepath,
         about: filePaths.find((f) => f.id === record.about?.id)?.filepath,
         archiveFile: undefined,
-        archiveFilename: record.archiveFile?.filename.endsWith(".sit")
-          ? record.archiveFile?.filename
-          : undefined,
+        archiveFilename: archiveName,
         ksaSampler: filePaths.find((f) => f.id === record.ksaSampler?.id)
           ?.filepath,
       };
