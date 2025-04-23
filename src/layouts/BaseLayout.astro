@@ -14,7 +14,7 @@ const getStats = async () => {
   const themes = await getCollection("themes");
   const authors = await getCollection("authors");
 
-  return `${themes.length} themes from ${authors.length} authors`;
+  return `${themes.length.toLocaleString()} themes from ${authors.length.toLocaleString()} authors`;
 };
 ---
 
