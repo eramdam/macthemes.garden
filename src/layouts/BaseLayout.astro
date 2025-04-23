@@ -2,6 +2,20 @@
 interface Props {}
 import "../styles/index.css";
 import OS9Window, { WindowButtons } from "../components/OS9Window.astro";
+import { getCollection } from "astro:content";
+
+const isDev = import.meta.env.MODE === "development";
+
+const getStats = async () => {
+  if (!isDev) {
+    return "";
+  }
+
+  const themes = await getCollection("themes");
+  const authors = await getCollection("authors");
+
+  return `${themes.length} themes from ${authors.length} authors`;
+};
 ---
 
 <html lang="en">
@@ -55,6 +69,7 @@ import OS9Window, { WindowButtons } from "../components/OS9Window.astro";
         All the themes showcased are the property of their respective authors.
         Not affiliated with Apple Inc.
       </p>
+      {isDev && <p>{getStats()}</p>}
     </OS9Window>
   </body>
 </html>
