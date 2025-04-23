@@ -4,13 +4,7 @@ import "../styles/index.css";
 import OS9Window, { WindowButtons } from "../components/OS9Window.astro";
 import { getCollection } from "astro:content";
 
-const isDev = import.meta.env.MODE === "development";
-
 const getStats = async () => {
-  if (!isDev) {
-    return "";
-  }
-
   const themes = await getCollection("themes");
   const authors = await getCollection("authors");
 
@@ -69,7 +63,7 @@ const getStats = async () => {
         All the themes showcased are the property of their respective authors.
         Not affiliated with Apple Inc.
       </p>
-      {isDev && <p>{getStats()}</p>}
+      <p>{getStats()}</p>
     </OS9Window>
   </body>
 </html>
