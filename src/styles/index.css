@@ -238,6 +238,7 @@ footer p {
 }
 
 .single-theme-page .infos dt {
+  margin-block-start: 10px;
   font-weight: bold;
 }
 

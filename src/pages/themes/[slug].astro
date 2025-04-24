@@ -19,8 +19,39 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 const theme = Astro.props.theme.data;
 const isDev = import.meta.env.DEV;
+const relatedThemes = (await getCollection("themes")).filter(
+  (t) =>
+    t.data.archiveFile === theme.archiveFile && t.id !== Astro.props.theme.id
+);
+const hasMoreThemesInArchive = relatedThemes.length > 0;
 ---
 
+<style>
+  .related-themes {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+    padding-top: 20px;
+    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    align-items: center;
+    justify-content: center;
+  }
+
+  .related-single-theme {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: left;
+  }
+
+  .related-single-theme > span {
+    font-size: 0.8rem;
+    display: flex;
+    flex-direction: column;
+  }
+</style>
 <BaseLayout title={theme.name}>
   <OS9Window asElement="main" title={theme.name}>
     <section class="single-theme-page">
@@ -55,10 +86,14 @@ const isDev = import.meta.env.DEV;
             <dt>Release year:</dt>
             <dd>{theme.year}</dd>
 
-            {isDev && (
-              <dt>Is new to Airtable:</dt>
-              <dd>{theme.isNew ? 'Yes' : 'No'}</dd>
-            )}
+            {
+              isDev && (
+                <Fragment>
+                  <dt>Is new to Airtable:</dt>
+                  <dd>{theme.isNew ? "Yes" : "No"}</dd>
+                </Fragment>
+              )
+            }
 
             <dt>Download:</dt>
             <dd>
@@ -83,6 +118,31 @@ const isDev = import.meta.env.DEV;
                 {archiveMd5(theme.archiveFile)}</a
               >
             </dd>
+            {
+              hasMoreThemesInArchive && (
+                <Fragment>
+                  <dt>More from the same archive:</dt>
+                  <dd class="related-themes">
+                    {relatedThemes.map((t) => {
+                      return (
+                        <a
+                          class="related-single-theme"
+                          href={`/themes/${t.data.urlBase}`}
+                        >
+                          <img
+                            src={t.data.mainThumbnail}
+                            loading="lazy"
+                            decoding="async"
+                            alt={`${t.data.name} by ${t.data.authors.join(", ")}`}
+                          />
+                          <span>{t.data.name}</span>
+                        </a>
+                      );
+                    })}
+                  </dd>
+                </Fragment>
+              )
+            }
           </dl>
         </div>
       </div>

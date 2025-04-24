@@ -19,9 +19,7 @@ h2,
 h3,
 h4,
 figure,
-blockquote,
-dl,
-dd {
+blockquote {
   margin-block-end: 0;
 }
 
