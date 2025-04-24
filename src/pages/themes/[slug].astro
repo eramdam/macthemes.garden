@@ -18,6 +18,7 @@ export const getStaticPaths = (async () => {
   });
 }) satisfies GetStaticPaths;
 const theme = Astro.props.theme.data;
+const isDev = import.meta.env.DEV;
 ---
 
 <BaseLayout title={theme.name}>
@@ -53,6 +54,11 @@ const theme = Astro.props.theme.data;
 
             <dt>Release year:</dt>
             <dd>{theme.year}</dd>
+
+            {isDev && (
+              <dt>Is new to Airtable:</dt>
+              <dd>{theme.isNew ? 'Yes' : 'No'}</dd>
+            )}
 
             <dt>Download:</dt>
             <dd>

@@ -6,6 +6,7 @@ import OS9Window from "./OS9Window.astro";
 import PaginationBar from "./PaginationBar.astro";
 
 import AuthorsFormatter from "./AuthorsFormatter.astro";
+import SingleTheme from "./SingleTheme.astro";
 
 interface Props {
   page: Pick<
@@ -25,21 +26,7 @@ const { page } = Astro.props;
         page.data
           .map((t) => t.data)
           .map(async (theme) => {
-            return (
-              <a href={`/themes/${theme.urlBase}`} class="single-theme">
-                <img
-                  loading="lazy"
-                  decoding="async"
-                  src={`${theme.mainThumbnail}`}
-                  alt=""
-                />
-                <div class="single-theme-name">{theme.name}</div>
-                <div class="single-theme-authors">
-                  <AuthorsFormatter authors={theme.authors} />
-                </div>
-                <div class="single-theme-year">{theme.year || "-"}</div>
-              </a>
-            );
+            return <SingleTheme theme={theme} />;
           })
       }
     </div>

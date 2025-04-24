@@ -5,6 +5,7 @@ import AuthorsFormatter from "../../components/AuthorsFormatter.astro";
 import OS9Window from "../../components/OS9Window.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getEntries } from "astro:content";
+import SingleTheme from "../../components/SingleTheme.astro";
 
 export const getStaticPaths = (async () => {
   const authors = await getCollection("authors");
@@ -36,21 +37,7 @@ const themesByAuthor = await getEntries(author.data.themes);
           themesByAuthor
             .map((t) => t.data)
             .map(async (theme) => {
-              return (
-                <a href={`/themes/${theme.urlBase}`} class="single-theme">
-                  <img
-                    loading="lazy"
-                    decoding="async"
-                    src={`${theme.mainThumbnail}`}
-                    alt=""
-                  />
-                  <div class="single-theme-name">{theme.name}</div>
-                  <div class="single-theme-authors">
-                    <AuthorsFormatter authors={theme.authors} />
-                  </div>
-                  <div class="single-theme-year">{theme.year || "-"}</div>
-                </a>
-              );
+              return <SingleTheme theme={theme} />;
             })
         }
       </div>

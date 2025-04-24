@@ -359,3 +359,10 @@ footer p {
 .header-box nav {
   background-color: var(--primary-white);
 }
+
+section.page {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

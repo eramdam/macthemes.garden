@@ -1,0 +1,45 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import OS9Window from "../components/OS9Window.astro";
+import AuthorsFormatter from "../components/AuthorsFormatter.astro";
+
+const themes = await getCollection("themes");
+const migratedThemes = themes.filter((t) => t.data.isAirtable);
+const newThemes = themes.filter((t) => t.data.isNew);
+---
+
+<style>
+  ul {
+    list-style-position: inside;
+  }
+  li:has(details) {
+  }
+</style>
+<BaseLayout title="debug">
+  <OS9Window title="Debug infos">
+    <ul>
+      <li>
+        {themes.length} themes
+      </li>
+      <li>
+        {migratedThemes.length} themes added to Airtable
+      </li>
+      <li>
+        {newThemes.length} themes unique to Airtable
+        <ul>
+          {
+            newThemes.map((t) => {
+              return (
+                <li>
+                  <a href={`/themes/${t.data.urlBase}`}>{t.data.name}</a>
+                  by <AuthorsFormatter asLinks authors={t.data.authors} />
+                </li>
+              );
+            })
+          }
+        </ul>
+      </li>
+    </ul>
+  </OS9Window>
+</BaseLayout>

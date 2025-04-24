@@ -8,6 +8,9 @@ const mySlugify = (str: string) => slugify(str, { remove: /[*+~.()'"!:@\/]/g });
 const archivesInAirtable = new Set(
   themesKaleidoscopeAirtable.map((t) => t.archiveFilename),
 );
+const archivesInBot = new Set(
+  themesKaleidoscopeBot.map((t) => t.archiveFilename),
+);
 const botThemesNotOnAirtableYet = themesKaleidoscopeBot.filter((theme) => {
   return !archivesInAirtable.has(theme.archiveFilename);
 });
@@ -33,7 +36,9 @@ export async function themesLoader() {
         ),
         mainThumbnail: theme.ksaSampler.replace("public/", "/"),
         archiveFile: theme.archiveFilename,
-        urlBase: mySlugify(`${theme.name}`),
+        urlBase: mySlugify(`${id}-${theme.name}`),
+        isAirtable: true,
+        isNew: !archivesInBot.has(theme.archiveFilename),
       };
     })
     .concat(
@@ -42,6 +47,7 @@ export async function themesLoader() {
           .createHash("shake256", { outputLength: 6 })
           .update([theme.name, theme.authors, theme.archiveFilename].join("-"))
           .digest("hex");
+
         return {
           id,
           name: theme.name,
@@ -51,7 +57,9 @@ export async function themesLoader() {
           thumbnails: theme.thumbnails.map((t) => t.replace("public/", "/")),
           mainThumbnail: theme.thumbnails[0].replace("public/", "/"),
           slug: theme.archiveFilename.replace(".sit", ""),
-          urlBase: mySlugify(`${theme.name}`),
+          urlBase: mySlugify(`${id}-${theme.name}`),
+          isAirtable: false,
+          isNew: false,
         };
       }),
     );

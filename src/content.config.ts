@@ -15,6 +15,8 @@ const themes = defineCollection({
     thumbnails: z.array(z.string()),
     archiveFile: z.string(),
     urlBase: z.string(),
+    isAirtable: z.boolean(),
+    isNew: z.boolean(),
   }),
 });
 
