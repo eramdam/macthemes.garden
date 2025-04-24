@@ -48,8 +48,8 @@ export async function themesLoader() {
           year: undefined,
           authors: makeAuthorsFromAuthorsString(theme.authors || ""),
           archiveFile: theme.archiveFilename,
-          thumbnails: theme.thumbnails,
-          mainThumbnail: theme.thumbnails[0],
+          thumbnails: theme.thumbnails.map((t) => t.replace("public/", "/")),
+          mainThumbnail: theme.thumbnails[0].replace("public/", "/"),
           slug: theme.archiveFilename.replace(".sit", ""),
           urlBase: mySlugify(`${theme.name}`),
         };
