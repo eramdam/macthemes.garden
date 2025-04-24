@@ -213,7 +213,6 @@ footer p {
 }
 
 .single-theme-page .gallery-thumbnail:first-child {
-  /* grid-column: 1 / span 2; */
 }
 .single-theme-page .gallery-thumbnail img {
   max-width: 100%;
