@@ -73,7 +73,7 @@ const { themes, authors } = await getCollectionStats();
         >
       </p>
     </OS9Window>
-    <script is:inline>
+    <script>
       document.querySelectorAll(".macos9-window").forEach((windowElement) => {
         const id = windowElement.getAttribute("id");
         const storageKey = `macthemes-window-${id}`;
@@ -87,7 +87,7 @@ const { themes, authors } = await getCollectionStats();
           windowElement.classList.add("zoomed");
         }
 
-        function setWindowState(state) {
+        function setWindowState(state: any) {
           const currentState = JSON.parse(
             localStorage.getItem(storageKey) ||
               `{"collapsed": false,"zoomed": false}`
