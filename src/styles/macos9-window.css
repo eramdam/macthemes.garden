@@ -46,7 +46,8 @@
   padding: 2px 4px;
   background-color: var(--grays-400);
   display: flex;
-  gap: 4px;
+  --macos9-window-titlebar-gap: 4px;
+  gap: var(--macos9-window-titlebar-gap);
   align-items: center;
   user-select: none;
 }
@@ -180,4 +181,10 @@
 }
 .macos9-window-genericbar:last-child {
   border-top: 1px solid var(--primary-black);
+}
+
+.macos9-window-titlebar:has(.button.close, .button.zoom, .button.close)
+  .button.close
+  + .filler {
+  padding-left: calc(13px + var(--macos9-window-titlebar-gap));
 }
