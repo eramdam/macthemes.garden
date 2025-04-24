@@ -6,7 +6,8 @@ interface Props {
   theme: InferEntrySchema<"themes">;
 }
 const { theme } = Astro.props;
-const isDev = import.meta.env.DEV;
+const isDev =
+  import.meta.env.DEV && import.meta.env.PUBLIC_SHOW_DEBUG === "true";
 ---
 
 <a href={`/themes/${theme.urlBase}`} class="single-theme">

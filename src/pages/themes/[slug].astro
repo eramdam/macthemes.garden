@@ -18,7 +18,8 @@ export const getStaticPaths = (async () => {
   });
 }) satisfies GetStaticPaths;
 const theme = Astro.props.theme.data;
-const isDev = import.meta.env.DEV;
+const isDev =
+  import.meta.env.DEV && import.meta.env.PUBLIC_SHOW_DEBUG === "true";
 const relatedThemes = (await getCollection("themes")).filter(
   (t) =>
     t.data.archiveFile === theme.archiveFile && t.id !== Astro.props.theme.id
