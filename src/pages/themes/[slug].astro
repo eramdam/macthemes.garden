@@ -20,7 +20,7 @@ export const getStaticPaths = (async () => {
 const theme = Astro.props.theme.data;
 ---
 
-<BaseLayout>
+<BaseLayout title={theme.name}>
   <OS9Window asElement="main" title={theme.name}>
     <section class="single-theme-page">
       <h1 class="single-theme-title">{theme.name}</h1>

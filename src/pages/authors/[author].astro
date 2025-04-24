@@ -22,7 +22,7 @@ const { author } = Astro.props;
 const themesByAuthor = await getEntries(author.data.themes);
 ---
 
-<BaseLayout>
+<BaseLayout title={`Themes by ${Astro.props.author.data.name}`}>
   <OS9Window
     asElement="main"
     title={`Themes by ${Astro.props.author.data.name}`}

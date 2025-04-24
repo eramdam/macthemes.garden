@@ -17,7 +17,7 @@ interface Props {
 const { page } = Astro.props;
 ---
 
-<BaseLayout>
+<BaseLayout title={undefined}>
   <OS9Window asElement="main" title="Index">
     <PaginationBar slot="before-content" pagination={page} />
     <div class="themes-grid">

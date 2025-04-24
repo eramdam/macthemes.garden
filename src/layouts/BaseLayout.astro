@@ -1,12 +1,11 @@
 ---
-interface Props {}
 import OS9Window, { WindowButtons } from "../components/OS9Window.astro";
 import { getCollectionStats } from "../content.config";
 import { TZDate } from "@date-fns/tz";
 import "../styles/index.css";
 
 interface Props {
-  title?: string;
+  title: string | undefined;
 }
 const { title } = Astro.props;
 const { themes, authors } = await getCollectionStats();
