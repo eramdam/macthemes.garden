@@ -62,7 +62,17 @@ export async function themesLoader() {
           isNew: false,
         };
       }),
-    );
+    )
+    .map((theme, _index, array) => {
+      return {
+        ...theme,
+        relatedThemes: array
+          .filter(
+            (t) => t.archiveFile === theme.archiveFile && t.id !== theme.id,
+          )
+          .map((t) => t.id),
+      };
+    });
 
   return result;
 }
