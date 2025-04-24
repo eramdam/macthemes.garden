@@ -23,7 +23,10 @@ const themesByAuthor = await getEntries(author.data.themes);
 ---
 
 <BaseLayout>
-  <OS9Window as="main" title={`Themes by ${Astro.props.author.data.name}`}>
+  <OS9Window
+    asElement="main"
+    title={`Themes by ${Astro.props.author.data.name}`}
+  >
     <div class="single-author-page">
       <h1 class="single-theme-title">
         Themes by {Astro.props.author.data.name}

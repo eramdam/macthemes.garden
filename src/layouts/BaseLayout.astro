@@ -22,7 +22,7 @@ const { themes, authors } = await getCollectionStats();
 
   <body>
     <OS9Window
-      as="header"
+      asElement="header"
       title="Welcome!"
       classname="header-box"
       buttons={[WindowButtons.Close, WindowButtons.Collapse]}
@@ -58,7 +58,7 @@ const { themes, authors } = await getCollectionStats();
       </nav>
     </OS9Window>
     <slot />
-    <OS9Window as="footer" title="Footer" classname="footer">
+    <OS9Window asElement="footer" title="Footer" classname="footer">
       <p>
         All the themes showcased are the property of their respective authors.
         Not affiliated with Apple Inc.

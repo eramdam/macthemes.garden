@@ -1,5 +1,5 @@
 ---
-import { compact, filter, isUndefined, omit } from "lodash-es";
+import { filter, isUndefined } from "lodash-es";
 import crypto from "node:crypto";
 
 export enum WindowButtons {
@@ -11,12 +11,12 @@ interface Props {
   classname?: string;
   title: string;
   buttons?: WindowButtons[];
-  as?: keyof astroHTML.JSX.DefinedIntrinsicElements;
+  asElement?: keyof astroHTML.JSX.DefinedIntrinsicElements;
 }
 
 const key = filter(
   [
-    Astro.props.as || "div",
+    Astro.props.asElement || "div",
     Astro.props.classname,
     ...(Astro.props.buttons || []),
   ],
@@ -36,7 +36,7 @@ const buttons = Astro.props.buttons ?? [
   WindowButtons.Collapse,
   WindowButtons.Zoom,
 ];
-const Wrapper = Astro.props.as ? Astro.props.as : "div";
+const Wrapper = Astro.props.asElement ? Astro.props.asElement : "div";
 ---
 
 <Wrapper id={id} class:list={["macos9-window", classname]}>
