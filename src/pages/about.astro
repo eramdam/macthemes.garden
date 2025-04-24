@@ -1,0 +1,159 @@
+---
+import { getCollection } from "astro:content";
+import { TZDate } from "@date-fns/tz";
+import OS9Window from "../components/OS9Window.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const themes = await getCollection("themes");
+const authors = await getCollection("authors");
+const migratedThemes = themes.filter((t) => t.data.isAirtable);
+---
+
+<style>
+  blockquote {
+    font-style: italic;
+  }
+</style>
+<BaseLayout title="About">
+  <OS9Window asElement="main" title="About">
+    <section class="page">
+      <p>
+        <strong> Mac Themes Garden</strong> is dedicated to showcasing schemes made
+        for <a href="https://en.wikipedia.org/wiki/Kaleidoscope_(software)"
+          >Kaleidoscope</a
+        > and celebrating the customization and expressiveness it enabled on Classic
+        Mac OS.
+      </p>
+      <h2>How it was made</h2>
+      <p>
+        The schemes showcased were initially gathered by scraping the <a
+          href="https://web.archive.org/web/20000823055322fw_/http://www.kaleidoscope.net/schemes/completelisting.shtml"
+          >Kaleidoscope Scheme Archive</a
+        > from the Wayback Machine around 2018 for use with my bot on <a
+          href="https://bsky.app/profile/macthemes.garden"
+          target="_blank"
+          rel="noopener">Bluesky</a
+        >, <a
+          href="https://social.erambert.me/@macthemes"
+          target="_blank"
+          rel="noopener">Mastodon</a
+        > and later <a
+          href="https://cohost.org/@macthemes"
+          target="_blank"
+          rel="noopener">Cohost</a
+        > (RIP), following in the tracks of the defunct <a
+          href="https://web.archive.org/web/20191021204432/https://twitter.com/kaleidoscopemac"
+          >@kaleidoscopemac</a
+        > account on Twitter.
+      </p>
+      <p>
+        A few years later, I grew frustrated with the fact that the only
+        "evidence" of these schemes were .gif files from the early 2000s. That's
+        when I started (and hope to finish soon...) the task of "recording"
+        every Kaleidoscope scheme at <a
+          href="https://archive.org/details/kaleidoscope-scheme-archive"
+          target="_blank"
+          rel="noopener">my disposal</a
+        >.
+      </p>
+      <h3>"Recording"</h3>
+      <p>
+        What I call "recording" here involves taking "live" screenshots of the
+        themes being used on a Mac OS 9.2 installation running in <a
+          href="https://getutm.app/"
+          target="_blank"
+          rel="noopener">UTM</a
+        > and combing through each archive to properly record every scheme's author
+        and release year.
+        <br />
+        This process is, to put it bluntly, a bit bonkers, but I feel it is worth
+        it. I'm barely halfway through the process, but I've already "uncovered"
+        some
+        <a href="/themes/34f739e27229-Rollercoaster-0-0-9-9">gems</a>{" "}
+        <a href="/themes/a903f770e956-Atlantis">that</a> weren't part of my original
+        dataset! <br /> It is long and manual work (<a
+          href="mailto:damien@erambert.me">reach out</a
+        > if you want to help), but worth it just to be able to exhibit these little
+        pieces of art :)
+      </p>
+      <h2>The @macthemes bot</h2>
+      <p>
+        As mentioned above, I run a bot on Mastodon and Bluesky that posts a
+        scheme from the archive every hour.
+      </p>
+      <ul>
+        <li>
+          <a
+            href="https://bsky.app/profile/macthemes.garden"
+            target="_blank"
+            rel="noopener">@macthemes.garden</a
+          > on Bluesky
+        </li>
+        <li>
+          <a
+            href="https://social.erambert.me/@macthemes"
+            target="_blank"
+            rel="noopener">@macthemes@erambert.me</a
+          > on Mastodon
+        </li>
+      </ul>
+      <h2>Prior arts & credits</h2>
+      <p>
+        I would be remiss if I didn't mention <a
+          href="https://kaleidoscope.hryjksn.com/"
+          target="_blank"
+          rel="noopener">Harry's own archive</a
+        > which I only found out after having started this whole endeavor. <br
+        />
+        <br />
+        Special thanks to:
+      </p>
+      <ul>
+        <li>
+          The <a href="https://archive.org" target="_blank" rel="noopener"
+            >Internet Archive</a
+          > and their Wayback Machine, without whom all of this site's content would
+          have been lost to time.
+        </li>
+        <li>
+          Shurey's <a href="http://www.shurey.com/Soft/Share/KSA/index.html"
+            >KSA Sampler</a
+          >, to replicate the Kaleidoscope Schemes Archive window look.
+        </li>
+        <li>
+          <a href="https://getutm.app/">UTM</a>, used to virtualize Mac OS 9 and
+          capture "raw" screenshots.
+        </li>
+        <li>
+          <a href="https://www.macintoshrepository.org/">Macintosh Repository</a
+          > and <a href="https://macintoshgarden.org/">Macintosh Garden</a>, for
+          preserving Macintosh software.
+        </li>
+        <li>
+          My friends <a href="https://www.wavebeem.com/">Sage</a> and <a
+            href="https://drac.at/">Ticky</a
+          > for providing feedback on the design of the website.
+        </li>
+        <li>
+          Everyone who enjoys (and enjoyed) seeing these schemes on their
+          Mastodon, Bluesky and Cohost feed.
+        </li>
+        <li>You! For reading :)</li>
+      </ul>
+      <h2>Stats</h2>
+      <p>
+        As of {
+          new TZDate(Date.now(), "America/Los_Angeles").toLocaleDateString(
+            "en",
+            {
+              dateStyle: "medium",
+            }
+          )
+        }, there are <a href="/">{themes.length.toLocaleString()} themes</a> from
+        <a href="/authors">{authors.length.toLocaleString()} authors</a>, and {
+          migratedThemes.length.toLocaleString()
+        } of these themes have been recorded completely with desktop screenshots.
+      </p>
+    </section>
+  </OS9Window>
+</BaseLayout>
