@@ -2,6 +2,7 @@
 interface Props {}
 import OS9Window, { WindowButtons } from "../components/OS9Window.astro";
 import { getCollectionStats } from "../content.config";
+import { TZDate } from "@date-fns/tz";
 import "../styles/index.css";
 
 interface Props {
@@ -65,9 +66,12 @@ const { themes, authors } = await getCollectionStats();
       </p>
       <p>
         As of {
-          new Date().toLocaleDateString("en", {
-            dateStyle: "medium",
-          })
+          new TZDate(Date.now(), "America/Los_Angeles").toLocaleDateString(
+            "en",
+            {
+              dateStyle: "medium",
+            }
+          )
         }, there are <a href="/">{themes.toLocaleString()} themes</a> from <a
           href="/authors">{authors.toLocaleString()} authors</a
         >
