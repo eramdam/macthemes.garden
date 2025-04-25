@@ -3,7 +3,12 @@ import slugify from "slugify";
 import themesKaleidoscopeAirtable from "./themes/airtable.json" with { type: "json" };
 import themesKaleidoscopeBot from "./themes/original.json" with { type: "json" };
 
-const mySlugify = (str: string) => slugify(str, { remove: /[*+~.()'"!:@\/]/g });
+export const customSlugify = (str: string) =>
+  slugify(str, {
+    remove: /[*+~.()'"!:@\/]/g,
+    trim: true,
+    strict: true,
+  });
 
 const archivesInAirtable = new Set(
   themesKaleidoscopeAirtable.map((t) => t.archiveFilename),
@@ -36,7 +41,7 @@ export async function themesLoader() {
         ),
         mainThumbnail: theme.ksaSampler.replace("public/", "/"),
         archiveFile: theme.archiveFilename,
-        urlBase: mySlugify(`${id}-${theme.name}`),
+        urlBase: customSlugify(`${id}-${theme.name}`),
         isAirtable: true,
         isNew: !archivesInBot.has(theme.archiveFilename),
       };
@@ -57,7 +62,7 @@ export async function themesLoader() {
           thumbnails: theme.thumbnails.map((t) => t.replace("public/", "/")),
           mainThumbnail: theme.thumbnails[0].replace("public/", "/"),
           slug: theme.archiveFilename.replace(".sit", ""),
-          urlBase: mySlugify(`${id}-${theme.name}`),
+          urlBase: customSlugify(`${id}-${theme.name}`),
           isAirtable: false,
           isNew: false,
         };
@@ -99,8 +104,8 @@ export async function themeAuthorsLoader() {
     return {
       name: a.author,
       id: a.author,
-      slug: slugify(a.author),
-      url: `/authors/${slugify(a.author)}`,
+      slug: customSlugify(a.author),
+      url: `/authors/${customSlugify(a.author)}`,
       themes: a.themes,
     };
   });
