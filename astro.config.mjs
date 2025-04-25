@@ -1,4 +1,5 @@
 import { defineConfig } from "astro/config";
+import astroBrokenLinksChecker from "astro-broken-link-checker";
 
 const isDev = import.meta.env.DEV;
 
@@ -15,4 +16,10 @@ export default defineConfig({
   devToolbar: {
     enabled: false,
   },
+  integrations: [
+    astroBrokenLinksChecker({
+      logFilePath: "broken-links.log", // Optional: specify the log file path
+      checkExternalLinks: false, // Optional: check external links (currently, caching to disk is not supported, and it is slow )
+    }),
+  ],
 });

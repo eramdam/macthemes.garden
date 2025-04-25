@@ -32,6 +32,7 @@
     "@types/node": "^22.14.0",
     "@types/slug": "^5.0.9",
     "airtable": "^0.12.2",
+    "astro-broken-link-checker": "imazen/astro-broken-link-checker",
     "astro": "^5.7.3",
     "async": "^3.2.6",
     "fs-extra": "^11.3.0",
