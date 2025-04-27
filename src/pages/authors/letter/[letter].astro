@@ -2,7 +2,7 @@
 import type { GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
 import AuthorsPage from "../../../components/AuthorsPage.astro";
-
+export const prerender = true;
 export const getStaticPaths = (async () => {
   const authors = await getCollection("authors");
 
