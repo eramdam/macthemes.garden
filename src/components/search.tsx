@@ -31,15 +31,16 @@ export const SearchForm: FunctionComponent<SearchFormProps> = (props) => {
   useEffect(() => {
     fetch("/search.json").then(async (res) => {
       themes.value = await res.json();
+
+      const initialSearchQuery =
+        new URLSearchParams(window.location.search).get("q") ?? "";
+      searchQuery.value = initialSearchQuery;
+      const initialPage =
+        parseInt(
+          new URLSearchParams(window.location.search).get("page") ?? "1",
+        ) || 1;
+      page.value = initialPage;
     });
-    const initialSearchQuery =
-      new URLSearchParams(window.location.search).get("q") ?? "";
-    searchQuery.value = initialSearchQuery;
-    const initialPage =
-      parseInt(
-        new URLSearchParams(window.location.search).get("page") ?? "1",
-      ) || 1;
-    page.value = initialPage;
   }, []);
   const searchResults = useComputed(() => {
     if (!searchQuery.value.trim()) {
