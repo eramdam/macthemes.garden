@@ -1,7 +1,32 @@
 ---
+import { getCollection, getEntries } from "astro:content";
+import { pick } from "lodash-es";
 import OS9Window from "../components/OS9Window.astro";
 import { SearchForm } from "../components/search";
 import BaseLayout from "../layouts/BaseLayout.astro";
+const themes = await getCollection("themes");
+const themesWithAuthorsPromise = themes.map(async (t) => {
+  return {
+    ...t,
+    data: {
+      ...t.data,
+      authors: (await getEntries(t.data.authors)).map((a) =>
+        pick(a.data, ["name", "url"])
+      ),
+    },
+  };
+});
+const themesWithAuthors = (await Promise.all(themesWithAuthorsPromise)).map(
+  (t) =>
+    pick(t.data, [
+      "urlBase",
+      "mainThumbnail",
+      "name",
+      "year",
+      "isNew",
+      "authors",
+    ])
+);
 ---
 
 <style is:global>
@@ -36,6 +61,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 </style>
 <BaseLayout title="Search">
   <OS9Window title="Search">
-    <SearchForm client:load />
+    <SearchForm client:load themes={themesWithAuthors} />
   </OS9Window>
 </BaseLayout>

@@ -8,7 +8,9 @@ import { OS9Button } from "./OS9Button";
 import { SingleTheme } from "./singleTheme";
 import { type SearchTheme, decompressThemes } from "../searchThemes";
 
-interface SearchFormProps {}
+interface SearchFormProps {
+  themes: SearchTheme[];
+}
 
 interface FormElements extends HTMLFormControlsCollection {
   searchInput: HTMLInputElement;
@@ -19,21 +21,17 @@ const pageSize = 51;
 export const SearchForm: FunctionComponent<SearchFormProps> = (props) => {
   const searchQuery = useSignal("");
   const page = useSignal(1);
-  const themes = useSignal<SearchTheme[]>([]);
+  const themes = props.themes;
 
   useEffect(() => {
-    fetch("/search.json").then(async (res) => {
-      themes.value = decompressThemes(await res.json());
-
-      const initialSearchQuery =
-        new URLSearchParams(window.location.search).get("q") ?? "";
-      searchQuery.value = initialSearchQuery;
-      const initialPage =
-        parseInt(
-          new URLSearchParams(window.location.search).get("page") ?? "1",
-        ) || 1;
-      page.value = initialPage;
-    });
+    const initialSearchQuery =
+      new URLSearchParams(window.location.search).get("q") ?? "";
+    searchQuery.value = initialSearchQuery;
+    const initialPage =
+      parseInt(
+        new URLSearchParams(window.location.search).get("page") ?? "1",
+      ) || 1;
+    page.value = initialPage;
   }, []);
   const searchResults = useComputed(() => {
     if (!searchQuery.value.trim()) {
@@ -41,7 +39,7 @@ export const SearchForm: FunctionComponent<SearchFormProps> = (props) => {
     }
 
     return chunk(
-      matchSorter(themes.value, searchQuery.value.trim(), {
+      matchSorter(themes, searchQuery.value.trim(), {
         keys: ["name", "authors.*.name", "year"],
         threshold: matchSorter.rankings.CONTAINS,
       }),
