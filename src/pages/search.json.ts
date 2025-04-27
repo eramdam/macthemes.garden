@@ -1,5 +1,6 @@
 import { getCollection, getEntries } from "astro:content";
 import { pick } from "lodash-es";
+import { compressThemes } from "../searchThemes";
 
 export async function GET() {
   const themes = await getCollection("themes");
@@ -25,8 +26,7 @@ export async function GET() {
         "authors",
       ]),
   );
-
-  const json = JSON.stringify(themesWithAuthors);
+  const json = JSON.stringify(compressThemes(themesWithAuthors));
 
   return new Response(json);
 }

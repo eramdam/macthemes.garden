@@ -1,20 +1,13 @@
 import { matchSorter } from "match-sorter";
-import { type ComponentProps, type FunctionComponent, type JSX } from "preact";
+import { type FunctionComponent, type JSX } from "preact";
 
 import { useComputed, useSignal } from "@preact/signals";
-import type { InferEntrySchema } from "astro:content";
 import { chunk } from "lodash-es";
 import { useEffect } from "preact/hooks";
 import { OS9Button } from "./OS9Button";
 import { SingleTheme } from "./singleTheme";
-import type { AuthorsFormatter } from "./authorsFormatter";
+import { type SearchTheme, decompressThemes } from "../searchThemes";
 
-type Theme = Pick<
-  InferEntrySchema<"themes">,
-  "urlBase" | "mainThumbnail" | "name" | "year" | "isNew"
-> & {
-  authors: ComponentProps<typeof AuthorsFormatter>["authors"];
-};
 interface SearchFormProps {}
 
 interface FormElements extends HTMLFormControlsCollection {
@@ -26,11 +19,11 @@ const pageSize = 51;
 export const SearchForm: FunctionComponent<SearchFormProps> = (props) => {
   const searchQuery = useSignal("");
   const page = useSignal(1);
-  const themes = useSignal<Theme[]>([]);
+  const themes = useSignal<SearchTheme[]>([]);
 
   useEffect(() => {
     fetch("/search.json").then(async (res) => {
-      themes.value = await res.json();
+      themes.value = decompressThemes(await res.json());
 
       const initialSearchQuery =
         new URLSearchParams(window.location.search).get("q") ?? "";
