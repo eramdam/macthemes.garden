@@ -1,0 +1,169 @@
+import { matchSorter } from "match-sorter";
+import { type FunctionComponent, type JSX } from "preact";
+
+import { useComputed, useSignal } from "@preact/signals";
+import type { InferEntrySchema } from "astro:content";
+import { chunk } from "lodash-es";
+import { useEffect } from "preact/hooks";
+import { OS9Button } from "./OS9Button";
+import { SingleTheme } from "./singleTheme";
+
+type Theme = Pick<
+  InferEntrySchema<"themes">,
+  "urlBase" | "mainThumbnail" | "name" | "year" | "isNew"
+>;
+interface SearchFormProps {
+  themes: Array<
+    Theme & {
+      authors: {
+        name: string;
+        slug: string | undefined;
+        url: string;
+      }[];
+    }
+  >;
+}
+
+interface FormElements extends HTMLFormControlsCollection {
+  searchInput: HTMLInputElement;
+}
+
+const pageSize = 51;
+
+export const SearchForm: FunctionComponent<SearchFormProps> = (props) => {
+  const searchQuery = useSignal("");
+  const page = useSignal(1);
+
+  useEffect(() => {
+    const initialSearchQuery =
+      new URLSearchParams(window.location.search).get("q") ?? "";
+    searchQuery.value = initialSearchQuery;
+    const initialPage =
+      parseInt(
+        new URLSearchParams(window.location.search).get("page") ?? "1",
+      ) || 1;
+    page.value = initialPage;
+  }, []);
+  const searchResults = useComputed(() => {
+    if (!searchQuery.value.trim()) {
+      return [[]];
+    }
+
+    return chunk(
+      matchSorter(props.themes, searchQuery.value.trim(), {
+        keys: ["name", "authors.*.name", "year"],
+        threshold: matchSorter.rankings.CONTAINS,
+      }),
+      pageSize,
+    );
+  });
+  const searchResultsCount = useComputed(() => {
+    return searchResults.value.reduce((acc, cur) => acc + cur.length, 0);
+  });
+
+  const pageIndex = useComputed(() => {
+    return page.value - 1;
+  });
+  const pageCount = useComputed(() => {
+    if (!searchQuery.value.trim()) {
+      return 1;
+    }
+    return Math.ceil(searchResultsCount.value / pageSize);
+  });
+
+  const onChange = (e: JSX.TargetedSubmitEvent<HTMLFormElement>) => {
+    if (!(e.target instanceof HTMLFormElement)) {
+      return;
+    }
+    e.preventDefault();
+
+    searchQuery.value = (e.target.elements as FormElements).searchInput.value;
+    page.value = 1;
+    const url = new URL(window.location.href);
+    url.searchParams.set("q", searchQuery.value);
+    url.searchParams.set("page", page.value.toString());
+    window.history.pushState({}, "", url);
+  };
+
+  const onPageChange = (direction: "next" | "prev") => {
+    if (direction === "next") {
+      page.value = Math.min(page.value + 1, pageCount.value);
+    } else {
+      page.value = Math.max(page.value - 1, 1);
+    }
+
+    const url = new URL(window.location.href);
+    url.searchParams.set("page", page.value.toString());
+    window.history.pushState({}, "", url);
+  };
+
+  const hasMoreThanOnePage = useComputed(() => {
+    return pageCount.value > 1;
+  });
+
+  return (
+    <>
+      <section className="macos9-window-genericbar search">
+        <form action="#" onSubmit={onChange}>
+          <input
+            type="search"
+            name="searchInput"
+            defaultValue={searchQuery.value}
+          />
+          <OS9Button asButton type={"submit"}>
+            Search
+          </OS9Button>
+        </form>
+        <div className="pagination">
+          {searchResultsCount.value > 0 && (
+            <p>
+              Found {searchResultsCount} theme
+              {searchResultsCount.value > 1 ? "s" : ""}{" "}
+              {hasMoreThanOnePage.value && (
+                <>
+                  (page {page.value} of {pageCount})
+                </>
+              )}
+            </p>
+          )}
+          {searchQuery.value.trim() && searchResultsCount.value === 0 && (
+            <p>No results found for "{searchQuery.value}"</p>
+          )}
+          {hasMoreThanOnePage.value && (
+            <>
+              <OS9Button
+                asButton
+                type={"button"}
+                onClick={() => {
+                  onPageChange("prev");
+                }}
+                disabled={page.value <= 1}
+              >
+                {"<"} Previous
+              </OS9Button>
+              <OS9Button
+                asButton
+                type={"button"}
+                onClick={() => {
+                  onPageChange("next");
+                }}
+                disabled={page.value >= pageCount.value}
+              >
+                Next {">"}
+              </OS9Button>
+            </>
+          )}
+        </div>
+      </section>
+      <div class="themes-grid">
+        {searchResults.value[pageIndex.value].map((t) => {
+          return (
+            <div>
+              <SingleTheme theme={t} authors={t.authors}></SingleTheme>
+            </div>
+          );
+        })}
+      </div>
+    </>
+  );
+};

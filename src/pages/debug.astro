@@ -1,8 +1,8 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, getEntries } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import OS9Window from "../components/OS9Window.astro";
-import AuthorsFormatter from "../components/AuthorsFormatter.astro";
+import { AuthorsFormatter } from "../components/authorsFormatter";
 
 const themes = await getCollection("themes");
 const migratedThemes = themes.filter((t) => t.data.isAirtable);
@@ -29,11 +29,14 @@ const newThemes = themes.filter((t) => t.data.isNew);
         {newThemes.length} themes unique to Airtable
         <ul>
           {
-            newThemes.map((t) => {
+            newThemes.map(async (t) => {
+              const authors = (await getEntries(t.data.authors)).map(
+                (a) => a.data
+              );
               return (
                 <li>
                   <a href={`/themes/${t.data.urlBase}`}>{t.data.name}</a>
-                  by <AuthorsFormatter asLinks authors={t.data.authors} />
+                  by <AuthorsFormatter asLinks authors={authors} />
                 </li>
               );
             })

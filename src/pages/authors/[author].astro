@@ -2,8 +2,8 @@
 import type { GetStaticPaths } from "astro";
 import { getCollection, getEntries } from "astro:content";
 import OS9Window from "../../components/OS9Window.astro";
-import SingleTheme from "../../components/SingleTheme.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { SingleTheme } from "../../components/singleTheme";
 
 export const getStaticPaths = (async () => {
   const authors = await getCollection("authors");
@@ -35,7 +35,10 @@ const themesByAuthor = await getEntries(author.data.themes);
           themesByAuthor
             .map((t) => t.data)
             .map(async (theme) => {
-              return <SingleTheme theme={theme} />;
+              const authors = (await getEntries(theme.authors)).map(
+                (a) => a.data
+              );
+              return <SingleTheme theme={theme} authors={authors} />;
             })
         }
       </div>
