@@ -133,4 +133,3 @@ data/attachments/*
 
 _site
 .astro
-.netlify

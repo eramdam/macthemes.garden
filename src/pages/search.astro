@@ -17,10 +17,6 @@ const themesWithAuthorsPromise = themes.map(async (t) => {
 const themesWithAuthors = (await Promise.all(themesWithAuthorsPromise)).map(
   (t) => t.data
 );
-
-const pageRaw = Astro.url.searchParams.get("page") || "";
-const queryPage = pageRaw ? parseInt(pageRaw, 10) : undefined;
-const query = Astro.url.searchParams.get("q") || undefined;
 ---
 
 <style is:global>
@@ -55,11 +51,6 @@ const query = Astro.url.searchParams.get("q") || undefined;
 </style>
 <BaseLayout title="Search">
   <OS9Window title="Search">
-    <SearchForm
-      client:load
-      themes={themesWithAuthors}
-      defaultQuery={query}
-      defaultPage={queryPage}
-    />
+    <SearchForm client:load themes={themesWithAuthors} />
   </OS9Window>
 </BaseLayout>
