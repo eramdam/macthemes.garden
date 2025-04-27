@@ -9,22 +9,30 @@ import { SingleTheme } from "./singleTheme";
 import { type SearchTheme, decompressThemes } from "../searchThemes";
 
 interface SearchFormProps {
-  defaultQuery?: string;
-  defaultPage?: number;
   themes: SearchTheme[];
 }
 
 interface FormElements extends HTMLFormControlsCollection {
-  q: HTMLInputElement;
+  searchInput: HTMLInputElement;
 }
 
 const pageSize = 51;
 
 export const SearchForm: FunctionComponent<SearchFormProps> = (props) => {
-  const searchQuery = useSignal(props.defaultQuery ?? "");
-  const page = useSignal(props.defaultPage ?? 1);
+  const searchQuery = useSignal("");
+  const page = useSignal(1);
   const themes = props.themes;
 
+  useEffect(() => {
+    const initialSearchQuery =
+      new URLSearchParams(window.location.search).get("q") ?? "";
+    searchQuery.value = initialSearchQuery;
+    const initialPage =
+      parseInt(
+        new URLSearchParams(window.location.search).get("page") ?? "1",
+      ) || 1;
+    page.value = initialPage;
+  }, []);
   const searchResults = useComputed(() => {
     if (!searchQuery.value.trim()) {
       return [[]];
@@ -58,7 +66,7 @@ export const SearchForm: FunctionComponent<SearchFormProps> = (props) => {
     }
     e.preventDefault();
 
-    searchQuery.value = (e.target.elements as FormElements).q.value;
+    searchQuery.value = (e.target.elements as FormElements).searchInput.value;
     page.value = 1;
     const url = new URL(window.location.href);
     url.searchParams.set("q", searchQuery.value);
@@ -85,8 +93,12 @@ export const SearchForm: FunctionComponent<SearchFormProps> = (props) => {
   return (
     <>
       <section className="macos9-window-genericbar search">
-        <form action="/search" onSubmit={onChange}>
-          <input type="search" name="q" defaultValue={searchQuery.value} />
+        <form action="#" onSubmit={onChange}>
+          <input
+            type="search"
+            name="searchInput"
+            defaultValue={searchQuery.value}
+          />
           <OS9Button asButton type={"submit"}>
             Search
           </OS9Button>
