@@ -1,5 +1,5 @@
 interface AuthorsFormatterProps {
-  authors: Array<{ name: string; slug: string | undefined; url: string }>;
+  authors: Array<{ name: string; url: string }>;
   asLinks?: true;
 }
 
@@ -17,7 +17,7 @@ export function AuthorsFormatter(props: AuthorsFormatterProps) {
         if (e.type === "element" && props.asLinks) {
           const author = authors.find((a) => a.name === e.value);
 
-          return <a href={author?.slug ? author?.url : undefined}>{e.value}</a>;
+          return <a href={author?.url ? author?.url : undefined}>{e.value}</a>;
         }
 
         return e.value;
