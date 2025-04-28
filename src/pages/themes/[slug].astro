@@ -9,7 +9,7 @@ import {
   AuthorsFormatter,
   formatAuthorsText,
 } from "../../components/authorsFormatter";
-import { undefined } from "astro:schema";
+
 export const getStaticPaths = (async () => {
   const themes = await getCollection("themes");
   return themes.map((t) => {
