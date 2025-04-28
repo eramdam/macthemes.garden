@@ -7,7 +7,7 @@ import "../styles/index.css";
 interface Props {
   title: string | undefined;
   description?: string;
-  image?: string;
+  images?: string[];
 }
 
 const { themes, authors } = await getCollectionStats();
@@ -18,9 +18,9 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 const description =
   Astro.props.description ??
   `Mac Themes Garden is dedicated to showcasing schemes made for Kaleidoscope and celebrating the customization and expressiveness it enabled on Classic Mac OS.`;
-const image = Astro.props.image
-  ? Astro.props.image
-  : "/assets/macthemes-garden-opengraph.webp";
+const images = Astro.props.images
+  ? Astro.props.images
+  : ["/assets/macthemes-garden-opengraph.webp"];
 ---
 
 <html lang="en">
@@ -48,8 +48,16 @@ const image = Astro.props.image
     <meta property="twitter:title" content={title} />
     <meta property="og:title" content={title} />
 
-    <meta property="twitter:image" content={image} />
-    <meta property="og:image" content={image} />
+    {
+      images.map((image) => {
+        return (
+          <>
+            <meta property="twitter:image" content={image} />
+            <meta property="og:image" content={image} />
+          </>
+        );
+      })
+    }
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="fediverse:creator" content="@macthemes@erambert.me" />
