@@ -137,7 +137,7 @@ const images = Astro.props.images
         >
       </p>
     </OS9Window>
-    <script>
+    <script is:inline>
       document.querySelectorAll(".macos9-window").forEach((windowElement) => {
         const id = windowElement.getAttribute("id");
         const storageKey = `macthemes-window-${id}`;
@@ -151,7 +151,7 @@ const images = Astro.props.images
           windowElement.classList.add("zoomed");
         }
 
-        function setWindowState(state: any) {
+        function setWindowState(state) {
           const currentState = JSON.parse(
             localStorage.getItem(storageKey) ||
               `{"collapsed": false,"zoomed": false}`
