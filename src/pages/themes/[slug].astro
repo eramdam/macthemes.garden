@@ -5,7 +5,11 @@ import { getCollection, getEntries } from "astro:content";
 import OS9Window from "../../components/OS9Window.astro";
 import { archiveFileSize, archiveMd5 } from "../../helpers";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { AuthorsFormatter } from "../../components/authorsFormatter";
+import {
+  AuthorsFormatter,
+  formatAuthorsText,
+} from "../../components/authorsFormatter";
+import { undefined } from "astro:schema";
 export const getStaticPaths = (async () => {
   const themes = await getCollection("themes");
   return themes.map((t) => {
@@ -23,6 +27,17 @@ const isDev =
 const relatedThemes = await getEntries(Astro.props.theme.data.relatedThemes);
 const hasMoreThemesInArchive = relatedThemes.length > 0;
 const authors = (await getEntries(theme.authors)).map((a) => a.data);
+const authorsString =
+  authors.length > 0
+    ? formatAuthorsText(authors.map((a) => a.name))
+    : undefined;
+const openGraphDescription = [
+  theme.name,
+  authorsString && `by ${authorsString}`,
+  theme.year && `(${theme.year})`,
+]
+  .filter(Boolean)
+  .join(" ");
 ---
 
 <style>
@@ -51,7 +66,11 @@ const authors = (await getEntries(theme.authors)).map((a) => a.data);
     flex-direction: column;
   }
 </style>
-<BaseLayout title={theme.name}>
+<BaseLayout
+  title={theme.name}
+  description={openGraphDescription}
+  image={theme.mainThumbnail}
+>
   <OS9Window asElement="main" title={theme.name}>
     <section class="single-theme-page">
       <h1 class="single-theme-title">{theme.name}</h1>

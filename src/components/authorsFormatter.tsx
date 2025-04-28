@@ -24,3 +24,7 @@ export function AuthorsFormatter(props: AuthorsFormatterProps) {
       })) || <em>Unknown</em>
   );
 }
+
+export function formatAuthorsText(authors: string[]) {
+  return listFormatter.format(authors);
+}

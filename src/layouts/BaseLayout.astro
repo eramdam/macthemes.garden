@@ -6,6 +6,8 @@ import "../styles/index.css";
 
 interface Props {
   title: string | undefined;
+  description?: string;
+  image?: string;
 }
 
 const { themes, authors } = await getCollectionStats();
@@ -13,7 +15,12 @@ const title = Astro.props.title
   ? `Mac Themes Garden | ${Astro.props.title}`
   : `Mac Themes Garden`;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
-const description = `Mac Themes Garden is dedicated to showcasing schemes made for Kaleidoscope and celebrating the customization and expressiveness it enabled on Classic Mac OS.`;
+const description =
+  Astro.props.description ??
+  `Mac Themes Garden is dedicated to showcasing schemes made for Kaleidoscope and celebrating the customization and expressiveness it enabled on Classic Mac OS.`;
+const image = Astro.props.image
+  ? Astro.props.image
+  : "/assets/macthemes-garden-opengraph.webp";
 ---
 
 <html lang="en">
@@ -27,16 +34,31 @@ const description = `Mac Themes Garden is dedicated to showcasing schemes made f
       href={new URL("feed.xml", Astro.site)}
     />
     <link rel="icon" href="/favicon.png" />
+    <meta property="og:url" content={canonicalUrl} />
+    <link rel="canonical" href={canonicalUrl} />
 
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta property="og:url" content={canonicalUrl} />
+    <meta name="twitter:description" content={description} />
+    <meta name="og:description" content={description} />
+
     <meta property="og:type" content="website" />
+    <meta property="twitter:domain" content={new URL("/", Astro.site).host} />
+
+    <meta property="twitter:title" content={title} />
     <meta property="og:title" content={title} />
-    <meta
-      property="og:image"
-      content={"/assets/macthemes-garden-opengraph.webp"}
-    />
+
+    <meta property="twitter:image" content={image} />
+    <meta property="og:image" content={image} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="fediverse:creator" content="@macthemes@erambert.me" />
+
+    <script
+      defer
+      is:inline
+      data-domain="macthemes.garden"
+      src="https://plausible.erambert.me/js/script.js"></script>
   </head>
 
   <body>

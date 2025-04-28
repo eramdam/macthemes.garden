@@ -6,6 +6,7 @@ import {
 } from "astro:content";
 import { renderFeedTheme } from "../components/feedTheme";
 import type { APIContext } from "astro";
+import { formatAuthorsText } from "../components/authorsFormatter";
 
 export async function GET(context: APIContext) {
   const themes = await getCollection("themes");
@@ -30,15 +31,10 @@ export async function GET(context: APIContext) {
   });
 }
 
-const listFormatter = new Intl.ListFormat("en", {
-  style: "long",
-  type: "conjunction",
-});
-
 async function makeAuthorsString(
   authors: ReferenceDataEntry<"authors", string>[],
 ) {
   const fullAuthors = (await getEntries(authors)).map((a) => a.data);
   const authorsList = fullAuthors.map((a) => a.name);
-  return listFormatter.format(authorsList);
+  return formatAuthorsText(authorsList);
 }
