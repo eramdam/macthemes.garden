@@ -18,6 +18,12 @@ const { themes, authors } = await getCollectionStats();
     <title>
       {title ? `Mac Themes Garden | ${title}` : `Mac Themes Gardens`}
     </title>
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Mac Themes Garden Feed"
+      href={new URL("feed.xml", Astro.site)}
+    />
   </head>
 
   <body>
@@ -48,6 +54,12 @@ const { themes, authors } = await getCollectionStats();
             </a>
           </li>
           <span class="spacer"></span>
+          <li>
+            <a href="/feed" class="macos9-menu-icon">
+              <img src="/assets/menu/feed.png" alt="" />
+              <span> Feed </span>
+            </a>
+          </li>
           <li>
             <a href="/search" class="macos9-menu-icon">
               <img src="/assets/menu/search.png" alt="" />

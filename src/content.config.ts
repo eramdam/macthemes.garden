@@ -1,9 +1,9 @@
 // 1. Import utilities from `astro:content`
 import { defineCollection, getCollection, reference, z } from "astro:content";
+import { memoize } from "lodash-es";
 
 // 2. Import loader(s)
 import { themeAuthorsLoader, themesLoader } from "./themesLoader";
-import { memoize } from "lodash-es";
 
 const themes = defineCollection({
   loader: themesLoader,
@@ -18,6 +18,7 @@ const themes = defineCollection({
     isAirtable: z.boolean(),
     isNew: z.boolean(),
     relatedThemes: z.array(reference("themes")),
+    updatedAt: z.date(),
   }),
 });
 

@@ -15,6 +15,7 @@ export default defineConfig({
         }
       : {}),
   },
+  site: isDev ? "http://localhost:4321" : "https://macthemes.garden",
   devToolbar: {
     enabled: false,
   },

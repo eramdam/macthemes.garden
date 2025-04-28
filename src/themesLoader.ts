@@ -2,6 +2,7 @@ import crypto from "node:crypto";
 import slugify from "slugify";
 import themesKaleidoscopeAirtable from "./themes/airtable.json" with { type: "json" };
 import themesKaleidoscopeBot from "./themes/original.json" with { type: "json" };
+import { orderBy } from "lodash-es";
 
 export const customSlugify = (str: string) =>
   slugify(str, {
@@ -29,7 +30,8 @@ export async function themesLoader() {
         .digest("hex");
 
       if (!theme.ksaSampler) {
-        console.log(theme);
+        console.log("!theme.ksaSampler", theme);
+        return undefined;
       }
       return {
         id,
@@ -44,8 +46,10 @@ export async function themesLoader() {
         urlBase: customSlugify(`${id}-${theme.name}`),
         isAirtable: true,
         isNew: !archivesInBot.has(theme.archiveFilename),
+        updatedAt: new Date(theme.lastModified),
       };
     })
+    .filter((theme) => !!theme)
     .concat(
       botThemesNotOnAirtableYet.map((theme) => {
         const id = crypto
@@ -56,7 +60,7 @@ export async function themesLoader() {
         return {
           id,
           name: theme.name,
-          year: undefined,
+          year: "",
           authors: makeAuthorsFromAuthorsString(theme.authors || ""),
           archiveFile: theme.archiveFilename,
           thumbnails: theme.thumbnails.map((t) => t.replace("public/", "/")),
@@ -65,6 +69,7 @@ export async function themesLoader() {
           urlBase: customSlugify(`${id}-${theme.name}`),
           isAirtable: false,
           isNew: false,
+          updatedAt: new Date(0),
         };
       }),
     )
@@ -79,7 +84,7 @@ export async function themesLoader() {
       };
     });
 
-  return result;
+  return orderBy(result, ["updatedAt"], ["desc"]);
 }
 
 export async function themeAuthorsLoader() {
