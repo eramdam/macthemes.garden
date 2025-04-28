@@ -7,17 +7,19 @@ import "../styles/index.css";
 interface Props {
   title: string | undefined;
 }
-const { title } = Astro.props;
+
 const { themes, authors } = await getCollectionStats();
+const title = Astro.props.title
+  ? `Mac Themes Garden | ${Astro.props.title}`
+  : `Mac Themes Garden`;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+const description = `Mac Themes Garden is dedicated to showcasing schemes made for Kaleidoscope and celebrating the customization and expressiveness it enabled on Classic Mac OS.`;
 ---
 
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
-      {title ? `Mac Themes Garden | ${title}` : `Mac Themes Gardens`}
-    </title>
     <link
       rel="alternate"
       type="application/rss+xml"
@@ -25,6 +27,16 @@ const { themes, authors } = await getCollectionStats();
       href={new URL("feed.xml", Astro.site)}
     />
     <link rel="icon" href="/favicon.png" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta
+      property="og:image"
+      content={"/assets/macthemes-garden-opengraph.webp"}
+    />
   </head>
 
   <body>
