@@ -24,6 +24,7 @@ const { themes, authors } = await getCollectionStats();
       title="Mac Themes Garden Feed"
       href={new URL("feed.xml", Astro.site)}
     />
+    <link rel="icon" href="/favicon.png" />
   </head>
 
   <body>
@@ -34,9 +35,9 @@ const { themes, authors } = await getCollectionStats();
       buttons={[WindowButtons.Close, WindowButtons.Collapse]}
     >
       <div class="header-image-box">
-        <div class="header-image">
+        <a href="/" class="header-image">
           <img src="/assets/macthemes-garden-header.png" alt="" />
-        </div>
+        </a>
       </div>
 
       <nav>

@@ -349,6 +349,7 @@ footer p {
     1px 1px 0 var(--primary-white);
   border: 1px solid var(--primary-black);
   line-height: 0;
+  display: block;
 }
 
 .header-box .header-image img {
