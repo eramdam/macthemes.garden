@@ -16,7 +16,14 @@ jobs:
           AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_TOKEN}}
           AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID}}
         run: touch .env && npm run data:airtable && rm .env
+      - uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          filters: |
+            themes:
+              - 'public/themes/attachments/**'
       - name: "Generate OpenGraph images"
+        if: steps.changes.outputs.themes == 'true'
         run: npm run data:opengraph
       - uses: EndBug/add-and-commit@v9
         with:
