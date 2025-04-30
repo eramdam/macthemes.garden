@@ -15,7 +15,7 @@ jobs:
         env:
           AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_TOKEN}}
           AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID}}
-        run: npm run data:airtable
+        run: touch .env && npm run data:airtable && rm .env
       - name: "Generate OpenGraph images"
         run: npm run data:opengraph
       - uses: EndBug/add-and-commit@v9
