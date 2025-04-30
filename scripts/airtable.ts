@@ -10,6 +10,7 @@ const base = new Airtable({ apiKey: process.env.AIRTABLE_TOKEN }).base(
 
 (async () => {
   const records = await grabRawRecords();
+  const existingAttachments = fs.globSync("public/themes/attachments/*.png");
   const normalizedRecords = records.map((record) => {
     return {
       name: record.fields["Name"] as string,
@@ -63,6 +64,17 @@ const base = new Airtable({ apiKey: process.env.AIRTABLE_TOKEN }).base(
     })
     .filter((f) => !!f && Object.values(f).filter((v) => !!v).length);
 
+  const allFiles = normalizedRecordsWithFilePaths.flatMap((r) => {
+    return [r.about, r.ksaSampler, r.showcase];
+  });
+  const filesToDelete = existingAttachments
+    .filter((f): f is string => Boolean(f))
+    .filter((file) => !allFiles.includes(file));
+
+  for (const file of filesToDelete) {
+    await fs.remove(file);
+  }
+
   await fs.writeFile(
     "src/themes/airtable.json",
     JSON.stringify(normalizedRecordsWithFilePaths, null, 2),
@@ -82,7 +94,6 @@ async function downloadAttachment(
   const filepath = `public/themes/attachments/${filename}`;
 
   if (await fs.exists(filepath)) {
-    console.log(`Cache hit for ${filename}`);
     return { id: attachment.id, filepath, filename: attachment.filename };
   }
 
