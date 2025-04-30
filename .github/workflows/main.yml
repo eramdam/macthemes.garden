@@ -1,0 +1,25 @@
+name: Airtable update
+on: workflow_dispatch
+jobs:
+  pull-airtable:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup env
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+      - run: npm ci
+      - name: "Pull data from Airtable"
+        env:
+          AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_TOKEN}}
+          AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID}}
+        run: npm run data:airtable
+      - name: "Generate OpenGraph images"
+        run: npm run data:opengraph
+      - uses: EndBug/add-and-commit@v9
+        with:
+          author_name: 🤖 Damien's Robot
+          author_email: damien+bot@erambert.me
+          message: Update themes data + images
