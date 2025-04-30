@@ -14,7 +14,17 @@ import { execaSync } from "execa";
   }
   const themes = await themesLoader();
   const threadsCount = cpus().length;
-  const themesChunks = chunk(themes, Math.ceil(themes.length / threadsCount));
+  const themesToUpdate = themes.filter((t) => {
+    return t.thumbnails.some((thumb) => {
+      return listOfChangedFiles
+        .map((l) => l.replace("public/", "/"))
+        .includes(thumb);
+    });
+  });
+  const themesChunks = chunk(
+    themesToUpdate,
+    Math.ceil(themes.length / threadsCount),
+  );
 
   themesChunks.forEach((themeChunk) => {
     const proc = spawn(`npx`, [
