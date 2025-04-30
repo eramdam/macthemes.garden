@@ -12,6 +12,7 @@
     "build": "astro check && astro build",
     "preview": "astro preview"
   },
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/eramdam/macthemes.garden.git"
@@ -39,6 +40,7 @@
     "astro": "^5.7.3",
     "astro-broken-link-checker": "imazen/astro-broken-link-checker",
     "async": "^3.2.6",
+    "execa": "^9.5.2",
     "fs-extra": "^11.3.0",
     "lodash-es": "^4.17.21",
     "match-sorter": "^8.0.0",
