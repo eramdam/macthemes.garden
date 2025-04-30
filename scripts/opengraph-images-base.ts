@@ -12,12 +12,10 @@ import { themesLoader } from "../src/themesLoader";
       .filter((t) => themesFromArguments.includes(t.id))
       .map((t) => {
         return async () => {
-          console.time(t.id);
           const res = (await generateOpenGraphImageForTheme(t))
             .png()
             .toFile(`public/themes-opengraph/${t.urlBase}.png`);
 
-          console.timeEnd(t.id);
           return res;
         };
       }),

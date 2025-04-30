@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "data:airtable": "tsx --no-warnings --env-file='.env' scripts/airtable.ts",
+    "data:opengraph": "tsx --no-warnings ./scripts/opengraph-images.ts",
     "data:bot": "tsx --no-warnings --env-file='.env' scripts/original-bot.ts",
     "dev": "astro dev",
     "check": "astro check",

@@ -34,6 +34,7 @@ export async function generateOpenGraphImageForTheme(
         width: imageDimension.width + margin * 2,
         height: imageDimension.height + margin * 2,
         position: "relative",
+        backgroundColor: "white",
       }}
     >
       {blurredImageData && (
