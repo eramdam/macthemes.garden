@@ -30,7 +30,7 @@ export async function themesLoader() {
         .digest("hex");
 
       if (!theme.ksaSampler) {
-        console.log("!theme.ksaSampler", theme);
+        // console.log("!theme.ksaSampler", theme);
         return undefined;
       }
       return {
