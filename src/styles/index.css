@@ -300,7 +300,6 @@ footer p {
   width: 32px;
   display: block;
   margin: 0 auto;
-  image-rendering: pixelated;
 }
 
 @media (max-width: 480px) {
