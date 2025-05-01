@@ -119,7 +119,7 @@ export const SearchForm: FunctionComponent<SearchFormProps> = (props) => {
             <p>No results found for "{searchQuery.value}"</p>
           )}
           {hasMoreThanOnePage.value && (
-            <>
+            <div class="pagination-buttons">
               <OS9Button
                 asButton
                 type={"button"}
@@ -140,7 +140,7 @@ export const SearchForm: FunctionComponent<SearchFormProps> = (props) => {
               >
                 Next {">"}
               </OS9Button>
-            </>
+            </div>
           )}
         </div>
       </section>
