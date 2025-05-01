@@ -355,6 +355,7 @@ footer p {
 .header-box .header-image img {
   width: 100%;
   height: auto;
+  aspect-ratio: 2195 / 510;
 }
 
 .header-box nav {
