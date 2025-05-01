@@ -304,6 +304,14 @@ footer p {
 }
 
 @media (max-width: 480px) {
+  .macos9-menu .spacer {
+    display: none;
+  }
+
+  .macos9-menu .spacer + li .macos9-menu-icon {
+    border: none;
+    box-shadow: none;
+  }
   .macos9-menu-icon {
     font-size: 0.8rem;
     padding: 6px;
