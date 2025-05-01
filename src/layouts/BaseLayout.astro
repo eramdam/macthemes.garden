@@ -8,6 +8,7 @@ interface Props {
   title: string | undefined;
   description?: string;
   images?: string[];
+  hideLayout?: boolean;
 }
 
 const { themes, authors } = await getCollectionStats();
@@ -21,6 +22,7 @@ const description =
 const images = Astro.props.images
   ? Astro.props.images
   : ["/assets/macthemes-garden-opengraph.webp"];
+const { hideLayout } = Astro.props;
 ---
 
 <html lang="en">
@@ -70,67 +72,74 @@ const images = Astro.props.images
   </head>
 
   <body>
-    <OS9Window
-      asElement="header"
-      title="Welcome!"
-      classname="header-box"
-      buttons={[WindowButtons.Close, WindowButtons.Collapse]}
-    >
-      <div class="header-image-box">
-        <a href="/" class="header-image">
-          <img src="/assets/macthemes-garden-header.png" alt="" />
-        </a>
-      </div>
-
-      <nav>
-        <ul class="macos9-menu">
-          <li>
-            <a href="/" class="macos9-menu-icon">
-              <img src="/assets/menu/schemes-puzzle.png" alt="" />
-              <span> Schemes </span>
-            </a>
-          </li>
-          <li>
-            <a href="/authors" class="macos9-menu-icon">
-              <img src="/assets/menu/file-sharing.png" alt="" />
-              <span> Authors </span>
-            </a>
-          </li>
-          <span class="spacer"></span>
-          <li>
-            <a href="/search" class="macos9-menu-icon">
-              <img src="/assets/menu/search.png" alt="" />
-              <span> Search </span>
-            </a>
-          </li>
-          <li>
-            <a href="/about" class="macos9-menu-icon">
-              <img src="/assets/menu/finder-computer.png" alt="" />
-              <span> About </span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </OS9Window>
-    <slot />
-    <OS9Window asElement="footer" title="Footer" classname="footer">
-      <p>
-        All the themes showcased are the property of their respective authors.
-        Not affiliated with Apple Inc.
-      </p>
-      <p>
-        As of {
-          new TZDate(Date.now(), "America/Los_Angeles").toLocaleDateString(
-            "en",
-            {
-              dateStyle: "medium",
-            }
-          )
-        }, there are <a href="/">{themes.toLocaleString()} themes</a> from <a
-          href="/authors">{authors.toLocaleString()} authors</a
+    {
+      !hideLayout && (
+        <OS9Window
+          asElement="header"
+          title="Welcome!"
+          classname="header-box"
+          buttons={[WindowButtons.Close, WindowButtons.Collapse]}
         >
-      </p>
-    </OS9Window>
+          <div class="header-image-box">
+            <a href="/" class="header-image">
+              <img src="/assets/macthemes-garden-header.png" alt="" />
+            </a>
+          </div>
+
+          <nav>
+            <ul class="macos9-menu">
+              <li>
+                <a href="/" class="macos9-menu-icon">
+                  <img src="/assets/menu/schemes-puzzle.png" alt="" />
+                  <span> Schemes </span>
+                </a>
+              </li>
+              <li>
+                <a href="/authors" class="macos9-menu-icon">
+                  <img src="/assets/menu/file-sharing.png" alt="" />
+                  <span> Authors </span>
+                </a>
+              </li>
+              <span class="spacer" />
+              <li>
+                <a href="/search" class="macos9-menu-icon">
+                  <img src="/assets/menu/search.png" alt="" />
+                  <span> Search </span>
+                </a>
+              </li>
+              <li>
+                <a href="/about" class="macos9-menu-icon">
+                  <img src="/assets/menu/finder-computer.png" alt="" />
+                  <span> About </span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </OS9Window>
+      )
+    }
+    <slot />
+    {
+      !hideLayout && (
+        <OS9Window asElement="footer" title="Footer" classname="footer">
+          <p>
+            All the themes showcased are the property of their respective
+            authors. Not affiliated with Apple Inc.
+          </p>
+          <p>
+            As of{" "}
+            {new TZDate(Date.now(), "America/Los_Angeles").toLocaleDateString(
+              "en",
+              {
+                dateStyle: "medium",
+              }
+            )}
+            , there are <a href="/">{themes.toLocaleString()} themes</a> from{" "}
+            <a href="/authors">{authors.toLocaleString()} authors</a>
+          </p>
+        </OS9Window>
+      )
+    }
     <!-- Script is raw to make it blocking and avoid a "flash of window with the wrong state" -->
     <script is:inline src="/windows.js"></script>
   </body>

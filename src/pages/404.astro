@@ -1,0 +1,61 @@
+---
+import { OS9Button } from "../components/OS9Button";
+import OS9Window from "../components/OS9Window.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<style is:global>
+  body {
+    background-image: none;
+  }
+</style>
+<style>
+  .error-window {
+    --scale: 1;
+    background-color: white;
+    width: calc(448px * var(--scale));
+    min-height: calc(126px * var(--scale));
+    z-index: 1;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -10%);
+    border: 2px solid black;
+    box-shadow:
+      0 0 0 2px white,
+      0 0 0 3px black;
+
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-auto-rows: auto;
+    column-gap: 10px;
+    row-gap: 18px;
+    padding: 10px;
+    font-weight: bold;
+  }
+
+  .error-window .button-wrapper {
+    grid-column: 1 / span 2;
+    display: flex;
+    justify-content: flex-end;
+  }
+</style>
+<BaseLayout title="Not found" hideLayout>
+  <div class="boot-window">
+    <img src="/assets/boot.png" alt="" />
+    <div>Starting up...</div>
+  </div>
+  <div class="error-window">
+    <img src="/assets/bomb.png" alt="" />
+    <div>
+      Sorry, a system error occurred. <br />
+      <br />
+
+      item not found <br />
+      Click the button below to restart your system.
+    </div>
+    <div class="button-wrapper">
+      <OS9Button href={"/"}> Restart </OS9Button>
+    </div>
+  </div>
+</BaseLayout>
