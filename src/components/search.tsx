@@ -38,13 +38,17 @@ export const SearchForm: FunctionComponent<SearchFormProps> = (props) => {
       return [[]];
     }
 
-    return chunk(
+    const results = chunk(
       matchSorter(themes, searchQuery.value.trim(), {
         keys: ["name", "authors.*.name", "year"],
         threshold: matchSorter.rankings.CONTAINS,
       }),
       pageSize,
     );
+    if (results.length < 1) {
+      return [[]];
+    }
+    return results;
   });
   const searchResultsCount = useComputed(() => {
     return searchResults.value.reduce((acc, cur) => acc + cur.length, 0);
