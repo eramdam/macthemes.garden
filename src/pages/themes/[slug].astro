@@ -113,17 +113,7 @@ const openGraphDescription = [
               )
             }
 
-            <dt>Download:</dt>
-            <dd>
-              <ul>
-                <li>
-                  <a
-                    href={`https://files.macthemes.garden/${theme.archiveFile}`}
-                    >#1 (files.macthemes.garden)</a
-                  >
-                </li>
-              </ul>
-            </dd>
+            <dt>Archive file:</dt>
             <dd>
               {theme.archiveFile}{" "}
               {archiveFileSize(theme.archiveFile)}
@@ -135,6 +125,27 @@ const openGraphDescription = [
               >
                 {archiveMd5(theme.archiveFile)}</a
               >
+            </dd>
+            <dt>Download links</dt>
+            <dd>
+              <ul>
+                <li>
+                  <a
+                    href={`https://files.macthemes.garden/${theme.archiveFile}`}
+                    >#1 (files.macthemes.garden)</a
+                  >
+                </li>
+                <li>
+                  <a href={`https://themes.lizard.tools/${theme.archiveFile}`}
+                    >#2 (themes.lizard.tools)</a
+                  >
+                </li>
+                <li>
+                  <a href={`https://macthemes.drac.at/${theme.archiveFile}`}
+                    >#3 (macthemes.drac.at)</a
+                  >
+                </li>
+              </ul>
             </dd>
             {
               hasMoreThemesInArchive && (
