@@ -38,6 +38,13 @@ const openGraphDescription = [
 ]
   .filter(Boolean)
   .join(" ");
+
+const fileHosts = [
+  "files.macthemes.garden",
+  "themes.lizard.tools",
+  "macthemes.drac.at",
+  "macthemes.jkap.io",
+];
 ---
 
 <style>
@@ -129,22 +136,17 @@ const openGraphDescription = [
             <dt>Download links:</dt>
             <dd>
               <ul>
-                <li>
-                  <a
-                    href={`https://files.macthemes.garden/${theme.archiveFile}`}
-                    >#1 (files.macthemes.garden)</a
-                  >
-                </li>
-                <li>
-                  <a href={`https://themes.lizard.tools/${theme.archiveFile}`}
-                    >#2 (themes.lizard.tools)</a
-                  >
-                </li>
-                <li>
-                  <a href={`https://macthemes.drac.at/${theme.archiveFile}`}
-                    >#3 (macthemes.drac.at)</a
-                  >
-                </li>
+                {
+                  fileHosts.map((fileHost, index) => {
+                    return (
+                      <li>
+                        <a href={`https://${fileHost}/${theme.archiveFile}`}>
+                          #{index + 1} ({fileHost})
+                        </a>
+                      </li>
+                    );
+                  })
+                }
               </ul>
             </dd>
             {
