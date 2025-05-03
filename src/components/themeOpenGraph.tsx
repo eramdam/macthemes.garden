@@ -6,20 +6,28 @@ export async function generateOpenGraphImageForTheme(
   theme: InferEntrySchema<"themes">,
 ) {
   let blurredImageData: Buffer | undefined;
+  const margin = 20;
+  const imageDimension = {
+    width: 1200,
+    height: 630,
+  };
 
   if (theme.thumbnails.length > 1) {
     blurredImageData = await sharp("public/" + theme.thumbnails[1])
+      .resize(imageDimension.width, imageDimension.height, {
+        fit: "cover",
+        position: "top",
+      })
       .blur(5)
       .toBuffer();
   }
 
   const mainThumbnailSharp = sharp("public" + theme.mainThumbnail);
   const mainThumbnail = await mainThumbnailSharp.png().toBuffer();
-  const margin = 20;
-  const imageDimension = {
-    width: 1200,
-    height: 630,
-  };
+  const mainThumbnailData = await sharp(mainThumbnail).metadata();
+  if (!mainThumbnailData.hasAlpha) {
+    console.log(theme);
+  }
 
   const svg = await satori(
     <div
@@ -40,10 +48,7 @@ export async function generateOpenGraphImageForTheme(
           style={{
             position: "absolute",
             filter: "brightness(40%)",
-            height: "100%",
-            width: "100%",
-            objectFit: "cover",
-            objectPosition: "top center",
+            inset: 0,
           }}
         />
       )}
