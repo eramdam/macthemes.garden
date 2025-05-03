@@ -102,6 +102,7 @@ export const SearchForm: FunctionComponent<SearchFormProps> = (props) => {
             type="search"
             name="searchInput"
             defaultValue={searchQuery.value}
+            autoFocus
           />
           <OS9Button asButton type={"submit"}>
             Search
