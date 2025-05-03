@@ -23,16 +23,23 @@ export const SearchForm: FunctionComponent<SearchFormProps> = (props) => {
   const searchQuery = useSignal("");
   const page = useSignal(1);
   const themes = props.themes;
-
-  useEffect(() => {
+  const inputKey = useSignal("");
+  const onLoad = () => {
     const initialSearchQuery =
       new URLSearchParams(window.location.search).get("q") ?? "";
     searchQuery.value = initialSearchQuery;
+    inputKey.value = initialSearchQuery;
     const initialPage =
       parseInt(
         new URLSearchParams(window.location.search).get("page") ?? "1",
       ) || 1;
     page.value = initialPage;
+  };
+
+  useEffect(() => {
+    onLoad();
+    window.addEventListener("popstate", onLoad);
+    return () => window.removeEventListener("popstate", onLoad);
   }, []);
   const searchResults = useComputed(() => {
     if (!searchQuery.value.trim()) {
@@ -100,6 +107,7 @@ export const SearchForm: FunctionComponent<SearchFormProps> = (props) => {
       <section className="macos9-window-genericbar search">
         <form action="#" onSubmit={onChange}>
           <input
+            key={inputKey.value}
             type="search"
             name="searchInput"
             defaultValue={searchQuery.value}
