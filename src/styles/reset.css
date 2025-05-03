@@ -75,7 +75,7 @@ picture {
 /* Inherit fonts for inputs and buttons */
 input,
 button,
-textarea,
+textarea:not([class]),
 select {
   font-family: inherit;
   font-size: inherit;

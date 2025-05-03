@@ -27,6 +27,22 @@ const migratedThemes = themes.filter((t) => t.data.isAirtable);
   .buttons > :is(a, img) {
     margin: 2px;
   }
+
+  .buttons-mybutton {
+    text-align: center;
+    width: 300px;
+  }
+
+  .buttons-mybutton img {
+    margin: 0 auto;
+  }
+
+  .buttons-wrapper {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    margin-bottom: 20px;
+  }
 </style>
 <BaseLayout title="About">
   <OS9Window asElement="main" title="About">
@@ -162,13 +178,44 @@ const migratedThemes = themes.filter((t) => t.data.isAirtable);
         <li>You! For reading :)</li>
       </ul>
       <h2>Buttons!</h2>
+      <div class="buttons-wrapper">
+        <p>
+          These are the buttons of people or websites that helped with the
+          project. Feel free to link to Mac Themes Garden the button on the
+          right!
+        </p>
+        <div class="buttons-mybutton">
+          <img
+            class="pixel"
+            src="/buttons/88x31_macthemes.garden.png"
+            alt="macthemes.garden"
+          />
+          <br />
+          <textarea
+            rows="2"
+            class="mybutton-textarea"
+            name="buttoncode"
+            aria-label="Button code"
+            style="resize: none"
+            onclick="this.select()"
+            spellcheck="false"
+            set:text={`<a href="https://macthemes.garden" title="Mac Themes Garden"><img
+    src="https://macthemes.garden/buttons/88x31_macthemes.garden.png" alt="Mac Themes Garden" style="image-rendering:pixelated;" /></a>`}
+          />
+        </div>
+      </div>
       <div class="buttons">
         <a href="https://damien.zone" title="damien dot zone">
           <img
+            class="pixel"
+            decoding="async"
+            loading="lazy"
             src="https://damien.zone/public/88x31_damien.png"
             alt="damien dot zone"
-            style="image-rendering:pixelated;"
           />
+        </a>
+        <a href="https://damien.zone" title="drac.at">
+          <img src="/buttons/dracat.png" alt="drac.at" />
         </a>
         <a
           href="https://jkap.io"
@@ -215,6 +262,18 @@ const migratedThemes = themes.filter((t) => t.data.isAirtable);
             alt="wavebeem.com"
           />
         </a>
+        <a
+          href="https://archive.org"
+          target="_blank"
+          rel="noopener"
+          title="Internet Archive"
+        >
+          <img
+            class="pixel"
+            src="/buttons/internet-archive.gif"
+            alt="Internet Archive"
+          /></a
+        >
       </div>
       <h2>Stats</h2>
       <p>

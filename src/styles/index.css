@@ -472,3 +472,7 @@ section.page {
     box-shadow: 1px 0px 0 #888788;
   }
 }
+
+.pixel {
+  image-rendering: pixelated;
+}
