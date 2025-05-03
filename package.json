@@ -9,8 +9,10 @@
     "data:bot": "tsx --no-warnings --env-file='.env' scripts/original-bot.ts",
     "dev": "astro dev",
     "check": "astro check",
+    "test": "npm run check",
     "build": "astro check && astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "prepare": "husky"
   },
   "type": "module",
   "repository": {
@@ -42,6 +44,7 @@
     "async": "^3.2.6",
     "execa": "^9.5.2",
     "fs-extra": "^11.3.0",
+    "husky": "^9.1.7",
     "lodash-es": "^4.17.21",
     "match-sorter": "^8.0.0",
     "npm-check": "^6.0.1",
