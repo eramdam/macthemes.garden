@@ -1,5 +1,6 @@
 import { matchSorter } from "match-sorter";
 import { type FunctionComponent, type JSX } from "preact";
+import { sample } from "lodash-es";
 
 import { useComputed, useSignal } from "@preact/signals";
 import { chunk } from "lodash-es";
@@ -106,6 +107,18 @@ export const SearchForm: FunctionComponent<SearchFormProps> = (props) => {
           />
           <OS9Button asButton type={"submit"}>
             Search
+          </OS9Button>
+          <OS9Button
+            asButton
+            type={"button"}
+            onClick={() => {
+              const random = sample(props.themes);
+              if (random) {
+                window.location.pathname = `/themes/${random.urlBase}`;
+              }
+            }}
+          >
+            Random theme
           </OS9Button>
         </form>
         <div className="pagination">
