@@ -13,6 +13,20 @@ const migratedThemes = themes.filter((t) => t.data.isAirtable);
   blockquote {
     font-style: italic;
   }
+
+  .buttons {
+    text-wrap: balance;
+    text-align: center;
+    line-height: 20px;
+  }
+
+  .buttons img {
+    display: inline;
+  }
+
+  .buttons > :is(a, img) {
+    margin: 2px;
+  }
 </style>
 <BaseLayout title="About">
   <OS9Window asElement="main" title="About">
@@ -147,6 +161,61 @@ const migratedThemes = themes.filter((t) => t.data.isAirtable);
         </li>
         <li>You! For reading :)</li>
       </ul>
+      <h2>Buttons!</h2>
+      <div class="buttons">
+        <a href="https://damien.zone" title="damien dot zone">
+          <img
+            src="https://damien.zone/public/88x31_damien.png"
+            alt="damien dot zone"
+            style="image-rendering:pixelated;"
+          />
+        </a>
+        <a
+          href="https://jkap.io"
+          target="_blank"
+          rel="noopener"
+          title="jae kaplan"
+        >
+          <img
+            class="pixel"
+            decoding="async"
+            loading="lazy"
+            src="/buttons/jkap.gif"
+            title="jae kaplan"
+            alt="jae kaplan"
+          />
+        </a>
+        <a
+          href="https://lizard.tools/"
+          target="_blank"
+          rel="noopener"
+          title="lizard.tools"
+        >
+          <img
+            class="pixel"
+            decoding="async"
+            loading="lazy"
+            src="/buttons/lizards-tools.png"
+            title="lizard.tools"
+            alt="lizard.tools"
+          />
+        </a>
+        <a
+          href="https://wavebeem.com"
+          target="_blank"
+          rel="noopener"
+          title="wavebeem.com"
+        >
+          <img
+            class="pixel"
+            decoding="async"
+            loading="lazy"
+            src="/buttons/wavebeem.gif"
+            title="wavebeem.com"
+            alt="wavebeem.com"
+          />
+        </a>
+      </div>
       <h2>Stats</h2>
       <p>
         As of {
