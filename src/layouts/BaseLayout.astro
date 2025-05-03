@@ -23,6 +23,12 @@ const images = Astro.props.images
   ? Astro.props.images
   : ["/assets/macthemes-garden-opengraph.webp"];
 const { hideLayout } = Astro.props;
+const footerDate = new TZDate(
+  Date.now(),
+  "America/Los_Angeles"
+).toLocaleDateString("en", {
+  dateStyle: "medium",
+});
 ---
 
 <html lang="en">
@@ -127,15 +133,12 @@ const { hideLayout } = Astro.props;
             authors. Not affiliated with Apple Inc.
           </p>
           <p>
-            As of{" "}
-            {new TZDate(Date.now(), "America/Los_Angeles").toLocaleDateString(
-              "en",
-              {
-                dateStyle: "medium",
-              }
-            )}
-            , there are <a href="/">{themes.toLocaleString()} themes</a> from{" "}
+            As of {footerDate}, there are{" "}
+            <a href="/">{themes.toLocaleString()} themes</a> from{" "}
             <a href="/authors">{authors.toLocaleString()} authors</a>
+          </p>
+          <p>
+            Part of <a href="https://damien.zone">damien's zone</a>
           </p>
         </OS9Window>
       )
