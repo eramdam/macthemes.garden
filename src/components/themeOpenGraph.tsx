@@ -2,8 +2,6 @@ import type { InferEntrySchema } from "astro:content";
 import satori from "satori";
 import sharp from "sharp";
 
-const ASPECT_RATIO = 1200 / 630;
-
 export async function generateOpenGraphImageForTheme(
   theme: InferEntrySchema<"themes">,
 ) {
@@ -17,11 +15,10 @@ export async function generateOpenGraphImageForTheme(
 
   const mainThumbnailSharp = sharp("public" + theme.mainThumbnail);
   const mainThumbnail = await mainThumbnailSharp.png().toBuffer();
-  const mainThumbnailData = await mainThumbnailSharp.metadata();
   const margin = 20;
   const imageDimension = {
-    height: mainThumbnailData.height! + margin,
-    width: Math.floor((mainThumbnailData.height! + margin) * ASPECT_RATIO),
+    width: 1200,
+    height: 630,
   };
 
   const svg = await satori(
@@ -30,8 +27,8 @@ export async function generateOpenGraphImageForTheme(
         display: "flex",
         alignItems: "center",
         justifyItems: "center",
-        width: imageDimension.width + margin * 2,
-        height: imageDimension.height + margin * 2,
+        width: "100%",
+        height: "100%",
         position: "relative",
         backgroundColor: "white",
       }}
@@ -43,24 +40,29 @@ export async function generateOpenGraphImageForTheme(
           style={{
             position: "absolute",
             filter: "brightness(40%)",
-            left: 0,
-            top: 0,
+            height: "100%",
+            width: "100%",
+            objectFit: "cover",
+            objectPosition: "top center",
           }}
         />
       )}
       <img
         // @ts-expect-error
         src={toArrayBuffer(mainThumbnail)}
-        height={mainThumbnailData.height}
-        width={mainThumbnailData.width}
         style={{
-          margin: `${margin / 2}px auto`,
+          padding: margin,
+          width: "100%",
+          height: "100%",
+          boxSizing: "border-box",
+          objectFit: "contain",
+          objectPosition: "center center",
         }}
       />
     </div>,
     {
-      width: imageDimension.width + margin * 2,
-      height: imageDimension.height + margin * 2,
+      width: imageDimension.width,
+      height: imageDimension.height,
       fonts: [],
     },
   );
