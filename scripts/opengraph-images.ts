@@ -3,12 +3,15 @@ import { themesLoader } from "../src/themesLoader";
 import { cpus } from "node:os";
 import { chunk } from "lodash-es";
 import { execaSync } from "execa";
+import yargs from "yargs";
+const argv = yargs(process.argv.slice(2)).parse();
 
 (async () => {
+  const ignoreChanges = argv.force ?? false;
   const listOfChangedFiles = execaSync({
     lines: true,
   })`git ls-files --modified --others public/themes/attachments`.stdout;
-  if (listOfChangedFiles.length < 1) {
+  if (!ignoreChanges && listOfChangedFiles.length < 1) {
     console.log("No images changed, no need to re-generate them");
     return;
   }
@@ -16,6 +19,9 @@ import { execaSync } from "execa";
   const threadsCount = cpus().length;
   const themesToUpdate = themes.filter((t) => {
     return t.thumbnails.some((thumb) => {
+      if (ignoreChanges) {
+        return true;
+      }
       return listOfChangedFiles
         .map((l) => l.replace("public/", "/"))
         .includes(thumb);
@@ -35,5 +41,6 @@ import { execaSync } from "execa";
     ]);
 
     proc.stdout.on("data", (data) => console.log(data.toString()));
+    proc.stderr.on("data", (data) => console.log(data.toString()));
   });
 })();

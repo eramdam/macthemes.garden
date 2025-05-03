@@ -58,6 +58,7 @@
     "sharp": "^0.34.1",
     "slugify": "^1.6.6",
     "tsx": "^4.19.2",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "yargs": "^17.7.2"
   }
 }
