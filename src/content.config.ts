@@ -18,7 +18,7 @@ const themes = defineCollection({
     isAirtable: z.boolean(),
     isNew: z.boolean(),
     relatedThemes: z.array(reference("themes")),
-    updatedAt: z.date(),
+    createdAt: z.date(),
   }),
 });
 

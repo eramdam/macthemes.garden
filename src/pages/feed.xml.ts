@@ -16,7 +16,7 @@ export async function GET(context: APIContext) {
       return {
         title: theme.data.name,
         link: `/themes/${theme.data.urlBase}`,
-        pubDate: new Date(theme.data.updatedAt),
+        pubDate: new Date(theme.data.createdAt),
         content: await renderFeedTheme(theme.data, context.site!),
         author: await makeAuthorsString(theme.data.authors),
       } satisfies RSSFeedItem;

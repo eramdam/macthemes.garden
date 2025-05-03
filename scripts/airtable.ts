@@ -25,7 +25,7 @@ const base = new Airtable({ apiKey: process.env.AIRTABLE_TOKEN }).base(
       ksaSampler: (
         record.fields["KSA Sampler transparent"] as Airtable.Attachment[]
       )?.[0],
-      lastModified: new Date(record.fields["Last Modified"] as string),
+      created: new Date(record.fields["Created"] as string),
     };
   });
   console.log(`Grabbed ${normalizedRecords.length} records`);

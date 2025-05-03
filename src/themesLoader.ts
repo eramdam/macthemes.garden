@@ -46,7 +46,7 @@ export async function themesLoader() {
         urlBase: customSlugify(`${id}-${theme.name}`),
         isAirtable: true,
         isNew: !archivesInBot.has(theme.archiveFilename),
-        updatedAt: new Date(theme.lastModified),
+        createdAt: new Date(theme.created),
       };
     })
     .filter((theme) => !!theme)
@@ -69,7 +69,7 @@ export async function themesLoader() {
           urlBase: customSlugify(`${id}-${theme.name}`),
           isAirtable: false,
           isNew: false,
-          updatedAt: new Date(0),
+          createdAt: new Date(0),
         };
       }),
     )
@@ -84,7 +84,7 @@ export async function themesLoader() {
       };
     });
 
-  return orderBy(result, ["updatedAt"], ["desc"]);
+  return orderBy(result, ["createdAt"], ["desc"]);
 }
 
 export async function themeAuthorsLoader() {
