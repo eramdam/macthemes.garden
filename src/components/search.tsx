@@ -4,9 +4,9 @@ import { type FunctionComponent, type JSX } from "preact";
 import { useComputed, useSignal } from "@preact/signals";
 import { chunk } from "lodash-es";
 import { useEffect } from "preact/hooks";
+import { type SearchTheme } from "../searchThemes";
 import { OS9Button } from "./OS9Button";
 import { SingleTheme } from "./singleTheme";
-import { type SearchTheme, decompressThemes } from "../searchThemes";
 
 interface SearchFormProps {
   themes: SearchTheme[];

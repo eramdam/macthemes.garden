@@ -1,7 +1,6 @@
 import type { InferEntrySchema } from "astro:content";
 import satori from "satori";
 import sharp from "sharp";
-import fs from "node:fs";
 
 const ASPECT_RATIO = 1200 / 630;
 
