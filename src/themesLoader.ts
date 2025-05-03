@@ -1,8 +1,8 @@
+import { orderBy, uniq } from "lodash-es";
 import crypto from "node:crypto";
 import slugify from "slugify";
 import themesKaleidoscopeAirtable from "./themes/airtable.json" with { type: "json" };
 import themesKaleidoscopeBot from "./themes/original.json" with { type: "json" };
-import { invert, orderBy, uniq } from "lodash-es";
 
 export const customSlugify = (str: string) =>
   slugify(str, {
@@ -243,7 +243,7 @@ const namesCorrectionMap = {
 
 const findCorrectedName = (maybeWrongName: string) => {
   return (
-    Object.entries(namesCorrectionMap).find(([key, values]) => {
+    Object.entries(namesCorrectionMap).find(([, values]) => {
       return values.includes(maybeWrongName);
     })?.[0] ?? maybeWrongName
   );
