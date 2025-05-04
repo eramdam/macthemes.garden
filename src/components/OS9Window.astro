@@ -43,7 +43,9 @@ const Wrapper = Astro.props.asElement ? Astro.props.asElement : "div";
   <div class="macos9-window-titlebar">
     {
       buttons.includes(WindowButtons.Close) && (
-        <button class="button close" data-action="close" />
+        <button class="button close" data-action="close">
+          <span class="button-dots" />
+        </button>
       )
     }
     <span class="filler"></span>
@@ -51,12 +53,16 @@ const Wrapper = Astro.props.asElement ? Astro.props.asElement : "div";
     <span class="filler"></span>
     {
       buttons.includes(WindowButtons.Zoom) && (
-        <button class="button zoom" data-action="zoom" />
+        <button class="button zoom" data-action="zoom">
+          <span class="button-dots" />
+        </button>
       )
     }
     {
       buttons.includes(WindowButtons.Collapse) && (
-        <button class="button collapse" data-action="collapse" />
+        <button class="button collapse" data-action="collapse">
+          <span class="button-dots" />
+        </button>
       )
     }
   </div>

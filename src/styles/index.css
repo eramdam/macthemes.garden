@@ -260,7 +260,7 @@ footer p {
   line-height: 1;
   display: flex;
   justify-content: center;
-  background-color: var(--grays-200);
+  background-color: var(--grays-300);
   width: 100%;
   padding: 5px;
   padding-top: 0;
@@ -343,7 +343,7 @@ footer p {
 }
 
 .header-box .macos9-window-body {
-  background-color: var(--grays-200);
+  background-color: var(--grays-300);
 }
 
 .header-box .header-image-box {
@@ -351,9 +351,15 @@ footer p {
 }
 
 .header-box .header-image {
+  --top-left-shadow: #888888;
+  --bottom-right-shadow: var(--primary-white);
   box-shadow:
-    -1px -1px 0 rgb(from var(--primary-black) r g b / 40%),
-    1px 1px 0 var(--primary-white);
+    -1px -1px 0 var(--top-left-shadow),
+    -1px 0px 0 var(--top-left-shadow),
+    0 -1px 0 var(--top-left-shadow),
+    1px 1px 0 var(--bottom-right-shadow),
+    1px 0 0 var(--bottom-right-shadow),
+    0 1px 0 var(--bottom-right-shadow);
   border: 1px solid var(--primary-black);
   line-height: 0;
   display: block;

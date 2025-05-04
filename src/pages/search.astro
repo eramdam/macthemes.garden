@@ -57,9 +57,15 @@ const themesWithAuthors = (await Promise.all(themesWithAuthorsPromise)).map(
     border-radius: 0;
     border: 1px solid var(--primary-black);
     background-color: white;
+    --top-left-shadow: var(--grays-600);
+    --bottom-right-shadow: var(--primary-white);
     box-shadow:
-      1px 1px 0 var(--grays-700),
-      -1px -1px 0 var(--primary-white);
+      -1px -1px 0 var(--top-left-shadow),
+      -1px 0px 0 var(--top-left-shadow),
+      0 -1px 0 var(--top-left-shadow),
+      1px 1px 0 var(--bottom-right-shadow),
+      1px 0 0 var(--bottom-right-shadow),
+      0 1px 0 var(--bottom-right-shadow);
   }
 
   @media (max-width: 600px) {

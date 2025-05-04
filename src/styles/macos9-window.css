@@ -15,8 +15,9 @@
     position: absolute;
     z-index: 1;
     box-shadow:
-      inset 1px 1px 0 rgb(from var(--primary-black) r g b / 10%),
-      inset -1px -1px 0 rgb(from var(--primary-black) r g b / 40%);
+      inset 1px 1px 0 rgba(255, 255, 255, 0.5),
+      inset -1px -1px 0 var(--grays-600),
+      inset 1px 1px 0 white;
   }
 }
 
@@ -38,6 +39,15 @@
   box-shadow:
     -1px -1px 0 rgb(from var(--primary-black) r g b / 40%),
     1px 1px 0 var(--primary-white);
+  --top-left-shadow: var(--grays-600);
+  --bottom-right-shadow: var(--primary-white);
+  box-shadow:
+    -1px -1px 0 var(--top-left-shadow),
+    -1px 0px 0 var(--top-left-shadow),
+    0 -1px 0 var(--top-left-shadow),
+    1px 1px 0 var(--bottom-right-shadow),
+    1px 0 0 var(--bottom-right-shadow),
+    0 1px 0 var(--bottom-right-shadow);
 
   background-color: var(--primary-white);
 }
@@ -55,15 +65,10 @@
 .macos9-window-titlebar > span.filler {
   flex: 1;
   background-color: #dddddd;
-  background-image: linear-gradient(
-    transparent,
-    transparent 50%,
-    var(--grays-600) 50%,
-    var(--grays-600)
-  );
+  background-image: linear-gradient(#ffffff, #ffffff 50%, #777777 50%, #777777);
   background-repeat: repeat;
   background-size: 100% 2px;
-  height: 11px;
+  height: 12px;
 
   position: relative;
 
@@ -71,7 +76,6 @@
   &::after {
     content: "";
     position: absolute;
-    height: 100%;
     width: 1px;
     background-size: 100% 2px;
     display: block;
@@ -80,22 +84,15 @@
   &::before {
     left: 0;
     top: 0;
-    background-image: linear-gradient(
-      #eeeeee,
-      #eeeeee 50%,
-      var(--grays-600) 50%,
-      var(--grays-600)
-    );
+    bottom: 0;
+    background-image: linear-gradient(#fff, #fff 50%, #cccccc 50%, #cccccc);
+    border-bottom: 1px solid #cccccc;
   }
   &::after {
     right: 0;
     top: 0;
-    background-image: linear-gradient(
-      #c5c5c5,
-      #c5c5c5 50%,
-      var(--grays-600) 50%,
-      var(--grays-600)
-    );
+    bottom: 0;
+    background-image: linear-gradient(#ccc, #ccc 50%, #777777 50%, #777777);
   }
 }
 
@@ -140,6 +137,31 @@
   }
 }
 
+.macos9-window-titlebar > button .button-dots {
+  position: absolute;
+  inset: 0;
+  display: block;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1px;
+    height: 1px;
+    background-color: #cccccc;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    background-color: #cccccc;
+  }
+}
+
 .macos9-window-titlebar > button.zoom::after {
   content: "";
   position: absolute;
@@ -170,11 +192,12 @@
 }
 
 .macos9-window-genericbar {
-  background-color: var(--grays-200);
+  background-color: var(--grays-300);
   min-height: 20px;
   box-shadow:
-    inset 1px 1px 0 var(--primary-white),
-    inset -1px -1px 0 var(--grays-700);
+    inset 1px 1px 0 rgba(255, 255, 255, 0.6),
+    inset -1px -1px 0 #aaaaaa,
+    inset 1px 1px 0 white;
   padding: 4px 0;
   font-size: 0.75rem;
 }
