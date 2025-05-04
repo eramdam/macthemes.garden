@@ -78,6 +78,8 @@
   }
 
   &::before {
+    left: 0;
+    top: 0;
     background-image: linear-gradient(
       #eeeeee,
       #eeeeee 50%,
@@ -87,6 +89,7 @@
   }
   &::after {
     right: 0;
+    top: 0;
     background-image: linear-gradient(
       #c5c5c5,
       #c5c5c5 50%,
