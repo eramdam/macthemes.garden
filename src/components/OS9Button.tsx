@@ -31,13 +31,13 @@ export function OS9Button({ children, ...attributes }: OS9ButtonProps) {
 
   if ("asButton" in attributes && attributes.asButton)
     return (
-      <button className="button" {...attributes}>
+      <button className="os9-button" {...attributes}>
         {content}
       </button>
     );
 
   return (
-    <a className="button" {...attributes}>
+    <a className="os9-button" {...attributes}>
       {content}
     </a>
   );

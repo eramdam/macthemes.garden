@@ -11,13 +11,13 @@
   --btn-corners-shadow: #bbb;
   --btn-border-flourish: #222;
 }
-.button {
+.os9-button {
   display: inline-block;
   text-decoration: none;
   border: none;
 }
 
-.button:focus-visible {
+.os9-button:focus-visible {
   outline: none;
 }
 
@@ -94,9 +94,9 @@
   background-color: var(--btn-border-flourish);
 }
 
-.button.active,
-.button:active,
-a.button:focus {
+.os9-button.active,
+.os9-button:active,
+a.os9-button:focus {
   --btn-background: #666666;
   --btn-text: white;
 
@@ -138,7 +138,7 @@ a.button:focus {
   }
 }
 
-.button[disabled] {
+.os9-button[disabled] {
   pointer-events: none;
   --btn-border: #9d9d9d;
   --btn-text: #9d9d9d;
