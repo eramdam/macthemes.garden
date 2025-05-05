@@ -126,7 +126,7 @@ export const SearchForm: FunctionComponent<SearchFormProps> = (props) => {
               }
             }}
           >
-            Random theme
+            Random
           </OS9Button>
         </form>
         <div className="pagination">
