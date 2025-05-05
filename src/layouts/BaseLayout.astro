@@ -47,14 +47,15 @@ const footerDate = new TZDate(
 
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="twitter:description" content={description} />
-    <meta name="og:description" content={description} />
+    <meta property="twitter:description" content={description} />
+    <meta property="og:description" content={description} />
 
     <meta property="og:type" content="website" />
     <meta property="twitter:domain" content={new URL("/", Astro.site).host} />
 
     <meta property="twitter:title" content={title} />
     <meta property="og:title" content={title} />
+    <meta name="theme-color" content="#63639c" />
 
     {
       images.map((image) => {
