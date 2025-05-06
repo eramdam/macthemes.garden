@@ -16,7 +16,7 @@ interface SingleThemeProps {
 export function SingleTheme(props: SingleThemeProps) {
   const { theme, authors } = props;
   return (
-    <a href={`/themes/${theme.urlBase}`} class="single-theme pixel">
+    <a href={`/themes/${theme.urlBase}`} class="single-theme">
       <img
         loading="lazy"
         decoding="async"
