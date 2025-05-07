@@ -16,10 +16,10 @@ const { pagination } = Astro.props;
           {pagination.lastPage > 1 && (
             <>
               <OS9Button href={pagination.url.first} rel="first">
-                &Lt; First
+                First
               </OS9Button>
               <OS9Button href={pagination.url.prev} rel="prev">
-                &LT; Previous
+                Previous
               </OS9Button>
             </>
           )}
@@ -28,7 +28,7 @@ const { pagination } = Astro.props;
     }
   </div>
   <div>
-    page {pagination.currentPage} of {pagination.lastPage}
+    Page {pagination.currentPage} of {pagination.lastPage}
   </div>
   <div>
     {
@@ -37,10 +37,10 @@ const { pagination } = Astro.props;
           {pagination.lastPage > 1 && (
             <>
               <OS9Button href={pagination.url.next} rel="next">
-                Next &GT;
+                Next
               </OS9Button>
               <OS9Button href={pagination.url.last} rel="last">
-                Last &Gt;
+                Last
               </OS9Button>
             </>
           )}
