@@ -72,3 +72,14 @@ export const PAGINATION: {
     };
   },
 };
+
+export enum SortOptions {
+  CREATED = "CREATED",
+  NAME = "NAME",
+  AUTHOR = "AUTHOR",
+  YEAR = "YEAR",
+}
+export enum SortOrders {
+  ASC = "asc",
+  DESC = "desc",
+}
