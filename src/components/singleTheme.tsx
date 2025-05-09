@@ -8,7 +8,7 @@ const isDev =
 interface SingleThemeProps {
   theme: Pick<
     InferEntrySchema<"themes">,
-    "urlBase" | "mainThumbnail" | "name" | "year" | "isNew"
+    "urlBase" | "mainThumbnail" | "name" | "year" | "isNew" | "createdAt"
   >;
   authors: ComponentProps<typeof AuthorsFormatter>["authors"];
 }
@@ -29,10 +29,13 @@ export function SingleTheme(props: SingleThemeProps) {
       </div>
       <div class="single-theme-year">{theme.year || "-"}</div>
       {isDev && (
-        <div>
-          Airtable only:
-          <input type="checkbox" checked={theme.isNew} />
-        </div>
+        <>
+          <div>{theme.createdAt.toDateString()}</div>
+          <div>
+            Airtable only:
+            <input type="checkbox" checked={theme.isNew} />
+          </div>
+        </>
       )}
     </a>
   );
