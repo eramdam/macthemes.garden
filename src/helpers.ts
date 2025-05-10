@@ -115,6 +115,6 @@ export const SortOptionsEnum = z
   .catch(SortOptions.CREATED);
 export enum SortOrders {
   ASC = "asc",
-  DESC = "asc",
+  DESC = "desc",
 }
 export const SortOrdersEnum = z.nativeEnum(SortOrders).catch(SortOrders.DESC);

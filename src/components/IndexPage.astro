@@ -22,6 +22,14 @@ const makeNewUrl = (sort: SortOptions, order: SortOrders) => {
   url.searchParams.set("order", order.toString());
   return url.toString();
 };
+
+const sortOptionsLabels: Record<SortOptions, string> = {
+  [SortOptions.AUTHOR]: "Author",
+  [SortOptions.CREATED]: "Recently updated",
+  [SortOptions.NAME]: "Name",
+  [SortOptions.YEAR]: "Year",
+};
+const listFormatter = new Intl.ListFormat("en");
 ---
 
 <style>
@@ -36,11 +44,27 @@ const makeNewUrl = (sort: SortOptions, order: SortOrders) => {
   <OS9Window asElement="main" title="Index">
     <PaginationBar slot="before-content" pagination={page} />
     <div class="themes-sorting">
-      Sort by: <a href={makeNewUrl(SortOptions.CREATED, SortOrders.DESC)}
-        >Updated date</a
-      > | <a href={makeNewUrl(SortOptions.NAME, SortOrders.DESC)}>Name</a> | <a
-        href={makeNewUrl(SortOptions.AUTHOR, SortOrders.DESC)}>Author</a
-      >
+      Sort by:
+      {
+        listFormatter
+          .formatToParts([
+            SortOptions.CREATED,
+            SortOptions.NAME,
+            SortOptions.AUTHOR,
+            SortOptions.YEAR,
+          ] as const)
+          .map((item) => {
+            if (item.type === "literal") {
+              return " | ";
+            }
+
+            return (
+              <a href={makeNewUrl(item.value as SortOptions, SortOrders.DESC)}>
+                {sortOptionsLabels[item.value as SortOptions]}
+              </a>
+            );
+          })
+      }
     </div>
     <div class="themes-grid">
       {
