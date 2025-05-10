@@ -6,6 +6,7 @@ import OS9Window from "./OS9Window.astro";
 import PaginationBar from "./PaginationBar.astro";
 import { SingleTheme } from "./singleTheme";
 import { getEntries } from "astro:content";
+import { SortOptions, SortOrders } from "../helpers";
 
 interface Props {
   page: Pick<
@@ -15,11 +16,32 @@ interface Props {
 }
 
 const { page } = Astro.props;
+const makeNewUrl = (sort: SortOptions, order: SortOrders) => {
+  const url = new URL(Astro.url);
+  url.searchParams.set("sort", sort);
+  url.searchParams.set("order", order.toString());
+  return url.toString();
+};
 ---
 
+<style>
+  .themes-sorting {
+    text-align: center;
+    padding: 10px 0;
+    margin: 0 10px;
+    border-bottom: 1px solid var(--grays-500);
+  }
+</style>
 <BaseLayout title={undefined}>
   <OS9Window asElement="main" title="Index">
     <PaginationBar slot="before-content" pagination={page} />
+    <div class="themes-sorting">
+      Sort by: <a href={makeNewUrl(SortOptions.CREATED, SortOrders.DESC)}
+        >Updated date</a
+      > | <a href={makeNewUrl(SortOptions.NAME, SortOrders.DESC)}>Name</a> | <a
+        href={makeNewUrl(SortOptions.AUTHOR, SortOrders.DESC)}>Author</a
+      >
+    </div>
     <div class="themes-grid">
       {
         page.data

@@ -1,16 +1,18 @@
 ---
-import type { GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
+import { isNumber } from "lodash-es";
 import IndexPage from "../../components/IndexPage.astro";
-import { PAGINATION } from "../../helpers";
-export const getStaticPaths = (async ({ paginate }) => {
-  const themes = await getCollection("themes");
-
-  return paginate(themes, { pageSize: PAGINATION.size });
-}) satisfies GetStaticPaths;
-
-const { page } = Astro.props;
-export const prerender = true;
+import { PAGINATION, SortOptionsEnum, SortOrdersEnum } from "../../helpers";
+const themes = await getCollection("themes");
+const pageRaw = Astro.params.page;
+let pageNumber = parseInt(pageRaw || "1", 10);
+if (!isNumber(pageNumber)) {
+  pageNumber = 1;
+}
+const rawSort = Astro.url.searchParams.get("sort");
+const sort = SortOptionsEnum.parse(rawSort);
+const rawOrder = Astro.url.searchParams.get("order");
+const order = SortOrdersEnum.parse(rawOrder);
 ---
 
-<IndexPage page={page} />
+<IndexPage page={PAGINATION.getPage(themes, pageNumber, sort, order)} />

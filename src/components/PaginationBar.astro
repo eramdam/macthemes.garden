@@ -6,6 +6,15 @@ interface Props {
   pagination: Pick<Page<unknown>, "url" | "lastPage" | "currentPage">;
 }
 const { pagination } = Astro.props;
+console.log("Astro.url");
+const makeNewUrl = (target: string) => {
+  const finalUrl = new URL(target, Astro.url);
+  for (const [key, value] of Astro.url.searchParams) {
+    finalUrl.searchParams.set(key, value);
+  }
+
+  return finalUrl.toString();
+};
 ---
 
 <div class="macos9-window-genericbar nav">
@@ -15,10 +24,13 @@ const { pagination } = Astro.props;
         <>
           {pagination.lastPage > 1 && (
             <>
-              <OS9Button href={pagination.url.first} rel="first">
+              <OS9Button
+                href={makeNewUrl(pagination.url.first || "/")}
+                rel="first"
+              >
                 First
               </OS9Button>
-              <OS9Button href={pagination.url.prev} rel="prev">
+              <OS9Button href={makeNewUrl(pagination.url.prev)} rel="prev">
                 Previous
               </OS9Button>
             </>
@@ -36,10 +48,16 @@ const { pagination } = Astro.props;
         <>
           {pagination.lastPage > 1 && (
             <>
-              <OS9Button href={pagination.url.next} rel="next">
+              <OS9Button
+                href={makeNewUrl(pagination.url.next).toString()}
+                rel="next"
+              >
                 Next
               </OS9Button>
-              <OS9Button href={pagination.url.last} rel="last">
+              <OS9Button
+                href={makeNewUrl(pagination.url.last || "/").toString()}
+                rel="last"
+              >
                 Last
               </OS9Button>
             </>
