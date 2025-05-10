@@ -6,20 +6,123 @@ import OS9Window from "./OS9Window.astro";
 import PaginationBar from "./PaginationBar.astro";
 import { SingleTheme } from "./singleTheme";
 import { getEntries } from "astro:content";
+import {
+  makeKeyFromSortAndOrder,
+  SortOptionsEnum,
+  SortOrdersEnum,
+  sortSlugsRegex,
+  type SortOptions,
+  type SortOrders,
+} from "../helpers";
+import { compact } from "lodash-es";
 
 interface Props {
   page: Pick<
     Page<CollectionEntry<"themes">>,
     "url" | "lastPage" | "currentPage" | "data"
   >;
+  sort?: SortOptions;
+  order?: SortOrders;
 }
 
 const { page } = Astro.props;
+const hasExplicitSort = !!Astro.props.sort && !!Astro.props.order;
+const currentSort = Astro.props.sort;
+const currentOrder = Astro.props.order;
+
+const sortOptionsLabels: Record<SortOptions, string> = {
+  [SortOptionsEnum.enum.author]: "Author",
+  [SortOptionsEnum.enum.created]: "Date",
+  [SortOptionsEnum.enum.name]: "Name",
+};
+
+const sortMenuItems = [
+  { type: SortOptionsEnum.enum.name, order: SortOrdersEnum.enum.asc },
+  { type: SortOptionsEnum.enum.author, order: SortOrdersEnum.enum.asc },
+];
+
+const makeNewUrl = (sort: SortOptions, order: SortOrders) => {
+  const newSlug = makeKeyFromSortAndOrder(sort, order);
+  const newUrl =
+    page.url.current === "/"
+      ? `/${newSlug}/1`
+      : page.url.current.replace(sortSlugsRegex, newSlug);
+
+  return newUrl;
+};
 ---
 
+<style>
+  .themes-sort {
+    padding: 10px 0;
+    margin: 0 10px;
+    border-bottom: 1px solid var(--grays-500);
+    display: flex;
+  }
+
+  .themes-sort > div {
+    text-align: right;
+  }
+
+  .themes-sort > div:first-child {
+    flex: 1;
+    text-align: left;
+  }
+</style>
 <BaseLayout title={undefined}>
   <OS9Window asElement="main" title="Index">
     <PaginationBar slot="before-content" pagination={page} />
+    <div class="themes-sort">
+      <div>
+        Sort by:
+        {
+          sortMenuItems.map((item, index) => {
+            const downArrow = <>&DownArrow;</>;
+            const upArrow = <>&UpArrow;</>;
+            const isCurrentSort = currentSort === item.type;
+            const currentArrow =
+              (hasExplicitSort &&
+                isCurrentSort &&
+                (currentOrder === SortOrdersEnum.enum.asc
+                  ? upArrow
+                  : downArrow)) ||
+              null;
+
+            return (
+              <>
+                <a
+                  href={makeNewUrl(
+                    item.type,
+                    currentSort === item.type &&
+                      currentOrder === SortOrdersEnum.enum.asc
+                      ? SortOrdersEnum.enum.desc
+                      : SortOrdersEnum.enum.asc
+                  )}
+                >
+                  {sortOptionsLabels[item.type]}
+                  {currentArrow && <>&nbsp;{currentArrow}</>}
+                </a>
+                {index < sortMenuItems.length - 1 && " | "}
+              </>
+            );
+          })
+        }
+      </div>
+      <div>
+        {
+          currentSort !== SortOptionsEnum.enum.created && hasExplicitSort && (
+            <a
+              href={makeNewUrl(
+                SortOptionsEnum.enum.created,
+                SortOrdersEnum.enum.desc
+              )}
+            >
+              Reset sort
+            </a>
+          )
+        }
+      </div>
+    </div>
     <div class="themes-grid">
       {
         page.data

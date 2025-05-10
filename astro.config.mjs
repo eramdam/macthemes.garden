@@ -9,6 +9,7 @@ const isDev = import.meta.env.DEV;
 export default defineConfig({
   redirects: {
     "/page/1": "/",
+    "/d-desc/1": "/",
     ...(!isDev
       ? {
           "/debug": "/",

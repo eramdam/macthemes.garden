@@ -1,0 +1,23 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+import IndexPage from "../../components/IndexPage.astro";
+import { PAGINATION, slugFromSortAndOrder, sortThemes } from "../../helpers";
+import { possibleSortSlugs } from "../../helpers";
+export const getStaticPaths = (async ({ paginate }) => {
+  const themes = await getCollection("themes");
+
+  return possibleSortSlugs.flatMap((slug) => {
+    const { order, sort } = slugFromSortAndOrder(slug);
+    return paginate(sortThemes(themes, sort, order), {
+      pageSize: PAGINATION.size,
+      params: { sort: slug },
+    });
+  });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+const { order, sort } = slugFromSortAndOrder(Astro.params.sort);
+---
+
+<IndexPage page={page} order={order} sort={sort} />
