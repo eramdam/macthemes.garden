@@ -7,15 +7,21 @@ import PaginationBar from "./PaginationBar.astro";
 import { SingleTheme } from "./singleTheme";
 import { getEntries } from "astro:content";
 import { SortOptions, SortOrders } from "../helpers";
+import { sortedIndexOf } from "lodash-es";
 
 interface Props {
   page: Pick<
     Page<CollectionEntry<"themes">>,
     "url" | "lastPage" | "currentPage" | "data"
   >;
+  sort: SortOptions;
+  order: SortOrders;
 }
 
 const { page } = Astro.props;
+const currentSort = Astro.props.sort;
+const currentOrder = Astro.props.order;
+const hasExplicitSort = Astro.url.searchParams.has("sort");
 const makeNewUrl = (sort: SortOptions, order: SortOrders) => {
   const url = new URL(Astro.url);
   url.searchParams.set("sort", sort);
@@ -25,11 +31,17 @@ const makeNewUrl = (sort: SortOptions, order: SortOrders) => {
 
 const sortOptionsLabels: Record<SortOptions, string> = {
   [SortOptions.AUTHOR]: "Author",
-  [SortOptions.CREATED]: "Recently updated",
+  [SortOptions.CREATED]: "Update date",
   [SortOptions.NAME]: "Name",
   [SortOptions.YEAR]: "Year",
 };
-const listFormatter = new Intl.ListFormat("en");
+
+const sortMenuItems = [
+  { type: SortOptions.CREATED, order: SortOrders.DESC },
+  { type: SortOptions.NAME, order: SortOrders.ASC },
+  { type: SortOptions.AUTHOR, order: SortOrders.ASC },
+  // { type: SortOptions.YEAR, order: SortOrders.ASC },
+];
 ---
 
 <style>
@@ -46,24 +58,33 @@ const listFormatter = new Intl.ListFormat("en");
     <div class="themes-sorting">
       Sort by:
       {
-        listFormatter
-          .formatToParts([
-            SortOptions.CREATED,
-            SortOptions.NAME,
-            SortOptions.AUTHOR,
-            SortOptions.YEAR,
-          ] as const)
-          .map((item) => {
-            if (item.type === "literal") {
-              return " | ";
-            }
+        sortMenuItems.map((item, index) => {
+          const downArrow = <>&DownArrow;</>;
+          const upArrow = <>&UpArrow;</>;
+          const isCurrentSort = currentSort === item.type;
+          const currentArrow =
+            (hasExplicitSort &&
+              isCurrentSort &&
+              (currentOrder === SortOrders.ASC ? upArrow : downArrow)) ||
+            null;
 
-            return (
-              <a href={makeNewUrl(item.value as SortOptions, SortOrders.DESC)}>
-                {sortOptionsLabels[item.value as SortOptions]}
+          return (
+            <>
+              <a
+                href={makeNewUrl(
+                  item.type,
+                  currentSort === item.type && currentOrder === SortOrders.ASC
+                    ? SortOrders.DESC
+                    : SortOrders.ASC
+                )}
+              >
+                {sortOptionsLabels[item.type]}
+                {currentArrow && <>&nbsp;{currentArrow}</>}
               </a>
-            );
-          })
+              {index < sortMenuItems.length - 1 && " | "}
+            </>
+          );
+        })
       }
     </div>
     <div class="themes-grid">

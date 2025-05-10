@@ -6,7 +6,6 @@ interface Props {
   pagination: Pick<Page<unknown>, "url" | "lastPage" | "currentPage">;
 }
 const { pagination } = Astro.props;
-console.log("Astro.url");
 const makeNewUrl = (target: string) => {
   const finalUrl = new URL(target, Astro.url);
   for (const [key, value] of Astro.url.searchParams) {

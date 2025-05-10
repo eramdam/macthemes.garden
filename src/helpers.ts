@@ -61,7 +61,6 @@ export const PAGINATION = {
     sortOption: SortOptions = SortOptions.CREATED,
     sortOrder: SortOrders = SortOrders.DESC,
   ): GetPageReturn => {
-    console.log({ sortOrder });
     const sorted = orderBy(
       collection,
       (t) => {
@@ -118,3 +117,11 @@ export enum SortOrders {
   DESC = "desc",
 }
 export const SortOrdersEnum = z.nativeEnum(SortOrders).catch(SortOrders.DESC);
+
+export function getSortAndOrderFromUrl(url: URL) {
+  const rawSort = url.searchParams.get("sort");
+  const sort = SortOptionsEnum.parse(rawSort);
+  const rawOrder = url.searchParams.get("order");
+  const order = SortOrdersEnum.parse(rawOrder);
+  return { sort, order };
+}

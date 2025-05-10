@@ -1,13 +1,14 @@
 ---
 import { getCollection } from "astro:content";
 import IndexPage from "../components/IndexPage.astro";
-import { PAGINATION, SortOptionsEnum, SortOrdersEnum } from "../helpers";
+import { getSortAndOrderFromUrl, PAGINATION } from "../helpers";
 
 const themes = await getCollection("themes");
-const rawSort = Astro.url.searchParams.get("sort");
-const sort = SortOptionsEnum.parse(rawSort);
-const rawOrder = Astro.url.searchParams.get("order");
-const order = SortOrdersEnum.parse(rawOrder);
+const { sort, order } = getSortAndOrderFromUrl(Astro.url);
 ---
 
-<IndexPage page={PAGINATION.getPage(themes, 1, sort, order)} />
+<IndexPage
+  page={PAGINATION.getPage(themes, 1, sort, order)}
+  sort={sort}
+  order={order}
+/>
