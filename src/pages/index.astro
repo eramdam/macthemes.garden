@@ -5,4 +5,4 @@ import { PAGINATION } from "../helpers";
 const themes = await getCollection("themes");
 ---
 
-<IndexPage page={PAGINATION.getPage(themes, 1)} />
+<IndexPage page={PAGINATION.getPage(themes, 1, "created", "desc")} />
