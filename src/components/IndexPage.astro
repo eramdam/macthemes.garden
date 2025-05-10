@@ -1,11 +1,6 @@
 ---
 import type { Page } from "astro";
-import { type CollectionEntry } from "astro:content";
-import BaseLayout from "../layouts/BaseLayout.astro";
-import OS9Window from "./OS9Window.astro";
-import PaginationBar from "./PaginationBar.astro";
-import { SingleTheme } from "./singleTheme";
-import { getEntries } from "astro:content";
+import { getEntries, type CollectionEntry } from "astro:content";
 import {
   makeKeyFromSortAndOrder,
   SortOptionsEnum,
@@ -14,7 +9,10 @@ import {
   type SortOptions,
   type SortOrders,
 } from "../helpers";
-import { compact } from "lodash-es";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import OS9Window from "./OS9Window.astro";
+import PaginationBar from "./PaginationBar.astro";
+import { SingleTheme } from "./singleTheme";
 
 interface Props {
   page: Pick<
