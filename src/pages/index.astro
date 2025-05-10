@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import IndexPage from "../components/IndexPage.astro";
 import { PAGINATION } from "../helpers";
 const themes = await getCollection("themes");
+export const prerender = true;
 ---
 
 <IndexPage page={PAGINATION.basePage(themes)} />

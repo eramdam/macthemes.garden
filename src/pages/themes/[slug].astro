@@ -10,6 +10,8 @@ import {
   formatAuthorsText,
 } from "../../components/authorsFormatter";
 
+export const prerender = true;
+
 export const getStaticPaths = (async () => {
   const themes = await getCollection("themes");
   return themes.map((t) => {

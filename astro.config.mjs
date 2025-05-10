@@ -3,6 +3,8 @@ import astroBrokenLinksChecker from "astro-broken-link-checker";
 
 import preact from "@astrojs/preact";
 
+import netlify from "@astrojs/netlify";
+
 const isDev = import.meta.env.DEV;
 
 // https://astro.build/config
@@ -15,10 +17,14 @@ export default defineConfig({
         }
       : {}),
   },
+
   site: isDev ? "http://localhost:4321" : "https://macthemes.garden",
+
   devToolbar: {
     enabled: false,
   },
+
+  output: "server",
   integrations: [
     astroBrokenLinksChecker({
       logFilePath: "broken-links.log", // Optional: specify the log file path
@@ -26,4 +32,6 @@ export default defineConfig({
     }),
     preact(),
   ],
+
+  adapter: netlify(),
 });
