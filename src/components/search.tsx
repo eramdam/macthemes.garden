@@ -174,6 +174,7 @@ export const SearchForm: FunctionComponent<SearchFormProps> = (props) => {
         {searchResults.value[pageIndex.value].map((t) => {
           return (
             <div>
+              {/* @ts-expect-error */}
               <SingleTheme theme={t} authors={t.authors}></SingleTheme>
             </div>
           );
