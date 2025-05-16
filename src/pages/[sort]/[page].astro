@@ -5,7 +5,6 @@ import IndexPage from "../../components/IndexPage.astro";
 import { PAGINATION, slugFromSortAndOrder, sortThemes } from "../../helpers";
 import { possibleSortSlugs } from "../../helpers";
 
-export const prerender = true;
 export const getStaticPaths = (async ({ paginate }) => {
   const themes = await getCollection("themes");
 

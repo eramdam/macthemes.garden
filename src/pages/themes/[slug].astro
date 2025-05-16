@@ -10,8 +10,6 @@ import OS9Window from "../../components/OS9Window.astro";
 import { archiveFileSize, archiveMd5 } from "../../helpers";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
-export const prerender = true;
-
 export const getStaticPaths = (async () => {
   const themes = await getCollection("themes");
   return themes.map((t) => {

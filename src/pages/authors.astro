@@ -2,7 +2,6 @@
 import { getCollection } from "astro:content";
 import AuthorsPage from "../components/AuthorsPage.astro";
 
-export const prerender = true;
 const authors = await getCollection("authors");
 ---
 
