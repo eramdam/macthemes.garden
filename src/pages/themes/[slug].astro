@@ -11,6 +11,8 @@ import {
 } from "../../components/authorsFormatter";
 import { actions } from "astro:actions";
 
+export const prerender = true;
+
 export const getStaticPaths = (async () => {
   const themes = await getCollection("themes");
   return themes.map((t) => {
