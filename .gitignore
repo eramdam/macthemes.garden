@@ -134,3 +134,4 @@ data/attachments/*
 _site
 .astro
 .DS_Store
+.netlify

@@ -19,6 +19,7 @@ const themes = defineCollection({
     isNew: z.boolean(),
     relatedThemes: z.array(reference("themes")),
     createdAt: z.date(),
+    likes: z.number().default(0),
   }),
 });
 

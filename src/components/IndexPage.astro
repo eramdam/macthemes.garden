@@ -29,12 +29,14 @@ const currentSort = Astro.props.sort;
 const currentOrder = Astro.props.order;
 
 const sortOptionsLabels: Record<SortOptions, string> = {
+  [SortOptionsEnum.enum.likes]: "Likes",
   [SortOptionsEnum.enum.author]: "Author",
-  [SortOptionsEnum.enum.created]: "Date",
+  [SortOptionsEnum.enum.created]: "Updated",
   [SortOptionsEnum.enum.name]: "Name",
 };
 
 const sortMenuItems = [
+  { type: SortOptionsEnum.enum.likes, order: SortOrdersEnum.enum.desc },
   { type: SortOptionsEnum.enum.name, order: SortOrdersEnum.enum.asc },
   { type: SortOptionsEnum.enum.author, order: SortOrdersEnum.enum.asc },
 ];
@@ -94,7 +96,7 @@ const makeNewUrl = (sort: SortOptions, order: SortOrders) => {
                     currentSort === item.type &&
                       currentOrder === SortOrdersEnum.enum.asc
                       ? SortOrdersEnum.enum.desc
-                      : SortOrdersEnum.enum.asc
+                      : item.order
                   )}
                 >
                   {sortOptionsLabels[item.type]}
