@@ -44,6 +44,7 @@
     "astro-broken-link-checker": "imazen/astro-broken-link-checker",
     "async": "^3.2.6",
     "cmpstr": "^2.0.3",
+    "date-fns": "^4.1.0",
     "execa": "^9.5.2",
     "fs-extra": "^11.3.0",
     "husky": "^9.1.7",

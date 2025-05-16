@@ -77,6 +77,7 @@ const fileHosts = [
 </style>
 <script>
   import { actions } from "astro:actions";
+  import { isNumber } from "lodash-es";
 
   const likeButton = document.querySelector("#likeButton");
   const likeCount = document.querySelector("#likeCount");
@@ -91,14 +92,18 @@ const fileHosts = [
       if (!themeId) {
         return;
       }
-      try {
-        const res = await actions.toggleLike({
-          themeId,
-        });
+      const { data, error } = await actions.toggleLike({
+        themeId,
+      });
 
-        const newCount = res.data;
-        likeCount.textContent = newCount?.toString() ?? likeButton.textContent;
-      } catch (e) {}
+      if (error) {
+        return;
+      }
+
+      const newCount = data;
+      if (isNumber(newCount)) {
+        likeCount.textContent = Number(newCount).toString();
+      }
     });
   }
 </script>

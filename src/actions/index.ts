@@ -1,4 +1,4 @@
-import { defineAction } from "astro:actions";
+import { ActionError, defineAction } from "astro:actions";
 import { themesLoader } from "../themesLoader";
 import { z } from "astro:content";
 import { and, db, eq, Like } from "astro:db";
@@ -8,9 +8,11 @@ import {
   getLikeForUserIdAndTheme,
   getLikesForTheme,
 } from "../helpers/dbHelpers";
+import { canUserIdMakeRequest } from "../helpers/rateLimitHelpers";
 
 const themes = await themesLoader();
 const possibleIds = new Set(themes.map((t) => t.id));
+
 export const server = {
   toggleLike: defineAction({
     accept: "json",
@@ -26,6 +28,14 @@ export const server = {
     }),
     handler: async (input, context) => {
       const userId = generateUserUUID(context.clientAddress);
+      if (!(await canUserIdMakeRequest(userId))) {
+        throw new ActionError({
+          code: "TOO_MANY_REQUESTS",
+          message:
+            "Rate-limit exceeded, wait a moment before making another request",
+        });
+      }
+
       const likesForUserAndTheme = await getLikeForUserIdAndTheme(
         userId,
         input.themeId,

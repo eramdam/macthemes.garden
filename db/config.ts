@@ -8,7 +8,14 @@ const Like = defineTable({
   },
 });
 
+const UserRequest = defineTable({
+  columns: {
+    userId: column.text(),
+    date: column.date(),
+  },
+});
+
 // https://astro.build/db/config
 export default defineDb({
-  tables: { Like },
+  tables: { Like, UserRequest },
 });
