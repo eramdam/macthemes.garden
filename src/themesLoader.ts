@@ -1,10 +1,9 @@
 import { orderBy, uniq } from "lodash-es";
 import crypto from "node:crypto";
 import slugify from "slugify";
+import { getLikesForTheme } from "./helpers/dbHelpers";
 import themesKaleidoscopeAirtable from "./themes/airtable.json" with { type: "json" };
 import themesKaleidoscopeBot from "./themes/original.json" with { type: "json" };
-import { db, eq, Like } from "astro:db";
-import { getLikesForTheme } from "./helpers/dbHelpers";
 
 export const customSlugify = (str: string) =>
   slugify(str, {

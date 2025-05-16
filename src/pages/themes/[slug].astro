@@ -2,14 +2,13 @@
 import type { GetStaticPaths } from "astro";
 import { getCollection, getEntries } from "astro:content";
 
-import OS9Window from "../../components/OS9Window.astro";
-import { archiveFileSize, archiveMd5 } from "../../helpers";
-import BaseLayout from "../../layouts/BaseLayout.astro";
 import {
   AuthorsFormatter,
   formatAuthorsText,
 } from "../../components/authorsFormatter";
-import { actions } from "astro:actions";
+import OS9Window from "../../components/OS9Window.astro";
+import { archiveFileSize, archiveMd5 } from "../../helpers";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 
 export const prerender = true;
 
