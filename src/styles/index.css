@@ -113,7 +113,8 @@ footer p {
 .themes-grid .single-theme-authors {
   font-size: 0.8125rem;
 }
-.themes-grid .single-theme-year {
+.themes-grid .single-theme-year,
+.themes-grid .single-theme-likes {
   font-size: 0.625rem;
 }
 

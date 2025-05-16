@@ -74,6 +74,8 @@ export function sortThemes(
             .toLowerCase();
         case SortOptionsEnum.enum.name:
           return customSlugify(t.data.name).toLowerCase();
+        case SortOptionsEnum.enum.likes:
+          return t.data.likes;
       }
     },
     sortOrder === SortOrdersEnum.enum.asc ? "asc" : "desc",
@@ -112,7 +114,7 @@ export const PAGINATION = {
   },
 };
 
-const SortOptionValues = ["created", "name", "author"] as const;
+const SortOptionValues = ["created", "name", "author", "likes"] as const;
 export const SortOptionsEnum = z.enum(SortOptionValues);
 export type SortOptions = z.infer<typeof SortOptionsEnum>;
 
@@ -124,11 +126,13 @@ const sortOptionToKey = {
   [SortOptionsEnum.enum.author]: "a",
   [SortOptionsEnum.enum.created]: "d",
   [SortOptionsEnum.enum.name]: "n",
+  [SortOptionsEnum.enum.likes]: "l",
 } as const;
 const keyToSortOption = {
   d: SortOptionsEnum.enum.created,
   a: SortOptionsEnum.enum.author,
   n: SortOptionsEnum.enum.name,
+  l: SortOptionsEnum.enum.likes,
 } as const;
 
 type SortOptionAndOrderSlug =
