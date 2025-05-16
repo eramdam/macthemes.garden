@@ -9,6 +9,7 @@ import {
   AuthorsFormatter,
   formatAuthorsText,
 } from "../../components/authorsFormatter";
+import { actions } from "astro:actions";
 
 export const getStaticPaths = (async () => {
   const themes = await getCollection("themes");
@@ -21,6 +22,7 @@ export const getStaticPaths = (async () => {
     };
   });
 }) satisfies GetStaticPaths;
+const themeId = Astro.props.theme.id;
 const theme = Astro.props.theme.data;
 const isDev =
   import.meta.env.DEV && import.meta.env.PUBLIC_SHOW_DEBUG === "true";
@@ -73,6 +75,33 @@ const fileHosts = [
     flex-direction: column;
   }
 </style>
+<script>
+  import { actions } from "astro:actions";
+
+  const likeButton = document.querySelector("#likeButton");
+  const likeCount = document.querySelector("#likeCount");
+
+  if (likeButton instanceof HTMLElement && likeCount instanceof HTMLElement) {
+    likeButton.addEventListener("click", async () => {
+      console.log(
+        `likeButton.dataset['theme-id']`,
+        likeButton.dataset["themeid"]
+      );
+      const themeId = likeButton.dataset["themeid"];
+      if (!themeId) {
+        return;
+      }
+      try {
+        const res = await actions.toggleLike({
+          themeId,
+        });
+
+        const newCount = res.data;
+        likeCount.textContent = newCount?.toString() ?? likeButton.textContent;
+      } catch (e) {}
+    });
+  }
+</script>
 <BaseLayout
   title={theme.name}
   description={openGraphDescription}
@@ -100,80 +129,88 @@ const fileHosts = [
         </div>
         <div class="infos">
           <dl>
-            <dt>Name:</dt>
-            <dd>{theme.name}</dd>
-
-            <dt>Author(s):</dt>
+            <dt>Likes:</dt>
             <dd>
-              <AuthorsFormatter asLinks authors={authors} />
+              <a href="#" id="likeButton" data-themeid={themeId}
+                >Like (<span id="likeCount">{theme.likes}</span>)
+              </a>
             </dd>
+            <dl>
+              <dt>Name:</dt>
+              <dd>{theme.name}</dd>
 
-            <dt>Release year:</dt>
-            <dd>{theme.year}</dd>
+              <dt>Author(s):</dt>
+              <dd>
+                <AuthorsFormatter asLinks authors={authors} />
+              </dd>
 
-            {
-              isDev && (
-                <Fragment>
-                  <dt>Is new to Airtable:</dt>
-                  <dd>{theme.isNew ? "Yes" : "No"}</dd>
-                </Fragment>
-              )
-            }
+              <dt>Release year:</dt>
+              <dd>{theme.year}</dd>
 
-            <dt>Archive file:</dt>
-            <dd>
-              {theme.archiveFile}{" "}
-              {archiveFileSize(theme.archiveFile)}
-            </dd>
-            <dd>
-              MD5
-              <a
-                href={`https://files.macthemes.garden/${theme.archiveFile}.md5`}
-              >
-                {archiveMd5(theme.archiveFile)}</a
-              >
-            </dd>
-            <dt>Download links:</dt>
-            <dd>
-              <ul>
-                {
-                  fileHosts.map((fileHost, index) => {
-                    return (
-                      <li>
-                        <a href={`https://${fileHost}/${theme.archiveFile}`}>
-                          #{index + 1} ({fileHost})
-                        </a>
-                      </li>
-                    );
-                  })
-                }
-              </ul>
-            </dd>
-            {
-              hasMoreThemesInArchive && (
-                <Fragment>
-                  <dt>More from the same archive file:</dt>
-                  <dd class="related-themes">
-                    {relatedThemes.map((t) => {
+              {
+                isDev && (
+                  <Fragment>
+                    <dt>Is new to Airtable:</dt>
+                    <dd>{theme.isNew ? "Yes" : "No"}</dd>
+                  </Fragment>
+                )
+              }
+
+              <dt>Archive file:</dt>
+              <dd>
+                {theme.archiveFile}{" "}
+                {archiveFileSize(theme.archiveFile)}
+              </dd>
+              <dd>
+                MD5
+                <a
+                  href={`https://files.macthemes.garden/${theme.archiveFile}.md5`}
+                >
+                  {archiveMd5(theme.archiveFile)}</a
+                >
+              </dd>
+              <dt>Download links:</dt>
+              <dd>
+                <ul>
+                  {
+                    fileHosts.map((fileHost, index) => {
                       return (
-                        <a
-                          class="related-single-theme"
-                          href={`/themes/${t.data.urlBase}`}
-                        >
-                          <img
-                            src={t.data.mainThumbnail}
-                            loading="lazy"
-                            decoding="async"
-                            alt={`${t.data.name} by ${t.data.authors.join(", ")}`}
-                          />
-                          <span>{t.data.name}</span>
-                        </a>
+                        <li>
+                          <a href={`https://${fileHost}/${theme.archiveFile}`}>
+                            #{index + 1} ({fileHost})
+                          </a>
+                        </li>
                       );
-                    })}
-                  </dd>
-                </Fragment>
-              )
-            }
+                    })
+                  }
+                </ul>
+              </dd>
+              {
+                hasMoreThemesInArchive && (
+                  <Fragment>
+                    <dt>More from the same archive file:</dt>
+                    <dd class="related-themes">
+                      {relatedThemes.map((t) => {
+                        return (
+                          <a
+                            class="related-single-theme"
+                            href={`/themes/${t.data.urlBase}`}
+                          >
+                            <img
+                              src={t.data.mainThumbnail}
+                              loading="lazy"
+                              decoding="async"
+                              alt={`${t.data.name} by ${t.data.authors.join(", ")}`}
+                            />
+                            <span>{t.data.name}</span>
+                          </a>
+                        );
+                      })}
+                    </dd>
+                  </Fragment>
+                )
+              }
+            </dl>
           </dl>
         </div>
       </div>
