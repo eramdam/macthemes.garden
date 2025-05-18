@@ -10,6 +10,7 @@ import OS9Window from "../../components/OS9Window.astro";
 import { archiveFileSize, archiveMd5 } from "../../helpers";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getLikeCountsByThemeIds } from "../../helpers/dbHelpers";
+import { LikeButton } from "../../components/likeButton";
 
 export const getStaticPaths = (async () => {
   const themes = await getCollection("themes");
@@ -136,12 +137,6 @@ const fileHosts = [
         </div>
         <div class="infos">
           <dl>
-            <dt>Likes:</dt>
-            <dd>
-              <a href="#" id="likeButton" data-themeid={themeId}
-                >Like (<span id="likeCount">{likesCount}</span>)
-              </a>
-            </dd>
             <dl>
               <dt>Name:</dt>
               <dd>{theme.name}</dd>
@@ -162,6 +157,13 @@ const fileHosts = [
                   </Fragment>
                 )
               }
+
+              <dt>Social:</dt>
+              <dd>
+                <LikeButton themeId={themeId} client:visible />
+                <br />
+                {isDev ? `\nlikes: ${likesCount}` : null}
+              </dd>
 
               <dt>Archive file:</dt>
               <dd>

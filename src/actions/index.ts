@@ -12,6 +12,7 @@ import { canUserIdMakeRequest } from "../helpers/rateLimitHelpers";
 
 const themes = await themesLoader();
 const possibleIds = new Set(themes.map((t) => t.id));
+const isDev = import.meta.env.DEV;
 
 export const server = {
   toggleLike: defineAction({
@@ -51,21 +52,24 @@ export const server = {
         userId,
         input.themeId,
       );
+      let liked = false;
       if (likesForUserAndTheme.length < 1) {
         await db.insert(Like).values({
           id: v4(),
           themeId: input.themeId,
           userId,
         });
+        liked = true;
       } else {
         await db
           .delete(Like)
           .where(and(eq(Like.themeId, input.themeId), eq(Like.userId, userId)));
+        liked = false;
       }
 
       const likes = await getLikesForTheme(input.themeId);
 
-      return likes.length;
+      return { liked, likes: isDev ? likes.length : 0 };
     },
   }),
 };

@@ -1,5 +1,5 @@
-import { defineConfig } from "astro/config";
 import astroBrokenLinksChecker from "astro-broken-link-checker";
+import { defineConfig } from "astro/config";
 
 import preact from "@astrojs/preact";
 
