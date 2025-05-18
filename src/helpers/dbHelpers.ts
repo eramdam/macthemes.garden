@@ -70,4 +70,11 @@ async function _getLikeCountsByThemeIds() {
   return likesCountById;
 }
 
-export const getLikeCountsByThemeIds = memoize(_getLikeCountsByThemeIds);
+const memoized = memoize(_getLikeCountsByThemeIds);
+
+export const getLikeCountsByThemeIds = async () => {
+  console.time("getLikeCountsByThemeIds");
+  const result = await memoized();
+  console.timeEnd("getLikeCountsByThemeIds");
+  return result;
+};
