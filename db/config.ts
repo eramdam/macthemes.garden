@@ -35,9 +35,10 @@ const Theme = defineTable({
 
 const UserRequest = defineTable({
   columns: {
-    userId: column.text(),
+    userId: column.text({ primaryKey: true }),
     date: column.date(),
   },
+  indexes: [{ on: "userId", unique: true }],
 });
 
 // https://astro.build/db/config
