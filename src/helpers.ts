@@ -79,7 +79,7 @@ export function sortThemes(
         case SortOptionsEnum.enum.name:
           return customSlugify(t.data.name).toLowerCase();
         case SortOptionsEnum.enum.likes:
-          return t.likes;
+          return -t.likes;
       }
     },
     sortOrder === SortOrdersEnum.enum.asc ? "asc" : "desc",

@@ -8,6 +8,8 @@ import { renderFeedTheme } from "../components/feedTheme";
 import type { APIContext } from "astro";
 import { formatAuthorsText } from "../components/authorsFormatter";
 
+export const prerender = true;
+
 export async function GET(context: APIContext) {
   const themes = await getCollection("themes");
   const limitedThemes = themes.slice(0, 100);

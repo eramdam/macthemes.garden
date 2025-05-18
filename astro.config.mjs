@@ -27,7 +27,7 @@ export default defineConfig({
     enabled: false,
   },
 
-  output: "static",
+  output: "server",
 
   integrations: [
     astroBrokenLinksChecker({
@@ -38,5 +38,7 @@ export default defineConfig({
     db(),
   ],
 
-  adapter: netlify(),
+  adapter: netlify({
+    cacheOnDemandPages: true,
+  }),
 });

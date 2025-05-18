@@ -1,35 +1,34 @@
 ---
-import type { GetStaticPaths } from "astro";
 import { getCollection, getEntries } from "astro:content";
 
 import {
   AuthorsFormatter,
   formatAuthorsText,
 } from "../../components/authorsFormatter";
+import { LikeButton } from "../../components/likeButton";
 import OS9Window from "../../components/OS9Window.astro";
 import { archiveFileSize, archiveMd5 } from "../../helpers";
+import {
+  generateUserUUID,
+  getLikeCountsByThemeIds,
+  getLikeForUserIdAndTheme,
+} from "../../helpers/dbHelpers";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { getLikeCountsByThemeIds } from "../../helpers/dbHelpers";
-import { LikeButton } from "../../components/likeButton";
 
-export const getStaticPaths = (async () => {
-  const themes = await getCollection("themes");
-  return themes.map((t) => {
-    return {
-      props: { theme: t },
-      params: {
-        slug: t.data.urlBase,
-      },
-    };
-  });
-}) satisfies GetStaticPaths;
+const themes = await getCollection("themes");
+const themeMatch = themes.find((t) => t.data.urlBase === Astro.params.slug);
+
+if (!themeMatch) {
+  return Astro.redirect("/404");
+}
+
 const likesCountByID = await getLikeCountsByThemeIds();
-const themeId = Astro.props.theme.id;
+const theme = themeMatch.data;
+const themeId = themeMatch.id;
 const likesCount = likesCountByID[themeId] || 0;
-const theme = Astro.props.theme.data;
 const isDev =
   import.meta.env.DEV && import.meta.env.PUBLIC_SHOW_DEBUG === "true";
-const relatedThemes = await getEntries(Astro.props.theme.data.relatedThemes);
+const relatedThemes = await getEntries(theme.relatedThemes);
 const hasMoreThemesInArchive = relatedThemes.length > 0;
 const authors = (await getEntries(theme.authors)).map((a) => a.data);
 const authorsString =
@@ -50,6 +49,12 @@ const fileHosts = [
   "macthemes.drac.at",
   "macthemes.jkap.io",
 ];
+
+const userId = generateUserUUID(Astro.clientAddress);
+const likedByUser =
+  (await getLikeForUserIdAndTheme(userId, themeId)).length > 0;
+
+console.log("Astro.clientAddress", Astro.clientAddress);
 ---
 
 <style>
@@ -160,7 +165,11 @@ const fileHosts = [
 
               <dt>Social:</dt>
               <dd>
-                <LikeButton themeId={themeId} client:visible />
+                <LikeButton
+                  initialLike={likedByUser}
+                  themeId={themeId}
+                  client:load
+                />
                 <br />
                 {isDev ? `\nlikes: ${likesCount}` : null}
               </dd>

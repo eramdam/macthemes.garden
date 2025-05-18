@@ -1,31 +1,22 @@
-import { useCallback, useEffect, useState } from "preact/hooks";
 import { actions } from "astro:actions";
+import { useCallback, useState } from "preact/hooks";
 import { Fragment } from "preact/jsx-runtime";
-import { getLocalLike, setLocalLike } from "../helpers/storageHelpers";
 
 interface LikeButtonProps {
   themeId: string;
+  initialLike: boolean;
 }
 export function LikeButton(props: LikeButtonProps) {
-  const [hasLiked, setHasLiked] = useState(false);
-
-  useEffect(() => {
-    const localLike = getLocalLike(props.themeId);
-
-    setHasLiked(localLike);
-  }, []);
+  const [hasLiked, setHasLiked] = useState(props.initialLike);
 
   const onClickLike = useCallback(async () => {
     try {
       const currentHasLiked = hasLiked;
       const newLikeValue = !currentHasLiked;
-      console.log({ newLikeValue });
       setHasLiked(newLikeValue);
-      setLocalLike(props.themeId, newLikeValue);
       const { data, error } = await actions.toggleLike({
         themeId: props.themeId,
       });
-      console.log(data);
 
       if (error) {
         setHasLiked(currentHasLiked);
