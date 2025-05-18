@@ -9,6 +9,7 @@ const likesCountByID = await getLikeCountsByThemeIds();
 const themesWithLikes = themes.map((t) => {
   return { ...t, likes: likesCountByID[t.id] || 0 };
 });
+const page = PAGINATION.getPage(themesWithLikes, 1, "created", "desc");
 ---
 
-<IndexPage page={PAGINATION.getPage(themesWithLikes, 1, "created", "desc")} />
+<IndexPage page={page} />

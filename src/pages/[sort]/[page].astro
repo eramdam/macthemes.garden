@@ -1,13 +1,7 @@
 ---
-import type { GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
 import IndexPage from "../../components/IndexPage.astro";
-import {
-  PAGINATION,
-  possibleSortSlugs,
-  slugFromSortAndOrder,
-  sortThemes,
-} from "../../helpers";
+import { PAGINATION, slugFromSortAndOrder } from "../../helpers";
 import { getLikeCountsByThemeIds } from "../../helpers/dbHelpers";
 
 const pageNumber = Astro.params.page;
@@ -17,7 +11,7 @@ const { sort, order } = slugFromSortAndOrder(Astro.params.sort || "d-desc");
 let themes = await getCollection("themes");
 
 if (sort === "likes") {
-  const likesCountByID = await getLikeCountsByThemeIds();
+  const likesCountByID = await getLikeCountsByThemeIds(Astro.session);
   themes = themes.map((t) => {
     return { ...t, likes: likesCountByID[t.id] || 0 };
   });

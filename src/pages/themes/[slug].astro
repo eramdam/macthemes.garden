@@ -5,16 +5,11 @@ import {
   AuthorsFormatter,
   formatAuthorsText,
 } from "../../components/authorsFormatter";
-import { LikeButton } from "../../components/likeButton";
 import OS9Window from "../../components/OS9Window.astro";
-import { archiveFileSize, archiveMd5 } from "../../helpers";
-import {
-  generateUserUUID,
-  getLikeCountsByThemeIds,
-  getLikeForUserIdAndTheme,
-} from "../../helpers/dbHelpers";
-import BaseLayout from "../../layouts/BaseLayout.astro";
 import ServerLikeButton from "../../components/ServerLikeButton.astro";
+import { archiveFileSize, archiveMd5 } from "../../helpers";
+import { getLikeCountsByThemeIds } from "../../helpers/dbHelpers";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 
 const themes = await getCollection("themes");
 const themeMatch = themes.find((t) => t.data.urlBase === Astro.params.slug);
@@ -23,7 +18,7 @@ if (!themeMatch) {
   return Astro.redirect("/404");
 }
 
-const likesCountByID = await getLikeCountsByThemeIds();
+const likesCountByID = await getLikeCountsByThemeIds(Astro.session);
 const theme = themeMatch.data;
 const themeId = themeMatch.id;
 const likesCount = likesCountByID[themeId] || 0;
@@ -78,38 +73,7 @@ const fileHosts = [
     flex-direction: column;
   }
 </style>
-<script>
-  import { actions } from "astro:actions";
-  import { isNumber } from "lodash-es";
 
-  const likeButton = document.querySelector("#likeButton");
-  const likeCount = document.querySelector("#likeCount");
-
-  if (likeButton instanceof HTMLElement && likeCount instanceof HTMLElement) {
-    likeButton.addEventListener("click", async () => {
-      console.log(
-        `likeButton.dataset['theme-id']`,
-        likeButton.dataset["themeid"]
-      );
-      const themeId = likeButton.dataset["themeid"];
-      if (!themeId) {
-        return;
-      }
-      const { data, error } = await actions.toggleLike({
-        themeId,
-      });
-
-      if (error) {
-        return;
-      }
-
-      const newCount = data;
-      if (isNumber(newCount)) {
-        likeCount.textContent = Number(newCount).toString();
-      }
-    });
-  }
-</script>
 <BaseLayout
   title={theme.name}
   description={openGraphDescription}

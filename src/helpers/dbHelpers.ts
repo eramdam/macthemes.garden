@@ -1,5 +1,8 @@
+import type { AstroSharedContext } from "astro";
 import { and, count, db, eq, Like, Theme, UserRequest } from "astro:db";
 import { getSecret } from "astro:env/server";
+import { differenceInMilliseconds } from "date-fns";
+import { millisecondsInHour, millisecondsInSecond } from "date-fns/constants";
 import { chunk, flatten, memoize } from "lodash-es";
 import { v5 } from "uuid";
 
@@ -72,9 +75,38 @@ async function _getLikeCountsByThemeIds() {
 
 const memoized = memoize(_getLikeCountsByThemeIds);
 
-export const getLikeCountsByThemeIds = async () => {
-  console.time("getLikeCountsByThemeIds");
-  const result = await memoized();
-  console.timeEnd("getLikeCountsByThemeIds");
+const sessionKey = "likesById";
+const sessionTTL = import.meta.env.DEV
+  ? millisecondsInSecond * 20
+  : millisecondsInHour * 6;
+type SessionStored = Awaited<ReturnType<typeof _getLikeCountsByThemeIds>>;
+
+async function getFromSession(
+  session: NonNullable<AstroSharedContext["session"]>,
+) {
+  const existing = await session.get<SessionStored>(sessionKey);
+  if (existing) {
+    return existing;
+  }
+
+  const newValue = await _getLikeCountsByThemeIds();
+  await session.set<SessionStored>(sessionKey, newValue, { ttl: sessionTTL });
+
+  return newValue;
+}
+
+export const getLikeCountsByThemeIds = async (
+  session?: AstroSharedContext["session"],
+) => {
+  if (!session) {
+    console.time("getLikeCountsByThemeIds memory");
+    const result = await memoized();
+    console.timeEnd("getLikeCountsByThemeIds memory");
+    return result;
+  }
+
+  console.time("getLikeCountsByThemeIds session");
+  const result = await getFromSession(session);
+  console.timeEnd("getLikeCountsByThemeIds session");
   return result;
 };
