@@ -6,7 +6,6 @@ import { chunk, random, sample, shuffle } from "lodash-es";
 
 const USER_IP = "1.1.1.1";
 const themes = await themesLoader();
-const likesNumber = [1, 20, 40, 0, 70, 0, 120, 200];
 // https://astro.build/db/seed
 export default async function seed() {
   const userId = generateUserUUID(USER_IP);
@@ -15,20 +14,20 @@ export default async function seed() {
 
   console.time("seed");
   for (const themesChunk of chunk(shuffle(themes), 200)) {
-    const numberOfLikesToAdd = sample(likesNumber)! + (Date.now() % 20);
     const operations = themesChunk
       .filter((t) => {
-        const shouldAddTheme = Math.random() > 0.3;
+        const modulo = parseInt(t.id, 16) % 16;
 
-        return shouldAddTheme;
+        return modulo > 5;
       })
-      .flatMap((theme) => {
+      .flatMap((theme, index) => {
         themesCount++;
+        const modulo = parseInt(theme.id, 16) % 10;
         return [
           db.insert(Theme).values({
             id: theme.id,
           }),
-          ...Array.from({ length: numberOfLikesToAdd }).map(() => {
+          ...Array.from({ length: (index % 10) + modulo }).map(() => {
             return db.insert(Like).values({
               themeId: theme.id,
               id: v4(),
