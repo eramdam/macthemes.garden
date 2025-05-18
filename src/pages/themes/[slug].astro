@@ -53,8 +53,6 @@ const fileHosts = [
 const userId = generateUserUUID(Astro.clientAddress);
 const likedByUser =
   (await getLikeForUserIdAndTheme(userId, themeId)).length > 0;
-
-console.log("Astro.clientAddress", Astro.clientAddress);
 ---
 
 <style>
