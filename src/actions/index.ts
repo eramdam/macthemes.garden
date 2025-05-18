@@ -36,16 +36,12 @@ export const server = {
         });
       }
 
-      const wasThemeAlreadyLiked =
-        (
-          await db
-            .select()
-            .from(Like)
-            .where(eq(Like.themeId, input.themeId))
-            .limit(1)
-        ).length > 0;
+      const existingTheme = await db
+        .select()
+        .from(Theme)
+        .where(eq(Theme.id, input.themeId));
 
-      if (!wasThemeAlreadyLiked) {
+      if (existingTheme.length < 1) {
         await db.insert(Theme).values({
           id: input.themeId,
         });
