@@ -8,13 +8,14 @@ const isDev =
 interface SingleThemeProps {
   theme: Pick<
     InferEntrySchema<"themes">,
-    "urlBase" | "mainThumbnail" | "name" | "year" | "isNew" | "likes"
+    "urlBase" | "mainThumbnail" | "name" | "year" | "isNew"
   >;
+  likes?: number;
   authors: ComponentProps<typeof AuthorsFormatter>["authors"];
 }
 
 export function SingleTheme(props: SingleThemeProps) {
-  const { theme, authors } = props;
+  const { theme, authors, likes } = props;
   return (
     <div class="single-theme">
       <a href={`/themes/${theme.urlBase}`}>
@@ -32,10 +33,8 @@ export function SingleTheme(props: SingleThemeProps) {
         <AuthorsFormatter authors={authors} />
       </div>
       <div class="single-theme-year">{theme.year || "-"}</div>
-      {theme.likes > 1 && (
-        <div class="single-theme-year">
-          {theme.likes.toLocaleString("en")} likes
-        </div>
+      {(likes || 0) > 1 && (
+        <div class="single-theme-year">{likes?.toLocaleString("en")} likes</div>
       )}
       {isDev && (
         <div>

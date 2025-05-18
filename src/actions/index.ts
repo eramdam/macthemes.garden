@@ -1,7 +1,7 @@
 import { ActionError, defineAction } from "astro:actions";
 import { themesLoader } from "../themesLoader";
 import { z } from "astro:content";
-import { and, db, eq, Like } from "astro:db";
+import { and, db, eq, Like, Theme } from "astro:db";
 import { v4 } from "uuid";
 import {
   generateUserUUID,
@@ -33,6 +33,21 @@ export const server = {
           code: "TOO_MANY_REQUESTS",
           message:
             "Rate-limit exceeded, wait a moment before making another request",
+        });
+      }
+
+      const wasThemeAlreadyLiked =
+        (
+          await db
+            .select()
+            .from(Like)
+            .where(eq(Like.themeId, input.themeId))
+            .limit(1)
+        ).length > 0;
+
+      if (!wasThemeAlreadyLiked) {
+        await db.insert(Theme).values({
+          id: input.themeId,
         });
       }
 

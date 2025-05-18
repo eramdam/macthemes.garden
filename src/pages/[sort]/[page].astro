@@ -2,15 +2,24 @@
 import type { GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
 import IndexPage from "../../components/IndexPage.astro";
-import { PAGINATION, slugFromSortAndOrder, sortThemes } from "../../helpers";
-import { possibleSortSlugs } from "../../helpers";
+import {
+  PAGINATION,
+  possibleSortSlugs,
+  slugFromSortAndOrder,
+  sortThemes,
+} from "../../helpers";
+import { getLikeCountsByThemeIds } from "../../helpers/dbHelpers";
 
 export const getStaticPaths = (async ({ paginate }) => {
   const themes = await getCollection("themes");
+  const likesCountByID = await getLikeCountsByThemeIds();
+  const themesWithLikes = themes.map((t) => {
+    return { ...t, likes: likesCountByID[t.id] || 0 };
+  });
 
   return possibleSortSlugs.flatMap((slug) => {
     const { order, sort } = slugFromSortAndOrder(slug);
-    return paginate(sortThemes(themes, sort, order), {
+    return paginate(sortThemes(themesWithLikes, sort, order), {
       pageSize: PAGINATION.size,
       params: { sort: slug },
     });

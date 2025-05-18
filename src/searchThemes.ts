@@ -4,13 +4,7 @@ import type { AuthorsFormatter } from "./components/authorsFormatter";
 
 export type SearchTheme = Pick<
   InferEntrySchema<"themes">,
-  | "urlBase"
-  | "mainThumbnail"
-  | "name"
-  | "year"
-  | "isNew"
-  | "archiveFile"
-  | "likes"
+  "urlBase" | "mainThumbnail" | "name" | "year" | "isNew" | "archiveFile"
 > & {
   authors: ComponentProps<typeof AuthorsFormatter>["authors"];
 };
@@ -24,7 +18,6 @@ export function compressThemes(themes: SearchTheme[]) {
       y: t.year,
       i: t.isNew,
       s: t.archiveFile,
-      l: t.likes,
       a: t.authors.map((a) => {
         return {
           n: a.name,
@@ -46,7 +39,6 @@ export function decompressThemes(
       year: t.y,
       isNew: t.i,
       archiveFile: t.s,
-      likes: t.l,
       authors: t.a.map((a) => {
         return {
           name: a.n,

@@ -1,5 +1,6 @@
-import { and, db, eq, Like, UserRequest } from "astro:db";
+import { and, count, db, eq, Like, Theme, UserRequest } from "astro:db";
 import { getSecret } from "astro:env/server";
+import { chunk, flatten, memoize } from "lodash-es";
 import { v5 } from "uuid";
 
 export async function getLikesForTheme(id: string) {
@@ -42,3 +43,31 @@ export async function recordLastRequestFromUserId(userId: string) {
     .values({ userId, date: new Date() })
     .values();
 }
+
+async function _getLikeCountsByThemeIds() {
+  const likedThemesIds = (await db.select().from(Theme)).map((t) => t.id);
+  let likesCountById: Record<string, number> = {};
+
+  for (const element of chunk(likedThemesIds, 400)) {
+    const transactions = element.map((id) => {
+      return db
+        .select({ [id]: count() })
+        .from(Like)
+        .where(eq(Like.themeId, id));
+    });
+
+    // @ts-expect-error
+    const results = flatten(await db.batch(transactions));
+
+    results.forEach((r) => {
+      likesCountById = {
+        ...likesCountById,
+        ...r,
+      };
+    });
+  }
+
+  return likesCountById;
+}
+
+export const getLikeCountsByThemeIds = memoize(_getLikeCountsByThemeIds);

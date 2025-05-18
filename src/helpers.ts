@@ -49,12 +49,16 @@ export function archiveMd5(value: string) {
 
 const pageSize = 51;
 type GetPageReturn = Pick<
-  Page<CollectionEntry<"themes">>,
+  Page<CollectionEntry<"themes"> & { likes: number }>,
   "url" | "lastPage" | "currentPage" | "data"
 >;
 
 export function sortThemes(
-  collection: Array<CollectionEntry<"themes">>,
+  collection: Array<
+    CollectionEntry<"themes"> & {
+      likes: number;
+    }
+  >,
   sortOption: SortOptions = SortOptionsEnum.enum.created,
   sortOrder: SortOrders = SortOrdersEnum.enum.asc,
 ) {
@@ -75,7 +79,7 @@ export function sortThemes(
         case SortOptionsEnum.enum.name:
           return customSlugify(t.data.name).toLowerCase();
         case SortOptionsEnum.enum.likes:
-          return t.data.likes;
+          return t.likes;
       }
     },
     sortOrder === SortOrdersEnum.enum.asc ? "asc" : "desc",
@@ -85,7 +89,7 @@ export function sortThemes(
 export const PAGINATION = {
   size: pageSize,
   getPage: (
-    collection: Array<CollectionEntry<"themes">>,
+    collection: Array<CollectionEntry<"themes"> & { likes: number }>,
     pageNumber: number,
     sortOption: SortOptions = SortOptionsEnum.enum.created,
     sortOrder: SortOrders = SortOrdersEnum.enum.asc,

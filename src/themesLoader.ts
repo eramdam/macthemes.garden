@@ -1,10 +1,8 @@
-import { groupBy, orderBy, uniq } from "lodash-es";
+import { orderBy, uniq } from "lodash-es";
 import crypto from "node:crypto";
 import slugify from "slugify";
-import { getLikesForTheme } from "./helpers/dbHelpers";
 import themesKaleidoscopeAirtable from "./themes/airtable.json" with { type: "json" };
 import themesKaleidoscopeBot from "./themes/original.json" with { type: "json" };
-import { db, Like } from "astro:db";
 
 export const customSlugify = (str: string) =>
   slugify(str, {
@@ -24,7 +22,6 @@ const botThemesNotOnAirtableYet = themesKaleidoscopeBot.filter((theme) => {
 });
 
 export async function themesLoader() {
-  const likesPerId = groupBy(await db.select().from(Like), (v) => v.themeId);
   const result = await Promise.all(
     themesKaleidoscopeAirtable
       .map((theme) => {
@@ -80,10 +77,8 @@ export async function themesLoader() {
         }),
       )
       .map(async (theme, _index, array) => {
-        const likesCount = likesPerId[theme.id]?.length || 0;
         return {
           ...theme,
-          likes: likesCount,
           relatedThemes: array
             .filter(
               (t) => t.archiveFile === theme.archiveFile && t.id !== theme.id,

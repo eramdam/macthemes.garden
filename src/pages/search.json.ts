@@ -25,7 +25,6 @@ export async function GET() {
         "isNew",
         "authors",
         "archiveFile",
-        "likes",
       ]),
   );
   const json = JSON.stringify(compressThemes(themesWithAuthors));
