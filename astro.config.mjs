@@ -40,6 +40,5 @@ export default defineConfig({
 
   adapter: netlify({
     cacheOnDemandPages: true,
-    edgeMiddleware: true,
   }),
 });
