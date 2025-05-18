@@ -14,6 +14,7 @@ import {
   getLikeForUserIdAndTheme,
 } from "../../helpers/dbHelpers";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import ServerLikeButton from "../../components/ServerLikeButton.astro";
 
 const themes = await getCollection("themes");
 const themeMatch = themes.find((t) => t.data.urlBase === Astro.params.slug);
@@ -49,10 +50,6 @@ const fileHosts = [
   "macthemes.drac.at",
   "macthemes.jkap.io",
 ];
-
-const userId = generateUserUUID(Astro.clientAddress);
-const likedByUser =
-  (await getLikeForUserIdAndTheme(userId, themeId)).length > 0;
 ---
 
 <style>
@@ -163,11 +160,10 @@ const likedByUser =
 
               <dt>Social:</dt>
               <dd>
-                <LikeButton
-                  initialLike={likedByUser}
-                  themeId={themeId}
-                  client:load
-                />
+                <ServerLikeButton server:defer themeId={themeId}>
+                  Like
+                </ServerLikeButton>
+
                 <br />
                 {isDev ? `\nlikes: ${likesCount}` : null}
               </dd>
