@@ -1,10 +1,17 @@
-import type { AstroSharedContext } from "astro";
+import TTLCache from "@isaacs/ttlcache";
 import { and, count, db, eq, Like, Theme, UserRequest } from "astro:db";
 import { getSecret } from "astro:env/server";
-import { differenceInMilliseconds } from "date-fns";
 import { millisecondsInHour, millisecondsInSecond } from "date-fns/constants";
-import { chunk, flatten, memoize } from "lodash-es";
+import { chunk, flatten } from "lodash-es";
 import { v5 } from "uuid";
+
+const sessionKey = "likesById";
+const sessionTTL = import.meta.env.DEV
+  ? millisecondsInSecond * 20
+  : millisecondsInHour * 6;
+type SessionStored = Awaited<ReturnType<typeof _getLikeCountsByThemeIds>>;
+
+const cache = new TTLCache({ max: 10, ttl: sessionTTL });
 
 export async function getLikesForTheme(id: string) {
   return db.select().from(Like).where(eq(Like.themeId, id));
@@ -73,41 +80,22 @@ async function _getLikeCountsByThemeIds() {
   return likesCountById;
 }
 
-const memoized = memoize(_getLikeCountsByThemeIds);
-
-const sessionKey = "likesById";
-const sessionTTL = import.meta.env.DEV
-  ? millisecondsInSecond * 20
-  : millisecondsInHour * 6;
-type SessionStored = Awaited<ReturnType<typeof _getLikeCountsByThemeIds>>;
-
-async function getFromSession(
-  session: NonNullable<AstroSharedContext["session"]>,
-) {
-  const existing = await session.get<SessionStored>(sessionKey);
+async function getFromCache() {
+  const existing = cache.get<SessionStored>(sessionKey);
   console.log({ cacheHit: !!existing });
   if (existing) {
     return existing;
   }
 
   const newValue = await _getLikeCountsByThemeIds();
-  await session.set<SessionStored>(sessionKey, newValue, { ttl: sessionTTL });
+  cache.set(sessionKey, newValue);
 
   return newValue;
 }
 
-export const getLikeCountsByThemeIds = async (
-  session?: AstroSharedContext["session"],
-) => {
-  if (!session) {
-    console.time("getLikeCountsByThemeIds memory");
-    const result = await memoized();
-    console.timeEnd("getLikeCountsByThemeIds memory");
-    return result;
-  }
-
-  console.time("getLikeCountsByThemeIds session");
-  const result = await getFromSession(session);
-  console.timeEnd("getLikeCountsByThemeIds session");
+export const getLikeCountsByThemeIds = async () => {
+  console.time("getLikeCountsByThemeIds cache");
+  const result = await getFromCache();
+  console.timeEnd("getLikeCountsByThemeIds cache");
   return result;
 };

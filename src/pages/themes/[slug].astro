@@ -18,7 +18,7 @@ if (!themeMatch) {
   return Astro.redirect("/404");
 }
 
-const likesCountByID = await getLikeCountsByThemeIds(Astro.session);
+const likesCountByID = await getLikeCountsByThemeIds();
 const theme = themeMatch.data;
 const themeId = themeMatch.id;
 const likesCount = likesCountByID[themeId] || 0;
