@@ -1,8 +1,8 @@
 import { db, Like, Theme } from "astro:db";
+import { chunk, shuffle } from "lodash-es";
 import { v4 } from "uuid";
 import { generateUserUUID } from "../src/helpers/dbHelpers";
 import { themesLoader } from "../src/themesLoader";
-import { chunk, random, sample, shuffle } from "lodash-es";
 
 const USER_IP = "1.1.1.1";
 const themes = await themesLoader();
