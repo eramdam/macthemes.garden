@@ -85,6 +85,7 @@ async function getFromSession(
   session: NonNullable<AstroSharedContext["session"]>,
 ) {
   const existing = await session.get<SessionStored>(sessionKey);
+  console.log({ cacheHit: !!existing });
   if (existing) {
     return existing;
   }
