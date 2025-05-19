@@ -2,6 +2,7 @@
 import type { Page } from "astro";
 import { getEntries, type CollectionEntry } from "astro:content";
 import {
+  invertOrdersMap,
   makeKeyFromSortAndOrder,
   SortOptionsEnum,
   SortOrdersEnum,
@@ -36,7 +37,7 @@ const sortOptionsLabels: Record<SortOptions, string> = {
 };
 
 const sortMenuItems = [
-  { type: SortOptionsEnum.enum.likes, order: SortOrdersEnum.enum.asc },
+  { type: SortOptionsEnum.enum.likes, order: SortOrdersEnum.enum.desc },
   { type: SortOptionsEnum.enum.name, order: SortOrdersEnum.enum.asc },
   { type: SortOptionsEnum.enum.author, order: SortOrdersEnum.enum.asc },
 ];
@@ -93,10 +94,10 @@ const makeNewUrl = (sort: SortOptions, order: SortOrders) => {
                 <a
                   href={makeNewUrl(
                     item.type,
-                    currentSort === item.type &&
-                      currentOrder === SortOrdersEnum.enum.asc
-                      ? SortOrdersEnum.enum.desc
-                      : item.order
+                    (currentSort === item.type &&
+                      currentOrder &&
+                      invertOrdersMap[currentOrder]) ||
+                      item.order
                   )}
                 >
                   {sortOptionsLabels[item.type]}

@@ -79,7 +79,7 @@ export function sortThemes(
         case SortOptionsEnum.enum.name:
           return customSlugify(t.data.name).toLowerCase();
         case SortOptionsEnum.enum.likes:
-          return -t.likes;
+          return t.likes;
       }
     },
     sortOrder === SortOrdersEnum.enum.asc ? "asc" : "desc",
@@ -162,6 +162,11 @@ export function makeKeyFromSortAndOrder(
 ): SortOptionAndOrderSlug {
   return `${sortOptionToKey[sort]}-${order}`;
 }
+
+export const invertOrdersMap = {
+  [SortOrdersEnum.enum.desc]: SortOrdersEnum.enum.asc,
+  [SortOrdersEnum.enum.asc]: SortOrdersEnum.enum.desc,
+};
 
 export const possibleSortSlugs = SortOptionsEnum.options.flatMap((option) => {
   return SortOrdersEnum.options.flatMap((order) => {
