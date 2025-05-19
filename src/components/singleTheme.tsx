@@ -18,13 +18,13 @@ export function SingleTheme(props: SingleThemeProps) {
   const { theme, authors, likes } = props;
   const yearPart = theme.year && (
     <>
-      <img src="/assets/calendar.png" />
+      <img src="/assets/calendar-bw.png" />
       {theme.year}
     </>
   );
   const likesPart = (likes || 0) > 1 && (
     <>
-      <img src="/assets/heart.png" />
+      <img src="/assets/heart-bw.png" />
       {likes}
     </>
   );

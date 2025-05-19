@@ -118,13 +118,11 @@ footer p {
   line-height: 1;
   display: flex;
   gap: 1ch;
-  margin-top: 0.4em;
 }
 
 .themes-grid .single-theme-year img {
-  vertical-align: middle;
+  vertical-align: sub;
   margin-right: 0.4ch;
-  margin-top: -0.4em;
   width: 16px;
   height: 16px;
   display: inline-block;
