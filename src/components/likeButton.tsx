@@ -33,7 +33,10 @@ export function LikeButton(props: LikeButtonProps) {
         href="#"
         id="likeButton"
         data-themeid={props.themeId}
-        onClick={onClickLike}
+        onClick={(e) => {
+          e.preventDefault();
+          onClickLike();
+        }}
       >
         <img
           src="/assets/finder-smile.png"
