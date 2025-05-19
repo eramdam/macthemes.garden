@@ -110,7 +110,7 @@ const fileHosts = [
               <dt>Name:</dt>
               <dd>{theme.name}</dd>
 
-              <dt>Author(s):</dt>
+              <dt>{authors.length > 1 ? "Authors" : "Author"}:</dt>
               <dd>
                 <AuthorsFormatter asLinks authors={authors} />
               </dd>
@@ -138,11 +138,11 @@ const fileHosts = [
               </dd>
 
               <dt>Archive file:</dt>
-              <dd>
+              <dd style={"font-family: monospace;"}>
                 {theme.archiveFile}{" "}
                 {archiveFileSize(theme.archiveFile)}
               </dd>
-              <dd>
+              <dd style={"font-family: monospace;"}>
                 MD5
                 <a
                   href={`https://files.macthemes.garden/${theme.archiveFile}.md5`}
@@ -151,7 +151,7 @@ const fileHosts = [
                 >
               </dd>
               <dt>Download links:</dt>
-              <dd>
+              <dd style={"font-family: monospace;"}>
                 <ul>
                   {
                     fileHosts.map((fileHost, index) => {
