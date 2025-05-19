@@ -17,6 +17,10 @@ export default defineConfig({
       : {}),
   },
 
+  prefetch: {
+    defaultStrategy: "hover",
+  },
+
   site: isDev ? "http://localhost:4321" : "https://macthemes.garden",
 
   devToolbar: {

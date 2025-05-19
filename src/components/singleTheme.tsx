@@ -30,7 +30,7 @@ export function SingleTheme(props: SingleThemeProps) {
   );
   return (
     <div class="single-theme">
-      <a href={`/themes/${theme.urlBase}`}>
+      <a href={`/themes/${theme.urlBase}`} data-astro-prefetch>
         <img
           loading="lazy"
           decoding="async"

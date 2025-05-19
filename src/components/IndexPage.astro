@@ -70,6 +70,15 @@ const makeNewUrl = (sort: SortOptions, order: SortOrders) => {
     text-align: left;
   }
 </style>
+<script>
+  import { prefetch } from "astro:prefetch";
+
+  document.querySelectorAll(".themes-sort a, a[rel=next]").forEach((a) => {
+    if (a instanceof HTMLAnchorElement) {
+      prefetch(a.href);
+    }
+  });
+</script>
 <BaseLayout title={undefined}>
   <OS9Window asElement="main" title="Index">
     <PaginationBar slot="before-content" pagination={page} />
