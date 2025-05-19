@@ -46,8 +46,8 @@ export function SingleTheme(props: SingleThemeProps) {
         <AuthorsFormatter authors={authors} />
       </div>
       <div className="single-theme-year">
-        <span>{likesPart || null}</span>
         <span>{yearPart || null}</span>
+        <span>{likesPart || null}</span>
       </div>
       {isDev && (
         <div>
