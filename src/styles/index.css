@@ -93,16 +93,15 @@ footer p {
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   justify-content: center;
   grid-auto-rows: auto;
-  gap: 20px;
+  gap: 30px;
   row-gap: 30px;
-  padding: 30px 20px;
+  padding: 30px 24px;
 }
 
 .themes-grid .single-theme {
   display: grid;
   grid-template-rows: repeat(3, auto);
-  gap: 2px;
-  text-align: center;
+  text-align: left;
   text-decoration-style: dotted;
 }
 
@@ -113,9 +112,14 @@ footer p {
 .themes-grid .single-theme-authors {
   font-size: 0.8125rem;
 }
-.themes-grid .single-theme-year,
-.themes-grid .single-theme-likes {
-  font-size: 0.625rem;
+.themes-grid .single-theme-year {
+  font-size: 0.7rem;
+  display: flex;
+  gap: 1ch;
+}
+
+.themes-grid .single-theme-year > span:empty {
+  display: none;
 }
 
 .themes-grid .single-theme img {
@@ -123,7 +127,7 @@ footer p {
   object-position: center;
   width: 100%;
   height: 100%;
-  max-height: 160px;
+  max-height: 200px;
   aspect-ratio: 1;
   margin-bottom: 10px;
 }

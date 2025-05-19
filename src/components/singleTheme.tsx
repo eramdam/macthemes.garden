@@ -16,6 +16,8 @@ interface SingleThemeProps {
 
 export function SingleTheme(props: SingleThemeProps) {
   const { theme, authors, likes } = props;
+  const yearPart = theme.year && `📅 ${theme.year}`;
+  const likesPart = (likes || 0) > 1 && `❤️ ${likes}`;
   return (
     <div class="single-theme">
       <a href={`/themes/${theme.urlBase}`}>
@@ -32,10 +34,10 @@ export function SingleTheme(props: SingleThemeProps) {
       <div class="single-theme-authors">
         <AuthorsFormatter authors={authors} />
       </div>
-      <div class="single-theme-year">{theme.year || "-"}</div>
-      {(likes || 0) > 1 && (
-        <div class="single-theme-year">{likes?.toLocaleString("en")} likes</div>
-      )}
+      <div className="single-theme-year">
+        <span>{likesPart || null}</span>
+        <span>{yearPart || null}</span>
+      </div>
       {isDev && (
         <div>
           Airtable only:
