@@ -35,6 +35,16 @@ export function LikeButton(props: LikeButtonProps) {
         data-themeid={props.themeId}
         onClick={onClickLike}
       >
+        <img
+          src="/assets/finder-smile.png"
+          style={{
+            width: 16,
+            height: 16,
+            display: "inline-block",
+            verticalAlign: "sub",
+            marginRight: 4,
+          }}
+        />
         {hasLiked ? "Liked" : "Like"}
       </a>
     </Fragment>

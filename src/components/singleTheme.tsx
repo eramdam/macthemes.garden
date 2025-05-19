@@ -24,7 +24,7 @@ export function SingleTheme(props: SingleThemeProps) {
   );
   const likesPart = (likes || 0) > 1 && (
     <>
-      <img src="/assets/heart-bw.png" />
+      <img src="/assets/finder-smile.png" />
       {likes}
     </>
   );

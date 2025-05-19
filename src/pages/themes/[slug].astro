@@ -127,14 +127,14 @@ const fileHosts = [
                 )
               }
 
-              <dt>Social:</dt>
+              <dt>Rating:</dt>
+              <dd>
+                {likesCount} likes
+              </dd>
               <dd>
                 <ServerLikeButton server:defer themeId={themeId}>
                   Like
                 </ServerLikeButton>
-
-                <br />
-                {isDev ? `\nlikes: ${likesCount}` : null}
               </dd>
 
               <dt>Archive file:</dt>
