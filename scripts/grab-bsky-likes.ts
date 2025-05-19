@@ -70,7 +70,9 @@ for (const recordsChunk of chunk(records, 25)) {
 
       if (themeIdForPost) {
         likesByThemeIds[themeIdForPost] =
-          (post.likeCount || 0) + (post.repostCount || 0);
+          (likesByThemeIds[themeIdForPost] || 0) +
+          (post.likeCount || 0) +
+          (post.repostCount || 0);
       }
     });
   }
@@ -78,10 +80,13 @@ for (const recordsChunk of chunk(records, 25)) {
 
 await fs.writeFile(
   new URL(import.meta.resolve("../src/themes/likes-bsky.json")).pathname,
-  JSON.stringify({
-    likes: likesByThemeIds,
-    date: new Date().toISOString(),
-  }),
+  JSON.stringify(
+    {
+      likes: likesByThemeIds,
+    },
+    null,
+    2,
+  ),
   "utf-8",
 );
 

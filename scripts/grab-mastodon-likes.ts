@@ -36,15 +36,21 @@ const likesByThemeIds = statsObject
     }
     return {
       ...prev,
-      [curr?.themeId]: (curr.favourites_count || 0) + (curr.reblogs_count || 0),
+      [curr?.themeId]:
+        (prev[curr.themeId] || 0) +
+        (curr.favourites_count || 0) +
+        (curr.reblogs_count || 0),
     };
   }, {});
 
 await fs.writeFile(
   new URL(import.meta.resolve("../src/themes/likes-mastodon.json")).pathname,
-  JSON.stringify({
-    likes: likesByThemeIds,
-    date: new Date().toISOString(),
-  }),
+  JSON.stringify(
+    {
+      likes: likesByThemeIds,
+    },
+    null,
+    2,
+  ),
   "utf-8",
 );
