@@ -16,14 +16,25 @@ interface SingleThemeProps {
 
 export function SingleTheme(props: SingleThemeProps) {
   const { theme, authors, likes } = props;
-  const yearPart = theme.year && `📅 ${theme.year}`;
-  const likesPart = (likes || 0) > 1 && `❤️ ${likes}`;
+  const yearPart = theme.year && (
+    <>
+      <img src="/assets/calendar.png" />
+      {theme.year}
+    </>
+  );
+  const likesPart = (likes || 0) > 1 && (
+    <>
+      <img src="/assets/heart.png" />
+      {likes}
+    </>
+  );
   return (
     <div class="single-theme">
       <a href={`/themes/${theme.urlBase}`}>
         <img
           loading="lazy"
           decoding="async"
+          class="single-theme-image"
           src={`${theme.mainThumbnail}`}
           alt=""
         />
