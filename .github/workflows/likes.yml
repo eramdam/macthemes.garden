@@ -1,0 +1,28 @@
+name: Grab likes from Mastodon and Bluesky
+on:
+  schedule:
+    # Every day at 2am
+    - cron: "0 2 * * *"
+jobs:
+  pull-likes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup env
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+      - run: npm ci
+      - name: "Pull data from Mastodon"
+        run: npm run data:mastodon
+      - name: "Pull data from Bluesky"
+        env:
+          BLUESKY_USERNAME: ${{ secrets.BLUESKY_USERNAME }}
+          BLUESKY_PASSWORD: ${{ secrets.BLUESKY_PASSWORD }}
+        run: touch .env && npm run data:bluesky && rm .env
+      - uses: EndBug/add-and-commit@v9
+        with:
+          author_name: 🤖 Damien's Robot
+          author_email: damien+bot@erambert.me
+          message: Update likes data

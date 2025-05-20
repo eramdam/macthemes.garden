@@ -2,6 +2,7 @@
 import type { Page } from "astro";
 import { getEntries, type CollectionEntry } from "astro:content";
 import {
+  invertOrdersMap,
   makeKeyFromSortAndOrder,
   SortOptionsEnum,
   SortOrdersEnum,
@@ -16,7 +17,7 @@ import { SingleTheme } from "./singleTheme";
 
 interface Props {
   page: Pick<
-    Page<CollectionEntry<"themes">>,
+    Page<CollectionEntry<"themes"> & { likes: number }>,
     "url" | "lastPage" | "currentPage" | "data"
   >;
   sort?: SortOptions;
@@ -29,12 +30,14 @@ const currentSort = Astro.props.sort;
 const currentOrder = Astro.props.order;
 
 const sortOptionsLabels: Record<SortOptions, string> = {
+  [SortOptionsEnum.enum.likes]: "Likes",
   [SortOptionsEnum.enum.author]: "Author",
-  [SortOptionsEnum.enum.created]: "Date",
+  [SortOptionsEnum.enum.created]: "Updated",
   [SortOptionsEnum.enum.name]: "Name",
 };
 
 const sortMenuItems = [
+  { type: SortOptionsEnum.enum.likes, order: SortOrdersEnum.enum.desc },
   { type: SortOptionsEnum.enum.name, order: SortOrdersEnum.enum.asc },
   { type: SortOptionsEnum.enum.author, order: SortOrdersEnum.enum.asc },
 ];
@@ -67,6 +70,15 @@ const makeNewUrl = (sort: SortOptions, order: SortOrders) => {
     text-align: left;
   }
 </style>
+<script>
+  import { prefetch } from "astro:prefetch";
+
+  document.querySelectorAll(".themes-sort a, a[rel=next]").forEach((a) => {
+    if (a instanceof HTMLAnchorElement) {
+      prefetch(a.href);
+    }
+  });
+</script>
 <BaseLayout title={undefined}>
   <OS9Window asElement="main" title="Index">
     <PaginationBar slot="before-content" pagination={page} />
@@ -91,10 +103,10 @@ const makeNewUrl = (sort: SortOptions, order: SortOrders) => {
                 <a
                   href={makeNewUrl(
                     item.type,
-                    currentSort === item.type &&
-                      currentOrder === SortOrdersEnum.enum.asc
-                      ? SortOrdersEnum.enum.desc
-                      : SortOrdersEnum.enum.asc
+                    (currentSort === item.type &&
+                      currentOrder &&
+                      invertOrdersMap[currentOrder]) ||
+                      item.order
                   )}
                 >
                   {sortOptionsLabels[item.type]}
@@ -123,14 +135,18 @@ const makeNewUrl = (sort: SortOptions, order: SortOrders) => {
     </div>
     <div class="themes-grid">
       {
-        page.data
-          .map((t) => t.data)
-          .map(async (theme) => {
-            const authors = (await getEntries(theme.authors)).map(
-              (a) => a.data
-            );
-            return <SingleTheme theme={theme} authors={authors} />;
-          })
+        page.data.map(async (theme) => {
+          const authors = (await getEntries(theme.data.authors)).map(
+            (a) => a.data
+          );
+          return (
+            <SingleTheme
+              likes={theme.likes}
+              theme={theme.data}
+              authors={authors}
+            />
+          );
+        })
       }
     </div>
     <PaginationBar slot="after-content" pagination={page} />

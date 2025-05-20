@@ -1,5 +1,6 @@
 import { getCollection, getEntries } from "astro:content";
 
+export const prerender = true;
 export async function GET() {
   const themes = await getCollection("themes");
   const themesWithAuthorsPromise = themes.map(async (t) => {

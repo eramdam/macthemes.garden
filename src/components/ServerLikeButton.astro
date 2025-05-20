@@ -1,0 +1,21 @@
+---
+import {
+  generateUserUUID,
+  getLikeForUserIdAndTheme,
+} from "../helpers/dbHelpers";
+import { LikeButton } from "./likeButton";
+
+interface Props {
+  themeId: string;
+}
+
+const userId = generateUserUUID(Astro.clientAddress);
+const likedByUser =
+  (await getLikeForUserIdAndTheme(userId, Astro.props.themeId)).length > 0;
+---
+
+<LikeButton
+  initialLike={likedByUser}
+  themeId={Astro.props.themeId}
+  client:load
+/>

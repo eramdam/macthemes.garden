@@ -1,23 +1,23 @@
 ---
-import type { GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
 import IndexPage from "../../components/IndexPage.astro";
-import { PAGINATION, slugFromSortAndOrder, sortThemes } from "../../helpers";
-import { possibleSortSlugs } from "../../helpers";
-export const getStaticPaths = (async ({ paginate }) => {
-  const themes = await getCollection("themes");
+import { PAGINATION, slugFromSortAndOrder } from "../../helpers";
+import { getLikeCountsByThemeIds } from "../../helpers/dbHelpers";
 
-  return possibleSortSlugs.flatMap((slug) => {
-    const { order, sort } = slugFromSortAndOrder(slug);
-    return paginate(sortThemes(themes, sort, order), {
-      pageSize: PAGINATION.size,
-      params: { sort: slug },
-    });
+const pageNumber = Astro.params.page;
+// @ts-expect-error
+const { sort, order } = slugFromSortAndOrder(Astro.params.sort || "d-desc");
+
+let themes = await getCollection("themes");
+
+if (sort === "likes") {
+  const likesCountByID = await getLikeCountsByThemeIds();
+  themes = themes.map((t) => {
+    return { ...t, likes: likesCountByID[t.id] || 0 };
   });
-}) satisfies GetStaticPaths;
+}
 
-const { page } = Astro.props;
-const { order, sort } = slugFromSortAndOrder(Astro.params.sort);
+const page = PAGINATION.getPage(themes as any, Number(pageNumber), sort, order);
 ---
 
 <IndexPage page={page} order={order} sort={sort} />

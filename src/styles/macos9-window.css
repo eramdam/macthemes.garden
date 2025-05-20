@@ -101,6 +101,10 @@
   height: 100%;
   display: inline-block;
   font-size: 0.75rem;
+  max-width: 80%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .macos9-window-titlebar > button {

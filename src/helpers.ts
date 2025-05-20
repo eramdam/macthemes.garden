@@ -49,12 +49,16 @@ export function archiveMd5(value: string) {
 
 const pageSize = 51;
 type GetPageReturn = Pick<
-  Page<CollectionEntry<"themes">>,
+  Page<CollectionEntry<"themes"> & { likes: number }>,
   "url" | "lastPage" | "currentPage" | "data"
 >;
 
 export function sortThemes(
-  collection: Array<CollectionEntry<"themes">>,
+  collection: Array<
+    CollectionEntry<"themes"> & {
+      likes: number;
+    }
+  >,
   sortOption: SortOptions = SortOptionsEnum.enum.created,
   sortOrder: SortOrders = SortOrdersEnum.enum.asc,
 ) {
@@ -74,6 +78,8 @@ export function sortThemes(
             .toLowerCase();
         case SortOptionsEnum.enum.name:
           return customSlugify(t.data.name).toLowerCase();
+        case SortOptionsEnum.enum.likes:
+          return t.likes;
       }
     },
     sortOrder === SortOrdersEnum.enum.asc ? "asc" : "desc",
@@ -83,7 +89,7 @@ export function sortThemes(
 export const PAGINATION = {
   size: pageSize,
   getPage: (
-    collection: Array<CollectionEntry<"themes">>,
+    collection: Array<CollectionEntry<"themes"> & { likes: number }>,
     pageNumber: number,
     sortOption: SortOptions = SortOptionsEnum.enum.created,
     sortOrder: SortOrders = SortOrdersEnum.enum.asc,
@@ -112,7 +118,7 @@ export const PAGINATION = {
   },
 };
 
-const SortOptionValues = ["created", "name", "author"] as const;
+const SortOptionValues = ["created", "name", "author", "likes"] as const;
 export const SortOptionsEnum = z.enum(SortOptionValues);
 export type SortOptions = z.infer<typeof SortOptionsEnum>;
 
@@ -124,11 +130,13 @@ const sortOptionToKey = {
   [SortOptionsEnum.enum.author]: "a",
   [SortOptionsEnum.enum.created]: "d",
   [SortOptionsEnum.enum.name]: "n",
+  [SortOptionsEnum.enum.likes]: "l",
 } as const;
 const keyToSortOption = {
   d: SortOptionsEnum.enum.created,
   a: SortOptionsEnum.enum.author,
   n: SortOptionsEnum.enum.name,
+  l: SortOptionsEnum.enum.likes,
 } as const;
 
 type SortOptionAndOrderSlug =
@@ -154,6 +162,11 @@ export function makeKeyFromSortAndOrder(
 ): SortOptionAndOrderSlug {
   return `${sortOptionToKey[sort]}-${order}`;
 }
+
+export const invertOrdersMap = {
+  [SortOrdersEnum.enum.desc]: SortOrdersEnum.enum.asc,
+  [SortOrdersEnum.enum.asc]: SortOrdersEnum.enum.desc,
+};
 
 export const possibleSortSlugs = SortOptionsEnum.options.flatMap((option) => {
   return SortOrdersEnum.options.flatMap((order) => {
