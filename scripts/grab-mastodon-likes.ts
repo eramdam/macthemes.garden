@@ -4,11 +4,11 @@ import fs from "fs-extra";
 const stats = await fetch(
   "https://social.erambert.me/macthemes-posts-stats.json",
 );
-const statsObject = (await stats.json()) as {
+const statsObject: {
   text: string;
   reblogs_count: number;
   favourites_count: number;
-}[];
+}[] = await stats.json();
 
 const urlRegex = new RegExp("https://macthemes.garden/themes/[a-z0-9]+", "i");
 const likesByThemeIds = statsObject
