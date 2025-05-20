@@ -1,14 +1,12 @@
 import TTLCache from "@isaacs/ttlcache";
 import { and, count, db, eq, Like, Theme, UserRequest } from "astro:db";
 import { getSecret } from "astro:env/server";
-import { millisecondsInHour, millisecondsInSecond } from "date-fns/constants";
+import { millisecondsInMinute } from "date-fns/constants";
 import { chunk, compact, flatten, uniq } from "lodash-es";
 import { v5 } from "uuid";
 
 const sessionKey = "likesById";
-const sessionTTL = import.meta.env.DEV
-  ? millisecondsInSecond * 20
-  : millisecondsInHour * 6;
+const sessionTTL = millisecondsInMinute * 20;
 type SessionStored = Awaited<ReturnType<typeof _getLikeCountsByThemeIds>>;
 
 const cache = new TTLCache({ max: 10, ttl: sessionTTL });
