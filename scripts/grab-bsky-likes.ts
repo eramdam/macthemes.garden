@@ -26,6 +26,7 @@ if (!ok) {
   process.exit(1);
 }
 
+const urlRegex = new RegExp("https://macthemes.garden/themes/([a-z0-9]+)", "i");
 const records: { rkey: string; themeId: string }[] = [];
 // convenient iterator for reading through an AT Protocol CAR repository
 for (const { collection, rkey, record } of iterateAtpRepo(data)) {
@@ -39,13 +40,10 @@ for (const { collection, rkey, record } of iterateAtpRepo(data)) {
           "https://macthemes.garden/themes/",
         )
       ) {
-        const themeId = new URL(
-          (record as any).facets?.[0].features?.[0].uri,
-        ).pathname
-          .split("/")
-          .pop()
-          ?.split("-")
-          .shift();
+        const [, themeId] =
+          String((record as any).facets?.[0].features?.[0].uri).match(
+            urlRegex,
+          ) || [];
         if (themeId) {
           records.push({ themeId, rkey });
         }

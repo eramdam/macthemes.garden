@@ -10,20 +10,11 @@ const statsObject: {
   favourites_count: number;
 }[] = await stats.json();
 
-const urlRegex = new RegExp("https://macthemes.garden/themes/[a-z0-9]+", "i");
+const urlRegex = new RegExp("https://macthemes.garden/themes/([a-z0-9]+)", "i");
 const likesByThemeIds = statsObject
   .map((obj) => {
-    const urlInText = obj.text.match(urlRegex);
-    if (!urlInText?.[0]) {
-      return undefined;
-    }
+    const [, themeId] = obj.text.match(urlRegex) || [];
 
-    const urlMatch = urlInText[0];
-    const themeId = new URL(urlMatch).pathname
-      .split("/")
-      .pop()
-      ?.split("-")
-      .shift();
     if (!themeId) {
       return undefined;
     }
