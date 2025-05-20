@@ -37,7 +37,6 @@ export function SingleTheme(props: SingleThemeProps) {
           class="single-theme-image"
           src={`${theme.mainThumbnail}`}
           alt=""
-          data-astro-prefetch="false"
         />
       </a>
       <a href={`/themes/${theme.urlBase}`}>
