@@ -8,7 +8,10 @@ import {
 import OS9Window from "../../components/OS9Window.astro";
 import ServerLikeButton from "../../components/ServerLikeButton.astro";
 import { archiveFileSize, archiveMd5 } from "../../helpers";
-import { getLikeCountsByThemeIds } from "../../helpers/dbHelpers";
+import {
+  generateUserUUID,
+  getLikesCountForThemeId,
+} from "../../helpers/dbHelpers";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 const themes = await getCollection("themes");
@@ -23,10 +26,10 @@ Astro.response.headers.set(
   "public, max-age=10, must-revalidate"
 );
 
-const likesCountByID = await getLikeCountsByThemeIds();
 const theme = themeMatch.data;
 const themeId = themeMatch.id;
-const likesCount = likesCountByID[themeId] || 0;
+const likesCount = await getLikesCountForThemeId(themeId);
+console.log(likesCount);
 const isDev =
   import.meta.env.DEV && import.meta.env.PUBLIC_SHOW_DEBUG === "true";
 const relatedThemes = await getEntries(theme.relatedThemes);
@@ -129,7 +132,7 @@ const fileHosts = [
 
               <dt>Rating:</dt>
               <dd>
-                {likesCount} likes
+                <span data-likes-count>{likesCount}</span> likes
               </dd>
               <dd>
                 <ServerLikeButton server:defer themeId={themeId}>

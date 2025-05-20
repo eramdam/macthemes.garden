@@ -6,13 +6,12 @@ import { v4 } from "uuid";
 import {
   generateUserUUID,
   getLikeForUserIdAndTheme,
-  getLikesForTheme,
+  getLikesCountForThemeId,
 } from "../helpers/dbHelpers";
 import { canUserIdMakeRequest } from "../helpers/rateLimitHelpers";
 
 const themes = await themesLoader();
 const possibleIds = new Set(themes.map((t) => t.id));
-const isDev = import.meta.env.DEV;
 
 export const server = {
   toggleLike: defineAction({
@@ -67,9 +66,9 @@ export const server = {
         liked = false;
       }
 
-      const likes = await getLikesForTheme(input.themeId);
+      const likes = await getLikesCountForThemeId(input.themeId);
 
-      return { liked, likes: isDev ? likes.length : 0 };
+      return { liked, likes: likes };
     },
   }),
 };

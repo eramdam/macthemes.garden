@@ -11,10 +11,6 @@ type SessionStored = Awaited<ReturnType<typeof _getLikeCountsByThemeIds>>;
 
 const cache = new TTLCache({ max: 10, ttl: sessionTTL });
 
-export async function getLikesForTheme(id: string) {
-  return db.select().from(Like).where(eq(Like.themeId, id));
-}
-
 export async function getLikeForUserIdAndTheme(
   userId: string,
   themeId: string,
@@ -52,7 +48,7 @@ export async function recordLastRequestFromUserId(userId: string) {
     .values();
 }
 
-async function _getLikeCountsByThemeIds() {
+async function getCombinedLikes() {
   const mastodonLikes = await import("../../src/themes/likes-mastodon.json");
   const blueskyLikes = await import("../../src/themes/likes-bsky.json");
   const combinedLikes = compact(
@@ -71,9 +67,20 @@ async function _getLikeCountsByThemeIds() {
       },
     ),
   ) as [string, number][];
-  const likedThemesIds = (await db.select().from(Theme)).map((t) => t.id);
+
   let likesCountById: Record<string, number> = {};
 
+  combinedLikes.forEach((pair) => {
+    const [themeId, likes] = pair;
+    likesCountById[themeId] = likes;
+  });
+
+  return likesCountById;
+}
+
+async function _getLikeCountsByThemeIds() {
+  const likedThemesIds = (await db.select().from(Theme)).map((t) => t.id);
+  let likesCountById: Record<string, number> = {};
   for (const themeIdsChunk of chunk(likedThemesIds, 400)) {
     const transactions = themeIdsChunk.map((id) => {
       return db
@@ -93,12 +100,23 @@ async function _getLikeCountsByThemeIds() {
     });
   }
 
-  combinedLikes.forEach((pair) => {
-    const [themeId, likes] = pair;
-    likesCountById[themeId] = likes;
+  const remoteLikesById = await getCombinedLikes();
+
+  Object.entries(remoteLikesById).forEach(([id, likesCount]) => {
+    likesCountById[id] = (likesCountById[id] || 0) + likesCount;
   });
 
   return likesCountById;
+}
+
+export async function getLikesCountForThemeId(themeId: string) {
+  const likesFromRemote = (await getCombinedLikes())[themeId] || 0;
+  const values = await db
+    .select({ count: count() })
+    .from(Like)
+    .where(eq(Like.themeId, themeId));
+
+  return likesFromRemote + values[0].count;
 }
 
 async function getFromCache() {

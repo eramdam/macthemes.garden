@@ -24,6 +24,10 @@ export function LikeButton(props: LikeButtonProps) {
       }
 
       setHasLiked(Boolean(data.liked));
+      const likesCountElement = document.querySelector("[data-likes-count]");
+      if (likesCountElement) {
+        likesCountElement.textContent = data.likes.toString();
+      }
     } catch (e) {}
   }, []);
 
