@@ -3,6 +3,7 @@ import OS9Window, { WindowButtons } from "../components/OS9Window.astro";
 import { getCollectionStats } from "../content.config";
 import { TZDate } from "@date-fns/tz";
 import "../styles/index.css";
+import { ClientRouter } from "astro:transitions";
 
 interface Props {
   title: string | undefined;
@@ -31,8 +32,9 @@ const footerDate = new TZDate(
 });
 ---
 
-<html lang="en">
+<html lang="en" transition:animate="none">
   <head>
+    <ClientRouter />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
