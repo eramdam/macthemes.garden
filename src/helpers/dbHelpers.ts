@@ -114,9 +114,4 @@ async function getFromCache() {
   return newValue;
 }
 
-export const getLikeCountsByThemeIds = async () => {
-  console.time("getLikeCountsByThemeIds cache");
-  const result = await getFromCache();
-  console.timeEnd("getLikeCountsByThemeIds cache");
-  return result;
-};
+export const getLikeCountsByThemeIds = _getLikeCountsByThemeIds;
