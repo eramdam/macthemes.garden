@@ -257,6 +257,7 @@ function makeAuthorsFromAuthorsString(authors: string): string[] {
   return uniq(
     (authors || "")
       .split(/(?:\sand\s|,|&)/i)
+      .map((a) => a.trim())
       .filter((a) => !!a)
       .map((a) => findCorrectedName(a)),
   );
