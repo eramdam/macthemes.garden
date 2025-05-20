@@ -30,13 +30,14 @@ export function SingleTheme(props: SingleThemeProps) {
   );
   return (
     <div class="single-theme">
-      <a href={`/themes/${theme.urlBase}`} data-astro-prefetch>
+      <a href={`/themes/${theme.urlBase}`}>
         <img
           loading="lazy"
           decoding="async"
           class="single-theme-image"
           src={`${theme.mainThumbnail}`}
           alt=""
+          data-astro-prefetch="false"
         />
       </a>
       <a href={`/themes/${theme.urlBase}`}>
