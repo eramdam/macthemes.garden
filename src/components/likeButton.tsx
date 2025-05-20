@@ -1,4 +1,5 @@
 import { actions } from "astro:actions";
+import { isNumber } from "lodash-es";
 import { useCallback, useState } from "preact/hooks";
 import { Fragment } from "preact/jsx-runtime";
 
@@ -24,6 +25,15 @@ export function LikeButton(props: LikeButtonProps) {
       }
 
       setHasLiked(Boolean(data.liked));
+      const offset = data.liked ? 1 : -1;
+      const countElement =
+        document.querySelector<HTMLSpanElement>("[data-like-count]");
+      const currentCount = parseInt(countElement?.textContent || "", 10);
+
+      if (isNumber(currentCount) && countElement) {
+        const newCount = currentCount + offset;
+        countElement.textContent = newCount.toString();
+      }
     } catch (e) {}
   }, []);
 
