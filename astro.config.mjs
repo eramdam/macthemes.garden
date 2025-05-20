@@ -27,9 +27,11 @@ export default defineConfig({
     enabled: false,
   },
 
-  output: "static",
+  output: "server",
 
   integrations: [preact(), db()],
 
-  adapter: netlify(),
+  adapter: netlify({
+    cacheOnDemandPages: true,
+  }),
 });

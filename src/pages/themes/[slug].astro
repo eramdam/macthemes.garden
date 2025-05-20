@@ -10,23 +10,22 @@ import ServerLikeButton from "../../components/ServerLikeButton.astro";
 import { archiveFileSize, archiveMd5 } from "../../helpers";
 import { getLikeCountsByThemeIds } from "../../helpers/dbHelpers";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import type { GetStaticPaths } from "astro";
 
-export const getStaticPaths = (async () => {
-  const themes = await getCollection("themes");
-  return themes.map((t) => {
-    return {
-      props: { theme: t },
-      params: {
-        slug: t.data.urlBase,
-      },
-    };
-  });
-}) satisfies GetStaticPaths;
+const themes = await getCollection("themes");
+const themeMatch = themes.find((t) => t.data.urlBase === Astro.params.slug);
+
+if (!themeMatch) {
+  return Astro.redirect("/404");
+}
+
+Astro.response.headers.set(
+  "CDN-Cache-Control",
+  "public, max-age=10, must-revalidate"
+);
 
 const likesCountByID = await getLikeCountsByThemeIds();
-const theme = Astro.props.theme.data;
-const themeId = Astro.props.theme.id;
+const theme = themeMatch.data;
+const themeId = themeMatch.id;
 const likesCount = likesCountByID[themeId] || 0;
 const isDev =
   import.meta.env.DEV && import.meta.env.PUBLIC_SHOW_DEBUG === "true";
@@ -130,7 +129,7 @@ const fileHosts = [
 
               <dt>Rating:</dt>
               <dd>
-                <span data-like-count>{likesCount}</span> likes
+                {likesCount} likes
               </dd>
               <dd>
                 <ServerLikeButton server:defer themeId={themeId}>

@@ -1,7 +1,17 @@
+import TTLCache from "@isaacs/ttlcache";
 import { and, count, db, eq, Like, Theme, UserRequest } from "astro:db";
 import { getSecret } from "astro:env/server";
-import { chunk, compact, flatten, memoize, uniq } from "lodash-es";
+import { millisecondsInHour, millisecondsInSecond } from "date-fns/constants";
+import { chunk, compact, flatten, uniq } from "lodash-es";
 import { v5 } from "uuid";
+
+const sessionKey = "likesById";
+const sessionTTL = import.meta.env.DEV
+  ? millisecondsInSecond * 20
+  : millisecondsInHour * 6;
+type SessionStored = Awaited<ReturnType<typeof _getLikeCountsByThemeIds>>;
+
+const cache = new TTLCache({ max: 10, ttl: sessionTTL });
 
 export async function getLikesForTheme(id: string) {
   return db.select().from(Like).where(eq(Like.themeId, id));
@@ -93,4 +103,22 @@ async function _getLikeCountsByThemeIds() {
   return likesCountById;
 }
 
-export const getLikeCountsByThemeIds = memoize(_getLikeCountsByThemeIds);
+async function getFromCache() {
+  const existing = cache.get<SessionStored>(sessionKey);
+  console.log({ cacheHit: !!existing });
+  if (existing) {
+    return existing;
+  }
+
+  const newValue = await _getLikeCountsByThemeIds();
+  cache.set(sessionKey, newValue);
+
+  return newValue;
+}
+
+export const getLikeCountsByThemeIds = async () => {
+  console.time("getLikeCountsByThemeIds cache");
+  const result = await getFromCache();
+  console.timeEnd("getLikeCountsByThemeIds cache");
+  return result;
+};
