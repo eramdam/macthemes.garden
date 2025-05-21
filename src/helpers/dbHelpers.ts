@@ -106,11 +106,15 @@ async function _getLikeCountsByThemeIds() {
   return likesCountById;
 }
 
+const likesPerIdCache = new ExpiryMap(millisecondsInMinute * 3);
+export function clearLikesPerIdCache() {
+  likesPerIdCache.clear();
+}
+
 export async function getLikesCountForThemeId(themeId: string) {
   return (await getLikeCountsByThemeIds())[themeId] || 0;
 }
 
-const cache = new ExpiryMap(millisecondsInMinute * 3);
 export const getLikeCountsByThemeIds = pMemoize(_getLikeCountsByThemeIds, {
-  cache,
+  cache: likesPerIdCache,
 });

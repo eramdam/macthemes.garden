@@ -4,6 +4,7 @@ import { z } from "astro:content";
 import { and, db, eq, Like, Theme } from "astro:db";
 import { v4 } from "uuid";
 import {
+  clearLikesPerIdCache,
   generateUserUUID,
   getLikeForUserIdAndTheme,
   getLikesCountForThemeId,
@@ -65,6 +66,8 @@ export const server = {
           .where(and(eq(Like.themeId, input.themeId), eq(Like.userId, userId)));
         liked = false;
       }
+
+      clearLikesPerIdCache();
 
       const likes = await getLikesCountForThemeId(input.themeId);
 
