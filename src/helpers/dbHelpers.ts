@@ -40,6 +40,7 @@ export async function removelikeForThemeFromUserId(
 }
 
 async function uploadLikesCountTable() {
+  console.time("uploadLikesCountTable");
   const likedThemes = await db.select().from(Like);
   const countsById = mapValues(
     groupBy(likedThemes, (l) => l.themeId),
@@ -60,6 +61,7 @@ async function uploadLikesCountTable() {
 
   // @ts-expect-error
   await db.batch(transactions);
+  console.timeEnd("uploadLikesCountTable");
 }
 
 export function generateUserUUID(ip: string) {
@@ -120,6 +122,7 @@ async function getCombinedLikesFromSocials() {
 export async function getLikeCountsByThemeIds(): Promise<
   Record<string, number>
 > {
+  console.time("getLikeCountsByThemeIds");
   const likesCount = await db.select().from(LikesCount);
   let likesCountById: Record<string, number> = {};
   const remoteLikesById = await getCombinedLikesFromSocials();
@@ -132,6 +135,7 @@ export async function getLikeCountsByThemeIds(): Promise<
     likesCountById[id] = (likesCountById[id] || 0) + likesCount;
   });
 
+  console.timeEnd("getLikeCountsByThemeIds");
   return likesCountById;
 }
 
