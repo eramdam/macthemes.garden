@@ -79,11 +79,13 @@ async function getCombinedLikes() {
 export async function getLikeCountsByThemeIds(
   session?: AstroSharedContext["session"],
 ): Promise<Record<string, number>> {
+  console.time("getLikeCountsByThemeIds");
   console.time("fromCache");
   const fromCache = await session?.get(dbCacheKey);
   console.timeEnd("fromCache");
   if (fromCache) {
     console.log("session cache hit");
+    console.timeEnd("getLikeCountsByThemeIds");
     return fromCache;
   }
 
@@ -128,6 +130,7 @@ export async function getLikeCountsByThemeIds(
   });
 
   session?.set(dbCacheKey, likesCountById);
+  console.timeEnd("getLikeCountsByThemeIds");
 
   return likesCountById;
 }
