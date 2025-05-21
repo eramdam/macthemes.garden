@@ -5,6 +5,7 @@ import { getCollection, getEntries } from "astro:content";
 import OS9Window from "../../components/OS9Window.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { SingleTheme } from "../../components/singleTheme";
+import { getLikesCountForThemeId } from "../../helpers/dbHelpers";
 
 export const getStaticPaths = (async () => {
   const authors = await getCollection("authors");
@@ -35,11 +36,20 @@ const themesByAuthor = await getEntries(author.data.themes);
         {
           themesByAuthor
             .map((t) => t.data)
-            .map(async (theme) => {
+            .map(async (theme, index) => {
               const authors = (await getEntries(theme.authors)).map(
                 (a) => a.data
               );
-              return <SingleTheme theme={theme} authors={authors} />;
+              const themeId = themesByAuthor[index].id;
+              const likesCount = await getLikesCountForThemeId(themeId);
+
+              return (
+                <SingleTheme
+                  likes={likesCount}
+                  theme={theme}
+                  authors={authors}
+                />
+              );
             })
         }
       </div>
