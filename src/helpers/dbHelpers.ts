@@ -1,7 +1,10 @@
 import { and, count, db, eq, Like, Theme, UserRequest } from "astro:db";
 import { getSecret } from "astro:env/server";
-import { chunk, compact, flatten, uniq } from "lodash-es";
+import { chunk, compact, flatten, memoize, uniq } from "lodash-es";
 import { v5 } from "uuid";
+import pMemoize from "p-memoize";
+import ExpiryMap from "expiry-map";
+import { millisecondsInMinute } from "date-fns/constants";
 
 export async function getLikeForUserIdAndTheme(
   userId: string,
@@ -72,6 +75,7 @@ async function getCombinedLikes() {
 }
 
 async function _getLikeCountsByThemeIds() {
+  console.log("getLikesCountForThemeId");
   const likedThemesIds = (await db.select().from(Theme)).map((t) => t.id);
   let likesCountById: Record<string, number> = {};
   for (const themeIdsChunk of chunk(likedThemesIds, 400)) {
@@ -103,13 +107,10 @@ async function _getLikeCountsByThemeIds() {
 }
 
 export async function getLikesCountForThemeId(themeId: string) {
-  const likesFromRemote = (await getCombinedLikes())[themeId] || 0;
-  const values = await db
-    .select({ count: count() })
-    .from(Like)
-    .where(eq(Like.themeId, themeId));
-
-  return likesFromRemote + values[0].count;
+  return (await getLikeCountsByThemeIds())[themeId] || 0;
 }
 
-export const getLikeCountsByThemeIds = _getLikeCountsByThemeIds;
+const cache = new ExpiryMap(millisecondsInMinute * 3);
+export const getLikeCountsByThemeIds = pMemoize(_getLikeCountsByThemeIds, {
+  cache,
+});
