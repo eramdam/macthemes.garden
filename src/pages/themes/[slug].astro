@@ -16,8 +16,12 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
 const themes = await getCollection("themes");
 const themeMatch = themes.find((t) => t.data.urlBase === Astro.params.slug);
+const themeIdMatch = themes.find((t) => t.id === Astro.params.slug);
 
 if (!themeMatch) {
+  if (themeIdMatch) {
+    return Astro.redirect(themeIdMatch.data.urlBase);
+  }
   return Astro.redirect("/404");
 }
 
