@@ -1,8 +1,9 @@
-name: Airtable update
+name: Airtable/Likes update
 on:
   schedule:
     # Runs every 4th hour at minute 0
     - cron: "0 */4 * * *"
+  workflow_dispatch:
 jobs:
   pull-airtable:
     runs-on: ubuntu-latest
@@ -21,8 +22,15 @@ jobs:
         run: touch .env && npm run data:airtable && rm .env
       - name: "Generate OpenGraph images"
         run: npm run data:opengraph
+      - name: "Pull likes from Mastodon"
+        run: npm run data:mastodon
+      - name: "Pull likes from Bluesky"
+        env:
+          BLUESKY_USERNAME: ${{ secrets.BLUESKY_USERNAME }}
+          BLUESKY_PASSWORD: ${{ secrets.BLUESKY_PASSWORD }}
+        run: touch .env && npm run data:bluesky && rm .env
       - uses: EndBug/add-and-commit@v9
         with:
           author_name: 🤖 Damien's Robot
           author_email: damien+bot@erambert.me
-          message: Update themes data + images
+          message: Update themes data + images + likes
