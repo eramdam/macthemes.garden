@@ -25,7 +25,7 @@ export function SingleTheme(props: SingleThemeProps) {
   const likesPart = (likes || 0) > 1 && (
     <>
       <img class="single-theme-icon" src="/assets/finder-smile.png" />
-      {likes}
+      {likes} {(likes || 0) > 1 ? "likes" : "like"}
     </>
   );
   return (
