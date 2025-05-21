@@ -52,20 +52,21 @@ async function getCombinedLikes() {
   const mastodonLikes = await import("../../src/themes/likes-mastodon.json");
   const blueskyLikes = await import("../../src/themes/likes-bsky.json");
   const combinedLikes = compact(
-    uniq([...Object.keys(mastodonLikes.likes), Object.keys(blueskyLikes)]).map(
-      (themeId) => {
-        // @ts-expect-error
-        const fromMasto = mastodonLikes.likes[themeId] ?? 0;
-        // @ts-expect-error
-        const fromBluesky = blueskyLikes.likes[themeId] ?? 0;
+    uniq([
+      ...Object.keys(mastodonLikes.likes),
+      ...Object.keys(blueskyLikes.likes),
+    ]).map((themeId) => {
+      // @ts-expect-error
+      const fromMasto = mastodonLikes.likes[themeId] ?? 0;
+      // @ts-expect-error
+      const fromBluesky = blueskyLikes.likes[themeId] ?? 0;
 
-        if (fromMasto + fromBluesky < 1) {
-          return undefined;
-        }
+      if (fromMasto + fromBluesky < 1) {
+        return undefined;
+      }
 
-        return [themeId, fromMasto + fromBluesky];
-      },
-    ),
+      return [themeId, fromMasto + fromBluesky];
+    }),
   ) as [string, number][];
 
   let likesCountById: Record<string, number> = {};
