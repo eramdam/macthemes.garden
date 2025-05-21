@@ -1,36 +1,27 @@
 ---
-export const prerender = true;
-import type { GetStaticPaths } from "astro";
 import { getCollection, getEntries } from "astro:content";
 import OS9Window from "../../components/OS9Window.astro";
-import BaseLayout from "../../layouts/BaseLayout.astro";
 import { SingleTheme } from "../../components/singleTheme";
-import { getLikesCountForThemeId } from "../../helpers/dbHelpers";
+import { getLikeCountsByThemeIds } from "../../helpers/dbHelpers";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 
-export const getStaticPaths = (async () => {
-  const authors = await getCollection("authors");
+const authorSlug = Astro.params.author;
+const authors = await getCollection("authors");
+const author = authors.find((a) => a.data.slug === authorSlug);
 
-  return authors.map((a) => {
-    return {
-      props: { author: a },
-      params: {
-        author: a.data.slug,
-      },
-    };
-  });
-}) satisfies GetStaticPaths;
-const { author } = Astro.props;
+if (!author) {
+  return Astro.redirect("/404");
+}
+
 const themesByAuthor = await getEntries(author.data.themes);
+const likesCountByThemeIds = await getLikeCountsByThemeIds();
 ---
 
-<BaseLayout title={`Themes by ${Astro.props.author.data.name}`}>
-  <OS9Window
-    asElement="main"
-    title={`Themes by ${Astro.props.author.data.name}`}
-  >
+<BaseLayout title={`Themes by ${author.data.name}`}>
+  <OS9Window asElement="main" title={`Themes by ${author.data.name}`}>
     <div class="single-author-page">
       <h1 class="single-theme-title">
-        Themes by {Astro.props.author.data.name}
+        Themes by {author.data.name}
       </h1>
       <div class="themes-grid">
         {
@@ -41,7 +32,7 @@ const themesByAuthor = await getEntries(author.data.themes);
                 (a) => a.data
               );
               const themeId = themesByAuthor[index].id;
-              const likesCount = await getLikesCountForThemeId(themeId);
+              const likesCount = likesCountByThemeIds[themeId];
 
               return (
                 <SingleTheme

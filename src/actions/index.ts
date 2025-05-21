@@ -1,15 +1,14 @@
 import { ActionError, defineAction } from "astro:actions";
-import { themesLoader } from "../themesLoader";
 import { z } from "astro:content";
 import { and, db, eq, Like, Theme } from "astro:db";
 import { v4 } from "uuid";
 import {
-  clearLikesPerIdCache,
   generateUserUUID,
-  getLikeForUserIdAndTheme,
   getLikesCountForThemeId,
+  getUserLikeStatusForTheme,
 } from "../helpers/dbHelpers";
 import { canUserIdMakeRequest } from "../helpers/rateLimitHelpers";
+import { themesLoader } from "../themesLoader";
 
 const themes = await themesLoader();
 const possibleIds = new Set(themes.map((t) => t.id));
@@ -48,12 +47,13 @@ export const server = {
         });
       }
 
-      const likesForUserAndTheme = await getLikeForUserIdAndTheme(
+      const didUserLikeThisTheme = await getUserLikeStatusForTheme(
         userId,
         input.themeId,
       );
+
       let liked = false;
-      if (likesForUserAndTheme.length < 1) {
+      if (!didUserLikeThisTheme) {
         await db.insert(Like).values({
           id: v4(),
           themeId: input.themeId,
@@ -66,8 +66,6 @@ export const server = {
           .where(and(eq(Like.themeId, input.themeId), eq(Like.userId, userId)));
         liked = false;
       }
-
-      clearLikesPerIdCache();
 
       const likes = await getLikesCountForThemeId(input.themeId);
 

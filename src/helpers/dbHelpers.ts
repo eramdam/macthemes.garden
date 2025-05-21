@@ -1,19 +1,20 @@
 import { and, count, db, eq, Like, Theme, UserRequest } from "astro:db";
 import { getSecret } from "astro:env/server";
-import { chunk, compact, flatten, memoize, uniq } from "lodash-es";
+import { chunk, compact, uniq } from "lodash-es";
 import { v5 } from "uuid";
-import pMemoize from "p-memoize";
-import ExpiryMap from "expiry-map";
-import { millisecondsInMinute } from "date-fns/constants";
 
-export async function getLikeForUserIdAndTheme(
+export async function getUserLikeStatusForTheme(
   userId: string,
   themeId: string,
 ) {
-  return db
-    .select()
-    .from(Like)
-    .where(and(eq(Like.userId, userId), eq(Like.themeId, themeId)));
+  return (
+    (
+      await db
+        .select()
+        .from(Like)
+        .where(and(eq(Like.userId, userId), eq(Like.themeId, themeId)))
+    ).length > 0
+  );
 }
 
 export function generateUserUUID(ip: string) {
@@ -74,11 +75,16 @@ async function getCombinedLikes() {
   return likesCountById;
 }
 
-async function _getLikeCountsByThemeIds() {
-  console.log("getLikesCountForThemeId");
+export async function getLikeCountsByThemeIds(): Promise<
+  Record<string, number>
+> {
+  console.time("getLikeCountsByThemeIds");
+  console.time("likedThemesIds");
   const likedThemesIds = (await db.select().from(Theme)).map((t) => t.id);
+  console.timeEnd("likedThemesIds");
   let likesCountById: Record<string, number> = {};
-  for (const themeIdsChunk of chunk(likedThemesIds, 400)) {
+  console.time("likesCountById");
+  for (const themeIdsChunk of chunk(likedThemesIds, 3000)) {
     const transactions = themeIdsChunk.map((id) => {
       return db
         .select({ [id]: count() })
@@ -86,16 +92,26 @@ async function _getLikeCountsByThemeIds() {
         .where(eq(Like.themeId, id));
     });
 
+    console.time("db");
     // @ts-expect-error
-    const results = flatten(await db.batch(transactions));
+    const results = (await db.batch(transactions)).flatMap((r) => r) as Record<
+      string,
+      number
+    >[];
+    console.timeEnd("db");
 
+    console.time("object");
     results.forEach((r) => {
-      likesCountById = {
-        ...likesCountById,
-        ...r,
-      };
+      const [id, count] = Object.entries(r)[0];
+      if (likesCountById[id]) {
+        likesCountById[id] += count;
+      } else {
+        likesCountById[id] = count;
+      }
     });
+    console.timeEnd("object");
   }
+  console.timeEnd("likesCountById");
 
   const remoteLikesById = await getCombinedLikes();
 
@@ -103,18 +119,11 @@ async function _getLikeCountsByThemeIds() {
     likesCountById[id] = (likesCountById[id] || 0) + likesCount;
   });
 
-  return likesCountById;
-}
+  console.timeEnd("getLikeCountsByThemeIds");
 
-const likesPerIdCache = new ExpiryMap(millisecondsInMinute * 3);
-export function clearLikesPerIdCache() {
-  likesPerIdCache.clear();
+  return likesCountById;
 }
 
 export async function getLikesCountForThemeId(themeId: string) {
   return (await getLikeCountsByThemeIds())[themeId] || 0;
 }
-
-export const getLikeCountsByThemeIds = pMemoize(_getLikeCountsByThemeIds, {
-  cache: likesPerIdCache,
-});

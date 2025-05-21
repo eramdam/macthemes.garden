@@ -32,7 +32,6 @@ export default defineConfig({
   integrations: [preact(), db()],
 
   adapter: netlify({
-    cacheOnDemandPages: true,
     edgeMiddleware: true,
   }),
 });

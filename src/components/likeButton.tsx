@@ -42,16 +42,7 @@ export function LikeButton(props: LikeButtonProps) {
           onClickLike();
         }}
       >
-        <img
-          src="/assets/finder-smile.png"
-          style={{
-            width: 16,
-            height: 16,
-            display: "inline-block",
-            verticalAlign: "sub",
-            marginRight: 4,
-          }}
-        />
+        <img src="/assets/finder-smile.png" class="like-button-icon" />
         {hasLiked ? "Liked" : "Like"}
       </a>
     </Fragment>
