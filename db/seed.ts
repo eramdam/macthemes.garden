@@ -6,7 +6,7 @@ import { themesLoader } from "../src/themesLoader";
 
 const USER_IP = "1.1.1.1";
 const themes = await themesLoader();
-const randomLikes = true;
+const randomLikes = false;
 // https://astro.build/db/seed
 export default async function seed() {
   const userId = generateUserUUID(USER_IP);
