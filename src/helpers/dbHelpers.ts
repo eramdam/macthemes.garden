@@ -33,6 +33,14 @@ export async function removelikeForThemeFromUserId(
   userId: string,
   themeId: string,
 ) {
+  const currentCount = (
+    await db.select().from(LikesCount).where(eq(LikesCount.themeId, themeId))
+  )[0].count;
+
+  // Special case when going from `1` to `0` to avoid inconsistencies.
+  if (currentCount === 1) {
+    await db.delete(LikesCount).where(eq(LikesCount.themeId, themeId));
+  }
   await db
     .delete(Like)
     .where(and(eq(Like.themeId, themeId), eq(Like.userId, userId)));
@@ -131,8 +139,8 @@ export async function getLikeCountsByThemeIds(): Promise<
     likesCountById[likeCountRow.themeId] = likeCountRow.count;
   }
 
-  Object.entries(remoteLikesById).forEach(([id, likesCount]) => {
-    likesCountById[id] = (likesCountById[id] || 0) + likesCount;
+  Object.entries(remoteLikesById).forEach(([id, remoteLikesCount]) => {
+    likesCountById[id] = (likesCountById[id] || 0) + remoteLikesCount;
   });
 
   console.timeEnd("getLikeCountsByThemeIds");
