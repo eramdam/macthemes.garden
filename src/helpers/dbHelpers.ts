@@ -82,12 +82,12 @@ export async function getLikeCountsByThemeIds(
   console.time("getLikeCountsByThemeIds");
   console.time("fromCache");
 
-  console.timeEnd("fromCache");
   if (session?.has(dbCacheKey)) {
     const fromCache = await session?.get(dbCacheKey);
 
     if (fromCache) {
       console.log("session cache hit");
+      console.timeEnd("fromCache");
       console.timeEnd("getLikeCountsByThemeIds");
       return fromCache;
     }
