@@ -1,8 +1,10 @@
-name: Grab likes from Mastodon and Bluesky
+name: Grab likes
 on:
   schedule:
     # Every day at 2am
     - cron: "0 2 * * *"
+  workflow_dispatch:
+
 jobs:
   pull-likes:
     runs-on: ubuntu-latest
