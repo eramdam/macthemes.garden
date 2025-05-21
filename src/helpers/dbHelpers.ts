@@ -81,12 +81,16 @@ export async function getLikeCountsByThemeIds(
 ): Promise<Record<string, number>> {
   console.time("getLikeCountsByThemeIds");
   console.time("fromCache");
-  const fromCache = await session?.get(dbCacheKey);
+
   console.timeEnd("fromCache");
-  if (fromCache) {
-    console.log("session cache hit");
-    console.timeEnd("getLikeCountsByThemeIds");
-    return fromCache;
+  if (session?.has(dbCacheKey)) {
+    const fromCache = await session?.get(dbCacheKey);
+
+    if (fromCache) {
+      console.log("session cache hit");
+      console.timeEnd("getLikeCountsByThemeIds");
+      return fromCache;
+    }
   }
 
   console.time("likedThemesIds");
