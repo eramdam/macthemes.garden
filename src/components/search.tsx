@@ -48,7 +48,7 @@ export const SearchForm: FunctionComponent<SearchFormProps> = (props) => {
 
     const results = chunk(
       matchSorter(themes, searchQuery.value.trim(), {
-        keys: ["name", "authors.*.name", "year", "archiveFile"],
+        keys: ["name", "authors.*.name", "year", "archiveFile", "id"],
         threshold: matchSorter.rankings.CONTAINS,
       }),
       pageSize,

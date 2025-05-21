@@ -18,16 +18,20 @@ const themesWithAuthorsPromise = themes.map(async (t) => {
   };
 });
 const themesWithAuthors = (await Promise.all(themesWithAuthorsPromise)).map(
-  (t) =>
-    pick(t.data, [
-      "urlBase",
-      "mainThumbnail",
-      "name",
-      "year",
-      "isNew",
-      "authors",
-      "archiveFile",
-    ])
+  (t) => {
+    return {
+      ...pick(t.data, [
+        "urlBase",
+        "mainThumbnail",
+        "name",
+        "year",
+        "isNew",
+        "authors",
+        "archiveFile",
+      ]),
+      id: t.id,
+    };
+  }
 );
 ---
 

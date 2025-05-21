@@ -1,15 +1,7 @@
-import TTLCache from "@isaacs/ttlcache";
 import { and, count, db, eq, Like, Theme, UserRequest } from "astro:db";
 import { getSecret } from "astro:env/server";
-import { millisecondsInMinute } from "date-fns/constants";
 import { chunk, compact, flatten, uniq } from "lodash-es";
 import { v5 } from "uuid";
-
-const sessionKey = "likesById";
-const sessionTTL = millisecondsInMinute * 20;
-type SessionStored = Awaited<ReturnType<typeof _getLikeCountsByThemeIds>>;
-
-const cache = new TTLCache({ max: 10, ttl: sessionTTL });
 
 export async function getLikeForUserIdAndTheme(
   userId: string,
@@ -118,19 +110,6 @@ export async function getLikesCountForThemeId(themeId: string) {
     .where(eq(Like.themeId, themeId));
 
   return likesFromRemote + values[0].count;
-}
-
-async function getFromCache() {
-  const existing = cache.get<SessionStored>(sessionKey);
-  console.log({ cacheHit: !!existing });
-  if (existing) {
-    return existing;
-  }
-
-  const newValue = await _getLikeCountsByThemeIds();
-  cache.set(sessionKey, newValue);
-
-  return newValue;
 }
 
 export const getLikeCountsByThemeIds = _getLikeCountsByThemeIds;
