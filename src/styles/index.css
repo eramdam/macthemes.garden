@@ -496,3 +496,11 @@ section.page {
 .pixel {
   image-rendering: pixelated;
 }
+
+.like-button-icon {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: sub;
+  margin-right: 4px;
+}

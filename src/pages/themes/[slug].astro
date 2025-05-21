@@ -1,6 +1,7 @@
 ---
+import type { GetStaticPaths } from "astro";
+export const prerender = true;
 import { getCollection, getEntries } from "astro:content";
-
 import {
   AuthorsFormatter,
   formatAuthorsText,
@@ -11,25 +12,22 @@ import { archiveFileSize, archiveMd5 } from "../../helpers";
 import { getLikesCountForThemeId } from "../../helpers/dbHelpers";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
-const themes = await getCollection("themes");
-const themeMatch = themes.find((t) => t.data.urlBase === Astro.params.slug);
-const themeIdMatch = themes.find((t) => t.id === Astro.params.slug);
+export const getStaticPaths = (async () => {
+  const themes = await getCollection("themes");
+  return themes.flatMap((t) => {
+    return {
+      props: { theme: t },
+      params: {
+        slug: t.data.urlBase,
+      },
+    };
+  });
+}) satisfies GetStaticPaths;
 
-if (!themeMatch) {
-  if (themeIdMatch) {
-    return Astro.redirect(themeIdMatch.data.urlBase);
-  }
-  return Astro.redirect("/404");
-}
+const themeProps = Astro.props.theme;
+const theme = themeProps.data;
+const themeId = themeProps.id;
 
-Astro.response.headers.set(
-  "CDN-Cache-Control",
-  "public, max-age=10, must-revalidate"
-);
-
-const theme = themeMatch.data;
-const themeId = themeMatch.id;
-const likesCount = await getLikesCountForThemeId(themeId, Astro.session);
 const isDev =
   import.meta.env.DEV && import.meta.env.PUBLIC_SHOW_DEBUG === "true";
 const relatedThemes = await getEntries(theme.relatedThemes);
@@ -131,14 +129,19 @@ const fileHosts = [
               }
 
               <dt>Rating:</dt>
-              <dd>
-                <span data-likes-count>{likesCount}</span> likes
-              </dd>
-              <dd>
-                <ServerLikeButton server:defer themeId={themeId}>
-                  Like
-                </ServerLikeButton>
-              </dd>
+              <ServerLikeButton server:defer themeId={themeId}>
+                <div slot="fallback">
+                  <dd>&nbsp;</dd>
+                  <dd>
+                    <a href="#">
+                      <img
+                        src="/assets/finder-smile.png"
+                        class="like-button-icon"
+                      />Like
+                    </a>
+                  </dd>
+                </div>
+              </ServerLikeButton>
 
               <dt>Archive file:</dt>
               <dd style={"font-family: monospace;"}>
