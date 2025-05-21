@@ -19,7 +19,8 @@ const likedByUser = await getUserLikeStatusForTheme(
 ---
 
 <dd>
-  <span data-likes-count>{likesCount}</span> likes
+  <span data-likes-count>{likesCount}</span>
+  {likesCount > 1 ? "likes" : "like"}
 </dd>
 <dd>
   <LikeButton

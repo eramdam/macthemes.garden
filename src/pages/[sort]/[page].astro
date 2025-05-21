@@ -9,13 +9,10 @@ const pageNumber = Astro.params.page;
 const { sort, order } = slugFromSortAndOrder(Astro.params.sort || "d-desc");
 
 let themes = await getCollection("themes");
-
-if (sort === "likes") {
-  const likesCountByID = await getLikeCountsByThemeIds();
-  themes = themes.map((t) => {
-    return { ...t, likes: likesCountByID[t.id] || 0 };
-  });
-}
+const likesCountByID = await getLikeCountsByThemeIds();
+themes = themes.map((t) => {
+  return { ...t, likes: likesCountByID[t.id] || 0 };
+});
 
 const page = PAGINATION.getPage(themes as any, Number(pageNumber), sort, order);
 ---
