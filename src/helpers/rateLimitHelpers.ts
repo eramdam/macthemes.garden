@@ -8,9 +8,6 @@ import {
 const timeWindow = 3_000;
 
 export async function canUserIdMakeRequest(userId: string) {
-  if (import.meta.env.DEV) {
-    return true;
-  }
   const lastRequestForUser = (await getLastRequestFromUserId(userId))?.[0];
 
   if (!lastRequestForUser?.date) {

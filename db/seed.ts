@@ -1,4 +1,4 @@
-import { db, Like, Theme } from "astro:db";
+import { db, Like, LikesCount, Theme } from "astro:db";
 import { chunk, shuffle } from "lodash-es";
 import { v4 } from "uuid";
 import { generateUserUUID } from "../src/helpers/dbHelpers";
@@ -25,16 +25,21 @@ export default async function seed() {
         .flatMap((theme, index) => {
           themesCount++;
           const modulo = parseInt(theme.id, 16) % 10;
+          const numberOfLikesForTheme = (index % 10) + modulo;
           return [
             db.insert(Theme).values({
               id: theme.id,
             }),
-            ...Array.from({ length: (index % 10) + modulo }).map(() => {
+            ...Array.from({ length: numberOfLikesForTheme }).map(() => {
               return db.insert(Like).values({
                 themeId: theme.id,
                 id: v4(),
                 userId,
               });
+            }),
+            db.insert(LikesCount).values({
+              themeId: theme.id,
+              count: numberOfLikesForTheme,
             }),
           ];
         });

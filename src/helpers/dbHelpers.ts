@@ -1,7 +1,7 @@
-import { and, count, db, eq, Like, Theme, UserRequest } from "astro:db";
+import { and, db, eq, Like, LikesCount, UserRequest } from "astro:db";
 import { getSecret } from "astro:env/server";
-import { chunk, compact, uniq } from "lodash-es";
-import { v5 } from "uuid";
+import { compact, groupBy, mapValues, uniq } from "lodash-es";
+import { v4, v5 } from "uuid";
 
 export async function getUserLikeStatusForTheme(
   userId: string,
@@ -17,6 +17,51 @@ export async function getUserLikeStatusForTheme(
   );
 }
 
+export async function addLikeForThemeFromUserId(
+  userId: string,
+  themeId: string,
+) {
+  await db.insert(Like).values({
+    id: v4(),
+    themeId: themeId,
+    userId,
+  });
+  await uploadLikesCountTable();
+}
+
+export async function removelikeForThemeFromUserId(
+  userId: string,
+  themeId: string,
+) {
+  await db
+    .delete(Like)
+    .where(and(eq(Like.themeId, themeId), eq(Like.userId, userId)));
+  await uploadLikesCountTable();
+}
+
+async function uploadLikesCountTable() {
+  const likedThemes = await db.select().from(Like);
+  const countsById = mapValues(
+    groupBy(likedThemes, (l) => l.themeId),
+    (g) => g.length,
+  );
+
+  const transactions = Object.entries(countsById).map(([key, count]) => {
+    return db
+      .insert(LikesCount)
+      .values({ themeId: key, count: count })
+      .onConflictDoUpdate({
+        target: LikesCount.themeId,
+        set: {
+          count: count,
+        },
+      });
+  });
+
+  // @ts-expect-error
+  await db.batch(transactions);
+}
+
 export function generateUserUUID(ip: string) {
   return v5(ip, getSecret("UUID_NAMESPACE") || "");
 }
@@ -29,22 +74,19 @@ export async function getLastRequestFromUserId(userId: string) {
 }
 
 export async function recordLastRequestFromUserId(userId: string) {
-  const needsUpdate = (await getLastRequestFromUserId(userId)).length > 0;
-
-  if (needsUpdate) {
-    return await db
-      .update(UserRequest)
-      .set({ userId, date: new Date() })
-      .values();
-  }
-
   return await db
     .insert(UserRequest)
     .values({ userId, date: new Date() })
+    .onConflictDoUpdate({
+      target: UserRequest.userId,
+      set: {
+        date: new Date(),
+      },
+    })
     .values();
 }
 
-async function getCombinedLikes() {
+async function getCombinedLikesFromSocials() {
   const mastodonLikes = await import("../../src/themes/likes-mastodon.json");
   const blueskyLikes = await import("../../src/themes/likes-bsky.json");
   const combinedLikes = compact(
@@ -78,48 +120,17 @@ async function getCombinedLikes() {
 export async function getLikeCountsByThemeIds(): Promise<
   Record<string, number>
 > {
-  console.time("getLikeCountsByThemeIds");
-  console.time("likedThemesIds");
-  const likedThemesIds = (await db.select().from(Theme)).map((t) => t.id);
-  console.timeEnd("likedThemesIds");
+  const likesCount = await db.select().from(LikesCount);
   let likesCountById: Record<string, number> = {};
-  console.time("likesCountById");
-  for (const themeIdsChunk of chunk(likedThemesIds, 3000)) {
-    const transactions = themeIdsChunk.map((id) => {
-      return db
-        .select({ [id]: count() })
-        .from(Like)
-        .where(eq(Like.themeId, id));
-    });
+  const remoteLikesById = await getCombinedLikesFromSocials();
 
-    console.time("db");
-    // @ts-expect-error
-    const results = (await db.batch(transactions)).flatMap((r) => r) as Record<
-      string,
-      number
-    >[];
-    console.timeEnd("db");
-
-    console.time("object");
-    results.forEach((r) => {
-      const [id, count] = Object.entries(r)[0];
-      if (likesCountById[id]) {
-        likesCountById[id] += count;
-      } else {
-        likesCountById[id] = count;
-      }
-    });
-    console.timeEnd("object");
+  for (const likeCountRow of likesCount) {
+    likesCountById[likeCountRow.themeId] = likeCountRow.count;
   }
-  console.timeEnd("likesCountById");
-
-  const remoteLikesById = await getCombinedLikes();
 
   Object.entries(remoteLikesById).forEach(([id, likesCount]) => {
     likesCountById[id] = (likesCountById[id] || 0) + likesCount;
   });
-
-  console.timeEnd("getLikeCountsByThemeIds");
 
   return likesCountById;
 }

@@ -41,7 +41,20 @@ const UserRequest = defineTable({
   indexes: [{ on: "userId", unique: true }],
 });
 
+const LikesCount = defineTable({
+  columns: {
+    themeId: column.text({
+      primaryKey: true,
+      references() {
+        return Theme.columns.id;
+      },
+    }),
+    count: column.number(),
+  },
+  indexes: [{ on: "themeId", unique: true }],
+});
+
 // https://astro.build/db/config
 export default defineDb({
-  tables: { Like, Theme, UserRequest },
+  tables: { Like, Theme, UserRequest, LikesCount },
 });

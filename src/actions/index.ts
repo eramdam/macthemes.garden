@@ -3,9 +3,11 @@ import { z } from "astro:content";
 import { and, db, eq, Like, Theme } from "astro:db";
 import { v4 } from "uuid";
 import {
+  addLikeForThemeFromUserId,
   generateUserUUID,
   getLikesCountForThemeId,
   getUserLikeStatusForTheme,
+  removelikeForThemeFromUserId,
 } from "../helpers/dbHelpers";
 import { canUserIdMakeRequest } from "../helpers/rateLimitHelpers";
 import { themesLoader } from "../themesLoader";
@@ -54,16 +56,11 @@ export const server = {
 
       let liked = false;
       if (!didUserLikeThisTheme) {
-        await db.insert(Like).values({
-          id: v4(),
-          themeId: input.themeId,
-          userId,
-        });
+        await addLikeForThemeFromUserId(userId, input.themeId);
+
         liked = true;
       } else {
-        await db
-          .delete(Like)
-          .where(and(eq(Like.themeId, input.themeId), eq(Like.userId, userId)));
+        await removelikeForThemeFromUserId(userId, input.themeId);
         liked = false;
       }
 
