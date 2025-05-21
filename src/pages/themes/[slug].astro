@@ -29,7 +29,7 @@ Astro.response.headers.set(
 
 const theme = themeMatch.data;
 const themeId = themeMatch.id;
-const likesCount = await getLikesCountForThemeId(themeId);
+const likesCount = await getLikesCountForThemeId(themeId, Astro.session);
 const isDev =
   import.meta.env.DEV && import.meta.env.PUBLIC_SHOW_DEBUG === "true";
 const relatedThemes = await getEntries(theme.relatedThemes);

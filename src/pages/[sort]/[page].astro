@@ -11,7 +11,7 @@ const { sort, order } = slugFromSortAndOrder(Astro.params.sort || "d-desc");
 let themes = await getCollection("themes");
 
 if (sort === "likes") {
-  const likesCountByID = await getLikeCountsByThemeIds();
+  const likesCountByID = await getLikeCountsByThemeIds(Astro.session);
   themes = themes.map((t) => {
     return { ...t, likes: likesCountByID[t.id] || 0 };
   });

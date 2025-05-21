@@ -1,11 +1,10 @@
 ---
-export const prerender = true;
 import { getCollection } from "astro:content";
 import IndexPage from "../components/IndexPage.astro";
 import { PAGINATION } from "../helpers";
 import { getLikeCountsByThemeIds } from "../helpers/dbHelpers";
 const themes = await getCollection("themes");
-const likesCountByID = await getLikeCountsByThemeIds();
+const likesCountByID = await getLikeCountsByThemeIds(Astro.session);
 const themesWithLikes = themes.map((t) => {
   return { ...t, likes: likesCountByID[t.id] || 0 };
 });
