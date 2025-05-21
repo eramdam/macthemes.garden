@@ -1,12 +1,24 @@
 ---
 import { getCollection } from "astro:content";
 import IndexPage from "../../components/IndexPage.astro";
-import { PAGINATION, slugFromSortAndOrder } from "../../helpers";
+import {
+  PAGINATION,
+  slugFromSortAndOrder,
+  SortOptionsEnum,
+  SortOrdersEnum,
+} from "../../helpers";
 import { getLikeCountsByThemeIds } from "../../helpers/dbHelpers";
 
 const pageNumber = Astro.params.page;
 // @ts-expect-error
 const { sort, order } = slugFromSortAndOrder(Astro.params.sort || "d-desc");
+
+if (
+  SortOrdersEnum.safeParse(order).error ||
+  SortOptionsEnum.safeParse(sort).error
+) {
+  return Astro.redirect("/");
+}
 
 let themes = await getCollection("themes");
 const likesCountByID = await getLikeCountsByThemeIds();
