@@ -1,4 +1,3 @@
-import type { AstroSharedContext } from "astro";
 import { and, count, db, eq, Like, Theme, UserRequest } from "astro:db";
 import { getSecret } from "astro:env/server";
 import { chunk, compact, uniq } from "lodash-es";
@@ -76,23 +75,10 @@ async function getCombinedLikes() {
   return likesCountById;
 }
 
-export async function getLikeCountsByThemeIds(
-  session?: AstroSharedContext["session"],
-): Promise<Record<string, number>> {
+export async function getLikeCountsByThemeIds(): Promise<
+  Record<string, number>
+> {
   console.time("getLikeCountsByThemeIds");
-  console.time("fromCache");
-
-  if (session?.has(dbCacheKey)) {
-    const fromCache = await session?.get(dbCacheKey);
-
-    if (fromCache) {
-      console.log("session cache hit");
-      console.timeEnd("fromCache");
-      console.timeEnd("getLikeCountsByThemeIds");
-      return fromCache;
-    }
-  }
-
   console.time("likedThemesIds");
   const likedThemesIds = (await db.select().from(Theme)).map((t) => t.id);
   console.timeEnd("likedThemesIds");
@@ -133,17 +119,11 @@ export async function getLikeCountsByThemeIds(
     likesCountById[id] = (likesCountById[id] || 0) + likesCount;
   });
 
-  session?.set(dbCacheKey, likesCountById);
   console.timeEnd("getLikeCountsByThemeIds");
 
   return likesCountById;
 }
 
-export const dbCacheKey = "likes" as const;
-
-export async function getLikesCountForThemeId(
-  themeId: string,
-  session: AstroSharedContext["session"] | undefined,
-) {
-  return (await getLikeCountsByThemeIds(session))[themeId] || 0;
+export async function getLikesCountForThemeId(themeId: string) {
+  return (await getLikeCountsByThemeIds())[themeId] || 0;
 }

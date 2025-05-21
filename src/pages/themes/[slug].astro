@@ -1,6 +1,5 @@
 ---
 import type { GetStaticPaths } from "astro";
-export const prerender = true;
 import { getCollection, getEntries } from "astro:content";
 import {
   AuthorsFormatter,
@@ -9,8 +8,8 @@ import {
 import OS9Window from "../../components/OS9Window.astro";
 import ServerLikeButton from "../../components/ServerLikeButton.astro";
 import { archiveFileSize, archiveMd5 } from "../../helpers";
-import { getLikesCountForThemeId } from "../../helpers/dbHelpers";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+export const prerender = true;
 
 export const getStaticPaths = (async () => {
   const themes = await getCollection("themes");

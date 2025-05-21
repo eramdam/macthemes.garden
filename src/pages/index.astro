@@ -4,7 +4,7 @@ import IndexPage from "../components/IndexPage.astro";
 import { PAGINATION } from "../helpers";
 import { getLikeCountsByThemeIds } from "../helpers/dbHelpers";
 const themes = await getCollection("themes");
-const likesCountByID = await getLikeCountsByThemeIds(Astro.session);
+const likesCountByID = await getLikeCountsByThemeIds();
 const themesWithLikes = themes.map((t) => {
   return { ...t, likes: likesCountByID[t.id] || 0 };
 });

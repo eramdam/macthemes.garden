@@ -3,10 +3,9 @@ import { z } from "astro:content";
 import { and, db, eq, Like, Theme } from "astro:db";
 import { v4 } from "uuid";
 import {
-  dbCacheKey,
   generateUserUUID,
-  getUserLikeStatusForTheme,
   getLikesCountForThemeId,
+  getUserLikeStatusForTheme,
 } from "../helpers/dbHelpers";
 import { canUserIdMakeRequest } from "../helpers/rateLimitHelpers";
 import { themesLoader } from "../themesLoader";
@@ -68,15 +67,7 @@ export const server = {
         liked = false;
       }
 
-      if (context.session) {
-        console.log("clear cache after user action");
-        context.session?.delete(dbCacheKey);
-      }
-
-      const likes = await getLikesCountForThemeId(
-        input.themeId,
-        context.session,
-      );
+      const likes = await getLikesCountForThemeId(input.themeId);
 
       return { liked, likes: likes };
     },

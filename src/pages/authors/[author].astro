@@ -2,10 +2,7 @@
 import { getCollection, getEntries } from "astro:content";
 import OS9Window from "../../components/OS9Window.astro";
 import { SingleTheme } from "../../components/singleTheme";
-import {
-  getLikeCountsByThemeIds,
-  getLikesCountForThemeId,
-} from "../../helpers/dbHelpers";
+import { getLikeCountsByThemeIds } from "../../helpers/dbHelpers";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 const authorSlug = Astro.params.author;
@@ -17,7 +14,7 @@ if (!author) {
 }
 
 const themesByAuthor = await getEntries(author.data.themes);
-const likesCountByThemeIds = await getLikeCountsByThemeIds(Astro.session);
+const likesCountByThemeIds = await getLikeCountsByThemeIds();
 ---
 
 <BaseLayout title={`Themes by ${author.data.name}`}>

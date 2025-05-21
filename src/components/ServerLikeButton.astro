@@ -11,10 +11,7 @@ interface Props {
 }
 
 const userId = generateUserUUID(Astro.clientAddress);
-const likesCount = await getLikesCountForThemeId(
-  Astro.props.themeId,
-  Astro.session
-);
+const likesCount = await getLikesCountForThemeId(Astro.props.themeId);
 const likedByUser = await getUserLikeStatusForTheme(
   userId,
   Astro.props.themeId
