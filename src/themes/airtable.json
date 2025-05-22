@@ -3377,7 +3377,7 @@
   },
   {
     "name": "Apprentice",
-    "authors": "ikthusian",
+    "authors": "Brian Brasher",
     "year": "1998",
     "about": "public/themes/attachments/about-attfbp7zttr1lbwmz-image.png",
     "showcase": "public/themes/attachments/showcase-attq7le22dif2rdpu-image.png",
@@ -5386,7 +5386,7 @@
   },
   {
     "name": "betakarat",
-    "authors": "ikthusian",
+    "authors": "Brian Brasher",
     "year": "1997",
     "about": "public/themes/attachments/about-attlfhrlsqtnuygz1-image.png",
     "showcase": "public/themes/attachments/showcase-attdn62il6tgyn2wq-image.png",
@@ -7089,7 +7089,6 @@
   },
   {
     "name": "BluTeK",
-    "authors": "Ruth Bartlett",
     "year": "1998",
     "about": "public/themes/attachments/about-attoxnxap6lajdkim-image.png",
     "showcase": "public/themes/attachments/showcase-attaoognbtlbffql6-image.png",
@@ -19259,7 +19258,7 @@
   },
   {
     "name": "hannah",
-    "authors": "ikthusian",
+    "authors": "Brian Brasher",
     "year": "1998",
     "about": "public/themes/attachments/about-att5oidth5jxlltab-image.png",
     "showcase": "public/themes/attachments/showcase-attfnlylo2ozwfzlz-image.png",
@@ -22247,7 +22246,7 @@
   },
   {
     "name": "JoRoyal",
-    "authors": "ikthusian",
+    "authors": "Brian Brasher",
     "year": "1997",
     "about": "public/themes/attachments/about-attluooqms7zg7svb-image.png",
     "showcase": "public/themes/attachments/showcase-att9crsuvtxbdehhc-image.png",
@@ -23585,7 +23584,7 @@
   },
   {
     "name": "LeadMichele",
-    "authors": "ikthusian",
+    "authors": "Brian Brasher",
     "year": "1997",
     "about": "public/themes/attachments/about-attzbfxijailykl8k-image.png",
     "showcase": "public/themes/attachments/showcase-attkdqjprp1owaile-image.png",
@@ -27069,12 +27068,373 @@
     "archiveFilename": "moonstone.sit"
   },
   {
-    "created": "2025-04-26T06:52:18.000Z"
+    "name": "MoopTeK",
+    "authors": "Ruth Bartlett",
+    "year": "1998",
+    "about": "public/themes/attachments/about-attsfwnyawhpvk6gy-image.png",
+    "showcase": "public/themes/attachments/showcase-att9y5pcqia3p7eij-image.png",
+    "archiveFileName2": "mooptek.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attqiefxosup6afrv-image.png",
+    "created": "2025-04-26T06:52:18.000Z",
+    "archiveFilename": "mooptek.sit"
   },
   {
-    "created": "2025-04-26T06:52:18.000Z"
+    "name": "Mordor II",
+    "authors": "Scott Hunter",
+    "year": "1999",
+    "about": "public/themes/attachments/about-att8m23i8ep1zzfau-image.png",
+    "showcase": "public/themes/attachments/showcase-att1r0vczsvbmtr47-image.png",
+    "archiveFileName2": "mordorii.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-att9vxfmeu0dqflxs-image.png",
+    "created": "2025-04-26T06:52:18.000Z",
+    "archiveFilename": "mordorii.sit"
   },
   {
-    "created": "2025-04-26T06:52:18.000Z"
+    "name": "Mordor",
+    "authors": "Scott Hunter",
+    "year": "1998",
+    "about": "public/themes/attachments/about-attl7my4m0b8fi1lq-image.png",
+    "showcase": "public/themes/attachments/showcase-atts8mmfmxq8g5658-image.png",
+    "archiveFileName2": "mordor.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attiw1u2kmp3c7axh-image.png",
+    "created": "2025-04-26T06:52:18.000Z",
+    "archiveFilename": "mordor.sit"
+  },
+  {
+    "name": "More Roses!",
+    "authors": "Martha Royer",
+    "year": "1998",
+    "about": "public/themes/attachments/about-attesgtnk2trvdbhe-image.png",
+    "showcase": "public/themes/attachments/showcase-attobymng0efgnwyi-image.png",
+    "archiveFileName2": "moreroses.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attf014ulx7pzvepz-image.png",
+    "created": "2025-05-22T04:13:53.000Z",
+    "archiveFilename": "moreroses.sit"
+  },
+  {
+    "name": "More Jaded",
+    "authors": "Richard C. Miske",
+    "year": "1997",
+    "about": "public/themes/attachments/about-atthdwdhpg2dox2zf-image.png",
+    "showcase": "public/themes/attachments/showcase-att7rc4jflrvdqcjt-image.png",
+    "archiveFileName2": "morejaded.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attqwxcpqrjchvl7v-image.png",
+    "created": "2025-05-22T04:13:53.000Z",
+    "archiveFilename": "morejaded.sit"
+  },
+  {
+    "name": "Morganite",
+    "authors": "Janet Snider Parris",
+    "year": "1999",
+    "about": "public/themes/attachments/about-attikppnsxghjvugk-image.png",
+    "showcase": "public/themes/attachments/showcase-atts6zfdchnnrfddh-image.png",
+    "archiveFileName2": "morganite.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attpgtsq7vkvazss1-image.png",
+    "created": "2025-05-22T04:13:54.000Z",
+    "archiveFilename": "morganite.sit"
+  },
+  {
+    "name": "Mosaic",
+    "authors": "Martha Royer",
+    "year": "1998",
+    "about": "public/themes/attachments/about-attk2e4bzffqcnwol-image.png",
+    "showcase": "public/themes/attachments/showcase-attutmrmtngkzqs1s-image.png",
+    "archiveFileName2": "mosaic.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attwidkuaout9po4u-image.png",
+    "created": "2025-05-22T04:19:46.000Z",
+    "archiveFilename": "mosaic.sit"
+  },
+  {
+    "name": "Mosaica Francais",
+    "authors": "Martha Royer",
+    "year": "1998",
+    "about": "public/themes/attachments/about-attger19lmb5cohor-image.png",
+    "showcase": "public/themes/attachments/showcase-attwm5sqv07khxkub-image.png",
+    "archiveFileName2": "mosaicafrancais.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attuogdcvtycuouix-image.png",
+    "created": "2025-05-22T04:19:46.000Z",
+    "archiveFilename": "mosaicafrancais.sit"
+  },
+  {
+    "name": "Moses",
+    "authors": "Maury McCown",
+    "year": "1998",
+    "about": "public/themes/attachments/about-atthyzvajvunjizfe-image.png",
+    "showcase": "public/themes/attachments/showcase-attng6virxc7sqnon-image.png",
+    "archiveFileName2": "moses.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attmjqwtqyxmyow68-image.png",
+    "created": "2025-05-22T04:19:46.000Z",
+    "archiveFilename": "moses.sit"
+  },
+  {
+    "name": "Mosque",
+    "authors": "Martha Royer",
+    "year": "2001",
+    "about": "public/themes/attachments/about-attn960euct3nfape-image.png",
+    "showcase": "public/themes/attachments/showcase-attsbldfyyb4fgx4n-image.png",
+    "archiveFileName2": "mosque.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attukoy7hca3arnd0-image.png",
+    "created": "2025-05-22T04:19:46.000Z",
+    "archiveFilename": "mosque.sit"
+  },
+  {
+    "name": "MOSS",
+    "authors": "Jon Iverson",
+    "year": "1997",
+    "about": "public/themes/attachments/about-attppaeeyngnhtdxi-image.png",
+    "showcase": "public/themes/attachments/showcase-atthyp9fg2ww3ousp-image.png",
+    "archiveFileName2": "moss.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attxtqu3nhwra7alh-image.png",
+    "created": "2025-05-22T04:19:47.000Z",
+    "archiveFilename": "moss.sit"
+  },
+  {
+    "name": "Mossy",
+    "authors": "Maury McCown",
+    "year": "1998",
+    "about": "public/themes/attachments/about-attzbprvmipl7j07d-image.png",
+    "showcase": "public/themes/attachments/showcase-att53d56hpyodlbyh-image.png",
+    "archiveFileName2": "mossy.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-atton3vt2qd8p30gt-image.png",
+    "created": "2025-05-22T04:28:24.000Z",
+    "archiveFilename": "mossy.sit"
+  },
+  {
+    "name": "MOTH",
+    "authors": "Chris Walker",
+    "year": "1998",
+    "about": "public/themes/attachments/about-att1cehvhseqluluh-image.png",
+    "showcase": "public/themes/attachments/showcase-att0l5dsyajpbj5zy-image.png",
+    "archiveFileName2": "moth.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attwiivoadxkjjdas-image.png",
+    "created": "2025-05-22T04:28:24.000Z",
+    "archiveFilename": "moth.sit"
+  },
+  {
+    "name": "mo",
+    "authors": "Martha Royer",
+    "year": "1999",
+    "about": "public/themes/attachments/about-atttgcy5r8x4xhcw4-image.png",
+    "showcase": "public/themes/attachments/showcase-atttivnszrwquxt3k-image.png",
+    "archiveFileName2": "mothergoose.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attnuopux35o0vlpm-image.png",
+    "created": "2025-05-22T04:32:42.000Z",
+    "archiveFilename": "mothergoose.sit"
+  },
+  {
+    "name": "MotherShip1000",
+    "authors": "r. rivera ramirez",
+    "year": "2001",
+    "about": "public/themes/attachments/about-atty2rzt5nakmtqfk-image.png",
+    "showcase": "public/themes/attachments/showcase-attldoclbttr12ono-image.png",
+    "archiveFileName2": "mothership.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attjgufmb6bwci6ff-image.png",
+    "created": "2025-05-22T04:32:42.000Z",
+    "archiveFilename": "mothership.sit"
+  },
+  {
+    "name": "MotherShip2000",
+    "authors": "r. rivera ramirez",
+    "year": "2001",
+    "about": "public/themes/attachments/about-attlfa1mtbi4gfx0w-image.png",
+    "showcase": "public/themes/attachments/showcase-atthxrlfac1mlljp3-image.png",
+    "archiveFileName2": "mothership.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attw5m6swurstxga1-image.png",
+    "created": "2025-05-22T04:36:08.000Z",
+    "archiveFilename": "mothership.sit"
+  },
+  {
+    "name": "MotherShip3000",
+    "authors": "r. rivera ramirez",
+    "year": "2001",
+    "about": "public/themes/attachments/about-attzsxax9ftjfh5se-image.png",
+    "showcase": "public/themes/attachments/showcase-attsw3ocn4mhze6b0-image.png",
+    "archiveFileName2": "mothership.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-att4bdsbcr7mx7cp0-image.png",
+    "created": "2025-05-22T04:37:46.000Z",
+    "archiveFilename": "mothership.sit"
+  },
+  {
+    "name": "Moulin Rouge",
+    "authors": "Gwendolyn",
+    "year": "2001",
+    "about": "public/themes/attachments/about-attiq2dznmprlpxwe-image.png",
+    "showcase": "public/themes/attachments/showcase-attq8dsnbcecklsrx-image.png",
+    "archiveFileName2": "moulinrouge.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attqnzf0rfticq7cx-image.png",
+    "created": "2025-05-22T04:37:47.000Z",
+    "archiveFilename": "moulinrouge.sit"
+  },
+  {
+    "name": "Monkey Paradise Winter",
+    "authors": "Masashi Ichikawa",
+    "year": "1999",
+    "about": "public/themes/attachments/about-att615kfjvhjmkuib-image.png",
+    "showcase": "public/themes/attachments/showcase-attl3flcz0s2gaujq-image.png",
+    "archiveFileName2": "mpwinter.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attcr2jcfhonrsp3b-image.png",
+    "created": "2025-05-22T04:40:28.000Z",
+    "archiveFilename": "mpwinter.sit"
+  },
+  {
+    "name": "Mr. Blackie",
+    "authors": "Matricia Erigero",
+    "year": "1998",
+    "about": "public/themes/attachments/about-att17vszgw5za2uhe-image.png",
+    "showcase": "public/themes/attachments/showcase-att2eq1p8r2mqr7gk-image.png",
+    "archiveFileName2": "mrblackie.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attom09ehxkab9cgv-image.png",
+    "created": "2025-05-22T04:40:28.000Z",
+    "archiveFilename": "mrblackie.sit"
+  },
+  {
+    "name": "Mr Stripey 2",
+    "authors": "Chris Walker",
+    "year": "1998",
+    "about": "public/themes/attachments/about-att4momzyxgzja79m-image.png",
+    "showcase": "public/themes/attachments/showcase-atttxakhmo0dui5go-image.png",
+    "archiveFileName2": "mrstripey.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attvxvh8neq09oa3s-image.png",
+    "created": "2025-05-22T04:58:02.000Z",
+    "archiveFilename": "mrstripey.sit"
+  },
+  {
+    "name": "MS-Blue",
+    "year": "1999",
+    "about": "public/themes/attachments/about-attmxqgr647vyikkg-image.png",
+    "showcase": "public/themes/attachments/showcase-atth1dss775nsqpog-image.png",
+    "archiveFileName2": "ms-schemes.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attibxdgyeertkcjg-image.png",
+    "created": "2025-05-22T04:58:02.000Z",
+    "archiveFilename": "ms-schemes.sit"
+  },
+  {
+    "name": "MS-Platinum",
+    "year": "1999",
+    "about": "public/themes/attachments/about-attmjwlkeghqxsels-image.png",
+    "showcase": "public/themes/attachments/showcase-att46dapet8hmgsri-image.png",
+    "archiveFileName2": "ms-schemes.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attklt4ynx23wfl1f-image.png",
+    "created": "2025-05-22T05:00:12.000Z",
+    "archiveFilename": "ms-schemes.sit"
+  },
+  {
+    "name": "MS-Red",
+    "year": "1999",
+    "about": "public/themes/attachments/about-attjhh1zqqxxmlwig-image.png",
+    "showcase": "public/themes/attachments/showcase-attdrunaktg1vhr9e-image.png",
+    "archiveFileName2": "ms-schemes.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attne7ehudbzdnlps-image.png",
+    "created": "2025-05-22T05:00:13.000Z",
+    "archiveFilename": "ms-schemes.sit"
+  },
+  {
+    "name": "Microsoft Bookshelf",
+    "authors": "Ken Yaecker",
+    "year": "1997",
+    "about": "public/themes/attachments/about-attnxvzt300u54lv9-image.png",
+    "showcase": "public/themes/attachments/showcase-att0yqxbusmbzcvk1-image.png",
+    "archiveFileName2": "msbookshelfmotif.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attnoklbsluw4mhwk-image.png",
+    "created": "2025-05-22T05:02:37.000Z",
+    "archiveFilename": "msbookshelfmotif.sit"
+  },
+  {
+    "name": "Mucho Mucha",
+    "authors": "Martha Royer",
+    "year": "2000",
+    "about": "public/themes/attachments/about-attjvlvhvzxwdwudr-image.png",
+    "showcase": "public/themes/attachments/showcase-attdjdc7huj1q8gzo-image.png",
+    "archiveFileName2": "muchomucha.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attcx7guoe6jfpk70-image.png",
+    "created": "2025-05-22T05:02:37.000Z",
+    "archiveFilename": "muchomucha.sit"
+  },
+  {
+    "name": "Muddy Black",
+    "authors": "Masaki",
+    "year": "1999",
+    "about": "public/themes/attachments/about-att1oobmpmqhyxnkf-image.png",
+    "showcase": "public/themes/attachments/showcase-attddjjwdbcyqp3qn-image.png",
+    "archiveFileName2": "muddyblack.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attb6rumdqgl0ftjj-image.png",
+    "created": "2025-05-22T05:02:37.000Z",
+    "archiveFilename": "muddyblack.sit"
+  },
+  {
+    "name": "Multi-Mac",
+    "year": "1998",
+    "about": "public/themes/attachments/about-attrhe7ceomuqzdq6-image.png",
+    "showcase": "public/themes/attachments/showcase-attu8z7prtcvccxhr-image.png",
+    "archiveFileName2": "multi-mac.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-att9hjmpvadfzkudb-image.png",
+    "created": "2025-05-22T05:08:05.000Z",
+    "archiveFilename": "multi-mac.sit"
+  },
+  {
+    "name": "MultiThread Ivy",
+    "authors": "Jorge Salvador Caffarena, Taetia Zysshe",
+    "year": "1998",
+    "about": "public/themes/attachments/about-attufwlvp2ixlbkbr-image.png",
+    "showcase": "public/themes/attachments/showcase-attr3k1vjdfl2wyrx-image.png",
+    "archiveFileName2": "multithreadembossed.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attnkf90v3i4f8jnw-image.png",
+    "created": "2025-05-22T05:09:06.000Z",
+    "archiveFilename": "multithreadembossed.sit"
+  },
+  {
+    "name": "MultiThread Lavender",
+    "authors": "Jorge Salvador Caffarena, Taetia Zysshe",
+    "year": "1998",
+    "about": "public/themes/attachments/about-attrg5icxi0o2ei83-image.png",
+    "showcase": "public/themes/attachments/showcase-attwc0wd3ffhczdxc-image.png",
+    "archiveFileName2": "multithreadembossed.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attgjcwqn8kj3uhax-image.png",
+    "created": "2025-05-22T05:09:06.000Z",
+    "archiveFilename": "multithreadembossed.sit"
+  },
+  {
+    "name": "MultiThread Magenta",
+    "authors": "Jorge Salvador Caffarena, Taetia Zysshe",
+    "year": "1998",
+    "about": "public/themes/attachments/about-attxyho8hwbpdohsv-image.png",
+    "showcase": "public/themes/attachments/showcase-atthmt6ozu9wv5csj-image.png",
+    "archiveFileName2": "multithreadembossed.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-att9zckzm8lcjpi6h-image.png",
+    "created": "2025-05-22T05:09:07.000Z",
+    "archiveFilename": "multithreadembossed.sit"
+  },
+  {
+    "name": "MultiThread Flat",
+    "authors": "Jorge Salvador Caffarena",
+    "year": "1998",
+    "about": "public/themes/attachments/about-attmzfn3vuf0gdacf-image.png",
+    "showcase": "public/themes/attachments/showcase-att9uw0m2kqatlxfx-image.png",
+    "archiveFileName2": "multithreadflat.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-att7x7fawhgf0zmmi-image.png",
+    "created": "2025-05-22T05:09:07.000Z",
+    "archiveFilename": "multithreadflat.sit"
+  },
+  {
+    "name": "MultiThread",
+    "authors": "Jorge Salvador Caffarena",
+    "year": "1998",
+    "about": "public/themes/attachments/about-atteonwfpz33lagay-image.png",
+    "showcase": "public/themes/attachments/showcase-att2wg6cictzafkdc-image.png",
+    "archiveFileName2": "multithread.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attdv3ncl2hv8ny5c-image.png",
+    "created": "2025-05-22T05:13:35.000Z",
+    "archiveFilename": "multithread.sit"
+  },
+  {
+    "name": "Mund",
+    "authors": "Brian Brasher",
+    "year": "1998",
+    "about": "public/themes/attachments/about-atthqwj3yuesqmvfo-image.png",
+    "showcase": "public/themes/attachments/showcase-attinbcla5olergyg-image.png",
+    "archiveFileName2": "mund.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attbx54ptjflwytqj-image.png",
+    "created": "2025-05-22T05:13:36.000Z",
+    "archiveFilename": "mund.sit"
   }
 ]
