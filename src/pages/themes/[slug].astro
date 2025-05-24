@@ -31,7 +31,6 @@ const themeProps = Astro.props.theme;
 const theme = themeProps.data;
 const themeId = themeProps.id;
 const paletteData = getPaletteForThemeId(themeId);
-console.log({ paletteData });
 
 const isDev =
   import.meta.env.DEV && import.meta.env.PUBLIC_SHOW_DEBUG === "true";
@@ -85,14 +84,19 @@ const fileHosts = [
   }
 
   .palette {
-    display: flex;
-    gap: 10px;
     padding-top: 10px;
   }
 
-  .palette > div {
-    height: 30px;
-    width: 30px;
+  .palette-color-item {
+    display: flex;
+    gap: 1ch;
+    align-items: center;
+  }
+
+  .palette-color {
+    display: inline-block;
+    height: 24px;
+    width: 24px;
   }
 </style>
 
@@ -163,16 +167,25 @@ const fileHosts = [
                 paletteData && (
                   <>
                     <dt>Colors:</dt>
-                    <dd class="palette">
-                      {paletteData.map((color) => {
-                        return (
-                          <div
-                            style={{
-                              backgroundColor: `rgb(${color[0]},${color[1]}, ${color[2]})`,
-                            }}
-                          />
-                        );
-                      })}
+                    <dd>
+                      <ul class="palette">
+                        {paletteData.map(({ diff, color, name }) => {
+                          return (
+                            <li class="palette-color-item">
+                              <span
+                                class="palette-color"
+                                style={{
+                                  backgroundColor: `oklab(${color.L}% ${color.a}% ${color.b}%)`,
+                                }}
+                              />
+                              <span>
+                                {name}
+                                {isDev && `diff ${diff.toFixed(1)}`}
+                              </span>
+                            </li>
+                          );
+                        })}
+                      </ul>
                     </dd>
                   </>
                 )

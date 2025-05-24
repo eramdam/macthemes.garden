@@ -1,10 +1,14 @@
 import type { Page } from "astro";
 import { z, type CollectionEntry } from "astro:content";
 import archivesData from "./themes/archive-data.json" with { type: "json" };
-import { chunk, orderBy } from "lodash-es";
+import { chunk, isEqual, orderBy, uniq } from "lodash-es";
 import { customSlugify } from "./themesLoader";
-import paletteData from "./themes/palettes.json" with { type: "json" };
+import rawPaletteData from "./themes/palettes.json" with { type: "json" };
 import type { RgbPixel } from "quantize";
+import * as colorDiff from "color-diff";
+import { parseToRgb } from "polished";
+
+const paletteData = rawPaletteData as unknown as Record<string, RgbPixel[]>;
 
 const archives = Object.keys(archivesData);
 const formatter = Intl.NumberFormat("en-US", {
@@ -178,7 +182,115 @@ export const possibleSortSlugs = SortOptionsEnum.options.flatMap((option) => {
 }) as SortOptionAndOrderSlug[];
 export const sortSlugsRegex = new RegExp(`(${possibleSortSlugs.join("|")})`);
 
-export function getPaletteForThemeId(themeId: string): RgbPixel[] | undefined {
-  // @ts-expect-error
-  return paletteData[themeId];
+// From https://www.kreativekorp.com/moccp/#Mac-OS-X-Crayons
+const targetPaletteColors = [
+  ["#ffcc66", "Cantaloupe"],
+  ["#ccff66", "Honeydew"],
+  ["#66ffcc", "Spindrift"],
+  ["#66ccff", "Sky"],
+  ["#cc66ff", "Lavender"],
+  ["#ff70cf", "Carnation"],
+  ["#000000", "Licorice"],
+  ["#ffffff", "Snow"],
+  ["#ff6666", "Salmon"],
+  ["#ffff66", "Banana"],
+  ["#66ff66", "Flora"],
+  ["#66ffff", "Ice"],
+  ["#6666ff", "Orchid"],
+  ["#ff66ff", "Bubblegum"],
+  ["#191919", "Lead"],
+  ["#e6e6e6", "Mercury"],
+  ["#ff8000", "Tangerine"],
+  ["#80ff00", "Lime"],
+  ["#00ff80", "Sea Foam"],
+  ["#0080ff", "Aqua"],
+  ["#8000ff", "Grape"],
+  ["#ff0080", "Strawberry"],
+  ["#333333", "Tungsten"],
+  ["#cccccc", "Silver"],
+  ["#ff0000", "Maraschino"],
+  ["#ffff00", "Lemon"],
+  ["#00ff00", "Spring"],
+  ["#00ffff", "Turquoise"],
+  ["#0000ff", "Blueberry"],
+  ["#ff00ff", "Magenta"],
+  ["#4c4c4c", "Iron"],
+  // Excluding very dark colors
+  ["#b3b3b3", "Magnesium"],
+  ["#804000", "Mocha"],
+  ["#408000", "Fern"],
+  ["#008040", "Moss"],
+  ["#004080", "Ocean"],
+  ["#400080", "Eggplant"],
+  ["#800040", "Maroon"],
+  ["#666666", "Steel"],
+  ["#999999", "Aluminum"],
+  ["#800000", "Cayenne"],
+  ["#808000", "Asparagus"],
+  ["#008000", "Clover"],
+  ["#008080", "Teal"],
+  ["#000080", "Midnight"],
+  ["#800080", "Plum"],
+  ["#7f7f7f", "Tin"],
+  ["#808080", "Nickel"],
+] as const;
+
+const targetColors = targetPaletteColors
+  .map(([color]) => {
+    const rgb = parseToRgb(color);
+    return {
+      R: rgb.red,
+      G: rgb.green,
+      B: rgb.blue,
+    };
+  })
+  .map(colorDiff.rgb_to_lab);
+
+export function findNameForPaletteColor(color: colorDiff.LabColor) {
+  const matchedIndex = targetColors.findIndex((targetLab) => {
+    return isEqual(targetLab, color);
+  });
+  if (matchedIndex < 0) {
+    return undefined;
+  }
+  return targetPaletteColors[matchedIndex][1];
+}
+
+export function getPaletteForThemeId(themeId: string) {
+  const rawPaletteColors = paletteData[themeId];
+
+  if (!rawPaletteColors) {
+    return undefined;
+  }
+
+  return rawPaletteColors
+    .map((rawPaletteColor) => {
+      const rawPaletteColorLab = colorDiff.rgb_to_lab({
+        R: rawPaletteColor[0],
+        G: rawPaletteColor[1],
+        B: rawPaletteColor[2],
+      });
+      const useRaw = true;
+      if (useRaw) {
+        return {
+          diff: 0,
+          color: rawPaletteColorLab,
+          name: rawPaletteColor,
+        } as const;
+      }
+
+      const closest = colorDiff.closest_lab(rawPaletteColorLab, targetColors);
+      const diff = colorDiff.diff(closest, rawPaletteColorLab);
+
+      return {
+        diff,
+        color: closest,
+        name: findNameForPaletteColor(closest),
+      } as const;
+    })
+    .filter(Boolean)
+    .filter(({ color }, index, array) => {
+      const colors = array.map(({ color: c }) => c);
+      return colors.lastIndexOf(color) === index;
+    });
 }
