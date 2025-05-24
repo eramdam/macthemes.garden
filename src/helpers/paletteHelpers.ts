@@ -74,6 +74,7 @@ export const ClassicPaletteColors = [
   ["#333333", "Gabbro"],
   ["#222222", "Basalt"],
   ["#000000", "Obsidian"],
+
   ["#7465dc", "Violet Dusk"],
   ["#5b87f2", "Sky Blue"],
   ["#62d6ac", "Ocean Green"],
@@ -84,6 +85,7 @@ export const ClassicPaletteColors = [
   ["#f87b57", "Tulip"],
   ["#da456b", "Carnation"],
   ["#bb56c3", "Orchid"],
+
   ["#8154d1", "Pale Violet"],
   ["#6876e7", "Evening Blue"],
   ["#5dbaca", "Fog"],
@@ -94,6 +96,7 @@ export const ClassicPaletteColors = [
   ["#ff9456", "Grapefruit"],
   ["#f06157", "Salmon"],
   ["#dc54ad", "Grape"],
+
   ["#5918bb", "Violet"],
   ["#1822cd", "Blue"],
   ["#18605a", "Seaweed"],
@@ -104,6 +107,7 @@ export const ClassicPaletteColors = [
   ["#ff7518", "Melon"],
   ["#f63f1b", "Red Orange"],
   ["#ed181e", "Red"],
+
   ["#6c18b0", "Royal Violet"],
   ["#4618c6", "Blue Violet"],
   ["#184b81", "Sea Blue"],
@@ -114,6 +118,7 @@ export const ClassicPaletteColors = [
   ["#ff9218", "Orange"],
   ["#fa4e19", "Fire"],
   ["#ef1f1d", "Apple"],
+
   ["#291a10", "Sepia"],
   ["#5b3d23", "Raw Sienna"],
   ["#8c6137", "Dirt"],
@@ -126,7 +131,7 @@ export const ClassicPaletteColors = [
   ["#32323e", "Cool Shale"],
 ] as const;
 
-export const targetPaletteColors = OSXPaletteColors;
+export const targetPaletteColors = ClassicPaletteColors;
 
 const targetPaletteColorsRgb = targetPaletteColors.map(([color]) => {
   const rgb = parseToRgb(color);
@@ -155,8 +160,6 @@ export function getPaletteForThemeId(
   themeId: string,
   rawPaletteColors = paletteData[themeId],
 ) {
-  // const rawPaletteColors = paletteData[themeId];
-
   if (!rawPaletteColors) {
     return undefined;
   }
@@ -199,7 +202,7 @@ export function getPaletteForThemeId(
         } as const;
       })
       .filter(Boolean)
-      .slice(0, 8),
+      .slice(0, 80),
     (c) => c.name,
   );
 }
