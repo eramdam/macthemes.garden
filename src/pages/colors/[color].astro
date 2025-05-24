@@ -10,6 +10,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import OS9Window from "../../components/OS9Window.astro";
 import { getCollection, getEntries } from "astro:content";
 import { SingleTheme } from "../../components/singleTheme";
+import { orderBy } from "lodash-es";
 
 export const prerender = true;
 export const getStaticPaths = (() => {
@@ -25,18 +26,28 @@ export const getStaticPaths = (() => {
   });
 }) satisfies GetStaticPaths;
 const { color } = Astro.props;
-const themesForColor = (await getCollection("themes"))
-  .filter((t) => {
+const themesForColor = orderBy(
+  (await getCollection("themes")).filter((t) => {
     return getPaletteForThemeId(t.id)?.some((c) => {
       return c.name === color[1];
     });
-  })
-  .map((t) => {
-    return {
-      ...t,
-      likes: 0,
-    };
-  });
+  }),
+  (t) => {
+    const palette = getPaletteForThemeId(t.id);
+    if (!palette) {
+      return undefined;
+    }
+
+    // Use the index of the color (lower is more prominent) to sort the themes.
+    return palette.map((c) => c.name).indexOf(color[1]);
+  },
+  "asc"
+).map((t) => {
+  return {
+    ...t,
+    likes: 0,
+  };
+});
 ---
 
 <style>
@@ -51,13 +62,9 @@ const themesForColor = (await getCollection("themes"))
       </h1>
       <div class="themes-grid">
         {
-          sortThemes(
-            themesForColor,
-            SortOptionsEnum.enum.name,
-            SortOrdersEnum.enum.asc
-          )
+          themesForColor
             .map((t) => t.data)
-            .map(async (theme, index) => {
+            .map(async (theme) => {
               const authors = (await getEntries(theme.authors)).map(
                 (a) => a.data
               );
