@@ -2,17 +2,7 @@
 import { uniq } from "lodash-es";
 import OS9Window from "../components/OS9Window.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import palettes from "../themes/palettes.json" with { type: "json" };
-
-const allColors = uniq(
-  Object.values(palettes)
-    .flatMap((p) => p)
-    .map((p) => {
-      return `rgb(${p[0]},${p[1]},${p[2]})`;
-    })
-).toSorted();
-
-console.log(allColors);
+import { ThemePaletteDebugger } from "../components/themePaletteDebugger";
 ---
 
 <style>
@@ -30,14 +20,6 @@ console.log(allColors);
 </style>
 <BaseLayout title="Palettes">
   <OS9Window asElement="main" title="Palettes">
-    <div class="palette">
-      {
-        allColors.map((color) => {
-          return (
-            <div class="palette-color" style={{ backgroundColor: color }} />
-          );
-        })
-      }
-    </div>
+    <ThemePaletteDebugger client:only />
   </OS9Window>
 </BaseLayout>

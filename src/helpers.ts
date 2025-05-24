@@ -6,7 +6,7 @@ import { customSlugify } from "./themesLoader";
 import rawPaletteData from "./themes/palettes.json" with { type: "json" };
 import type { RgbPixel } from "quantize";
 import * as colorDiff from "color-diff";
-import { parseToRgb } from "polished";
+import { parseToRgb, toColorString } from "polished";
 
 const paletteData = rawPaletteData as unknown as Record<string, RgbPixel[]>;
 
@@ -215,7 +215,6 @@ const targetPaletteColors = [
   ["#0000ff", "Blueberry"],
   ["#ff00ff", "Magenta"],
   ["#4c4c4c", "Iron"],
-  // Excluding very dark colors
   ["#b3b3b3", "Magnesium"],
   ["#804000", "Mocha"],
   ["#408000", "Fern"],
@@ -270,12 +269,16 @@ export function getPaletteForThemeId(themeId: string) {
         G: rawPaletteColor[1],
         B: rawPaletteColor[2],
       });
-      const useRaw = true;
+      const useRaw = false;
       if (useRaw) {
         return {
           diff: 0,
           color: rawPaletteColorLab,
-          name: rawPaletteColor,
+          name: toColorString({
+            red: rawPaletteColor[0],
+            green: rawPaletteColor[1],
+            blue: rawPaletteColor[2],
+          }),
         } as const;
       }
 
@@ -292,5 +295,6 @@ export function getPaletteForThemeId(themeId: string) {
     .filter(({ color }, index, array) => {
       const colors = array.map(({ color: c }) => c);
       return colors.lastIndexOf(color) === index;
-    });
+    })
+    .slice(0, 8);
 }

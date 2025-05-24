@@ -85,6 +85,9 @@ const fileHosts = [
 
   .palette {
     padding-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
   }
 
   .palette-color-item {
@@ -93,10 +96,15 @@ const fileHosts = [
     align-items: center;
   }
 
+  .palette-color-name {
+    display: none;
+  }
+
   .palette-color {
     display: inline-block;
-    height: 24px;
-    width: 24px;
+    height: 36px;
+    width: 36px;
+    border: 1px solid black;
   }
 </style>
 
@@ -178,7 +186,7 @@ const fileHosts = [
                                   backgroundColor: `oklab(${color.L}% ${color.a}% ${color.b}%)`,
                                 }}
                               />
-                              <span>
+                              <span class="palette-color-name">
                                 {name}
                                 {isDev && `diff ${diff.toFixed(1)}`}
                               </span>
