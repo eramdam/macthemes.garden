@@ -2,11 +2,9 @@
 import type { GetStaticPaths } from "astro";
 import {
   getPaletteForThemeId,
-  SortOptionsEnum,
-  SortOrdersEnum,
-  sortThemes,
   targetPaletteColors,
-} from "../../helpers";
+} from "../../helpers/paletteHelpers";
+import { SortOptionsEnum, SortOrdersEnum, sortThemes } from "../../helpers";
 import { customSlugify } from "../../themesLoader";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import OS9Window from "../../components/OS9Window.astro";

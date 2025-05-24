@@ -30,10 +30,15 @@ export async function getPaletteForTheme(
   for (const pixel of pixels) {
     const mappedPixel = getReducedPixel(pixel, colorMap);
     const existingPixelScore = colorScores.get(mappedPixel);
+    const isGrayscale =
+      mappedPixel[0] === mappedPixel[1] && mappedPixel[1] === mappedPixel[2];
+    const isVeryDark =
+      mappedPixel[0] < 30 && mappedPixel[1] < 30 && mappedPixel[2] < 30;
+    const scoreBonus = isGrayscale || isVeryDark ? 1 : 4;
     if (!existingPixelScore) {
-      colorScores.set(mappedPixel, 1);
+      colorScores.set(mappedPixel, 1 * scoreBonus);
     } else {
-      colorScores.set(mappedPixel, existingPixelScore + 1);
+      colorScores.set(mappedPixel, existingPixelScore + 1 * scoreBonus);
     }
   }
 

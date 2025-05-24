@@ -1,10 +1,7 @@
-import path from "path";
-import quantize, { type RgbPixel } from "quantize";
-import sharp from "sharp";
-import { themesLoader } from "../src/themesLoader";
-import { getPaletteForTheme } from "../src/helpers/thumbnailHelpers";
 import fs from "fs-extra";
-import { memoize, orderBy, sortBy } from "lodash-es";
+import { type RgbPixel } from "quantize";
+import { getPaletteForTheme } from "../src/helpers/thumbnailHelpers";
+import { themesLoader } from "../src/themesLoader";
 
 (async () => {
   const themes = await themesLoader();
