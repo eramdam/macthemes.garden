@@ -1,7 +1,6 @@
 import { ActionError, defineAction } from "astro:actions";
 import { z } from "astro:content";
-import { and, db, eq, Like, Theme } from "astro:db";
-import { v4 } from "uuid";
+import { db, eq, Theme } from "astro:db";
 import {
   addLikeForThemeFromUserId,
   generateUserUUID,
