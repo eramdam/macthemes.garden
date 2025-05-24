@@ -3,6 +3,8 @@ import { z, type CollectionEntry } from "astro:content";
 import archivesData from "./themes/archive-data.json" with { type: "json" };
 import { chunk, orderBy } from "lodash-es";
 import { customSlugify } from "./themesLoader";
+import paletteData from "./themes/palettes.json" with { type: "json" };
+import type { RgbPixel } from "quantize";
 
 const archives = Object.keys(archivesData);
 const formatter = Intl.NumberFormat("en-US", {
@@ -175,3 +177,8 @@ export const possibleSortSlugs = SortOptionsEnum.options.flatMap((option) => {
   });
 }) as SortOptionAndOrderSlug[];
 export const sortSlugsRegex = new RegExp(`(${possibleSortSlugs.join("|")})`);
+
+export function getPaletteForThemeId(themeId: string): RgbPixel[] | undefined {
+  // @ts-expect-error
+  return paletteData[themeId];
+}

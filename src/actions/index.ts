@@ -14,18 +14,20 @@ import { themesLoader } from "../themesLoader";
 const themes = await themesLoader();
 const possibleIds = new Set(themes.map((t) => t.id));
 
+const zodThemeId = z.string().refine(
+  (rawString) => {
+    return possibleIds.has(rawString);
+  },
+  {
+    message: "String is not a valid theme ID",
+  },
+);
+
 export const server = {
   toggleLike: defineAction({
     accept: "json",
     input: z.object({
-      themeId: z.string().refine(
-        (rawString) => {
-          return possibleIds.has(rawString);
-        },
-        {
-          message: "String is not a valid theme ID",
-        },
-      ),
+      themeId: zodThemeId,
     }),
     handler: async (input, context) => {
       const userId = generateUserUUID(context.clientAddress);

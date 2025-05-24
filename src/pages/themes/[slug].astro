@@ -7,7 +7,11 @@ import {
 } from "../../components/authorsFormatter";
 import OS9Window from "../../components/OS9Window.astro";
 import ServerLikeButton from "../../components/ServerLikeButton.astro";
-import { archiveFileSize, archiveMd5 } from "../../helpers";
+import {
+  archiveFileSize,
+  archiveMd5,
+  getPaletteForThemeId,
+} from "../../helpers";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 export const prerender = true;
 
@@ -26,6 +30,8 @@ export const getStaticPaths = (async () => {
 const themeProps = Astro.props.theme;
 const theme = themeProps.data;
 const themeId = themeProps.id;
+const paletteData = getPaletteForThemeId(themeId);
+console.log({ paletteData });
 
 const isDev =
   import.meta.env.DEV && import.meta.env.PUBLIC_SHOW_DEBUG === "true";
@@ -77,6 +83,17 @@ const fileHosts = [
     display: flex;
     flex-direction: column;
   }
+
+  .palette {
+    display: flex;
+    gap: 10px;
+    padding-top: 10px;
+  }
+
+  .palette > div {
+    height: 30px;
+    width: 30px;
+  }
 </style>
 
 <BaseLayout
@@ -106,7 +123,7 @@ const fileHosts = [
         </div>
         <div class="infos">
           <dl>
-            <dl>
+            <>
               <dt>Name:</dt>
               <dd>{theme.name}</dd>
 
@@ -141,6 +158,25 @@ const fileHosts = [
                   </dd>
                 </div>
               </ServerLikeButton>
+
+              {
+                paletteData && (
+                  <>
+                    <dt>Colors:</dt>
+                    <dd class="palette">
+                      {paletteData.map((color) => {
+                        return (
+                          <div
+                            style={{
+                              backgroundColor: `rgb(${color[0]},${color[1]}, ${color[2]})`,
+                            }}
+                          />
+                        );
+                      })}
+                    </dd>
+                  </>
+                )
+              }
 
               <dt>Archive file:</dt>
               <dd style={"font-family: monospace;"}>
@@ -196,7 +232,7 @@ const fileHosts = [
                   </Fragment>
                 )
               }
-            </dl>
+            </>
           </dl>
         </div>
       </div>
