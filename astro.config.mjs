@@ -13,6 +13,7 @@ export default defineConfig({
     ...(!isDev
       ? {
           "/debug": "/",
+          "/palettes": "/",
         }
       : {}),
   },
