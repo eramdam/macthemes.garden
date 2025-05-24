@@ -182,71 +182,142 @@ export const possibleSortSlugs = SortOptionsEnum.options.flatMap((option) => {
 }) as SortOptionAndOrderSlug[];
 export const sortSlugsRegex = new RegExp(`(${possibleSortSlugs.join("|")})`);
 
-// From https://www.kreativekorp.com/moccp/#Mac-OS-X-Crayons
-const targetPaletteColors = [
-  ["#ffcc66", "Cantaloupe"],
-  ["#ccff66", "Honeydew"],
-  ["#66ffcc", "Spindrift"],
-  ["#66ccff", "Sky"],
-  ["#cc66ff", "Lavender"],
-  ["#ff70cf", "Carnation"],
+// https://www.kreativekorp.com/moccp/#Mac-OS-X-Crayons
+export const OSXPaletteColors = [
   ["#000000", "Licorice"],
-  ["#ffffff", "Snow"],
-  ["#ff6666", "Salmon"],
-  ["#ffff66", "Banana"],
-  ["#66ff66", "Flora"],
-  ["#66ffff", "Ice"],
-  ["#6666ff", "Orchid"],
-  ["#ff66ff", "Bubblegum"],
   ["#191919", "Lead"],
-  ["#e6e6e6", "Mercury"],
-  ["#ff8000", "Tangerine"],
-  ["#80ff00", "Lime"],
-  ["#00ff80", "Sea Foam"],
-  ["#0080ff", "Aqua"],
-  ["#8000ff", "Grape"],
-  ["#ff0080", "Strawberry"],
   ["#333333", "Tungsten"],
-  ["#cccccc", "Silver"],
-  ["#ff0000", "Maraschino"],
-  ["#ffff00", "Lemon"],
-  ["#00ff00", "Spring"],
-  ["#00ffff", "Turquoise"],
-  ["#0000ff", "Blueberry"],
-  ["#ff00ff", "Magenta"],
   ["#4c4c4c", "Iron"],
-  ["#b3b3b3", "Magnesium"],
-  ["#804000", "Mocha"],
-  ["#408000", "Fern"],
-  ["#008040", "Moss"],
-  ["#004080", "Ocean"],
-  ["#400080", "Eggplant"],
-  ["#800040", "Maroon"],
   ["#666666", "Steel"],
-  ["#999999", "Aluminum"],
-  ["#800000", "Cayenne"],
-  ["#808000", "Asparagus"],
-  ["#008000", "Clover"],
-  ["#008080", "Teal"],
-  ["#000080", "Midnight"],
-  ["#800080", "Plum"],
   ["#7f7f7f", "Tin"],
   ["#808080", "Nickel"],
+  ["#999999", "Aluminum"],
+  ["#b3b3b3", "Magnesium"],
+  ["#cccccc", "Silver"],
+  ["#e6e6e6", "Mercury"],
+  ["#ffffff", "Snow"],
+
+  ["#800000", "Cayenne"],
+  ["#804000", "Mocha"],
+  ["#808000", "Asparagus"],
+  ["#408000", "Fern"],
+  ["#008000", "Clover"],
+  ["#008040", "Moss"],
+  ["#008080", "Teal"],
+  ["#004080", "Ocean"],
+  ["#000080", "Midnight"],
+  ["#400080", "Eggplant"],
+  ["#800080", "Plum"],
+  ["#800040", "Maroon"],
+
+  ["#ff0000", "Maraschino"],
+  ["#ff8000", "Tangerine"],
+  ["#ffff00", "Lemon"],
+  ["#80ff00", "Lime"],
+  ["#00ff00", "Spring"],
+  ["#00ff80", "Sea Foam"],
+  ["#00ffff", "Turquoise"],
+  ["#0080ff", "Aqua"],
+  ["#0000ff", "Blueberry"],
+  ["#8000ff", "Grape"],
+  ["#ff00ff", "Magenta"],
+  ["#ff0080", "Strawberry"],
+
+  ["#ff6666", "Salmon"],
+  ["#ffcc66", "Cantaloupe"],
+  ["#ffff66", "Banana"],
+  ["#ccff66", "Honeydew"],
+  ["#66ff66", "Flora"],
+  ["#66ffcc", "Spindrift"],
+  ["#66ffff", "Ice"],
+  ["#66ccff", "Sky"],
+  ["#6666ff", "Orchid"],
+  ["#cc66ff", "Lavender"],
+  ["#ff66ff", "Bubblegum"],
+  ["#ff70cf", "Carnation"],
 ] as const;
 
-const targetColors = targetPaletteColors
-  .map(([color]) => {
-    const rgb = parseToRgb(color);
-    return {
-      R: rgb.red,
-      G: rgb.green,
-      B: rgb.blue,
-    };
-  })
-  .map(colorDiff.rgb_to_lab);
+// https://www.kreativekorp.com/moccp/#Mac-OS-Classic-Crayons
+export const ClassicPaletteColors = [
+  ["#ffffff", "Chalk"],
+  ["#eeeeee", "Marble"],
+  ["#cccccc", "Soapstone"],
+  ["#aaaaaa", "Concrete"],
+  ["#888888", "Granite"],
+  ["#777777", "Flint"],
+  ["#555555", "Shale"],
+  ["#333333", "Gabbro"],
+  ["#222222", "Basalt"],
+  ["#000000", "Obsidian"],
+  ["#7465dc", "Violet Dusk"],
+  ["#5b87f2", "Sky Blue"],
+  ["#62d6ac", "Ocean Green"],
+  ["#5fbd71", "Spring Frost"],
+  ["#7e835b", "Mildew"],
+  ["#e6e658", "Mustard"],
+  ["#ffbf56", "Canteloupe"],
+  ["#f87b57", "Tulip"],
+  ["#da456b", "Carnation"],
+  ["#bb56c3", "Orchid"],
+  ["#8154d1", "Pale Violet"],
+  ["#6876e7", "Evening Blue"],
+  ["#5dbaca", "Fog"],
+  ["#60ca8e", "Chlorine"],
+  ["#71985e", "Moss"],
+  ["#b2b459", "Olive"],
+  ["#ffe957", "Banana"],
+  ["#ff9456", "Grapefruit"],
+  ["#f06157", "Salmon"],
+  ["#dc54ad", "Grape"],
+  ["#5918bb", "Violet"],
+  ["#1822cd", "Blue"],
+  ["#18605a", "Seaweed"],
+  ["#2f8b20", "Clover"],
+  ["#8cbc1c", "Cactus"],
+  ["#ffea18", "Lemon"],
+  ["#ffaf18", "Tangerine"],
+  ["#ff7518", "Melon"],
+  ["#f63f1b", "Red Orange"],
+  ["#ed181e", "Red"],
+  ["#6c18b0", "Royal Violet"],
+  ["#4618c6", "Blue Violet"],
+  ["#184b81", "Sea Blue"],
+  ["#187534", "Pine"],
+  ["#5da31e", "Fern"],
+  ["#bad41a", "Watercress"],
+  ["#ffcc18", "Marigold"],
+  ["#ff9218", "Orange"],
+  ["#fa4e19", "Fire"],
+  ["#ef1f1d", "Apple"],
+  ["#291a10", "Sepia"],
+  ["#5b3d23", "Raw Sienna"],
+  ["#8c6137", "Dirt"],
+  ["#be844a", "Tan"],
+  ["#cdc7c1", "Warm Marble"],
+  ["#8c8073", "Warm Granite"],
+  ["#3e3832", "Warm Shale"],
+  ["#c1c1cd", "Cool Marble"],
+  ["#73738c", "Cool Granite"],
+  ["#32323e", "Cool Shale"],
+] as const;
 
-export function findNameForPaletteColor(color: colorDiff.LabColor) {
-  const matchedIndex = targetColors.findIndex((targetLab) => {
+export const targetPaletteColors = OSXPaletteColors;
+
+const targetPaletteColorsRgb = targetPaletteColors.map(([color]) => {
+  const rgb = parseToRgb(color);
+  return {
+    R: rgb.red,
+    G: rgb.green,
+    B: rgb.blue,
+  };
+});
+
+export const targetPaletteColorsLab = targetPaletteColorsRgb.map(
+  colorDiff.rgb_to_lab,
+);
+
+export function findNameForPaletteColor(color: colorDiff.RGBColor) {
+  const matchedIndex = targetPaletteColorsRgb.findIndex((targetLab) => {
     return isEqual(targetLab, color);
   });
   if (matchedIndex < 0) {
@@ -273,7 +344,11 @@ export function getPaletteForThemeId(themeId: string) {
       if (useRaw) {
         return {
           diff: 0,
-          color: rawPaletteColorLab,
+          color: {
+            R: rawPaletteColor[0],
+            G: rawPaletteColor[1],
+            B: rawPaletteColor[2],
+          },
           name: toColorString({
             red: rawPaletteColor[0],
             green: rawPaletteColor[1],
@@ -282,8 +357,15 @@ export function getPaletteForThemeId(themeId: string) {
         } as const;
       }
 
-      const closest = colorDiff.closest_lab(rawPaletteColorLab, targetColors);
-      const diff = colorDiff.diff(closest, rawPaletteColorLab);
+      const closest = colorDiff.closest(
+        {
+          R: rawPaletteColor[0],
+          G: rawPaletteColor[1],
+          B: rawPaletteColor[2],
+        },
+        targetPaletteColorsRgb,
+      );
+      const diff = 0;
 
       return {
         diff,
@@ -296,5 +378,5 @@ export function getPaletteForThemeId(themeId: string) {
       const colors = array.map(({ color: c }) => c);
       return colors.lastIndexOf(color) === index;
     })
-    .slice(0, 8);
+    .slice(0, 6);
 }

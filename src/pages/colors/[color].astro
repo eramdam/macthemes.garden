@@ -1,0 +1,73 @@
+---
+import type { GetStaticPaths } from "astro";
+import {
+  getPaletteForThemeId,
+  SortOptionsEnum,
+  SortOrdersEnum,
+  sortThemes,
+  targetPaletteColors,
+} from "../../helpers";
+import { customSlugify } from "../../themesLoader";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import OS9Window from "../../components/OS9Window.astro";
+import { getCollection, getEntries } from "astro:content";
+import { SingleTheme } from "../../components/singleTheme";
+
+export const prerender = true;
+export const getStaticPaths = (() => {
+  return targetPaletteColors.map((color) => {
+    return {
+      props: {
+        color: color,
+      },
+      params: {
+        color: customSlugify(color[1]).toLowerCase(),
+      },
+    };
+  });
+}) satisfies GetStaticPaths;
+const { color } = Astro.props;
+const themesForColor = (await getCollection("themes"))
+  .filter((t) => {
+    return getPaletteForThemeId(t.id)?.some((c) => {
+      return c.name === color[1];
+    });
+  })
+  .map((t) => {
+    return {
+      ...t,
+      likes: 0,
+    };
+  });
+---
+
+<style>
+  .single-color-page {
+  }
+</style>
+<BaseLayout title={color[1]}>
+  <OS9Window title={color[1]} asElement="main">
+    <div class="single-theme-page">
+      <h1 class="single-theme-title">
+        Themes with {color[1]}
+      </h1>
+      <div class="themes-grid">
+        {
+          sortThemes(
+            themesForColor,
+            SortOptionsEnum.enum.name,
+            SortOrdersEnum.enum.asc
+          )
+            .map((t) => t.data)
+            .map(async (theme, index) => {
+              const authors = (await getEntries(theme.authors)).map(
+                (a) => a.data
+              );
+
+              return <SingleTheme theme={theme} authors={authors} />;
+            })
+        }
+      </div>
+    </div>
+  </OS9Window>
+</BaseLayout>

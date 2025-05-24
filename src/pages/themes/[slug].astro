@@ -13,6 +13,7 @@ import {
   getPaletteForThemeId,
 } from "../../helpers";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { customSlugify } from "../../themesLoader";
 export const prerender = true;
 
 export const getStaticPaths = (async () => {
@@ -87,7 +88,9 @@ const fileHosts = [
     padding-top: 10px;
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    /* display: grid; */
+    /* grid-template-columns: repeat(3, 1fr); */
+    gap: 6px;
   }
 
   .palette-color-item {
@@ -97,13 +100,14 @@ const fileHosts = [
   }
 
   .palette-color-name {
+    font-size: 14px;
     display: none;
   }
 
   .palette-color {
     display: inline-block;
-    height: 36px;
-    width: 36px;
+    height: 24px;
+    width: 24px;
     border: 1px solid black;
   }
 </style>
@@ -179,17 +183,23 @@ const fileHosts = [
                       <ul class="palette">
                         {paletteData.map(({ diff, color, name }) => {
                           return (
-                            <li class="palette-color-item">
-                              <span
-                                class="palette-color"
-                                style={{
-                                  backgroundColor: `oklab(${color.L}% ${color.a}% ${color.b}%)`,
-                                }}
-                              />
-                              <span class="palette-color-name">
-                                {name}
-                                {isDev && `diff ${diff.toFixed(1)}`}
-                              </span>
+                            <li>
+                              <a
+                                class="palette-color-item"
+                                href={`/colors/${customSlugify(name!).toLowerCase()}`}
+                              >
+                                <span
+                                  class="palette-color"
+                                  style={{
+                                    backgroundColor: `rgb(${color.R}, ${color.G}, ${color.B})`,
+                                    // backgroundColor: `oklab(${color.L}% ${color.a}% ${color.b}%)`,
+                                  }}
+                                />
+                                <span class="palette-color-name">
+                                  {name}
+                                  {isDev && `diff ${diff.toFixed(1)}`}
+                                </span>
+                              </a>
                             </li>
                           );
                         })}
