@@ -10,38 +10,38 @@ import { customSlugify } from "../themesLoader";
   @use "sass:math";
   :root {
     --color-picker-size: 14px;
-    --scale: 1.6;
-    --color-picker-item-diag: (var(--color-picker-size) * var(--scale)) *
+    --color-picker-scale: 2.4;
+    --color-picker-item-diag: (
+        var(--color-picker-size) * var(--color-picker-scale)
+      ) *
       sqrt(2);
   }
   .color-picker-wrapper {
     overflow: hidden;
     height: calc(var(--color-picker-item-diag) * 5);
-    padding-top: calc(var(--color-picker-item-diag) / 2);
+    position: relative;
   }
   .color-picker {
     display: grid;
     grid-template-columns: repeat(
       12,
-      calc(var(--color-picker-size) * var(--scale))
+      calc(var(--color-picker-size) * var(--color-picker-scale))
     );
     grid-template-rows: repeat(
       13,
-      calc(var(--color-picker-size) * var(--scale))
+      calc(var(--color-picker-size) * var(--color-picker-scale))
     );
-    width: calc(20 * var(--color-picker-size));
     grid-auto-flow: row;
-    rotate: -45deg;
-    translate: 0 calc(var(--color-picker-item-diag) * -2.8);
+    transform: translate(-50%, -50%) rotate(-45deg);
+    top: 50%;
+    left: 50%;
+    position: absolute;
     transform-origin: center center;
-    gap: 1px;
-
-    margin: 0 auto;
   }
 
   .color-picker-block {
-    height: calc(var(--color-picker-size) * var(--scale));
-    width: calc(var(--color-picker-size) * var(--scale));
+    height: calc(var(--color-picker-size) * var(--color-picker-scale));
+    width: calc(var(--color-picker-size) * var(--color-picker-scale));
     box-shadow: 0 0 0 1px black;
   }
 
@@ -127,11 +127,30 @@ import { customSlugify } from "../themesLoader";
       });
     });
   }
+
+  document
+    .querySelector<HTMLInputElement>(".color-picker-sizer")
+    ?.addEventListener("input", (e) => {
+      if (e.currentTarget instanceof HTMLInputElement) {
+        document.documentElement.style.setProperty(
+          "--color-picker-scale",
+          e.currentTarget.value
+        );
+      }
+    });
 </script>
 <BaseLayout title="Colors">
   <OS9Window title="Colors" asElement="main">
     <section class="page">
       <h2>Choose a color to explore themes:</h2>
+      <!-- <input
+        type="range"
+        class="color-picker-sizer"
+        min="1"
+        max="3.6"
+        step="0.01"
+        value="2"
+      /> -->
       <div class="color-picker-wrapper">
         <div class="color-picker">
           {
