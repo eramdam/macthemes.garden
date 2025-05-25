@@ -85,15 +85,17 @@ const fileHosts = [
     padding-top: 10px;
     display: flex;
     flex-wrap: wrap;
-    /* display: grid; */
-    /* grid-template-columns: repeat(3, 1fr); */
-    gap: 6px;
+    gap: 10px;
   }
 
   .palette-color-item {
     display: flex;
     gap: 1ch;
     align-items: center;
+  }
+
+  .palette-color-item:hover {
+    transform: scale(1.6);
   }
 
   .palette-color-name {
@@ -105,7 +107,7 @@ const fileHosts = [
     display: inline-block;
     height: 24px;
     width: 24px;
-    border: 1px solid black;
+    box-shadow: 0 0 0 1px black;
   }
 </style>
 
