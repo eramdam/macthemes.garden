@@ -202,7 +202,7 @@ export function getPaletteForThemeId(
         } as const;
       })
       .filter(Boolean)
-      .slice(0, 80),
+      .slice(0, 6),
     (c) => c.name,
   );
 }
