@@ -1,12 +1,12 @@
+import { orderBy } from "lodash-es";
 import path from "path";
 import quantize, { type RgbPixel } from "quantize";
 import sharp from "sharp";
 import type { themesLoader } from "../themesLoader";
-import { orderBy } from "lodash-es";
 
 export async function getPaletteForTheme(
   theme: Awaited<ReturnType<typeof themesLoader>>[number],
-) {
+): Promise<RgbPixel[] | undefined> {
   const thumbnailSharp = sharp(path.join("public", theme.mainThumbnail));
   const { width } = await thumbnailSharp.metadata();
   const resizedSharp = thumbnailSharp
@@ -14,7 +14,7 @@ export async function getPaletteForTheme(
       width: width / 4,
       kernel: "nearest",
     })
-    .png();
+    .png({ force: true });
   const [red, green, blue, alpha] = await Promise.all([
     resizedSharp.extractChannel("red").raw().toBuffer(),
     resizedSharp.extractChannel("green").raw().toBuffer(),
@@ -54,7 +54,7 @@ export async function getPaletteForTheme(
 
   return orderBy(
     // For some reason `quantize` returns pixel values from 1-256? I think?? So I need to -1 everything lmao.
-    paletteColors.map((p) => p.map((n) => n - 1)),
+    paletteColors.map((p) => p.map((n) => n - 1)) as RgbPixel[],
     (p) => {
       return colorScores.get(p) ?? 0;
     },

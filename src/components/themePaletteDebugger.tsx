@@ -20,7 +20,7 @@ export function ThemePaletteDebugger() {
     if (data && data.palette) {
       themeThumbnail.value = data.thumbnail;
       themePalette.value = data.palette;
-      getPaletteForThemeId.cache.clear?.();
+      getPaletteForThemeId.cache?.clear?.();
       themePaletteMatches.value = getPaletteForThemeId(
         String(form.themeId.value).trim(),
         data.palette,
