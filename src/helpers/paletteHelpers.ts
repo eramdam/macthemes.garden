@@ -1,7 +1,7 @@
 import rawPaletteData from "../themes/palettes.json" with { type: "json" };
 
 import * as colorDiff from "color-diff";
-import { isEqual, uniqBy } from "lodash-es";
+import { isEqual, memoize, uniqBy } from "lodash-es";
 import { parseToRgb, toColorString } from "polished";
 import type { RgbPixel } from "quantize";
 
@@ -156,7 +156,17 @@ export function findNameForPaletteColor(color: colorDiff.RGBColor) {
   return targetPaletteColors[matchedIndex][1];
 }
 
-export function getPaletteForThemeId(
+export function findHexForPaletteColor(color: colorDiff.RGBColor) {
+  const matchedIndex = targetPaletteColorsRgb.findIndex((targetLab) => {
+    return isEqual(targetLab, color);
+  });
+  if (matchedIndex < 0) {
+    return undefined;
+  }
+  return targetPaletteColors[matchedIndex][0];
+}
+
+function _getPaletteForThemeId(
   themeId: string,
   rawPaletteColors = paletteData[themeId],
 ) {
@@ -198,6 +208,7 @@ export function getPaletteForThemeId(
           diff,
           color: closest,
           rawPaletteColor,
+          hex: findHexForPaletteColor(closest),
           name: findNameForPaletteColor(closest),
         } as const;
       })
@@ -206,3 +217,5 @@ export function getPaletteForThemeId(
     (c) => c.name,
   );
 }
+
+export const getPaletteForThemeId = memoize(_getPaletteForThemeId);

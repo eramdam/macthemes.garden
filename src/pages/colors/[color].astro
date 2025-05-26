@@ -1,16 +1,15 @@
 ---
 import type { GetStaticPaths } from "astro";
+import { getCollection, getEntries } from "astro:content";
+import { orderBy } from "lodash-es";
+import OS9Window from "../../components/OS9Window.astro";
+import { SingleTheme } from "../../components/singleTheme";
 import {
   getPaletteForThemeId,
   targetPaletteColors,
 } from "../../helpers/paletteHelpers";
-import { SortOptionsEnum, SortOrdersEnum, sortThemes } from "../../helpers";
-import { customSlugify } from "../../themesLoader";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import OS9Window from "../../components/OS9Window.astro";
-import { getCollection, getEntries } from "astro:content";
-import { SingleTheme } from "../../components/singleTheme";
-import { orderBy } from "lodash-es";
+import { customSlugify } from "../../themesLoader";
 
 export const prerender = true;
 export const getStaticPaths = (() => {
@@ -26,28 +25,18 @@ export const getStaticPaths = (() => {
   });
 }) satisfies GetStaticPaths;
 const { color } = Astro.props;
+const paletteColors = await getCollection("paletteColors");
+const matchingPaletteColor =
+  paletteColors.find((p) => p.data.hex === color[0]) || paletteColors[0];
+const themes = await getEntries(matchingPaletteColor.data.themes);
 const themesForColor = orderBy(
-  (await getCollection("themes")).filter((t) => {
-    return getPaletteForThemeId(t.id)?.some((c) => {
-      return c.name === color[1];
-    });
-  }),
+  themes,
   (t) => {
-    const palette = getPaletteForThemeId(t.id);
-    if (!palette) {
-      return undefined;
-    }
-
     // Use the index of the color (lower is more prominent) to sort the themes.
-    return palette.map((c) => c.name).indexOf(color[1]);
+    return t.data.colors.map((c) => c.id).indexOf(color[0]);
   },
   "asc"
-).map((t) => {
-  return {
-    ...t,
-    likes: 0,
-  };
-});
+);
 ---
 
 <style>

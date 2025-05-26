@@ -12,9 +12,7 @@ export function ThemePaletteDebugger() {
 
   const onSubmit: JSX.SubmitEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    console.log("aaaaaa");
     const form = e.target as HTMLFormElement;
-    console.log(form.themeId.value);
     const { data } = await actions.debugPalette({
       themeId: String(form.themeId.value).trim(),
     });
@@ -22,6 +20,7 @@ export function ThemePaletteDebugger() {
     if (data && data.palette) {
       themeThumbnail.value = data.thumbnail;
       themePalette.value = data.palette;
+      getPaletteForThemeId.cache.clear?.();
       themePaletteMatches.value = getPaletteForThemeId(
         String(form.themeId.value).trim(),
         data.palette,
