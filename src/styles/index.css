@@ -255,8 +255,7 @@ footer p {
   font-weight: bold;
 }
 
-.single-color-title,
-.single-theme-title {
+:where(.single-color-title, .single-theme-title) {
   text-align: center;
 }
 
