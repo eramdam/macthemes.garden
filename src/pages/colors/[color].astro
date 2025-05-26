@@ -8,6 +8,7 @@ import { targetPaletteColors } from "../../helpers/paletteHelpers";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { customSlugify } from "../../themesLoader";
 import ColorPicker from "../../components/ColorPicker.astro";
+import { ClientRouter } from "astro:transitions";
 
 export const prerender = true;
 export const getStaticPaths = (() => {
@@ -46,6 +47,7 @@ const themesForColor = orderBy(
     border: 1px solid black;
   }
 </style>
+<ClientRouter />
 <BaseLayout title={color[1]}>
   <OS9Window title={color[1]} asElement="main">
     <div class="single-color-page">
