@@ -11,6 +11,14 @@ const scale = Astro.props.initialScale ?? 2.4;
 <style lang="scss" define:vars={{ initialScale: scale }}>
   @use "sass:math";
 
+  .color-picker-component {
+    width: calc(var(--color-picker-item-diag) * 11.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
   .color-picker-wrapper {
     --color-picker-size: 14px;
     --color-picker-scale: var(--initialScale);
@@ -20,8 +28,11 @@ const scale = Astro.props.initialScale ?? 2.4;
       sqrt(2);
 
     overflow: hidden;
-    height: calc(var(--color-picker-item-diag) * 5);
+    height: calc(var(--color-picker-item-diag) * 4.5);
+    width: calc(var(--color-picker-item-diag) * 11.5);
     position: relative;
+  }
+  .color-picker-current-name {
   }
   .color-picker {
     display: grid;
@@ -101,35 +112,38 @@ const scale = Astro.props.initialScale ?? 2.4;
   }
 </style>
 
-<div class="color-picker-wrapper">
-  <div class="color-picker">
-    {
-      targetPaletteColors.map((color) => {
-        return (
-          <a
-            href={`/colors/${customSlugify(color[1]).toLowerCase()}`}
-            class="color-picker-item"
-            title={color[1]}
-          >
-            <div
-              class="color-picker-block"
-              style={{
-                backgroundColor: color[0],
-              }}
-            />
-          </a>
-        );
-      })
-    }
+<div class="color-picker-component">
+  <div class="color-picker-wrapper">
+    <div class="color-picker">
+      {
+        targetPaletteColors.map((color) => {
+          return (
+            <a
+              href={`/colors/${customSlugify(color[1]).toLowerCase()}`}
+              class="color-picker-item"
+              title={color[1]}
+            >
+              <div
+                class="color-picker-block"
+                style={{
+                  backgroundColor: color[0],
+                }}
+              />
+            </a>
+          );
+        })
+      }
+    </div>
   </div>
+  <div class="color-picker-current-name">&nbsp;</div>
 </div>
-<div class="color-picker-current-name">&nbsp;</div>
 
 <script>
   function main() {
     const currentName = document.querySelector<HTMLDivElement>(
       ".color-picker-current-name"
     );
+    console.log({ currentName });
     const colorPickerItems = document.querySelectorAll<HTMLAnchorElement>(
       "a.color-picker-item"
     );
@@ -161,4 +175,5 @@ const scale = Astro.props.initialScale ?? 2.4;
   }
 
   document.addEventListener("astro:page-load", main);
+  main();
 </script>

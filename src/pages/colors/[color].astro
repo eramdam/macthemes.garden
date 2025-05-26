@@ -38,24 +38,60 @@ const themesForColor = orderBy(
 );
 ---
 
-<style>
+<style is:global>
+  .color-picker-current-name {
+    /* display: none; */
+  }
+
+  .color-picker-wrapper {
+    display: none;
+  }
+
   .single-color-title span {
-    width: 32px;
-    height: 32px;
+    width: 1em;
+    height: 1em;
     display: inline-block;
-    vertical-align: bottom;
+    vertical-align: sub;
     border: 1px solid black;
+  }
+
+  @media (max-width: 900px) {
+    .single-color-title {
+      font-size: 28px;
+    }
+  }
+
+  @media (min-width: 820px) and (hover: hover) {
+    .single-color-title {
+      text-align: left;
+      flex: 1;
+      line-height: 1.5;
+      margin-top: -30px;
+    }
+
+    .color-picker-wrapper {
+      display: block;
+    }
+
+    .single-color-color-picker {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin: 0 24px;
+    }
   }
 </style>
 <ClientRouter />
 <BaseLayout title={color[1]}>
   <OS9Window title={color[1]} asElement="main">
     <div class="single-color-page">
-      <h1 class="single-color-title">
-        Themes using {color[1]}{" "}
-        <span style={{ backgroundColor: color[0] }}></span>
-      </h1>
-      <ColorPicker initialScale={1.4} />
+      <div class="single-color-color-picker">
+        <h1 class="single-color-title">
+          Themes using {color[1]}{" "}
+          <span style={{ backgroundColor: color[0] }}></span>
+        </h1>
+        <ColorPicker initialScale={1.4} />
+      </div>
       <div class="themes-grid">
         {
           themesForColor
