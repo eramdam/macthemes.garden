@@ -2,6 +2,7 @@ import fs from "fs-extra";
 import { type RgbPixel } from "quantize";
 import { getPaletteForTheme } from "../src/helpers/thumbnailHelpers";
 import { themesLoader } from "../src/themesLoader";
+import prettier from "prettier";
 
 (async () => {
   const themes = await themesLoader({
@@ -18,7 +19,9 @@ import { themesLoader } from "../src/themesLoader";
 
   await fs.writeFile(
     new URL(import.meta.resolve("../src/themes/palettes.json")).pathname,
-    JSON.stringify(themeIdToPalette),
+    await prettier.format(JSON.stringify(themeIdToPalette), {
+      parser: "json",
+    }),
     "utf-8",
   );
 })();
