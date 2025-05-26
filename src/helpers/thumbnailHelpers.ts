@@ -8,18 +8,11 @@ export async function getPaletteForTheme(
   theme: Awaited<ReturnType<typeof themesLoader>>[number],
 ): Promise<RgbPixel[] | undefined> {
   const thumbnailSharp = sharp(path.join("public", theme.mainThumbnail));
-  const { width } = await thumbnailSharp.metadata();
-  const resizedSharp = thumbnailSharp
-    .resize({
-      width: width / 4,
-      kernel: "nearest",
-    })
-    .png({ force: true });
   const [red, green, blue, alpha] = await Promise.all([
-    resizedSharp.extractChannel("red").raw().toBuffer(),
-    resizedSharp.extractChannel("green").raw().toBuffer(),
-    resizedSharp.extractChannel("blue").raw().toBuffer(),
-    resizedSharp.extractChannel("alpha").raw().toBuffer(),
+    thumbnailSharp.extractChannel("red").raw().toBuffer(),
+    thumbnailSharp.extractChannel("green").raw().toBuffer(),
+    thumbnailSharp.extractChannel("blue").raw().toBuffer(),
+    thumbnailSharp.extractChannel("alpha").raw().toBuffer(),
   ]);
   let pixels: RgbPixel[] = [];
 
