@@ -7,6 +7,7 @@ import { SingleTheme } from "../../components/singleTheme";
 import { targetPaletteColors } from "../../helpers/paletteHelpers";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { customSlugify } from "../../themesLoader";
+import ColorPicker from "../../components/ColorPicker.astro";
 
 export const prerender = true;
 export const getStaticPaths = (() => {
@@ -49,9 +50,10 @@ const themesForColor = orderBy(
   <OS9Window title={color[1]} asElement="main">
     <div class="single-color-page">
       <h1 class="single-color-title">
-        Themes with {color[1]}{" "}
+        Themes using {color[1]}{" "}
         <span style={{ backgroundColor: color[0] }}></span>
       </h1>
+      <ColorPicker initialScale={1.4} />
       <div class="themes-grid">
         {
           themesForColor

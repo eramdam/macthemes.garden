@@ -1,102 +1,15 @@
 ---
+import ColorPicker from "../components/ColorPicker.astro";
 import OS9Window from "../components/OS9Window.astro";
-import { targetPaletteColors } from "../helpers/paletteHelpers";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { customSlugify } from "../themesLoader";
 ---
 
-<style lang="scss">
-  @use "sass:math";
-  :root {
-    --color-picker-size: 14px;
-    --color-picker-scale: 2.4;
-    --color-picker-item-diag: (
-        var(--color-picker-size) * var(--color-picker-scale)
-      ) *
-      sqrt(2);
-  }
-  .color-picker-wrapper {
-    overflow: hidden;
-    height: calc(var(--color-picker-item-diag) * 5);
-    position: relative;
-  }
-  .color-picker {
-    display: grid;
-    grid-template-columns: repeat(
-      12,
-      calc(var(--color-picker-size) * var(--color-picker-scale))
-    );
-    grid-template-rows: repeat(
-      13,
-      calc(var(--color-picker-size) * var(--color-picker-scale))
-    );
-    grid-auto-flow: row;
-    transform: translate(-50%, -50%) rotate(-45deg);
-    top: 50%;
-    left: 50%;
-    position: absolute;
-    transform-origin: center center;
-  }
-
-  .color-picker-block {
-    height: calc(var(--color-picker-size) * var(--color-picker-scale));
-    width: calc(var(--color-picker-size) * var(--color-picker-scale));
-    box-shadow: 0 0 0 1px black;
-  }
-
-  .color-picker-block:hover {
-    scale: 1.5;
-  }
-
-  .color-picker-current-name {
+<style>
+  h2 {
     text-align: center;
-    font-size: 18px;
-    font-weight: 600;
   }
-
-  /* 1st row */
-  @for $i from 1 through 10 {
-    .color-picker-item:nth-child(#{$i}) {
-      grid-column: #{$i + 2};
-      grid-row: #{$i};
-    }
-  }
-  /* 2nd row */
-  @for $i from 11 through 20 {
-    .color-picker-item:nth-child(#{$i}) {
-      grid-column: #{$i - 8};
-      grid-row: #{$i - 9};
-    }
-  }
-  /* 3rd row */
-  @for $i from 21 through 30 {
-    .color-picker-item:nth-child(#{$i}) {
-      grid-column: #{$i - 19};
-      grid-row: #{$i - 19};
-    }
-  }
-  /* 4th row */
-  @for $i from 31 through 40 {
-    .color-picker-item:nth-child(#{$i}) {
-      grid-column: #{$i - 29};
-      grid-row: #{$i - 28};
-    }
-  }
-  /* 5th row */
-  @for $i from 41 through 50 {
-    .color-picker-item:nth-child(#{$i}) {
-      grid-column: #{$i - 40};
-      grid-row: #{$i - 38};
-    }
-  }
-  /* 6th row */
-  @for $i from 51 through 60 {
-    .color-picker-item:nth-child(#{$i}) {
-      grid-column: #{$i - 50};
-      grid-row: #{$i - 47};
-    }
-  }
-
+</style>
+<style is:global>
   @media (max-width: 800px) or (hover: none) {
     :root {
       --color-picker-scale: 1.5;
@@ -161,79 +74,12 @@ import { customSlugify } from "../themesLoader";
       column-count: 2;
     }
   }
-
-  h2 {
-    text-align: center;
-  }
 </style>
-<script>
-  const currentName = document.querySelector<HTMLDivElement>(
-    ".color-picker-current-name"
-  );
-  const colorPickerItems = document.querySelectorAll<HTMLAnchorElement>(
-    "a.color-picker-item"
-  );
-
-  if (currentName && colorPickerItems.length) {
-    colorPickerItems.forEach((item) => {
-      item.addEventListener("mouseover", (e) => {
-        if (e.currentTarget instanceof HTMLAnchorElement) {
-          const name = e.currentTarget.title;
-          currentName.textContent = name;
-        }
-      });
-      item.addEventListener("mouseout", () => {
-        currentName.innerHTML = "&nbsp;";
-      });
-    });
-  }
-
-  document
-    .querySelector<HTMLInputElement>(".color-picker-sizer")
-    ?.addEventListener("input", (e) => {
-      if (e.currentTarget instanceof HTMLInputElement) {
-        document.documentElement.style.setProperty(
-          "--color-picker-scale",
-          e.currentTarget.value
-        );
-      }
-    });
-</script>
 <BaseLayout title="Colors">
   <OS9Window title="Colors" asElement="main">
     <section class="page">
       <h2>Choose a color to explore themes:</h2>
-      <!-- <input
-        type="range"
-        class="color-picker-sizer"
-        min="1"
-        max="3.6"
-        step="0.01"
-        value="2"
-      /> -->
-      <div class="color-picker-wrapper">
-        <div class="color-picker">
-          {
-            targetPaletteColors.map((color) => {
-              return (
-                <a
-                  href={`/colors/${customSlugify(color[1]).toLowerCase()}`}
-                  class="color-picker-item"
-                  title={color[1]}
-                >
-                  <div
-                    class="color-picker-block"
-                    style={{
-                      backgroundColor: color[0],
-                    }}
-                  />
-                </a>
-              );
-            })
-          }
-        </div>
-      </div>
-      <div class="color-picker-current-name">&nbsp;</div>
+      <ColorPicker />
     </section>
   </OS9Window>
 </BaseLayout>
