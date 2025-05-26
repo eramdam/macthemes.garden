@@ -7,61 +7,6 @@ import type { RgbPixel } from "quantize";
 
 const paletteData = rawPaletteData as unknown as Record<string, RgbPixel[]>;
 
-// https://www.kreativekorp.com/moccp/#Mac-OS-X-Crayons
-export const OSXPaletteColors = [
-  ["#000000", "Licorice"],
-  ["#191919", "Lead"],
-  ["#333333", "Tungsten"],
-  ["#4c4c4c", "Iron"],
-  ["#666666", "Steel"],
-  ["#7f7f7f", "Tin"],
-  ["#808080", "Nickel"],
-  ["#999999", "Aluminum"],
-  ["#b3b3b3", "Magnesium"],
-  ["#cccccc", "Silver"],
-  ["#e6e6e6", "Mercury"],
-  ["#ffffff", "Snow"],
-
-  ["#800000", "Cayenne"],
-  ["#804000", "Mocha"],
-  ["#808000", "Asparagus"],
-  ["#408000", "Fern"],
-  ["#008000", "Clover"],
-  ["#008040", "Moss"],
-  ["#008080", "Teal"],
-  ["#004080", "Ocean"],
-  ["#000080", "Midnight"],
-  ["#400080", "Eggplant"],
-  ["#800080", "Plum"],
-  ["#800040", "Maroon"],
-
-  ["#ff0000", "Maraschino"],
-  ["#ff8000", "Tangerine"],
-  ["#ffff00", "Lemon"],
-  ["#80ff00", "Lime"],
-  ["#00ff00", "Spring"],
-  ["#00ff80", "Sea Foam"],
-  ["#00ffff", "Turquoise"],
-  ["#0080ff", "Aqua"],
-  ["#0000ff", "Blueberry"],
-  ["#8000ff", "Grape"],
-  ["#ff00ff", "Magenta"],
-  ["#ff0080", "Strawberry"],
-
-  ["#ff6666", "Salmon"],
-  ["#ffcc66", "Cantaloupe"],
-  ["#ffff66", "Banana"],
-  ["#ccff66", "Honeydew"],
-  ["#66ff66", "Flora"],
-  ["#66ffcc", "Spindrift"],
-  ["#66ffff", "Ice"],
-  ["#66ccff", "Sky"],
-  ["#6666ff", "Orchid"],
-  ["#cc66ff", "Lavender"],
-  ["#ff66ff", "Bubblegum"],
-  ["#ff70cf", "Carnation"],
-] as const;
-
 // https://www.kreativekorp.com/moccp/#Mac-OS-Classic-Crayons
 export const ClassicPaletteColors = [
   ["#ffffff", "Chalk"],
