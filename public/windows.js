@@ -1,6 +1,5 @@
 function attachHandlers() {
   document.querySelectorAll(".macos9-window").forEach((windowElement) => {
-    console.log({ windowElement });
     const id = windowElement.getAttribute("id");
     const storageKey = `macthemes-window-${id}`;
     const windowState = JSON.parse(
@@ -58,5 +57,4 @@ function attachHandlers() {
   });
 }
 
-document.addEventListener("astro:after-swap", attachHandlers);
 attachHandlers();
