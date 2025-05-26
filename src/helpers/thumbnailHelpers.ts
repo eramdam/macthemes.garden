@@ -11,7 +11,7 @@ export async function getPaletteForTheme(
   const { width } = await thumbnailSharp.metadata();
   const resizedSharp = thumbnailSharp
     .resize({
-      width: width / 4,
+      width: width / 2,
       kernel: "nearest",
     })
     .png({ force: true });

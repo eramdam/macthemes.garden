@@ -1,8 +1,8 @@
 import fs from "fs-extra";
+import prettier from "prettier";
 import { type RgbPixel } from "quantize";
 import { getPaletteForTheme } from "../src/helpers/thumbnailHelpers";
 import { themesLoader } from "../src/themesLoader";
-import prettier from "prettier";
 
 (async () => {
   const themes = await themesLoader({
