@@ -9,7 +9,10 @@ export async function getPaletteForTheme(
 ) {
   const thumbnailSharp = sharp(path.join("public", theme.mainThumbnail));
   const { width } = await thumbnailSharp.metadata();
-  const resizedSharp = thumbnailSharp.resize(width);
+  const resizedSharp = thumbnailSharp.resize({
+    width: width / 4,
+    kernel: "nearest",
+  });
   const [red, green, blue] = await Promise.all([
     resizedSharp.extractChannel("red").raw().toBuffer(),
     resizedSharp.extractChannel("green").raw().toBuffer(),
