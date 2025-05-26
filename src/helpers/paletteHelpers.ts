@@ -1,11 +1,24 @@
 import rawPaletteData from "../themes/palettes.json" with { type: "json" };
 
 import * as colorDiff from "color-diff";
-import { isEqual, memoize, uniqBy } from "lodash-es";
-import { parseToRgb, toColorString } from "polished";
+import { isEqual, memoize, shuffle, uniqBy } from "lodash-es";
+import {
+  parseToRgb,
+  rgbToColorString,
+  saturate,
+  toColorString,
+} from "polished";
 import type { RgbPixel } from "quantize";
 
 const paletteData = rawPaletteData as unknown as Record<string, RgbPixel[]>;
+
+const debug = false;
+
+function log(message?: any, ...opts: any[]) {
+  if (debug) {
+    console.log(message, ...opts);
+  }
+}
 
 // https://www.kreativekorp.com/moccp/#Mac-OS-Classic-Crayons
 export const ClassicPaletteColors = [
@@ -91,8 +104,8 @@ export const targetPaletteColorsLab = targetPaletteColorsRgb.map(
   colorDiff.rgb_to_lab,
 );
 
-export function findNameForPaletteColor(color: colorDiff.RGBColor) {
-  const matchedIndex = targetPaletteColorsRgb.findIndex((targetLab) => {
+export function findNameForPaletteColor(color: colorDiff.LabColor) {
+  const matchedIndex = targetPaletteColorsLab.findIndex((targetLab) => {
     return isEqual(targetLab, color);
   });
   if (matchedIndex < 0) {
@@ -101,8 +114,8 @@ export function findNameForPaletteColor(color: colorDiff.RGBColor) {
   return targetPaletteColors[matchedIndex][1];
 }
 
-export function findHexForPaletteColor(color: colorDiff.RGBColor) {
-  const matchedIndex = targetPaletteColorsRgb.findIndex((targetLab) => {
+export function findHexForPaletteColor(color: colorDiff.LabColor) {
+  const matchedIndex = targetPaletteColorsLab.findIndex((targetLab) => {
     return isEqual(targetLab, color);
   });
   if (matchedIndex < 0) {
@@ -131,6 +144,11 @@ function _getPaletteForThemeId(
               G: rawPaletteColor[1],
               B: rawPaletteColor[2],
             },
+            hex: toColorString({
+              red: rawPaletteColor[0],
+              green: rawPaletteColor[1],
+              blue: rawPaletteColor[2],
+            }),
             name: toColorString({
               red: rawPaletteColor[0],
               green: rawPaletteColor[1],
@@ -139,24 +157,68 @@ function _getPaletteForThemeId(
           } as const;
         }
 
-        const closest = colorDiff.closest(
-          {
-            R: rawPaletteColor[0],
-            G: rawPaletteColor[1],
-            B: rawPaletteColor[2],
-          },
-          targetPaletteColorsRgb,
+        const rawColorLab = colorDiff.rgb_to_lab({
+          R: rawPaletteColor[0],
+          G: rawPaletteColor[1],
+          B: rawPaletteColor[2],
+        });
+
+        let closestLab = colorDiff.closest_lab(
+          rawColorLab,
+          targetPaletteColorsLab,
         );
+        let diff = colorDiff.diff(closestLab, rawColorLab);
+        let fixed = false;
+
+        // If diff is too high, increase the saturation a bit to get a "better" (more natural) match
+        if (diff > 10) {
+          const rawPaletteColorString = rgbToColorString({
+            red: rawPaletteColor[0],
+            green: rawPaletteColor[1],
+            blue: rawPaletteColor[2],
+          });
+          log("Correcting ", {
+            name: findNameForPaletteColor(closestLab),
+            diff,
+            string: rawPaletteColorString,
+          });
+
+          const saturated = parseToRgb(saturate(0.3, rawPaletteColorString));
+          const newClosestLab = colorDiff.closest_lab(
+            colorDiff.rgb_to_lab({
+              R: saturated.red,
+              G: saturated.green,
+              B: saturated.blue,
+            }),
+            targetPaletteColorsLab,
+          );
+          // If we got a different match, then we fixed it.
+          if (!isEqual(closestLab, newClosestLab)) {
+            closestLab = newClosestLab;
+            diff = colorDiff.diff(closestLab, rawColorLab);
+            fixed = true;
+            log("Fixed ", {
+              name: findNameForPaletteColor(closestLab),
+              diff,
+              string: rgbToColorString({
+                red: rawPaletteColor[0],
+                green: rawPaletteColor[1],
+                blue: rawPaletteColor[2],
+              }),
+            });
+          }
+        }
 
         return {
-          color: closest,
+          fixed,
+          diff,
+          color: closestLab,
           rawPaletteColor,
-          hex: findHexForPaletteColor(closest),
-          name: findNameForPaletteColor(closest),
+          hex: findHexForPaletteColor(closestLab),
+          name: findNameForPaletteColor(closestLab),
         } as const;
       })
-      .filter(Boolean)
-      .slice(0, 6),
+      .filter((c) => c.diff < 15 || c.fixed),
     (c) => c.name,
   );
 }

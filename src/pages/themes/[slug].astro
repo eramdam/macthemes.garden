@@ -180,7 +180,7 @@ const fileHosts = [
                     <dt>Colors:</dt>
                     <dd>
                       <ul class="palette">
-                        {paletteData.map(({ color, name }) => {
+                        {paletteData.map(({ hex, name }) => {
                           return (
                             <li>
                               <a
@@ -190,7 +190,7 @@ const fileHosts = [
                                 <span
                                   class="palette-color"
                                   style={{
-                                    backgroundColor: `rgb(${color.R}, ${color.G}, ${color.B})`,
+                                    backgroundColor: hex,
                                   }}
                                 />
                                 {/* <span class="palette-color-name">{name}</span> */}

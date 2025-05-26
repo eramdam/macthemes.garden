@@ -7,7 +7,7 @@ export function ThemePaletteDebugger() {
   const themeThumbnail = useSignal("");
   const themePalette = useSignal<[number, number, number][]>([]);
   const themePaletteMatches = useSignal<
-    ReturnType<typeof getPaletteForThemeId> | undefined
+    undefined | Awaited<ReturnType<typeof getPaletteForThemeId>>
   >(undefined);
 
   const onSubmit: JSX.SubmitEventHandler<HTMLFormElement> = async (e) => {
@@ -78,7 +78,7 @@ export function ThemePaletteDebugger() {
             }}
           >
             {themePaletteMatches.value.map((obj) => {
-              const { color } = obj;
+              const { hex } = obj;
               console.log(obj);
               return (
                 <li>
@@ -86,7 +86,7 @@ export function ThemePaletteDebugger() {
                     style={{
                       height: 20,
                       width: 20,
-                      backgroundColor: `rgb(${color.R}, ${color.G}, ${color.B})`,
+                      backgroundColor: hex,
                       border: "1px solid black",
                     }}
                   ></div>
