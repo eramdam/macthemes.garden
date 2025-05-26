@@ -53,7 +53,8 @@ export async function getPaletteForTheme(
   }
 
   return orderBy(
-    paletteColors,
+    // For some reason `quantize` returns pixel values from 1-256? I think?? So I need to -1 everything lmao.
+    paletteColors.map((p) => p.map((n) => n - 1)),
     (p) => {
       return colorScores.get(p) ?? 0;
     },
