@@ -1,7 +1,7 @@
 import rawPaletteData from "../themes/palettes.json" with { type: "json" };
 
 import * as colorDiff from "color-diff";
-import { isEqual, memoize, shuffle, uniqBy } from "lodash-es";
+import { isEqual, memoize, uniqBy } from "lodash-es";
 import {
   parseToRgb,
   rgbToColorString,
