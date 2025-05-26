@@ -37,14 +37,20 @@ const themesForColor = orderBy(
 ---
 
 <style>
-  .single-color-page {
+  .single-color-title span {
+    width: 32px;
+    height: 32px;
+    display: inline-block;
+    vertical-align: bottom;
+    border: 1px solid black;
   }
 </style>
 <BaseLayout title={color[1]}>
   <OS9Window title={color[1]} asElement="main">
-    <div class="single-theme-page">
-      <h1 class="single-theme-title">
-        Themes with {color[1]}
+    <div class="single-color-page">
+      <h1 class="single-color-title">
+        Themes with {color[1]}{" "}
+        <span style={{ backgroundColor: color[0] }}></span>
       </h1>
       <div class="themes-grid">
         {

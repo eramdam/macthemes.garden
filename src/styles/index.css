@@ -255,12 +255,16 @@ footer p {
   font-weight: bold;
 }
 
+.single-color-title,
 .single-theme-title {
   text-align: center;
 }
 
+.single-color-page,
+.single-theme-page,
 .single-author-page {
-  padding: 20px 0;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .single-page-title {
