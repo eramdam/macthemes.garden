@@ -1,11 +1,11 @@
 import { defineCollection, getCollection, reference, z } from "astro:content";
-import { groupBy, keyBy, memoize } from "lodash-es";
+import { memoize } from "lodash-es";
 
-import { themeAuthorsLoader, themesLoader } from "./themesLoader";
 import {
   getPaletteForThemeId,
   targetPaletteColors,
 } from "./helpers/paletteHelpers";
+import { themeAuthorsLoader, themesLoader } from "./themesLoader";
 
 const themes = defineCollection({
   loader: themesLoader,

@@ -76,7 +76,7 @@ export const server = {
     input: z.object({
       themeId: zodThemeId,
     }),
-    handler: async (input, context) => {
+    handler: async (input) => {
       if (!import.meta.env.DEV) {
         return undefined;
       }

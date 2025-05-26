@@ -1,4 +1,4 @@
-import { memoize, orderBy, uniq } from "lodash-es";
+import { memoize, uniq } from "lodash-es";
 import crypto from "node:crypto";
 import slugify from "slugify";
 import { getPaletteForThemeId } from "./helpers/paletteHelpers";

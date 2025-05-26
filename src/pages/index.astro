@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import IndexPage from "../components/IndexPage.astro";
-import { PAGINATION } from "../helpers";
+import { PAGINATION } from "../helpers/sortHelpers";
 import { getLikeCountsByThemeIds } from "../helpers/dbHelpers";
 const themes = await getCollection("themes");
 const likesCountByID = await getLikeCountsByThemeIds();

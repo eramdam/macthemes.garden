@@ -10,7 +10,7 @@ import ServerLikeButton from "../../components/ServerLikeButton.astro";
 import { getPaletteForThemeId } from "../../helpers/paletteHelpers";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { customSlugify } from "../../themesLoader";
-import { archiveFileSize, archiveMd5 } from "../../helpers";
+import { archiveFileSize, archiveMd5 } from "../../helpers/archiveHelpers";
 export const prerender = true;
 
 export const getStaticPaths = (async () => {
