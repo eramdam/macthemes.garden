@@ -9,19 +9,26 @@ export async function getPaletteForTheme(
 ) {
   const thumbnailSharp = sharp(path.join("public", theme.mainThumbnail));
   const { width } = await thumbnailSharp.metadata();
-  const resizedSharp = thumbnailSharp.resize({
-    width: width / 4,
-    kernel: "nearest",
-  });
-  const [red, green, blue] = await Promise.all([
+  const resizedSharp = thumbnailSharp
+    .resize({
+      width: width / 4,
+      kernel: "nearest",
+    })
+    .png();
+  const [red, green, blue, alpha] = await Promise.all([
     resizedSharp.extractChannel("red").raw().toBuffer(),
     resizedSharp.extractChannel("green").raw().toBuffer(),
     resizedSharp.extractChannel("blue").raw().toBuffer(),
+    resizedSharp.extractChannel("alpha").raw().toBuffer(),
   ]);
   let pixels: RgbPixel[] = [];
+
   for (let index = 0; index < red.length; index++) {
-    pixels[index] = [red[index], green[index], blue[index]];
+    if (alpha[index] > 0) {
+      pixels[index] = [red[index], green[index], blue[index]];
+    }
   }
+  pixels = pixels.filter(Boolean);
   const colorMap = quantize(pixels, 12);
   if (!colorMap) {
     return undefined;
