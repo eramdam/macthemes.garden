@@ -12,7 +12,7 @@ import { canUserIdMakeRequest } from "../helpers/rateLimitHelpers";
 import { themesLoader } from "../themesLoader";
 import { getPaletteForTheme } from "../helpers/thumbnailHelpers";
 
-const themes = await themesLoader();
+const themes = await themesLoader({ colors: false, relatedThemes: false });
 const possibleIds = new Set(themes.map((t) => t.id));
 
 const zodThemeId = z.string().refine(

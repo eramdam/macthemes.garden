@@ -202,10 +202,8 @@ function _getPaletteForThemeId(
           },
           targetPaletteColorsRgb,
         );
-        const diff = 0;
 
         return {
-          diff,
           color: closest,
           rawPaletteColor,
           hex: findHexForPaletteColor(closest),

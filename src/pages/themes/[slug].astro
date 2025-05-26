@@ -180,7 +180,7 @@ const fileHosts = [
                     <dt>Colors:</dt>
                     <dd>
                       <ul class="palette">
-                        {paletteData.map(({ diff, color, name }) => {
+                        {paletteData.map(({ color, name }) => {
                           return (
                             <li>
                               <a
@@ -193,10 +193,7 @@ const fileHosts = [
                                     backgroundColor: `rgb(${color.R}, ${color.G}, ${color.B})`,
                                   }}
                                 />
-                                <span class="palette-color-name">
-                                  {name}
-                                  {isDev && `diff ${diff.toFixed(1)}`}
-                                </span>
+                                {/* <span class="palette-color-name">{name}</span> */}
                               </a>
                             </li>
                           );

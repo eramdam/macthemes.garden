@@ -15,7 +15,7 @@ const argv = yargs(process.argv.slice(2)).parse();
     console.log("No images changed, no need to re-generate them");
     return;
   }
-  const themes = await themesLoader();
+  const themes = await themesLoader({ colors: false, relatedThemes: false });
   const threadsCount = cpus().length;
   const themesToUpdate = themes.filter((t) => {
     return t.thumbnails.some((thumb) => {

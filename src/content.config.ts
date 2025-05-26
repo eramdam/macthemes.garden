@@ -37,7 +37,7 @@ const authors = defineCollection({
 
 const paletteColors = defineCollection({
   loader: async () => {
-    const themes = await themesLoader();
+    const themes = await themesLoader({ colors: false, relatedThemes: false });
     let themesIdsByColor: Record<string, string[]> = {};
 
     for (const theme of themes) {

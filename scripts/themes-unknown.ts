@@ -2,7 +2,7 @@ import { compact } from "lodash-es";
 import themesKaleidoscopeBot from "../src/themes/original.json" with { type: "json" };
 import { themesLoader } from "../src/themesLoader";
 
-const themes = await themesLoader();
+const themes = await themesLoader({ colors: false, relatedThemes: false });
 
 const themesWithNoAuthors = themes.filter((t) => {
   return t.authors.length < 1;

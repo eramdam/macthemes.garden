@@ -22,7 +22,17 @@ const botThemesNotOnAirtableYet = themesKaleidoscopeBot.filter((theme) => {
   return !archivesInAirtable.has(theme.archiveFilename);
 });
 
-export async function themesLoader() {
+interface ThemesLoaderOptions {
+  colors?: boolean;
+  relatedThemes?: boolean;
+}
+
+export async function themesLoader(
+  options: ThemesLoaderOptions = {
+    colors: true,
+    relatedThemes: true,
+  },
+) {
   const result = themesKaleidoscopeAirtable
     .map((theme) => {
       const id = crypto
@@ -74,15 +84,21 @@ export async function themesLoader() {
       }),
     )
     .map((theme, _index, array) => {
-      // @ts-expect-error
-      theme.colors = getPaletteForThemeId(theme.id)?.map((c) => {
-        return c.hex || "";
-      });
+      if (options.colors) {
+        // @ts-expect-error
+        theme.colors = getPaletteForThemeId(theme.id)?.map((c) => {
+          return c.hex || "";
+        });
+      }
 
-      // @ts-expect-error
-      theme.relatedThemes = array
-        .filter((t) => t.archiveFile === theme.archiveFile && t.id !== theme.id)
-        .map((t) => t.id);
+      if (options.relatedThemes) {
+        // @ts-expect-error
+        theme.relatedThemes = array
+          .filter(
+            (t) => t.archiveFile === theme.archiveFile && t.id !== theme.id,
+          )
+          .map((t) => t.id);
+      }
 
       return theme;
     });
@@ -90,7 +106,7 @@ export async function themesLoader() {
 }
 
 export async function themeAuthorsLoader() {
-  const themes = await themesLoader();
+  const themes = await themesLoader({ colors: false, relatedThemes: false });
 
   const baseAuthors = new Set(
     themes

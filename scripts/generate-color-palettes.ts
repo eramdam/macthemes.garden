@@ -4,7 +4,10 @@ import { getPaletteForTheme } from "../src/helpers/thumbnailHelpers";
 import { themesLoader } from "../src/themesLoader";
 
 (async () => {
-  const themes = await themesLoader();
+  const themes = await themesLoader({
+    colors: false,
+    relatedThemes: false,
+  });
   const themeIdToPalette: Record<string, RgbPixel[]> = {};
   for (const theme of themes) {
     const palette = await getPaletteForTheme(theme);
