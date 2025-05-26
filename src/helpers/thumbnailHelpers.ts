@@ -25,10 +25,9 @@ export async function getPaletteForTheme(
 
   for (let index = 0; index < red.length; index++) {
     if (alpha[index] > 0) {
-      pixels[index] = [red[index], green[index], blue[index]];
+      pixels.push([red[index], green[index], blue[index]]);
     }
   }
-  pixels = pixels.filter(Boolean);
   const colorMap = quantize(pixels, 12);
   if (!colorMap) {
     return undefined;

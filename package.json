@@ -49,6 +49,7 @@
     "@types/lodash-es": "^4.17.12",
     "@types/node": "^22.15.21",
     "@types/quantize": "^1.0.2",
+    "@types/yargs": "^17.0.33",
     "airtable": "^0.12.2",
     "astro": "^5.8.0",
     "async": "^3.2.6",

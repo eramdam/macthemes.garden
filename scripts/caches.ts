@@ -1,3 +1,4 @@
+// @ts-expect-error
 import { AssetCache } from "@11ty/eleventy-fetch";
 
 export const airtableCache = new AssetCache("garden.macthemes.airtable");

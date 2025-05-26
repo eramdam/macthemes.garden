@@ -1,4 +1,4 @@
-import Airtable, { FieldSet, Records } from "airtable";
+import Airtable, { type FieldSet, type Records } from "airtable";
 import async from "async";
 import fs from "fs-extra";
 import { airtableCache } from "./caches";
@@ -98,7 +98,7 @@ async function downloadAttachment(
   }
 
   const response = await fetch(attachment.url);
-  let buffer = await response.arrayBuffer();
+  let buffer: Buffer | ArrayBuffer = await response.arrayBuffer();
 
   if (filename.includes("ksa-sampler")) {
     const imagedata = await sharp(buffer).metadata();
@@ -112,6 +112,7 @@ async function downloadAttachment(
   }
 
   console.log(`Downloaded ${filename}`);
+  // @ts-expect-error
   await fs.writeFile(filepath, Buffer.from(buffer));
   return { id: attachment.id, filepath, filename: attachment.filename };
 }

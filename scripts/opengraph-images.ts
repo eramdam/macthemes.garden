@@ -7,6 +7,7 @@ import yargs from "yargs";
 const argv = yargs(process.argv.slice(2)).parse();
 
 (async () => {
+  // @ts-expect-error
   const ignoreChanges = argv.force ?? false;
   const listOfChangedFiles = execaSync({
     lines: true,

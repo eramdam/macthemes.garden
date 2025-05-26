@@ -13,12 +13,12 @@ import sharp from "sharp";
     authors: string;
     archiveFilename: string;
     thumbnails: string[];
-  }[] = json.map((record) => {
+  }[] = json.map((record: any) => {
     return {
       name: record.name,
       authors: record.author,
       archiveFilename: path.parse(record.download).base,
-      thumbnails: record.thumbnails.map((t) => {
+      thumbnails: record.thumbnails.map((t: any) => {
         return `https://raw.githubusercontent.com/eramdam/shapeshifter-themes/refs/heads/master/${String(t).replace(".upscaled", "")}`;
       }),
     };
@@ -52,7 +52,7 @@ async function downloadThumbnail(thumbnailUrl: string) {
   }
 
   const res = await fetch(thumbnailUrl);
-  let buffer = await res.arrayBuffer();
+  let buffer: ArrayBuffer | Buffer = await res.arrayBuffer();
   const imagedata = await sharp(buffer).metadata();
   buffer = await sharp(buffer)
     .resize({
