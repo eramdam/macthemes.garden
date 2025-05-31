@@ -18,7 +18,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     .color-picker-current-name {
       display: none;
     }
-    .color-picker {
+
+    .color-picker.color-picker {
       transform: none;
       transform-origin: unset;
       left: unset;
@@ -30,7 +31,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       margin-bottom: -10px;
     }
 
-    .color-picker,
+    .color-picker.color-picker,
     h2 {
       padding: 10px;
     }
@@ -60,8 +61,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     }
 
     .color-picker-wrapper {
-      overflow: unset;
-      height: auto;
+      overflow: unset !important;
+      height: auto !important;
+      width: 100% !important;
+      margin: auto !important;
     }
 
     h2 {
@@ -70,7 +73,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   }
 
   @media (max-width: 600px) {
-    .color-picker {
+    .color-picker.color-picker {
       column-count: 2;
     }
   }
