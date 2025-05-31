@@ -1,0 +1,24 @@
+---
+import OS9Window from "../components/OS9Window.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { ThemePaletteDebugger } from "../components/themePaletteDebugger";
+---
+
+<style>
+  .palette {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .palette-color {
+    display: block;
+    height: 30px;
+    width: 30px;
+  }
+</style>
+<BaseLayout title="Palettes">
+  <OS9Window asElement="main" title="Palettes">
+    <ThemePaletteDebugger client:load />
+  </OS9Window>
+</BaseLayout>

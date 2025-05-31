@@ -1,6 +1,7 @@
-import { orderBy, uniq } from "lodash-es";
+import { memoize, uniq } from "lodash-es";
 import crypto from "node:crypto";
 import slugify from "slugify";
+import { getPaletteForThemeId } from "./helpers/paletteHelpers";
 import themesKaleidoscopeAirtable from "./themes/airtable.json" with { type: "json" };
 import themesKaleidoscopeBot from "./themes/original.json" with { type: "json" };
 
@@ -21,78 +22,91 @@ const botThemesNotOnAirtableYet = themesKaleidoscopeBot.filter((theme) => {
   return !archivesInAirtable.has(theme.archiveFilename);
 });
 
-export async function themesLoader() {
-  const result = await Promise.all(
-    themesKaleidoscopeAirtable
-      .map((theme) => {
+interface ThemesLoaderOptions {
+  colors?: boolean;
+  relatedThemes?: boolean;
+}
+
+export async function themesLoader(
+  options: ThemesLoaderOptions = {
+    colors: true,
+    relatedThemes: true,
+  },
+) {
+  const result = themesKaleidoscopeAirtable
+    .map((theme) => {
+      const id = crypto
+        .createHash("shake256", { outputLength: 6 })
+        .update([theme.name, theme.authors, theme.archiveFilename].join("-"))
+        .digest("hex");
+
+      if (!theme.ksaSampler) {
+        throw new Error(`invalid theme ${theme.name} ${theme.authors}`);
+      }
+
+      return {
+        id,
+        name: theme.name,
+        authors: makeAuthorsFromAuthorsString(theme.authors || ""),
+        year: theme.year,
+        thumbnails: [theme.ksaSampler, theme.about, theme.showcase].map((t) =>
+          t.replace("public/", "/"),
+        ),
+        mainThumbnail: theme.ksaSampler.replace("public/", "/"),
+        archiveFile: theme.archiveFilename,
+        urlBase: customSlugify(`${id}-${theme.name}`),
+        isAirtable: true,
+        isNew: !archivesInBot.has(theme.archiveFilename),
+        createdAt: new Date(theme.created),
+      };
+    })
+    .concat(
+      botThemesNotOnAirtableYet.map((theme) => {
         const id = crypto
           .createHash("shake256", { outputLength: 6 })
           .update([theme.name, theme.authors, theme.archiveFilename].join("-"))
           .digest("hex");
 
-        if (!theme.ksaSampler) {
-          // console.log("!theme.ksaSampler", theme);
-          return undefined;
-        }
         return {
           id,
           name: theme.name,
+          year: "",
           authors: makeAuthorsFromAuthorsString(theme.authors || ""),
-          year: theme.year,
-          thumbnails: [theme.ksaSampler, theme.about, theme.showcase].map((t) =>
-            t.replace("public/", "/"),
-          ),
-          mainThumbnail: theme.ksaSampler.replace("public/", "/"),
           archiveFile: theme.archiveFilename,
+          thumbnails: theme.thumbnails.map((t) => t.replace("public/", "/")),
+          mainThumbnail: theme.thumbnails[0].replace("public/", "/"),
+          slug: theme.archiveFilename.replace(".sit", ""),
           urlBase: customSlugify(`${id}-${theme.name}`),
-          isAirtable: true,
-          isNew: !archivesInBot.has(theme.archiveFilename),
-          createdAt: new Date(theme.created),
-        };
-      })
-      .filter((theme) => !!theme)
-      .concat(
-        botThemesNotOnAirtableYet.map((theme) => {
-          const id = crypto
-            .createHash("shake256", { outputLength: 6 })
-            .update(
-              [theme.name, theme.authors, theme.archiveFilename].join("-"),
-            )
-            .digest("hex");
-
-          return {
-            id,
-            name: theme.name,
-            year: "",
-            authors: makeAuthorsFromAuthorsString(theme.authors || ""),
-            archiveFile: theme.archiveFilename,
-            thumbnails: theme.thumbnails.map((t) => t.replace("public/", "/")),
-            mainThumbnail: theme.thumbnails[0].replace("public/", "/"),
-            slug: theme.archiveFilename.replace(".sit", ""),
-            urlBase: customSlugify(`${id}-${theme.name}`),
-            isAirtable: false,
-            isNew: false,
-            createdAt: new Date(0),
-          };
-        }),
-      )
-      .map(async (theme, _index, array) => {
-        return {
-          ...theme,
-          relatedThemes: array
-            .filter(
-              (t) => t.archiveFile === theme.archiveFile && t.id !== theme.id,
-            )
-            .map((t) => t.id),
+          isAirtable: false,
+          isNew: false,
+          createdAt: new Date(0),
         };
       }),
-  );
+    )
+    .map((theme, _index, array) => {
+      if (options.colors) {
+        // @ts-expect-error
+        theme.colors = getPaletteForThemeId(theme.id)?.map((c) => {
+          return c.hex || "";
+        });
+      }
 
-  return orderBy(result, ["createdAt"], ["desc"]);
+      if (options.relatedThemes) {
+        // @ts-expect-error
+        theme.relatedThemes = array
+          .filter(
+            (t) => t.archiveFile === theme.archiveFile && t.id !== theme.id,
+          )
+          .map((t) => t.id);
+      }
+
+      return theme;
+    });
+  return result;
 }
 
 export async function themeAuthorsLoader() {
-  const themes = await themesLoader();
+  const themes = await themesLoader({ colors: false, relatedThemes: false });
 
   const baseAuthors = new Set(
     themes
@@ -245,20 +259,21 @@ const namesCorrectionMap = {
   "Woo Kong Teik": ["Woo Kong Teik", "Woo Kong Teik"],
 };
 
-const findCorrectedName = (maybeWrongName: string) => {
+const findCorrectedName = memoize((maybeWrongName: string) => {
   return (
     Object.entries(namesCorrectionMap).find(([, values]) => {
       return values.includes(maybeWrongName);
     })?.[0] ?? maybeWrongName
   );
-};
+});
 
+const authorSplitRegex = /(?:\sand\s|,|&)/i;
 function makeAuthorsFromAuthorsString(authors: string): string[] {
-  return uniq(
+  const res = uniq(
     (authors || "")
-      .split(/(?:\sand\s|,|&)/i)
-      .map((a) => a.trim())
-      .filter((a) => !!a)
-      .map((a) => findCorrectedName(a)),
-  );
+      .split(authorSplitRegex)
+      .map((a) => findCorrectedName(a.trim())),
+  ).filter((a) => !!a);
+
+  return res;
 }

@@ -21,18 +21,21 @@ const likesByThemeIds = statsObject
     return { ...obj, themeId };
   })
   .filter(Boolean)
-  .reduce((prev, curr) => {
-    if (!curr?.themeId) {
-      return {};
-    }
-    return {
-      ...prev,
-      [curr?.themeId]:
-        (prev[curr.themeId] || 0) +
-        (curr.favourites_count || 0) +
-        (curr.reblogs_count || 0),
-    };
-  }, {});
+  .reduce(
+    (prev, curr) => {
+      if (!curr?.themeId) {
+        return {};
+      }
+      return {
+        ...prev,
+        [curr?.themeId]:
+          (prev[curr.themeId] || 0) +
+          (curr.favourites_count || 0) +
+          (curr.reblogs_count || 0),
+      };
+    },
+    {} as Record<string, number>,
+  );
 
 await fs.writeFile(
   new URL(import.meta.resolve("../src/themes/likes-mastodon.json")).pathname,

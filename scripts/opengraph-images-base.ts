@@ -5,7 +5,7 @@ import { themesLoader } from "../src/themesLoader";
 (async () => {
   const [, , ...themeIds] = process.argv;
   const themesFromArguments = themeIds;
-  const allThemes = await themesLoader();
+  const allThemes = await themesLoader({ colors: false, relatedThemes: false });
 
   await async.parallelLimit(
     allThemes

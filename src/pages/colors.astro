@@ -1,0 +1,89 @@
+---
+import ColorPicker from "../components/ColorPicker.astro";
+import OS9Window from "../components/OS9Window.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<style>
+  h2 {
+    text-align: center;
+  }
+</style>
+<style is:global>
+  @media (max-width: 800px) or (hover: none) {
+    :root {
+      --color-picker-scale: 1.5;
+    }
+
+    .color-picker-current-name {
+      display: none;
+    }
+    .color-picker {
+      transform: none;
+      transform-origin: unset;
+      left: unset;
+      top: unset;
+      width: 100%;
+      position: relative;
+      display: block;
+      column-count: 3;
+      margin-bottom: -10px;
+    }
+
+    .color-picker,
+    h2 {
+      padding: 10px;
+    }
+
+    .color-picker-item {
+      margin-bottom: 10px;
+    }
+
+    .color-picker-block {
+      box-shadow: 0 0 0 1px black;
+    }
+
+    .color-picker-item:nth-child(n) {
+      grid-column: unset;
+      grid-row: unset;
+    }
+
+    .color-picker-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .color-picker-item::after {
+      content: attr(title);
+      font-size: 12px;
+    }
+
+    .color-picker-wrapper {
+      overflow: unset;
+      height: auto;
+    }
+
+    h2 {
+      text-align: left !important;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .color-picker {
+      column-count: 2;
+    }
+  }
+
+  .color-picker-wrapper {
+    margin: 0 auto;
+  }
+</style>
+<BaseLayout title="Colors">
+  <OS9Window title="Colors" asElement="main">
+    <section class="page">
+      <h2>Choose a color to explore themes:</h2>
+      <ColorPicker />
+    </section>
+  </OS9Window>
+</BaseLayout>

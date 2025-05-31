@@ -7,10 +7,12 @@ import {
 } from "../../components/authorsFormatter";
 import OS9Window from "../../components/OS9Window.astro";
 import ServerLikeButton from "../../components/ServerLikeButton.astro";
-import { archiveFileSize, archiveMd5 } from "../../helpers";
+import { getPaletteForThemeId } from "../../helpers/paletteHelpers";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-export const prerender = true;
+import { customSlugify } from "../../themesLoader";
+import { archiveFileSize, archiveMd5 } from "../../helpers/archiveHelpers";
 
+export const prerender = true;
 export const getStaticPaths = (async () => {
   const themes = await getCollection("themes");
   return themes.flatMap((t) => {
@@ -26,6 +28,7 @@ export const getStaticPaths = (async () => {
 const themeProps = Astro.props.theme;
 const theme = themeProps.data;
 const themeId = themeProps.id;
+const paletteData = getPaletteForThemeId(themeId);
 
 const isDev =
   import.meta.env.DEV && import.meta.env.PUBLIC_SHOW_DEBUG === "true";
@@ -77,6 +80,35 @@ const fileHosts = [
     display: flex;
     flex-direction: column;
   }
+
+  .palette {
+    padding-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .palette-color-item {
+    display: flex;
+    gap: 1ch;
+    align-items: center;
+  }
+
+  .palette-color-item:hover {
+    transform: scale(1.6);
+  }
+
+  .palette-color-name {
+    font-size: 14px;
+    display: none;
+  }
+
+  .palette-color {
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+    box-shadow: 0 0 0 1px black;
+  }
 </style>
 
 <BaseLayout
@@ -106,7 +138,7 @@ const fileHosts = [
         </div>
         <div class="infos">
           <dl>
-            <dl>
+            <>
               <dt>Name:</dt>
               <dd>{theme.name}</dd>
 
@@ -141,6 +173,36 @@ const fileHosts = [
                   </dd>
                 </div>
               </ServerLikeButton>
+
+              {
+                paletteData && (
+                  <>
+                    <dt>Colors:</dt>
+                    <dd>
+                      <ul class="palette">
+                        {paletteData.map(({ hex, name }) => {
+                          return (
+                            <li>
+                              <a
+                                class="palette-color-item"
+                                href={`/colors/${customSlugify(name!).toLowerCase()}`}
+                              >
+                                <span
+                                  class="palette-color"
+                                  style={{
+                                    backgroundColor: hex,
+                                  }}
+                                />
+                                {/* <span class="palette-color-name">{name}</span> */}
+                              </a>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </dd>
+                  </>
+                )
+              }
 
               <dt>Archive file:</dt>
               <dd style={"font-family: monospace;"}>
@@ -196,7 +258,7 @@ const fileHosts = [
                   </Fragment>
                 )
               }
-            </dl>
+            </>
           </dl>
         </div>
       </div>

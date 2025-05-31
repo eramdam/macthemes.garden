@@ -1,0 +1,109 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection, getEntries } from "astro:content";
+import { orderBy } from "lodash-es";
+import OS9Window from "../../components/OS9Window.astro";
+import { SingleTheme } from "../../components/singleTheme";
+import { targetPaletteColors } from "../../helpers/paletteHelpers";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { customSlugify } from "../../themesLoader";
+import ColorPicker from "../../components/ColorPicker.astro";
+
+export const prerender = true;
+export const getStaticPaths = (() => {
+  return targetPaletteColors.map((color) => {
+    return {
+      props: {
+        color: color,
+      },
+      params: {
+        color: customSlugify(color[1]).toLowerCase(),
+      },
+    };
+  });
+}) satisfies GetStaticPaths;
+const { color } = Astro.props;
+const paletteColors = await getCollection("paletteColors");
+const matchingPaletteColor =
+  paletteColors.find((p) => p.data.hex === color[0]) || paletteColors[0];
+const themes = await getEntries(matchingPaletteColor.data.themes);
+const themesForColor = orderBy(
+  themes,
+  (t) => {
+    // Use the index of the color (lower is more prominent) to sort the themes.
+    return t.data.colors.map((c) => c.id).indexOf(color[0]);
+  },
+  "asc"
+);
+---
+
+<style is:global>
+  .color-picker-current-name {
+    /* display: none; */
+  }
+
+  .color-picker-wrapper {
+    display: none;
+  }
+
+  .single-color-title span {
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    vertical-align: sub;
+    border: 1px solid black;
+  }
+
+  @media (max-width: 900px) {
+    .single-color-title {
+      font-size: 28px;
+    }
+  }
+
+  @media (min-width: 820px) and (hover: hover) {
+    .single-color-title {
+      text-align: left;
+      flex: 1;
+      line-height: 1.5;
+      margin-top: -30px;
+    }
+
+    .color-picker-wrapper {
+      display: block;
+    }
+
+    .single-color-color-picker {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin: 0 24px;
+    }
+  }
+</style>
+
+<BaseLayout title={color[1]}>
+  <OS9Window title={color[1]} asElement="main">
+    <div class="single-color-page">
+      <div class="single-color-color-picker">
+        <h1 class="single-color-title">
+          Themes using {color[1]}{" "}
+          <span style={{ backgroundColor: color[0] }}></span>
+        </h1>
+        <ColorPicker initialScale={1.4} />
+      </div>
+      <div class="themes-grid">
+        {
+          themesForColor
+            .map((t) => t.data)
+            .map(async (theme) => {
+              const authors = (await getEntries(theme.authors)).map(
+                (a) => a.data
+              );
+
+              return <SingleTheme theme={theme} authors={authors} />;
+            })
+        }
+      </div>
+    </div>
+  </OS9Window>
+</BaseLayout>

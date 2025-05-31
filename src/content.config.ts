@@ -1,8 +1,10 @@
-// 1. Import utilities from `astro:content`
 import { defineCollection, getCollection, reference, z } from "astro:content";
 import { memoize } from "lodash-es";
 
-// 2. Import loader(s)
+import {
+  getPaletteForThemeId,
+  targetPaletteColors,
+} from "./helpers/paletteHelpers";
 import { themeAuthorsLoader, themesLoader } from "./themesLoader";
 
 const themes = defineCollection({
@@ -18,6 +20,7 @@ const themes = defineCollection({
     isAirtable: z.boolean(),
     isNew: z.boolean(),
     relatedThemes: z.array(reference("themes")),
+    colors: z.array(reference("paletteColors")),
     createdAt: z.date(),
   }),
 });
@@ -31,8 +34,42 @@ const authors = defineCollection({
     themes: z.array(reference("themes")),
   }),
 });
-// 4. Export a single `collections` object to register your collection(s)
-export const collections = { themes, authors };
+
+const paletteColors = defineCollection({
+  loader: async () => {
+    const themes = await themesLoader({ colors: false, relatedThemes: false });
+    let themesIdsByColor: Record<string, string[]> = {};
+
+    for (const theme of themes) {
+      const paletteForTheme = getPaletteForThemeId(theme.id) || [];
+      for (const paletteColor of paletteForTheme) {
+        if (paletteColor.hex) {
+          if (themesIdsByColor[paletteColor.hex]) {
+            themesIdsByColor[paletteColor.hex].push(theme.id);
+          } else {
+            themesIdsByColor[paletteColor.hex] = [theme.id];
+          }
+        }
+      }
+    }
+
+    return targetPaletteColors.map((color) => {
+      return {
+        id: color[0],
+        name: color[1],
+        hex: color[0],
+        themes: themesIdsByColor[color[0]],
+      };
+    });
+  },
+  schema: z.object({
+    name: z.string(),
+    hex: z.string(),
+    themes: z.array(reference("themes")),
+  }),
+});
+
+export const collections = { themes, authors, paletteColors };
 
 export const getCollectionStats = memoize(async () => {
   return {

@@ -10,22 +10,25 @@ import {
 } from "../helpers/dbHelpers";
 import { canUserIdMakeRequest } from "../helpers/rateLimitHelpers";
 import { themesLoader } from "../themesLoader";
+import { getPaletteForTheme } from "../helpers/thumbnailHelpers";
 
-const themes = await themesLoader();
+const themes = await themesLoader({ colors: false, relatedThemes: false });
 const possibleIds = new Set(themes.map((t) => t.id));
+
+const zodThemeId = z.string().refine(
+  (rawString) => {
+    return possibleIds.has(rawString);
+  },
+  {
+    message: "String is not a valid theme ID",
+  },
+);
 
 export const server = {
   toggleLike: defineAction({
     accept: "json",
     input: z.object({
-      themeId: z.string().refine(
-        (rawString) => {
-          return possibleIds.has(rawString);
-        },
-        {
-          message: "String is not a valid theme ID",
-        },
-      ),
+      themeId: zodThemeId,
     }),
     handler: async (input, context) => {
       const userId = generateUserUUID(context.clientAddress);
@@ -68,4 +71,28 @@ export const server = {
       return { liked, likes: likes };
     },
   }),
+  debugPalette: defineAction({
+    accept: "json",
+    input: z.object({
+      themeId: zodThemeId,
+    }),
+    handler: async (input) => {
+      if (!import.meta.env.DEV) {
+        return undefined;
+      }
+      const theme = themes.find((t) => t.id === input.themeId);
+      if (!theme) {
+        return undefined;
+      }
+
+      const palette = await getPaletteForTheme(theme);
+
+      return { palette, thumbnail: theme.mainThumbnail };
+    },
+  }),
 };
+
+if (!import.meta.env.DEV) {
+  // @ts-expect-error
+  delete server.debugPalette;
+}

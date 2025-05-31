@@ -3,7 +3,7 @@ import satori from "satori";
 import sharp from "sharp";
 
 export async function generateOpenGraphImageForTheme(
-  theme: InferEntrySchema<"themes">,
+  theme: Pick<InferEntrySchema<"themes">, "thumbnails" | "mainThumbnail">,
 ) {
   let blurredImageData: Buffer | undefined;
   const margin = 20;
