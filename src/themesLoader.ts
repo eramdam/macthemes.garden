@@ -257,6 +257,7 @@ const namesCorrectionMap = {
   "Waynne Warren": ["Waynne Warren", "Waynne Warrern"],
   "William Bart": ["William Bart", "William Martin"],
   "Woo Kong Teik": ["Woo Kong Teik", "Woo Kong Teik"],
+  "Paul McCoy": ["Javasa Inc.", "Javasa Inc"],
 };
 
 const findCorrectedName = memoize((maybeWrongName: string) => {
