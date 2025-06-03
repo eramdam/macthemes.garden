@@ -62,7 +62,18 @@ const base = new Airtable({ apiKey: process.env.AIRTABLE_TOKEN }).base(
           ?.filepath,
       };
     })
-    .filter((f) => !!f && Object.values(f).filter((v) => !!v).length);
+    .filter((f) => !!f && Object.values(f).filter((v) => !!v).length)
+    .filter((f) => {
+      // TODO: use zod or something to do all that validation stuff...
+      return Boolean(
+        f.name &&
+          (f.year || f.authors) &&
+          f.about &&
+          f.showcase &&
+          f.archiveFilename &&
+          f.ksaSampler,
+      );
+    });
 
   const allFiles = normalizedRecordsWithFilePaths.flatMap((r) => {
     return [r.about, r.ksaSampler, r.showcase];
