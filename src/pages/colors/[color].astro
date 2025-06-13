@@ -9,7 +9,6 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import { customSlugify } from "../../themesLoader";
 import ColorPicker from "../../components/ColorPicker.astro";
 
-export const prerender = true;
 export const getStaticPaths = (() => {
   return targetPaletteColors.map((color) => {
     return {

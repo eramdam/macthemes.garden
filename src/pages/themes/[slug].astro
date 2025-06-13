@@ -12,7 +12,6 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import { customSlugify } from "../../themesLoader";
 import { archiveFileSize, archiveMd5 } from "../../helpers/archiveHelpers";
 
-export const prerender = true;
 export const getStaticPaths = (async () => {
   const themes = await getCollection("themes");
   return themes.flatMap((t) => {

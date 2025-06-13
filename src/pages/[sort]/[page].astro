@@ -1,32 +1,38 @@
 ---
+import type { GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
 import IndexPage from "../../components/IndexPage.astro";
+import { getLikeCountsByThemeIds } from "../../helpers/dbHelpers";
 import {
   PAGINATION,
+  possibleSortSlugs,
   slugFromSortAndOrder,
-  SortOptionsEnum,
-  SortOrdersEnum,
+  sortThemes,
 } from "../../helpers/sortHelpers";
-import { getLikeCountsByThemeIds } from "../../helpers/dbHelpers";
 
-const pageNumber = Astro.params.page;
-// @ts-expect-error
-const { sort, order } = slugFromSortAndOrder(Astro.params.sort || "d-desc");
+export const getStaticPaths = (async ({ paginate }) => {
+  const themes = await getCollection("themes");
+  const likesCountByID = await getLikeCountsByThemeIds();
+  return possibleSortSlugs.flatMap((slug) => {
+    const { order, sort } = slugFromSortAndOrder(slug);
+    return paginate(
+      sortThemes(
+        themes.map((t) => {
+          return { ...t, likes: likesCountByID[t.id] || 0 };
+        }),
+        sort,
+        order
+      ),
+      {
+        pageSize: PAGINATION.size,
+        params: { sort: slug },
+      }
+    );
+  });
+}) satisfies GetStaticPaths;
 
-if (
-  SortOrdersEnum.safeParse(order).error ||
-  SortOptionsEnum.safeParse(sort).error
-) {
-  return Astro.redirect("/");
-}
-
-let themes = await getCollection("themes");
-const likesCountByID = await getLikeCountsByThemeIds();
-themes = themes.map((t) => {
-  return { ...t, likes: likesCountByID[t.id] || 0 };
-});
-
-const page = PAGINATION.getPage(themes as any, Number(pageNumber), sort, order);
+const { page } = Astro.props;
+const { order, sort } = slugFromSortAndOrder(Astro.params.sort);
 ---
 
 <IndexPage page={page} order={order} sort={sort} />

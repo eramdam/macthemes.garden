@@ -28,7 +28,7 @@ export default defineConfig({
     enabled: false,
   },
 
-  output: "server",
+  output: "static",
 
   integrations: [preact(), db()],
 
