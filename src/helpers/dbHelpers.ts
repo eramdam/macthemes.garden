@@ -1,6 +1,6 @@
 import { and, db, eq, Like, LikesCount, UserRequest } from "astro:db";
 import { getSecret } from "astro:env/server";
-import { compact, groupBy, mapValues, uniq } from "lodash-es";
+import { compact, groupBy, mapValues, memoize, uniq } from "lodash-es";
 import { v4, v5 } from "uuid";
 
 export async function getUserLikeStatusForTheme(
@@ -127,9 +127,7 @@ async function getCombinedLikesFromSocials() {
   return likesCountById;
 }
 
-export async function getLikeCountsByThemeIds(): Promise<
-  Record<string, number>
-> {
+async function _getLikeCountsByThemeIds(): Promise<Record<string, number>> {
   console.time("getLikeCountsByThemeIds");
   const likesCount = await db.select().from(LikesCount);
   let likesCountById: Record<string, number> = {};
@@ -146,6 +144,8 @@ export async function getLikeCountsByThemeIds(): Promise<
   console.timeEnd("getLikeCountsByThemeIds");
   return likesCountById;
 }
+
+export const getLikeCountsByThemeIds = memoize(_getLikeCountsByThemeIds);
 
 export async function getLikesCountForThemeId(themeId: string) {
   return (await getLikeCountsByThemeIds())[themeId] || 0;

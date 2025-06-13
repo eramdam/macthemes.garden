@@ -1,6 +1,6 @@
 import { ActionError, defineAction } from "astro:actions";
 import { z } from "astro:content";
-import { db, eq, Theme } from "astro:db";
+import { db, eq, like, Theme } from "astro:db";
 import {
   addLikeForThemeFromUserId,
   generateUserUUID,
@@ -68,7 +68,7 @@ export const server = {
 
       const likes = await getLikesCountForThemeId(input.themeId);
 
-      return { liked, likes: likes };
+      return { liked, likes: likes + (liked ? 1 : -1) };
     },
   }),
   debugPalette: defineAction({
