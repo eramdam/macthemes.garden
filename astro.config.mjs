@@ -2,6 +2,7 @@ import { defineConfig } from "astro/config";
 import preact from "@astrojs/preact";
 import db from "@astrojs/db";
 import netlify from "@astrojs/netlify";
+import astroBrokenLinksChecker from "astro-broken-link-checker";
 
 const isDev = import.meta.env.DEV;
 
@@ -30,7 +31,14 @@ export default defineConfig({
 
   output: "static",
 
-  integrations: [preact(), db()],
+  integrations: [
+    preact(),
+    db(),
+    astroBrokenLinksChecker({
+      logFilePath: "broken-links.log", // Optional: specify the log file path
+      checkExternalLinks: false, // Optional: check external links (currently, caching to disk is not supported, and it is slow )
+    }),
+  ],
 
   adapter: netlify({
     edgeMiddleware: true,

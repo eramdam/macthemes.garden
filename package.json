@@ -52,6 +52,7 @@
     "@types/yargs": "^17.0.33",
     "airtable": "^0.12.2",
     "astro": "^5.9.2",
+    "astro-broken-link-checker": "imazen/astro-broken-link-checker",
     "async": "^3.2.6",
     "cmpstr": "^2.0.3",
     "color-diff": "^1.4.0",
