@@ -1,8 +1,8 @@
 name: Airtable/Likes update
 on:
   schedule:
-    # “At minute 0 past every 4th hour.”
-    - cron: "0 */4 * * *"
+    # “At 00:00 every day”
+    - cron: "0 0 * * *"
   workflow_dispatch:
 jobs:
   pull-airtable:
