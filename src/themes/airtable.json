@@ -29954,5 +29954,49 @@
     "ksaSampler": "public/themes/attachments/ksa-sampler-att5qtuea8epsu1fs-image.png",
     "created": "2025-10-13T01:58:15.000Z",
     "archiveFilename": "openscheme.sit"
+  },
+  {
+    "name": "OPENSTEP 4",
+    "authors": "Scott Naness",
+    "year": "1998",
+    "about": "public/themes/attachments/about-attg8a3yahiy2jlob-image.png",
+    "showcase": "public/themes/attachments/showcase-attol3u04bmtwgbif-image.png",
+    "archiveFileName2": "openstep4.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-att5rt0t21jpkivt4-image.png",
+    "created": "2025-10-13T02:01:56.000Z",
+    "archiveFilename": "openstep4.sit"
+  },
+  {
+    "name": "OpiumSeed",
+    "authors": "Albie Wong",
+    "year": "1997",
+    "about": "public/themes/attachments/about-attvjkvpdiv2fx17d-image.png",
+    "showcase": "public/themes/attachments/showcase-attiqdaimgv2rpyqg-image.png",
+    "archiveFileName2": "opiumseedplus.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attlw7xdgenl8z0a4-image.png",
+    "created": "2025-10-13T02:01:56.000Z",
+    "archiveFilename": "opiumseedplus.sit"
+  },
+  {
+    "name": "Orange & Black Crepe",
+    "authors": "Therri",
+    "year": "2000",
+    "about": "public/themes/attachments/about-attvu7qkc4vj6nvdb-image.png",
+    "showcase": "public/themes/attachments/showcase-attf0or1gb9qg11kq-image.png",
+    "archiveFileName2": "orangeandblackcrepe.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-atthujvvpt1cpwoov-image.png",
+    "created": "2025-10-13T02:01:57.000Z",
+    "archiveFilename": "orangeandblackcrepe.sit"
+  },
+  {
+    "name": "Orange and Blue Pride",
+    "authors": "David Esche",
+    "year": "1998",
+    "about": "public/themes/attachments/about-attcf4uwheq4si6qe-image.png",
+    "showcase": "public/themes/attachments/showcase-attkqnkmf4hntk4s7-image.png",
+    "archiveFileName2": "orangeandbluepride.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attgzx1wfpjnyljxg-image.png",
+    "created": "2025-10-26T18:13:48.000Z",
+    "archiveFilename": "orangeandbluepride.sit"
   }
 ]
