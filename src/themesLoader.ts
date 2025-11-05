@@ -159,7 +159,7 @@ const namesCorrectionMap = {
   "Erik Soderlund": ["Erik Soderlund", "Erik Sôderlund", "Erik Söderlund"],
   "Esse Design": ["Esse Design", "Moss Design"],
   "G. Vié": ["G. Vie", "G. Vié"],
-  "Gaeme Hunt": ["Gaeme Hunt", "Graeme C. Hunt", "Graeme Hunt"],
+  "Graeme Hunt": ["Gaeme Hunt", "Graeme C. Hunt", "Graeme Hunt"],
   "Hans van Kampen": ["Hans v. Kampen", "Hans van Kampen"],
   hardc0rp: ["Hardc0rp", "hardc0rp"],
   "Hideaki Kamada": ["Hideaki Kamada", "Kideaki Kamada"],
