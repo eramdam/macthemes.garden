@@ -27,7 +27,6 @@ export default defineConfig({
   },
 
   output: "static",
-
   integrations: [
     preact(),
     // astroBrokenLinksChecker({
