@@ -1,5 +1,5 @@
 import { useSignal } from "@preact/signals";
-import { actions } from "astro:actions";
+
 import { Fragment, type JSX } from "preact";
 import { getPaletteForThemeId } from "../helpers/paletteHelpers";
 
@@ -12,20 +12,21 @@ export function ThemePaletteDebugger() {
 
   const onSubmit: JSX.SubmitEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    const form = e.target as HTMLFormElement;
-    const { data } = await actions.debugPalette({
-      themeId: String(form.themeId.value).trim(),
-    });
+    // TODO: re-plug the debug stuff if needed later
+    // const form = e.target as HTMLFormElement;
+    // const { data } = await actions.debugPalette({
+    //   themeId: String(form.themeId.value).trim(),
+    // });
 
-    if (data && data.palette) {
-      themeThumbnail.value = data.thumbnail;
-      themePalette.value = data.palette;
-      getPaletteForThemeId.cache?.clear?.();
-      themePaletteMatches.value = getPaletteForThemeId(
-        String(form.themeId.value).trim(),
-        data.palette,
-      );
-    }
+    // if (data && data.palette) {
+    //   themeThumbnail.value = data.thumbnail;
+    //   themePalette.value = data.palette;
+    //   getPaletteForThemeId.cache?.clear?.();
+    //   themePaletteMatches.value = getPaletteForThemeId(
+    //     String(form.themeId.value).trim(),
+    //     data.palette,
+    //   );
+    // }
   };
 
   return (
