@@ -1,3 +1,4 @@
+// import astroBrokenLinksChecker from "astro-broken-link-checker";
 import preact from "@astrojs/preact";
 import { defineConfig } from "astro/config";
 
