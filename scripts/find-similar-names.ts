@@ -1,6 +1,6 @@
-import { themeAuthorsLoader } from "../src/themesLoader";
 import { CmpStr } from "cmpstr";
-import { fromPairs, groupBy, mapValues, memoize, toPairs } from "lodash-es";
+import { fromPairs, groupBy, toPairs } from "lodash-es";
+import { themeAuthorsLoader } from "../src/themesLoader";
 
 const cmp = new CmpStr();
 cmp.rmvAlgo("soundex");
@@ -30,12 +30,6 @@ function areStringsSimilar(stringA: string, stringB: string) {
 
   return average > 0.7;
 }
-
-const collator = new Intl.Collator("en", {
-  usage: "search",
-  ignorePunctuation: true,
-  sensitivity: "base",
-});
 
 (async () => {
   const authors = await themeAuthorsLoader();
