@@ -1030,6 +1030,16 @@
     "archiveFilename": "iridiumbrights.sit"
   },
   {
+    "name": "Iridium (Lime)",
+    "authors": "Evan Thompson",
+    "year": "1998",
+    "about": "public/themes/attachments/about-attnibes9xc4ekuqr-image.png",
+    "showcase": "public/themes/attachments/showcase-attynj1ie61lecvcb-image.png",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attnn1ral2m4ydfn7-image.png",
+    "created": "2023-12-01T06:41:17.000Z",
+    "archiveFilename": "iridiumbrights.sit"
+  },
+  {
     "name": "Iridium (Magenta)",
     "authors": "Evan Thompson",
     "year": "1998",
@@ -35238,5 +35248,82 @@
     "ksaSampler": "public/themes/attachments/ksa-sampler-attk56rpuiqhog0sc-image.png",
     "created": "2026-02-08T02:33:28.000Z",
     "archiveFilename": "rubymuangman.sit"
+  },
+  {
+    "name": "007",
+    "authors": "Tomas Sor",
+    "year": "1998",
+    "about": "public/themes/attachments/about-attklohsllxozcp3k-image.png",
+    "showcase": "public/themes/attachments/showcase-attns1qlqlxdusxe8-image.png",
+    "archiveFileName2": "007tomas.SIT",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attzecbdvqv9l6skg-image.png",
+    "created": "2026-02-08T02:37:28.000Z",
+    "archiveFilename": "007tomas.SIT"
+  },
+  {
+    "name": "Classic Batman",
+    "authors": "Richard Davis",
+    "year": "1997",
+    "about": "public/themes/attachments/about-att9kwbx0xccr3yqo-image.png",
+    "showcase": "public/themes/attachments/showcase-attndbupdfyol0kfs-image.png",
+    "archiveFileName2": "batman.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attjo1ikoq41bnvdu-image.png",
+    "created": "2026-02-08T02:37:28.000Z",
+    "archiveFilename": "batman.sit"
+  },
+  {
+    "name": "Kitty Kat",
+    "authors": "Michael Hernandez, Jr.",
+    "year": "1998",
+    "about": "public/themes/attachments/about-attmxwirzbn70bgre-image.png",
+    "showcase": "public/themes/attachments/showcase-attmrww7owcgokkqm-image.png",
+    "archiveFileName2": "kittykat.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attyflfrklcuovncl-image.png",
+    "created": "2026-02-11T02:14:51.000Z",
+    "archiveFilename": "kittykat.sit"
+  },
+  {
+    "name": "Ultratech 2.2",
+    "authors": "Janet Snider Parris",
+    "year": "1998",
+    "about": "public/themes/attachments/about-att1awnutaesecfoc-image.png",
+    "showcase": "public/themes/attachments/showcase-attxgv6opzbg57v3u-image.png",
+    "archiveFileName2": "ultratech98.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attopwben1lgyxogc-image.png",
+    "created": "2026-02-11T02:14:51.000Z",
+    "archiveFilename": "ultratech98.sit"
+  },
+  {
+    "name": "iMac the Scheme",
+    "authors": "Hi! Inc.",
+    "year": "1998",
+    "about": "public/themes/attachments/about-attgrdehpmitvfn75-image.png",
+    "showcase": "public/themes/attachments/showcase-att9bahfocrj7ydi1-image.png",
+    "archiveFileName2": "imacthescheme.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attqv1x4mbbtsy5pg-image.png",
+    "created": "2026-02-11T02:25:17.000Z",
+    "archiveFilename": "imacthescheme.sit"
+  },
+  {
+    "name": "PuyoPuyo",
+    "authors": "Jeremy Burge",
+    "year": "1998",
+    "about": "public/themes/attachments/about-attke7l8jsozvdmte-image.png",
+    "showcase": "public/themes/attachments/showcase-attj7r8t4u6yw0ubh-image.png",
+    "archiveFileName2": "puyopuyo.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-att3cuu5icl48snou-image.png",
+    "created": "2026-02-11T02:25:17.000Z",
+    "archiveFilename": "puyopuyo.sit"
+  },
+  {
+    "name": "South Park",
+    "authors": "Todd Johnson",
+    "year": "1998",
+    "about": "public/themes/attachments/about-attbtjr8q0ywm2sw8-image.png",
+    "showcase": "public/themes/attachments/showcase-attkcrpbcqgygymry-image.png",
+    "archiveFileName2": "sthpark.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attondt6ccsuuuqfp-image.png",
+    "created": "2026-02-11T02:25:17.000Z",
+    "archiveFilename": "sthpark.sit"
   }
 ]
