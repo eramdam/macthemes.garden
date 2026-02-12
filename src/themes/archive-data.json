@@ -42,6 +42,7 @@
   "0000.sit": { "md5": "d3d618136d8d528ba4b572cb354c7892", "size": 417063 },
   "007.sit": { "md5": "899de85b38631f4a5ae15a5034512dd5", "size": 87280 },
   "007gold.sit": { "md5": "f3aea6fde3d11d4ed1570ee63a40e4f0", "size": 35145 },
+  "007tomas.sit": { "md5": "56be71c96ac4693357bfbf7ab722e2fb", "size": 44761 },
   "0099.sit": { "md5": "83d5543cdcae6e560a8d4df51f90a796", "size": 711694 },
   "00whiteout.sit": {
     "md5": "780decb5f01133fb131d5f79e521159d",
@@ -908,6 +909,7 @@
   },
   "batik.sit": { "md5": "342881f7c490b1f334c15d4c01f6b328", "size": 221845 },
   "batikii.sit": { "md5": "9fcfea77648223fd59a0b5898831d9af", "size": 444921 },
+  "batman.sit": { "md5": "8d8b5f64c856e6be97793653bea40561", "size": 164698 },
   "batonrouge.sit": {
     "md5": "dc04518a833d5562ce85467dbd8db72e",
     "size": 107082
@@ -4988,6 +4990,10 @@
     "md5": "01b4390477ce6e4757c71b93cbc5a461",
     "size": 46675
   },
+  "imacthescheme.sit": {
+    "md5": "365ed1205b14badc4c3c3f59e0dba3cd",
+    "size": 52219
+  },
   "imaculate.sit": {
     "md5": "b17e3c04f5f715c81b7f8e31f1dd9009",
     "size": 354352
@@ -5532,6 +5538,7 @@
     "size": 118081
   },
   "kitt.sit": { "md5": "1e4b199b2b14e67376b10f9e4ba2b17d", "size": 12691 },
+  "kittykat.sit": { "md5": "870bc3c470bfe4bd9932bcfb89605d19", "size": 544242 },
   "kittykitty.sit": {
     "md5": "85acd3559f8637b7d27badacd384d871",
     "size": 418207
@@ -7827,6 +7834,7 @@
     "md5": "1d1f0c7755016a1085d3c925a662fbbd",
     "size": 125621
   },
+  "puyopuyo.sit": { "md5": "8e9609a342ccaa9a7f362351c2b0cfe6", "size": 170035 },
   "puzzle.sit": { "md5": "56145378de5c7520ffb75b2864011a8d", "size": 53589 },
   "puzzlepascal.sit": {
     "md5": "e0b1d0d148e7e92dac5090e2b848a090",
@@ -9144,6 +9152,7 @@
     "size": 262410
   },
   "steveos.sit": { "md5": "9b05884d85ef3ef03bbdfb0cc9304bd9", "size": 422670 },
+  "sthpark.sit": { "md5": "0fcdc84e16f6fb5fd813fcf6f4b8d69b", "size": 90242 },
   "stilllife.sit": {
     "md5": "846d8aa63a91d75fd35579323ef87f82",
     "size": 624327
@@ -10058,6 +10067,10 @@
   "ultratech.sit": {
     "md5": "9d5b6df947f8e9c5e83c0c668b08e4fe",
     "size": 407471
+  },
+  "ultratech98.sit": {
+    "md5": "4f4b7958c98ad1653bd90e23b0ec92d5",
+    "size": 315895
   },
   "undark.sit": { "md5": "905276b49f6da192d562f1071ef14979", "size": 48305 },
   "underconstruction.sit": {
