@@ -6353,6 +6353,7 @@
     "year": "2000",
     "about": "public/themes/attachments/about-attdhv0qeqnq1godm-image.png",
     "showcase": "public/themes/attachments/showcase-attvuvltb1uk5ngtn-image.png",
+    "archiveFileName2": "blood.1.sit",
     "ksaSampler": "public/themes/attachments/ksa-sampler-attg6l9bjlxnndvwb-image.png",
     "created": "2024-03-19T04:47:08.000Z",
     "archiveFilename": "blood.1.sit"
@@ -6363,9 +6364,10 @@
     "year": "2000",
     "about": "public/themes/attachments/about-attakxrt8yjypfpiy-image.png",
     "showcase": "public/themes/attachments/showcase-att1illygdgwdomhj-image.png",
+    "archiveFileName2": "blood.2.sit",
     "ksaSampler": "public/themes/attachments/ksa-sampler-attsoxcnesdis78ya-image.png",
     "created": "2024-03-19T04:47:09.000Z",
-    "archiveFilename": "Blood.2.sit"
+    "archiveFilename": "blood.2.sit"
   },
   {
     "name": "Bloody Mary",
@@ -25878,10 +25880,10 @@
     "year": "1998",
     "about": "public/themes/attachments/about-att5rxfnlbjbnqnky-image.png",
     "showcase": "public/themes/attachments/showcase-atte0ruvczmetbov8-image.png",
-    "archiveFileName2": "menegrothcavesold.sit",
+    "archiveFileName2": "!!!menegrothcavesold.sit",
     "ksaSampler": "public/themes/attachments/ksa-sampler-attynmnb2f55md2qe-image.png",
     "created": "2025-04-23T02:40:40.000Z",
-    "archiveFilename": "menegrothcavesold.sit"
+    "archiveFilename": "!!!menegrothcavesold.sit"
   },
   {
     "name": "Menegroth Caves 2.0",
@@ -33621,10 +33623,10 @@
     "year": "1997",
     "about": "public/themes/attachments/about-attec4mvwv8m3xurp-image.png",
     "showcase": "public/themes/attachments/showcase-atte3hpeapi51i6ef-image.png",
-    "archiveFileName2": "qsrevengeold.sit",
+    "archiveFileName2": "!!!qsrevengeold.sit",
     "ksaSampler": "public/themes/attachments/ksa-sampler-att4ev8xtzfkxzz1m-image.png",
     "created": "2026-02-03T05:06:17.000Z",
-    "archiveFilename": "qsrevengeold.sit"
+    "archiveFilename": "!!!qsrevengeold.sit"
   },
   {
     "name": "Q's Nite",
@@ -33873,10 +33875,10 @@
     "year": "2000",
     "about": "public/themes/attachments/about-attlqzox4d1d6tdsv-image.png",
     "showcase": "public/themes/attachments/showcase-attmeexzkfgtnvrvu-image.png",
-    "archiveFileName2": "rainbowlarry",
+    "archiveFileName2": "rainbowlarry.sit",
     "ksaSampler": "public/themes/attachments/ksa-sampler-attz1igccbry3jemh-image.png",
     "created": "2026-02-03T05:45:03.000Z",
-    "archiveFilename": "rainbowlarry"
+    "archiveFilename": "rainbowlarry.sit"
   },
   {
     "name": "Rainbow Confetti",
@@ -34782,10 +34784,10 @@
     "year": "1999",
     "about": "public/themes/attachments/about-attcl1axvyxnoluji-image.png",
     "showcase": "public/themes/attachments/showcase-attbz8hdkr4kijzcg-image.png",
-    "archiveFileName2": "rhapsodydr1",
+    "archiveFileName2": "rhapsodydr1.sit",
     "ksaSampler": "public/themes/attachments/ksa-sampler-attdxkljaxhocwwqp-image.png",
     "created": "2026-02-08T01:43:42.000Z",
-    "archiveFilename": "rhapsodydr1"
+    "archiveFilename": "rhapsodydr1.sit"
   },
   {
     "name": "RhapSTEP 1.1",
@@ -34881,10 +34883,10 @@
     "year": "1999",
     "about": "public/themes/attachments/about-attsk4lkzqghabqrd-image.png",
     "showcase": "public/themes/attachments/showcase-att97gv6ahokcdvk6-image.png",
-    "archiveFileName2": "robok2",
+    "archiveFileName2": "robo-k2.sit",
     "ksaSampler": "public/themes/attachments/ksa-sampler-attkt3krvxwhlopax-image.png",
     "created": "2026-02-08T01:57:43.000Z",
-    "archiveFilename": "robok2"
+    "archiveFilename": "robo-k2.sit"
   },
   {
     "name": "Robotic Eyes",
@@ -35255,10 +35257,10 @@
     "year": "1998",
     "about": "public/themes/attachments/about-attklohsllxozcp3k-image.png",
     "showcase": "public/themes/attachments/showcase-attns1qlqlxdusxe8-image.png",
-    "archiveFileName2": "007tomas.SIT",
+    "archiveFileName2": "007tomas.sit",
     "ksaSampler": "public/themes/attachments/ksa-sampler-attzecbdvqv9l6skg-image.png",
     "created": "2026-02-08T02:37:28.000Z",
-    "archiveFilename": "007tomas.SIT"
+    "archiveFilename": "007tomas.sit"
   },
   {
     "name": "Classic Batman",
