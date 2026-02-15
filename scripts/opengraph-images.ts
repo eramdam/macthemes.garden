@@ -3,12 +3,9 @@ import { themesLoader } from "../src/themesLoader";
 import { cpus } from "node:os";
 import { chunk } from "lodash-es";
 import { execaSync } from "execa";
-import yargs from "yargs";
-const argv = yargs(process.argv.slice(2)).parse();
 
 (async () => {
-  // @ts-expect-error
-  const ignoreChanges = argv.force ?? false;
+  const ignoreChanges = true;
   const listOfChangedFiles = execaSync({
     lines: true,
   })`git ls-files --modified --others public/themes/attachments`.stdout;
