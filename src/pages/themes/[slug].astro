@@ -6,12 +6,11 @@ import {
   formatAuthorsText,
 } from "../../components/authorsFormatter";
 import OS9Window from "../../components/OS9Window.astro";
-import ServerLikeButton from "../../components/ServerLikeButton.astro";
+import { archiveFileSize, archiveMd5 } from "../../helpers/archiveHelpers";
+import { getLikesCountForThemeId } from "../../helpers/dbHelpers";
 import { getPaletteForThemeId } from "../../helpers/paletteHelpers";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { customSlugify } from "../../themesLoader";
-import { archiveFileSize, archiveMd5 } from "../../helpers/archiveHelpers";
-import { getLikesCountForThemeId } from "../../helpers/dbHelpers";
 
 export const getStaticPaths = (async () => {
   const themes = await getCollection("themes");
