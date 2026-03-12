@@ -1,6 +1,7 @@
 import type { Page } from "astro";
 
-import { z, type CollectionEntry } from "astro:content";
+import { type CollectionEntry } from "astro:content";
+import { z } from "astro/zod";
 import { chunk, orderBy } from "lodash-es";
 import { customSlugify } from "../themesLoader";
 
