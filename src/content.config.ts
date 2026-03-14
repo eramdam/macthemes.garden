@@ -1,4 +1,5 @@
-import { defineCollection, getCollection, reference, z } from "astro:content";
+import { defineCollection, getCollection, reference } from "astro:content";
+import { z } from "astro/zod";
 import { memoize } from "lodash-es";
 
 import {
