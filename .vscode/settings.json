@@ -6,5 +6,6 @@
   "[liquid]": {
     "editor.defaultFormatter": "sissel.shopify-liquid",
     "editor.formatOnSave": true
-  }
+  },
+  "js/ts.tsdk.path": "node_modules/typescript/lib"
 }
