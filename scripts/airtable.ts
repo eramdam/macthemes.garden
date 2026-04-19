@@ -57,7 +57,7 @@ const base = new Airtable({ apiKey: process.env.AIRTABLE_TOKEN }).base(
         showcase: filePaths.find((f) => f.id === record.showcase?.id)?.filepath,
         about: filePaths.find((f) => f.id === record.about?.id)?.filepath,
         archiveFile: undefined,
-        archiveFilename: archiveName,
+        archiveFilename: archiveName?.trim(),
         ksaSampler: filePaths.find((f) => f.id === record.ksaSampler?.id)
           ?.filepath,
       };

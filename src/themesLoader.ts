@@ -37,7 +37,11 @@ export async function themesLoader(
     .map((theme) => {
       const id = crypto
         .createHash("shake256", { outputLength: 6 })
-        .update([theme.name, theme.authors, theme.archiveFilename].join("-"))
+        .update(
+          [theme.name, theme.authors, theme.archiveFilename]
+            .map((s) => s?.trim())
+            .join("-"),
+        )
         .digest("hex");
 
       if (!theme.ksaSampler) {
