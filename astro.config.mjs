@@ -22,7 +22,7 @@ export default defineConfig({
   },
 
   build: {
-    assetsPrefix: "https://macthemes-garden.b-cdn.net/",
+    assetsPrefix: "https://cdn.macthemes.garden/",
   },
 
   site: isDev ? "http://localhost:4321" : "https://macthemes.garden",

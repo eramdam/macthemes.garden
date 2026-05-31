@@ -1,6 +1,7 @@
 import type { InferEntrySchema } from "astro:content";
 import type { ComponentProps } from "preact";
 import { AuthorsFormatter } from "./authorsFormatter";
+import { cdn } from "../helpers/cdn";
 
 const isDev =
   import.meta.env.DEV && import.meta.env.PUBLIC_SHOW_DEBUG === "true";
@@ -18,13 +19,13 @@ export function SingleTheme(props: SingleThemeProps) {
   const { theme, authors, likes } = props;
   const yearPart = theme.year && (
     <>
-      <img class="single-theme-icon" src="/assets/calendar-bw.png" />
+      <img class="single-theme-icon" src={cdn("/assets/calendar-bw.png")} />
       {theme.year}
     </>
   );
   const likesPart = (likes || 0) > 0 && (
     <>
-      <img class="single-theme-icon" src="/assets/finder-smile.png" />
+      <img class="single-theme-icon" src={cdn("/assets/finder-smile.png")} />
       {likes} {(likes || 0) > 1 ? "likes" : "like"}
     </>
   );
@@ -35,7 +36,7 @@ export function SingleTheme(props: SingleThemeProps) {
           loading="lazy"
           decoding="async"
           class="single-theme-image"
-          src={`${theme.mainThumbnail}`}
+          src={cdn(theme.mainThumbnail)}
           alt=""
         />
       </a>
@@ -43,7 +44,7 @@ export function SingleTheme(props: SingleThemeProps) {
         <div class="single-theme-name">{theme.name}</div>
       </a>
       <div class="single-theme-authors">
-        <img class="single-theme-icon" src="/assets/author.png" />
+        <img class="single-theme-icon" src={cdn("/assets/author.png")} />
         <AuthorsFormatter authors={authors} />
       </div>
       <div className="single-theme-year">

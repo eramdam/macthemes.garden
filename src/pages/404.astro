@@ -1,5 +1,6 @@
 ---
 import { OS9Button } from "../components/OS9Button";
+import { cdn } from "../helpers/cdn";
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
@@ -41,11 +42,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 </style>
 <BaseLayout title="Not found" hideLayout>
   <div class="boot-window">
-    <img src="/assets/boot.png" alt="" />
+    <img src={cdn("/assets/boot.png")} alt="" />
     <div>Starting up...</div>
   </div>
   <div class="error-window">
-    <img src="/assets/bomb.png" alt="" />
+    <img src={cdn("/assets/bomb.png")} alt="" />
     <div>
       Sorry, a system error occurred. <br />
       <br />

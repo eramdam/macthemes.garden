@@ -3,6 +3,7 @@ import OS9Window, { WindowButtons } from "../components/OS9Window.astro";
 import { getCollectionStats } from "../content.config";
 import { TZDate } from "@date-fns/tz";
 import "../styles/index.css";
+import { cdn } from "../helpers/cdn";
 
 interface Props {
   title: string | undefined;
@@ -25,7 +26,7 @@ const images = Astro.props.images
 const { hideLayout } = Astro.props;
 const footerDate = new TZDate(
   Date.now(),
-  "America/Los_Angeles"
+  "America/Los_Angeles",
 ).toLocaleDateString("en", {
   dateStyle: "medium",
 });
@@ -89,7 +90,7 @@ const footerDate = new TZDate(
         >
           <div class="header-image-box">
             <a href="/" class="header-image">
-              <img src="/assets/macthemes-garden-header.png" alt="" />
+              <img src={cdn("/assets/macthemes-garden-header.png")} alt="" />
             </a>
           </div>
 
@@ -97,32 +98,32 @@ const footerDate = new TZDate(
             <ul class="macos9-menu">
               <li>
                 <a href="/" class="macos9-menu-icon">
-                  <img src="/assets/menu/schemes-puzzle.png" alt="" />
+                  <img src={cdn("/assets/menu/schemes-puzzle.png")} alt="" />
                   <span> Schemes </span>
                 </a>
               </li>
               <li>
                 <a href="/authors" class="macos9-menu-icon">
-                  <img src="/assets/menu/file-sharing.png" alt="" />
+                  <img src={cdn("/assets/menu/file-sharing.png")} alt="" />
                   <span> Authors </span>
                 </a>
               </li>
               <li>
                 <a href="/colors" class="macos9-menu-icon">
-                  <img src="/assets/menu/colors.png" alt="" />
+                  <img src={cdn("/assets/menu/colors.png")} alt="" />
                   <span> Colors </span>
                 </a>
               </li>
               <span class="spacer" />
               <li>
                 <a href="/search" class="macos9-menu-icon">
-                  <img src="/assets/menu/search.png" alt="" />
+                  <img src={cdn("/assets/menu/search.png")} alt="" />
                   <span> Search </span>
                 </a>
               </li>
               <li>
                 <a href="/about" class="macos9-menu-icon">
-                  <img src="/assets/menu/finder-computer.png" alt="" />
+                  <img src={cdn("/assets/menu/finder-computer.png")} alt="" />
                   <span> About </span>
                 </a>
               </li>

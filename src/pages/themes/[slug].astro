@@ -11,6 +11,7 @@ import { getLikesCountForThemeId } from "../../helpers/dbHelpers";
 import { getPaletteForThemeId } from "../../helpers/paletteHelpers";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { customSlugify } from "../../themesLoader";
+import { cdn } from "../../helpers/cdn";
 
 export const getStaticPaths = (async () => {
   const themes = await getCollection("themes");
@@ -131,11 +132,11 @@ const likesCount = await getLikesCountForThemeId(themeId);
               return (
                 <a
                   class="gallery-thumbnail"
-                  href={image}
+                  href={cdn(image)}
                   target="_blank"
                   rel="noopener"
                 >
-                  <img src={image} alt="" />
+                  <img src={cdn(image)} alt="" />
                 </a>
               );
             })
@@ -244,7 +245,7 @@ const likesCount = await getLikesCountForThemeId(themeId);
                             href={`/themes/${t.data.urlBase}`}
                           >
                             <img
-                              src={t.data.mainThumbnail}
+                              src={cdn(t.data.mainThumbnail)}
                               loading="lazy"
                               decoding="async"
                               alt={`${t.data.name} by ${t.data.authors.join(", ")}`}
