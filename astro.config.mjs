@@ -21,6 +21,10 @@ export default defineConfig({
     defaultStrategy: "hover",
   },
 
+  build: {
+    assetsPrefix: "https://macthemes-garden.b-cdn.net/",
+  },
+
   site: isDev ? "http://localhost:4321" : "https://macthemes.garden",
 
   devToolbar: {
