@@ -1,8 +1,7 @@
 import {
   type AnchorHTMLAttributes,
-  type ComponentChildren,
-  type JSX,
   type ButtonHTMLAttributes,
+  type ComponentChildren,
 } from "preact";
 import "./OS9Button.scss";
 

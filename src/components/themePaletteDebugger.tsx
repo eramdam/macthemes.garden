@@ -1,6 +1,6 @@
 import { useSignal } from "@preact/signals";
 
-import { Fragment, type JSX, type SubmitEventHandler } from "preact";
+import { Fragment, type SubmitEventHandler } from "preact";
 import { getPaletteForThemeId } from "../helpers/paletteHelpers";
 
 export function ThemePaletteDebugger() {

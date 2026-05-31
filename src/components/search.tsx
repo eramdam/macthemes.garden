@@ -1,10 +1,6 @@
-import { matchSorter } from "match-sorter";
-import {
-  type FunctionComponent,
-  type JSX,
-  type TargetedSubmitEvent,
-} from "preact";
 import { sample } from "lodash-es";
+import { matchSorter } from "match-sorter";
+import { type FunctionComponent, type TargetedSubmitEvent } from "preact";
 
 import { useComputed, useSignal } from "@preact/signals";
 import { chunk } from "lodash-es";
