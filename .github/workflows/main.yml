@@ -20,7 +20,16 @@ jobs:
           AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_TOKEN}}
           AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID}}
         run: touch .env && npm run data:airtable && rm .env
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          list-files: "shell"
+          filters: |
+            themes:
+              - 'public/themes/attachments/**'
+              - 'scripts/opengraph-images.ts'
       - name: "Generate OpenGraph images"
+        if: steps.filter.outputs.themes == 'true'
         run: npm run data:opengraph
       - name: "Generate palette data"
         run: npm run data:palette
