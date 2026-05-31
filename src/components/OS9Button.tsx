@@ -1,15 +1,20 @@
-import { type ComponentChildren, type JSX } from "preact";
+import {
+  type AnchorHTMLAttributes,
+  type ComponentChildren,
+  type JSX,
+  type ButtonHTMLAttributes,
+} from "preact";
 import "./OS9Button.scss";
 
 type OS9ButtonProps =
   | ({
       asButton: true;
       children?: ComponentChildren;
-    } & JSX.ButtonHTMLAttributes<HTMLButtonElement>)
+    } & ButtonHTMLAttributes<HTMLButtonElement>)
   | ({
       asButton?: false | undefined;
       children: ComponentChildren;
-    } & JSX.AnchorHTMLAttributes<HTMLAnchorElement>);
+    } & AnchorHTMLAttributes<HTMLAnchorElement>);
 
 export function OS9Button({ children, ...attributes }: OS9ButtonProps) {
   const content = (

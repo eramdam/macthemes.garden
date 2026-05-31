@@ -1,6 +1,6 @@
 import { useSignal } from "@preact/signals";
 
-import { Fragment, type JSX } from "preact";
+import { Fragment, type JSX, type SubmitEventHandler } from "preact";
 import { getPaletteForThemeId } from "../helpers/paletteHelpers";
 
 export function ThemePaletteDebugger() {
@@ -10,7 +10,7 @@ export function ThemePaletteDebugger() {
     undefined | Awaited<ReturnType<typeof getPaletteForThemeId>>
   >(undefined);
 
-  const onSubmit: JSX.SubmitEventHandler<HTMLFormElement> = async (e) => {
+  const onSubmit: SubmitEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     // TODO: re-plug the debug stuff if needed later
     // const form = e.target as HTMLFormElement;

@@ -1,5 +1,9 @@
 import { matchSorter } from "match-sorter";
-import { type FunctionComponent, type JSX } from "preact";
+import {
+  type FunctionComponent,
+  type JSX,
+  type TargetedSubmitEvent,
+} from "preact";
 import { sample } from "lodash-es";
 
 import { useComputed, useSignal } from "@preact/signals";
@@ -72,7 +76,7 @@ export const SearchForm: FunctionComponent<SearchFormProps> = (props) => {
     return Math.ceil(searchResultsCount.value / pageSize);
   });
 
-  const onChange = (e: JSX.TargetedSubmitEvent<HTMLFormElement>) => {
+  const onChange = (e: TargetedSubmitEvent<HTMLFormElement>) => {
     if (!(e.target instanceof HTMLFormElement)) {
       return;
     }
