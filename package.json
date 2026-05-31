@@ -13,7 +13,7 @@
     "dev": "astro dev",
     "check": "astro check",
     "test": "npm run check",
-    "build": "astro check && astro build",
+    "build": "astro build",
     "preview": "astro preview",
     "prepare": "husky"
   },
