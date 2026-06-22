@@ -21,7 +21,8 @@ RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store \
 COPY . .
 
 # astro build only — typecheck (astro check) runs in CI, not the deploy path.
-RUN pnpm exec astro build
+RUN --mount=type=cache,id=astro-build-cache,target=/app/node_modules/.astro \
+    pnpm exec astro build
 
 # ---- Runtime stage ----
 FROM nginx:alpine AS runtime
