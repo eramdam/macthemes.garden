@@ -140,6 +140,8 @@ export async function themeAuthorsLoader() {
 
 // To fix random typos I've made while recording the themes...
 const namesCorrectionMap = {
+  "Adam Block": ["Adam Block", "Adam Block"],
+  "AGRAPHA Design": ["AGRAPHA Design", "Agrapha Design"],
   "Albie Wong": ["Albie Wong", "albie wong"],
   "alta design": ["alta design", "Alta Design"],
   Amphagorey: ["amphagorey", "Amphagorey", "Amphaorey"],
@@ -234,12 +236,18 @@ const namesCorrectionMap = {
   "Robert Davis": ["Robert Davis", "robert davis"],
   "Robert Mcanally": ["Robert Mcanally", "Robert McAnally"],
   "Robin Rundkvist": ["Robin Rundkvist", "Robin Rundvist"],
+  "Robin Mitchell": ["Robin mitchell", "Robin Mitchell"],
   "Ronald ter Neuzen": ["Ronald ter Neuzen", "Ronald ter Neuzen"],
-  "Russeli Silver": [
+  "Russell Silver": [
     "Russeli Silver",
     "Russell silver",
     "Russel P. Silver Jr",
+    "Russell P. Silver Jr",
+    "Russel P. Silver Jr.",
+    "Russell P. Silver Jr.",
     "Russell Silver",
+    "Russell Silver Jr.",
+    "Russell Silver Jr",
   ],
   "S.R. Simons": ["S. R. Simons", "S.R. Simons"],
   "Sam Blumer": ["Sam Blumer", "Tim Blumer"],
@@ -262,6 +270,22 @@ const namesCorrectionMap = {
   "William Bart": ["William Bart", "William Martin"],
   "Woo Kong Teik": ["Woo Kong Teik", "Woo Kong Teik"],
   "Paul McCoy": ["Javasa Inc.", "Javasa Inc"],
+  [`Yasuo 'wyz' Suzuki`]: [
+    `Yasuo "wyz" Suzuki`,
+    `Yasuo 'wyz' Suzuki`,
+    "Yasuo Suzuki",
+  ],
+  "Jr.": ["Jr.", "Jr"],
+  Hiroko: ["Hiroko", "hiroko"],
+  "Indigo Kelleigh": ["Indigo Kelleigh", "indigo kelleigh"],
+  Marblehead: ["Marblehead", "marblehead"],
+  "Ryan Smith": ["Ryan Smith", "Ryan smith"],
+  "Stadio Yoco": ["Stadio Yoco", "stadio yoco"],
+  "Sylvaine Manson": ["Sylvaine MANSON", "Sylvaine Manson"],
+  "William Neidow": ["William Neidow", "william Neidow"],
+  WSTE: ["WSTE", "wste"],
+  Yoco: ["Yoco", "yoco"],
+  "Jesse D. Burgheimer": ["Jesse Burgheimer"],
 };
 
 const findCorrectedName = memoize((maybeWrongName: string) => {
