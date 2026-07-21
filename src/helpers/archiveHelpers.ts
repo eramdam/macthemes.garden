@@ -9,22 +9,17 @@ const formatter = Intl.NumberFormat("en-US", {
 });
 
 export function archiveFileSize(value: string) {
-  try {
-    const matchingArchive = archives.find((a) => a === value);
+  const matchingArchive = archives.find((a) => a === value);
 
-    if (!matchingArchive) {
-      return "";
-    }
-
-    // @ts-expect-error
-    const size = archivesData[matchingArchive].size;
-    const sizeKilobytes = size / 1024;
-
-    return `(${formatter.format(sizeKilobytes)})`;
-  } catch (e) {
-    console.error(e);
-    return "";
+  if (!matchingArchive) {
+    throw new Error(`Archive not found for ${value}`);
   }
+
+  // @ts-expect-error
+  const size = archivesData[matchingArchive].size;
+  const sizeKilobytes = size / 1024;
+
+  return `(${formatter.format(sizeKilobytes)})`;
 }
 
 export function archiveMd5(value: string) {
