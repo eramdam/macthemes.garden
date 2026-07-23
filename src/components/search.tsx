@@ -170,10 +170,10 @@ export const SearchForm: FunctionComponent<SearchFormProps> = (props) => {
           )}
         </div>
       </section>
-      <div class="themes-grid">
+      <div class="themes-grid" key={`${searchQuery.value}`}>
         {searchResults.value[pageIndex.value].map((t) => {
           return (
-            <div>
+            <div key={t.id}>
               <SingleTheme theme={t} authors={t.authors}></SingleTheme>
             </div>
           );
