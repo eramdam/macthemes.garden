@@ -1920,6 +1920,7 @@
   },
   {
     "name": "AGoldGold+",
+    "authors": "Albie Wong",
     "year": "1998",
     "about": "public/themes/attachments/about-attd9r7esrsb8ft0e-image.png",
     "showcase": "public/themes/attachments/showcase-att0e0hdxjxjqb8vh-image.png",
@@ -2099,7 +2100,7 @@
   },
   {
     "name": "Alex Gray",
-    "authors": "William Martin",
+    "authors": "William B. Martin",
     "year": "1997",
     "about": "public/themes/attachments/about-att1rmmxkmjzxqup2-image.png",
     "showcase": "public/themes/attachments/showcase-att2i3ygg461ub9ad-image.png",
@@ -3696,7 +3697,7 @@
     "archiveFilename": "!!!argentold.sit"
   },
   {
-    "name": "Argent 2",
+    "name": "Argent 2.2",
     "authors": "Richard Bensam",
     "year": "2000",
     "about": "public/themes/attachments/about-attgb78hr8h0qz0r8-image.png",
