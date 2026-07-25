@@ -11,8 +11,6 @@ export default defineConfig({
     "/d-desc/1": "/",
     ...(!isDev
       ? {
-          "/debug": "/",
-          "/debug-missing": "/",
           "/palettes": "/",
         }
       : {}),
