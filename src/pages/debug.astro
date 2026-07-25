@@ -3,9 +3,14 @@ import { getCollection, getEntries } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import OS9Window from "../components/OS9Window.astro";
 import { AuthorsFormatter } from "../components/authorsFormatter";
+import { partition } from "lodash-es";
 
 const themes = await getCollection("themes");
-const migratedThemes = themes.filter((t) => t.data.isAirtable);
+const [migratedThemes, nonMigratedThemes] = partition(
+  themes,
+  (p) => p.data.isAirtable,
+);
+
 const newThemes = themes.filter((t) => t.data.isNew);
 ---
 
@@ -23,6 +28,11 @@ const newThemes = themes.filter((t) => t.data.isNew);
         {themes.length} themes
       </li>
       <li>
+        <a href="/debug-missing"
+          >{nonMigratedThemes.length} themes missing from Airtable</a
+        >
+      </li>
+      <li>
         {migratedThemes.length} themes added to Airtable
       </li>
       <li>
@@ -31,7 +41,7 @@ const newThemes = themes.filter((t) => t.data.isNew);
           {
             newThemes.map(async (t) => {
               const authors = (await getEntries(t.data.authors)).map(
-                (a) => a.data
+                (a) => a.data,
               );
               return (
                 <li>
