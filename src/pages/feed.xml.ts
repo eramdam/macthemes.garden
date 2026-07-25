@@ -7,13 +7,15 @@ import {
 import { renderFeedTheme } from "../components/feedTheme";
 import type { APIContext } from "astro";
 import { formatAuthorsText } from "../components/authorsFormatter";
-import { orderBy } from "lodash-es";
+import { orderBy } from "es-toolkit";
 
 export async function GET(context: APIContext) {
   const themes = await getCollection("themes");
-  const limitedThemes = orderBy(themes, (t) => t.data.createdAt, [
-    "desc",
-  ]).slice(0, 100);
+  const limitedThemes = orderBy(
+    themes,
+    [(t) => t.data.createdAt],
+    ["desc"],
+  ).slice(0, 100);
   const items = await Promise.all(
     limitedThemes.map(async (theme) => {
       return {

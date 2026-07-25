@@ -1,5 +1,5 @@
 import { CmpStr } from "cmpstr";
-import { fromPairs, groupBy, toPairs } from "lodash-es";
+import { groupBy } from "es-toolkit";
 import { themeAuthorsLoader } from "../src/themesLoader";
 
 const cmp = new CmpStr();
@@ -34,22 +34,21 @@ function areStringsSimilar(stringA: string, stringB: string) {
 (async () => {
   const authors = await themeAuthorsLoader();
   const authorsNames = authors.map((a) => a.name);
-  // const authorsNames = ["KAYSHA", "Kaysha", "KaySha"];
-  // const _grouped = groupBy(authorsNames, (a) => {
-  //   return authorsNames.find((other) => collator.compare(a, other) === 0);
-  // });
-  const grouped = fromPairs(
-    toPairs(
+
+  const grouped = Object.fromEntries(
+    Object.entries(
       groupBy(authorsNames, (author) => {
-        return authorsNames.find((other) => {
-          if (
-            other === author ||
-            other.toLowerCase() === author.toLowerCase()
-          ) {
-            return true;
-          }
-          return areStringsSimilar(other, author);
-        });
+        return (
+          authorsNames.find((other) => {
+            if (
+              other === author ||
+              other.toLowerCase() === author.toLowerCase()
+            ) {
+              return true;
+            }
+            return areStringsSimilar(other, author);
+          }) || ""
+        );
       }),
     ).filter(([, key]) => key.length > 1),
   );

@@ -1,9 +1,8 @@
-import { sample } from "lodash-es";
+import { chunk, sample } from "es-toolkit";
 import { matchSorter } from "match-sorter";
 import { type FunctionComponent, type TargetedSubmitEvent } from "preact";
 
 import { useComputed, useSignal } from "@preact/signals";
-import { chunk } from "lodash-es";
 import { useEffect } from "preact/hooks";
 import { type SearchTheme } from "../searchThemes";
 import { OS9Button } from "./OS9Button";

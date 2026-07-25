@@ -1,7 +1,7 @@
 ---
 import type { GetStaticPaths } from "astro";
 import { getCollection, getEntries } from "astro:content";
-import { orderBy } from "lodash-es";
+import { orderBy } from "es-toolkit";
 import OS9Window from "../../components/OS9Window.astro";
 import { SingleTheme } from "../../components/singleTheme";
 import { targetPaletteColors } from "../../helpers/paletteHelpers";
@@ -28,11 +28,13 @@ const matchingPaletteColor =
 const themes = await getEntries(matchingPaletteColor.data.themes);
 const themesForColor = orderBy(
   themes,
-  (t) => {
-    // Use the index of the color (lower is more prominent) to sort the themes.
-    return t.data.colors.map((c) => c.id).indexOf(color[0]);
-  },
-  "asc"
+  [
+    (t) => {
+      // Use the index of the color (lower is more prominent) to sort the themes.
+      return t.data.colors.map((c) => c.id).indexOf(color[0]);
+    },
+  ],
+  ["asc"],
 );
 ---
 
@@ -96,7 +98,7 @@ const themesForColor = orderBy(
             .map((t) => t.data)
             .map(async (theme) => {
               const authors = (await getEntries(theme.authors)).map(
-                (a) => a.data
+                (a) => a.data,
               );
 
               return <SingleTheme theme={theme} authors={authors} />;

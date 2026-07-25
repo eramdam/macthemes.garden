@@ -1,9 +1,7 @@
 ---
-import type { GetStaticPaths } from "astro";
 import { getCollection, getEntries } from "astro:content";
 import OS9Window from "../components/OS9Window.astro";
 import { SingleTheme } from "../components/singleTheme";
-import { getLikeCountsByThemeIds } from "../helpers/dbHelpers";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const themesByAuthor = (await getCollection("themes")).filter(

@@ -1,6 +1,6 @@
 ---
 import { getCollection, getEntries } from "astro:content";
-import { pick } from "lodash-es";
+import { pick } from "es-toolkit";
 import OS9Window from "../components/OS9Window.astro";
 import { SearchForm } from "../components/search";
 import BaseLayout from "../layouts/BaseLayout.astro";
@@ -11,7 +11,7 @@ const themesWithAuthorsPromise = themes.map(async (t) => {
     data: {
       ...t.data,
       authors: (await getEntries(t.data.authors)).map((a) =>
-        pick(a.data, ["name", "url"])
+        pick(a.data, ["name", "url"]),
       ),
     },
   };
@@ -30,7 +30,7 @@ const themesWithAuthors = (await Promise.all(themesWithAuthorsPromise)).map(
       ]),
       id: t.id,
     };
-  }
+  },
 );
 ---
 

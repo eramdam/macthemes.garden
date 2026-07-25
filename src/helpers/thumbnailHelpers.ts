@@ -1,4 +1,4 @@
-import { orderBy } from "lodash-es";
+import { orderBy } from "es-toolkit";
 import path from "path";
 import quantize, { type RgbPixel } from "quantize";
 import sharp from "sharp";
@@ -54,10 +54,12 @@ export async function getPaletteForTheme(
   return orderBy(
     // For some reason `quantize` returns pixel values from 1-256? I think?? So I need to -1 everything lmao.
     paletteColors.map((p) => p.map((n) => n - 1)) as RgbPixel[],
-    (p) => {
-      return colorScores.get(p) ?? 0;
-    },
-    "desc",
+    [
+      (p) => {
+        return colorScores.get(p) ?? 0;
+      },
+    ],
+    ["desc"],
   );
 }
 

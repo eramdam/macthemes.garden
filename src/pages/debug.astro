@@ -3,7 +3,7 @@ import { getCollection, getEntries } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import OS9Window from "../components/OS9Window.astro";
 import { AuthorsFormatter } from "../components/authorsFormatter";
-import { partition } from "lodash-es";
+import { partition } from "es-toolkit";
 
 const themes = await getCollection("themes");
 const [migratedThemes, nonMigratedThemes] = partition(

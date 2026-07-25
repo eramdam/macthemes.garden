@@ -1,4 +1,4 @@
-import { compact } from "lodash-es";
+import { compact } from "es-toolkit";
 import themesKaleidoscopeBot from "../src/themes/original.json" with { type: "json" };
 import { themesLoader } from "../src/themesLoader";
 

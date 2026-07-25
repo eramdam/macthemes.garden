@@ -2,7 +2,7 @@ import type { Page } from "astro";
 
 import { type CollectionEntry } from "astro:content";
 import { z } from "astro/zod";
-import { chunk, orderBy } from "lodash-es";
+import { chunk, orderBy } from "es-toolkit";
 import { customSlugify } from "../themesLoader";
 
 const pageSize = 51;
@@ -22,25 +22,27 @@ export function sortThemes(
 ) {
   return orderBy(
     collection,
-    (t) => {
-      switch (sortOption) {
-        case SortOptionsEnum.enum.created:
-          return t.data.createdAt;
-        case SortOptionsEnum.enum.author:
-          if (t.data.authors.length === 0) {
-            return "z".repeat(200);
-          }
-          return t.data.authors
-            .map((t) => customSlugify(t.id))
-            .join("\n")
-            .toLowerCase();
-        case SortOptionsEnum.enum.name:
-          return customSlugify(t.data.name).toLowerCase();
-        case SortOptionsEnum.enum.likes:
-          return t.likes;
-      }
-    },
-    sortOrder === SortOrdersEnum.enum.asc ? "asc" : "desc",
+    [
+      (t) => {
+        switch (sortOption) {
+          case SortOptionsEnum.enum.created:
+            return t.data.createdAt;
+          case SortOptionsEnum.enum.author:
+            if (t.data.authors.length === 0) {
+              return "z".repeat(200);
+            }
+            return t.data.authors
+              .map((t) => customSlugify(t.id))
+              .join("\n")
+              .toLowerCase();
+          case SortOptionsEnum.enum.name:
+            return customSlugify(t.data.name).toLowerCase();
+          case SortOptionsEnum.enum.likes:
+            return t.likes;
+        }
+      },
+    ],
+    [sortOrder === SortOrdersEnum.enum.asc ? "asc" : "desc"],
   );
 }
 

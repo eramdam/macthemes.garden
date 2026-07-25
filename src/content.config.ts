@@ -1,6 +1,6 @@
 import { defineCollection, getCollection, reference } from "astro:content";
 import { z } from "astro/zod";
-import { memoize } from "lodash-es";
+import { memoize } from "es-toolkit";
 
 import {
   getPaletteForThemeId,

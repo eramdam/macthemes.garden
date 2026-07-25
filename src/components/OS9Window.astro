@@ -1,5 +1,5 @@
 ---
-import { filter, isUndefined } from "lodash-es";
+import { isUndefined } from "es-toolkit";
 import crypto from "node:crypto";
 
 export enum WindowButtons {
@@ -14,14 +14,13 @@ interface Props {
   asElement?: keyof astroHTML.JSX.DefinedIntrinsicElements;
 }
 
-const key = filter(
-  [
-    Astro.props.asElement || "div",
-    Astro.props.classname,
-    ...(Astro.props.buttons || []),
-  ],
-  (f) => !isUndefined(f)
-).join("-");
+const key = [
+  Astro.props.asElement || "div",
+  Astro.props.classname,
+  ...(Astro.props.buttons || []),
+]
+  .filter((f) => !isUndefined(f))
+  .join("-");
 
 const id = crypto
   .createHash("shake256", {

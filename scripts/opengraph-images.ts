@@ -1,7 +1,7 @@
 import { spawn } from "node:child_process";
 import { themesLoader } from "../src/themesLoader";
 import { cpus } from "node:os";
-import { chunk } from "lodash-es";
+import { chunk } from "es-toolkit";
 import { execaSync } from "execa";
 
 (async () => {

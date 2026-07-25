@@ -1,7 +1,7 @@
 import { iterateAtpRepo } from "@atcute/car";
 import { Client, CredentialManager } from "@atcute/client";
 import fs from "fs-extra";
-import { chunk } from "lodash-es";
+import { chunk } from "es-toolkit";
 // import lexicons
 import type {} from "@atcute/atproto";
 import type {} from "@atcute/bluesky";

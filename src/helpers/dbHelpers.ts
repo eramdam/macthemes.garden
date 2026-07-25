@@ -1,4 +1,4 @@
-import { compact, memoize, uniq } from "lodash-es";
+import { compact, memoize, uniq } from "es-toolkit";
 
 async function getCombinedLikesFromSocials() {
   const mastodonLikes = await import("../../src/themes/likes-mastodon.json");
