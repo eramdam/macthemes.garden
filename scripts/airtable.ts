@@ -67,11 +67,11 @@ const base = new Airtable({ apiKey: process.env.AIRTABLE_TOKEN }).base(
       // TODO: use zod or something to do all that validation stuff...
       return Boolean(
         f.name &&
-          (f.year || f.authors) &&
-          f.about &&
-          f.showcase &&
-          f.archiveFilename &&
-          f.ksaSampler,
+        (f.year || f.authors) &&
+        f.about &&
+        f.showcase &&
+        f.archiveFilename &&
+        f.ksaSampler,
       );
     });
 
@@ -84,6 +84,7 @@ const base = new Airtable({ apiKey: process.env.AIRTABLE_TOKEN }).base(
 
   for (const file of filesToDelete) {
     await fs.remove(file);
+    console.log("Deleted ", file);
   }
 
   await fs.writeFile(
@@ -129,17 +130,10 @@ async function downloadAttachment(
 }
 
 async function grabRawRecords(): Promise<Records<FieldSet>> {
-  if (airtableCache.isCacheValid("1d")) {
-    return airtableCache.getCachedValue() as unknown as Records<FieldSet>;
-  }
-  const records = await base("Kaleidoscope Schemes")
+  return await base("Kaleidoscope Schemes")
     .select({
       maxRecords: 5_000,
       view: "Grid view",
     })
     .all();
-
-  await airtableCache.save(records, "json");
-
-  return records;
 }

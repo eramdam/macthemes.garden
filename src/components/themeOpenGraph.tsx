@@ -26,7 +26,7 @@ export async function generateOpenGraphImageForTheme(
   const mainThumbnail = await mainThumbnailSharp.png().toBuffer();
   const mainThumbnailData = await sharp(mainThumbnail).metadata();
   if (!mainThumbnailData.hasAlpha) {
-    console.log(theme);
+    console.log("No alpha for", theme);
   }
 
   const svg = await satori(
