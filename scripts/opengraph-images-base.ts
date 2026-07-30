@@ -2,7 +2,6 @@ import async from "async";
 import fs from "node:fs";
 import { generateOpenGraphImageForTheme } from "../src/components/themeOpenGraph";
 import { themesLoader } from "../src/themesLoader";
-import { keyBy } from "es-toolkit";
 
 const CACHE_PATH = "./themes-map-cache.json";
 
@@ -15,15 +14,12 @@ const CACHE_PATH = "./themes-map-cache.json";
     | undefined = undefined;
 
   if (fs.existsSync(CACHE_PATH)) {
-    allThemesMap = JSON.parse(await fs.promises.readFile(CACHE_PATH, "utf-8"));
+    const raw = await fs.promises.readFile(CACHE_PATH, "utf-8");
+    allThemesMap = JSON.parse(raw);
   } else {
-    const allThemes = await themesLoader({
-      colors: false,
-      relatedThemes: false,
-    });
-    allThemesMap = keyBy(allThemes, (t) => t.id);
+    throw new Error("Missing cache file!");
   }
-  await fs.promises.writeFile(CACHE_PATH, JSON.stringify(allThemesMap));
+
   console.timeEnd("allThemes");
   const toProcess = themesFromArguments.map((id) => allThemesMap![id]);
 
@@ -37,6 +33,6 @@ const CACHE_PATH = "./themes-map-cache.json";
         return res;
       };
     }),
-    60,
+    100,
   );
 })();

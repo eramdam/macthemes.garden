@@ -3,7 +3,7 @@ import { render } from "takumi-js";
 import { Renderer } from "@takumi-rs/core";
 import sharp from "sharp";
 
-const renderer = new Renderer({ cacheMaxBytes: 64 * 1024 * 1024 });
+const renderer = new Renderer();
 
 export async function generateOpenGraphImageForTheme(
   theme: Pick<InferEntrySchema<"themes">, "thumbnails" | "mainThumbnail">,
@@ -23,7 +23,7 @@ export async function generateOpenGraphImageForTheme(
   const mainThumbnail = await mainThumbnailSharp.toBuffer();
   const mainThumbnailData = await sharp(mainThumbnail).metadata();
   if (!mainThumbnailData.hasAlpha) {
-    console.log("No alpha for", theme);
+    throw new Error(`No alpha for ${theme.mainThumbnail}`);
   }
 
   const png = await render(
