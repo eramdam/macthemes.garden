@@ -17,7 +17,7 @@ const themesByAuthor = (await getCollection("themes")).filter(
         {
           themesByAuthor
             .map((t) => t.data)
-            .map(async (theme, index) => {
+            .map(async (theme) => {
               const authors = (await getEntries(theme.authors)).map(
                 (a) => a.data,
               );

@@ -1,7 +1,6 @@
 import Airtable, { type FieldSet, type Records } from "airtable";
 import async from "async";
 import fs from "fs-extra";
-import { airtableCache } from "./caches";
 import sharp from "sharp";
 
 const base = new Airtable({ apiKey: process.env.AIRTABLE_TOKEN }).base(
