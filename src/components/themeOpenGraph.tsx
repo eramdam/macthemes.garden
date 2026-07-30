@@ -1,5 +1,5 @@
 import type { InferEntrySchema } from "astro:content";
-import satori from "satori";
+import { render } from "takumi-js";
 import sharp from "sharp";
 
 export async function generateOpenGraphImageForTheme(
@@ -19,6 +19,7 @@ export async function generateOpenGraphImageForTheme(
         position: "top",
       })
       .blur(5)
+      .modulate({ brightness: 0.7 })
       .toBuffer();
   }
 
@@ -29,7 +30,7 @@ export async function generateOpenGraphImageForTheme(
     console.log("No alpha for", theme);
   }
 
-  const svg = await satori(
+  const png = await render(
     <div
       style={{
         display: "flex",
@@ -43,18 +44,15 @@ export async function generateOpenGraphImageForTheme(
     >
       {blurredImageData && (
         <img
-          // @ts-expect-error
-          src={toArrayBuffer(blurredImageData)}
+          src={toDataUri(blurredImageData)}
           style={{
             position: "absolute",
-            filter: "brightness(40%)",
             inset: 0,
           }}
         />
       )}
       <img
-        // @ts-expect-error
-        src={toArrayBuffer(mainThumbnail)}
+        src={toDataUri(mainThumbnail)}
         style={{
           padding: margin,
           width: "100%",
@@ -68,18 +66,14 @@ export async function generateOpenGraphImageForTheme(
     {
       width: imageDimension.width,
       height: imageDimension.height,
+      format: "png",
       fonts: [],
     },
   );
 
-  return sharp(Buffer.from(svg));
+  return sharp(Buffer.from(png));
 }
 
-function toArrayBuffer(buffer: Buffer) {
-  const arrayBuffer = new ArrayBuffer(buffer.length);
-  const view = new Uint8Array(arrayBuffer);
-  for (let i = 0; i < buffer.length; ++i) {
-    view[i] = buffer[i];
-  }
-  return arrayBuffer;
+function toDataUri(buffer: Buffer) {
+  return `data:image/png;base64,${buffer.toString("base64")}`;
 }
