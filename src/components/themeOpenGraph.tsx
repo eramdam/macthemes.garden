@@ -16,14 +16,7 @@ export async function generateOpenGraphImageForTheme(
   };
 
   if (theme.thumbnails.length > 1) {
-    blurredImageData = await sharp("public/" + theme.thumbnails[1])
-      .resize(imageDimension.width, imageDimension.height, {
-        fit: "cover",
-        position: "top",
-      })
-      .blur(5)
-      .modulate({ brightness: 0.7 })
-      .toBuffer();
+    blurredImageData = await sharp("public/" + theme.thumbnails[1]).toBuffer();
   }
 
   const mainThumbnailSharp = sharp("public" + theme.mainThumbnail);
@@ -51,6 +44,9 @@ export async function generateOpenGraphImageForTheme(
           style={{
             position: "absolute",
             inset: 0,
+            objectPosition: "top",
+            objectFit: "cover",
+            filter: "blur(5px) brightness(70%)",
           }}
         />
       )}
