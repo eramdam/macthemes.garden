@@ -40,6 +40,7 @@
     "@atproto/api": "^0.15.8",
     "@date-fns/tz": "^1.2.0",
     "@preact/signals": "^2.10.0",
+    "@takumi-rs/core": "^2.5.3",
     "@types/async": "^3.2.24",
     "@types/color-diff": "^1.2.5",
     "@types/fs-extra": "^11.0.4",

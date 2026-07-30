@@ -38,6 +38,9 @@ importers:
       '@preact/signals':
         specifier: ^2.10.0
         version: 2.10.0(preact@10.29.7)
+      '@takumi-rs/core':
+        specifier: ^2.5.3
+        version: 2.5.3(preact@10.29.7)
       '@types/async':
         specifier: ^3.2.24
         version: 3.2.25

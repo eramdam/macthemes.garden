@@ -1,6 +1,9 @@
 import type { InferEntrySchema } from "astro:content";
 import { render } from "takumi-js";
+import { Renderer } from "@takumi-rs/core";
 import sharp from "sharp";
+
+const renderer = new Renderer({ cacheMaxBytes: 64 * 1024 * 1024 });
 
 export async function generateOpenGraphImageForTheme(
   theme: Pick<InferEntrySchema<"themes">, "thumbnails" | "mainThumbnail">,
@@ -68,6 +71,7 @@ export async function generateOpenGraphImageForTheme(
       height: imageDimension.height,
       format: "png",
       fonts: [],
+      renderer,
     },
   );
 
