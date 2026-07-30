@@ -5,6 +5,7 @@
 FROM node:26.5.0-slim AS build
 
 # pnpm via corepack; version is pinned by package.json "packageManager".
+RUN npm install -g corepack@latest
 RUN corepack enable
 ENV PNPM_HOME=/pnpm
 ENV PATH="$PNPM_HOME:$PATH"
