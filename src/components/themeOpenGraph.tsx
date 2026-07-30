@@ -20,7 +20,7 @@ export async function generateOpenGraphImageForTheme(
   }
 
   const mainThumbnailSharp = sharp("public" + theme.mainThumbnail);
-  const mainThumbnail = await mainThumbnailSharp.png().toBuffer();
+  const mainThumbnail = await mainThumbnailSharp.toBuffer();
   const mainThumbnailData = await sharp(mainThumbnail).metadata();
   if (!mainThumbnailData.hasAlpha) {
     console.log("No alpha for", theme);

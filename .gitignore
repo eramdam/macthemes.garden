@@ -135,3 +135,5 @@ _site
 .astro
 .DS_Store
 .netlify
+
+themes-map-cache.json
