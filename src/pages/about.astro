@@ -284,8 +284,9 @@ const migratedThemes = themes.filter((t) => t.data.isAirtable);
               dateStyle: "medium",
             },
           )
-        }, there are <a href="/">{themes.length.toLocaleString()} themes</a> from
-        <a href="/authors">{authors.length.toLocaleString()} authors</a>, and {
+        }, there are <a href="/">{themes.length.toLocaleString()} themes</a> from{
+          " "
+        }<a href="/authors">{authors.length.toLocaleString()} authors</a>, and {
           migratedThemes.length.toLocaleString()
         } of these themes have been recorded completely with desktop screenshots.
       </p>
