@@ -1,19 +1,19 @@
-import { iterateAtpRepo } from "@atcute/car";
-import { Client, CredentialManager } from "@atcute/client";
 import fs from "fs-extra";
 import { chunk } from "es-toolkit";
 // import lexicons
 import type {} from "@atcute/atproto";
 import type {} from "@atcute/bluesky";
+import { fromUint8Array } from "@atcute/repo";
+import { Client } from "@atcute/client";
+import { PasswordSession } from "@atcute/password-session";
 
 const actor = "did:plc:a5j6hkim467cvi4rzouh6aei";
-const manager = new CredentialManager({ service: "https://bsky.social" });
-const rpc = new Client({ handler: manager });
-
-await manager.login({
+const session = await PasswordSession.login({
+  service: "https://bsky.social",
   identifier: process.env.BLUESKY_USERNAME || "",
   password: process.env.BLUESKY_PASSWORD || "",
 });
+const rpc = new Client({ handler: session });
 
 const { data, ok } = await rpc.get("com.atproto.sync.getRepo", {
   as: "bytes",
@@ -29,7 +29,7 @@ if (!ok) {
 const urlRegex = new RegExp("https://macthemes.garden/themes/([a-z0-9]+)", "i");
 const records: { rkey: string; themeId: string }[] = [];
 // convenient iterator for reading through an AT Protocol CAR repository
-for (const { collection, rkey, record } of iterateAtpRepo(data)) {
+for (const { collection, rkey, record } of fromUint8Array(data)) {
   if (collection === "app.bsky.feed.post") {
     if (
       (record as any).facets?.[0].features?.[0].$type ===
