@@ -39,9 +39,15 @@ import path from "node:path";
           }
         }
 
-        if (pixels.length === alpha.length) {
+        // if (alpha.length ) {
+        //   console.info(
+        //     `[INFO] ${theme.name} has invalid thumbnail ${thumbnail}`,
+        //   );
+        // }
+
+        if (metadata.width >= 1000 || metadata.height >= 1000) {
           console.info(
-            `[INFO] ${theme.name} has invalid thumbnail ${thumbnail}`,
+            `[INFO] ${theme.name} has invalid-sized thumbnail ${thumbnail}`,
           );
         }
       }
