@@ -14,7 +14,7 @@ const base = new Airtable({ apiKey: process.env.AIRTABLE_TOKEN }).base(
     return {
       name: record.fields["Name"] as string,
       authors: record.fields["Author(s)"] as string,
-      year: record.fields["Year"] as string,
+      year: ((record.fields["Year"] as string) || "").trim(),
       about: (record.fields["About"] as Airtable.Attachment[])?.[0],
       showcase: (record.fields["Showcase"] as Airtable.Attachment[])?.[0],
       archiveFile: (
