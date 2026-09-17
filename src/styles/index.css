@@ -54,7 +54,7 @@ body {
   padding: 20px 0;
 }
 
-body > * {
+body>* {
   width: 100%;
 }
 
@@ -68,7 +68,7 @@ h1 {
   font-family: Charter, "Bitstream Charter", "Sitka Text", Cambria, serif;
 }
 
-header > h1 {
+header>h1 {
   text-align: center;
   margin: 1em 0;
 }
@@ -110,9 +110,11 @@ footer p {
   font-size: 1rem;
   font-weight: bold;
 }
+
 .themes-grid .single-theme-authors {
   font-size: 0.9rem;
 }
+
 .themes-grid .single-theme-year {
   font-size: 0.9rem;
   line-height: 1;
@@ -128,7 +130,7 @@ footer p {
   display: inline-block;
 }
 
-.themes-grid .single-theme-year > span:empty {
+.themes-grid .single-theme-year>span:empty {
   display: none;
 }
 
@@ -151,12 +153,12 @@ footer p {
   height: 31px;
 }
 
-.nav > div:nth-child(2) {
+.nav>div:nth-child(2) {
   flex: 1;
 }
 
-.nav > div:nth-child(1),
-.nav > div:nth-child(3) {
+.nav>div:nth-child(1),
+.nav>div:nth-child(3) {
   position: absolute;
   padding-left: 4px;
   padding-right: 4px;
@@ -166,11 +168,11 @@ footer p {
   gap: 4px;
 }
 
-.nav > div:nth-child(1) {
+.nav>div:nth-child(1) {
   left: 0;
 }
 
-.nav > div:nth-child(3) {
+.nav>div:nth-child(3) {
   right: 0;
 }
 
@@ -210,8 +212,7 @@ footer p {
   }
 }
 
-.single-theme-grid .infos {
-}
+.single-theme-grid .infos {}
 
 .single-theme-page .gallery {
   display: grid;
@@ -226,8 +227,8 @@ footer p {
   line-height: 0;
 }
 
-.single-theme-page .gallery-thumbnail:first-child {
-}
+.single-theme-page .gallery-thumbnail:first-child {}
+
 .single-theme-page .gallery-thumbnail img {
   max-width: 100%;
 }
@@ -291,7 +292,7 @@ footer p {
   flex: 1;
 }
 
-.macos9-menu .spacer + li .macos9-menu-icon {
+.macos9-menu .spacer+li .macos9-menu-icon {
   border-left: 1px solid var(--primary-white);
   box-shadow: -1px 0 0 0 var(--grays-800);
 }
@@ -324,14 +325,16 @@ footer p {
     display: none;
   }
 
-  .macos9-menu .spacer + li .macos9-menu-icon {
+  .macos9-menu .spacer+li .macos9-menu-icon {
     border: none;
     box-shadow: none;
   }
+
   .macos9-menu-icon {
     font-size: 0.8rem;
     padding: 6px;
   }
+
   .macos9-menu-icon img {
     height: 24px;
     width: 24px;
@@ -343,6 +346,7 @@ footer p {
   & img {
     filter: brightness(0.5);
   }
+
   & span {
     color: white;
     background-color: rgba(from var(--primary-black) r g b / 80%);
@@ -353,6 +357,7 @@ footer p {
   & img {
     filter: brightness(0.5);
   }
+
   & span {
     color: white;
     background-color: rgba(from var(--primary-black) r g b / 80%);
@@ -386,6 +391,10 @@ footer p {
   width: 100%;
   height: auto;
   aspect-ratio: 2195 / 510;
+}
+
+.header-box .header-image .hidden {
+  display: none;
 }
 
 .header-box nav {
@@ -426,7 +435,7 @@ section.page {
   }
 }
 
-.boot-window > div {
+.boot-window>div {
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -479,18 +488,16 @@ section.page {
       #6666cc calc(100% / 9 * 7) calc(100% / 9 * 8),
       #33339a calc(100% / 9 * 8) calc(100% / 9 * 9)
     ); */
-    background-image: linear-gradient(
-      to bottom,
-      #33339a,
-      #6666cc,
-      #9999fe,
-      #ccccfe,
-      #edeeee,
-      #ccccfe,
-      #9999fe,
-      #6666cc,
-      #33339a
-    );
+    background-image: linear-gradient(to bottom,
+        #33339a,
+        #6666cc,
+        #9999fe,
+        #ccccfe,
+        #edeeee,
+        #ccccfe,
+        #9999fe,
+        #6666cc,
+        #33339a);
     border-right: 1px solid var(--primary-black);
     box-shadow: 1px 0px 0 #888788;
   }

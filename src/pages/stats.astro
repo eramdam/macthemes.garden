@@ -1,0 +1,75 @@
+---
+import { getCollection, getEntries } from "astro:content";
+import { groupBy, mapValues, sortBy } from "es-toolkit";
+import OS9Window from "../components/OS9Window.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { themesLoader } from "../themesLoader";
+
+const themes = await themesLoader();
+
+const byYear = groupBy(themes, (t) => t.year);
+const yearCount = mapValues(byYear, (g) => g.length);
+const authors = await getCollection("authors");
+
+const themesCountByAuthors = Object.fromEntries(
+  sortBy(
+    await Promise.all(
+      authors.map(async (a) => [
+        a.data.name,
+        (await getEntries(a.data.themes)).length,
+      ]),
+    ),
+    [([, count]) => -count],
+  ),
+);
+console.log(themesCountByAuthors);
+---
+
+<BaseLayout title="Stats">
+  <OS9Window title="Stats">
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Year</th>
+          <th>Count</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {
+          Object.entries(yearCount).map(([key, value]) => {
+            return (
+              <tr>
+                <td>{key}</td>
+                <td>{value}</td>
+              </tr>
+            );
+          })
+        }
+      </tbody>
+    </table>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Author</th>
+          <th>Count</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {
+          Object.entries(themesCountByAuthors)
+            .slice(0, 10)
+            .map(([key, value]) => {
+              return (
+                <tr>
+                  <td>{key}</td>
+                  <td>{value}</td>
+                </tr>
+              );
+            })
+        }
+      </tbody>
+    </table>
+  </OS9Window>
+</BaseLayout>

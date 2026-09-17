@@ -58,39 +58,39 @@
 }
 
 .shadow:is(
-    [data-n="05"],
-    [data-n="07"],
-    [data-n="10"],
-    [data-n="13"],
-    [data-n="23"],
-    [data-n="31"]
-  ) {
+  [data-n="05"],
+  [data-n="07"],
+  [data-n="10"],
+  [data-n="13"],
+  [data-n="23"],
+  [data-n="31"]
+) {
   background-color: var(--btn-corners-shadow);
 }
 
 .shadow:is(
-    [data-n="02"],
-    [data-n="04"],
-    [data-n="08"],
-    [data-n="15"],
-    [data-n="20"],
-    [data-n="30"],
-    [data-n="33"],
-    [data-n="35"]
-  ) {
+  [data-n="02"],
+  [data-n="04"],
+  [data-n="08"],
+  [data-n="15"],
+  [data-n="20"],
+  [data-n="30"],
+  [data-n="33"],
+  [data-n="35"]
+) {
   background-color: var(--btn-border);
 }
 
 .shadow:is(
-    [data-n="01"],
-    [data-n="03"],
-    [data-n="09"],
-    [data-n="14"],
-    [data-n="22"],
-    [data-n="29"],
-    [data-n="34"],
-    [data-n="36"]
-  ) {
+  [data-n="01"],
+  [data-n="03"],
+  [data-n="09"],
+  [data-n="14"],
+  [data-n="22"],
+  [data-n="29"],
+  [data-n="34"],
+  [data-n="36"]
+) {
   background-color: var(--btn-border-flourish);
 }
 
@@ -101,14 +101,14 @@ a.os9-button:focus {
   --btn-text: white;
 
   .shadow:is(
-      [data-n="05"],
-      [data-n="06"],
-      [data-n="07"],
-      [data-n="10"],
-      [data-n="16"],
-      [data-n="23"],
-      [data-n="38"]
-    ) {
+    [data-n="05"],
+    [data-n="06"],
+    [data-n="07"],
+    [data-n="10"],
+    [data-n="16"],
+    [data-n="23"],
+    [data-n="38"]
+  ) {
     background-color: #444444;
   }
   .shadow:is([data-n="11"], [data-n="17"], [data-n="37"]) {
@@ -118,22 +118,22 @@ a.os9-button:focus {
     background-color: #666666;
   }
   .shadow:is(
-      [data-n="13"],
-      [data-n="25"],
-      [data-n="26"],
-      [data-n="21"],
-      [data-n="18"],
-      [data-n="31"]
-    ) {
+    [data-n="13"],
+    [data-n="25"],
+    [data-n="26"],
+    [data-n="21"],
+    [data-n="18"],
+    [data-n="31"]
+  ) {
     background-color: #777777;
   }
   .shadow:is(
-      [data-n="2d5"],
-      [data-n="27"],
-      [data-n="19"],
-      [data-n="28"],
-      [data-n="32"]
-    ) {
+    [data-n="2d5"],
+    [data-n="27"],
+    [data-n="19"],
+    [data-n="28"],
+    [data-n="32"]
+  ) {
     background-color: #888888;
   }
 }

@@ -78,7 +78,11 @@ const footerDate = new TZDate(
       data-domain="macthemes.garden"
       src="https://p.erambert.me/js/script.js"></script>
   </head>
-
+  <script>
+    const images = document.querySelectorAll(".header-image > img");
+    const idx = Math.trunc(new Date().getTime() / 1000 / 60) % images.length;
+    images[idx].classList.remove("hidden");
+  </script>
   <body>
     {
       !hideLayout && (
@@ -90,7 +94,40 @@ const footerDate = new TZDate(
         >
           <div class="header-image-box">
             <a href="/" class="header-image">
-              <img src={cdn("/assets/macthemes-garden-header.png")} alt="" />
+              <noscript>
+                <img src={cdn("/assets/headers/1.png")} alt="" />
+              </noscript>
+              <img class="hidden" src={cdn("/assets/headers/1.png")} alt="" />
+              <img
+                class="hidden"
+                loading="lazy"
+                src={cdn("/assets/headers/2.png")}
+                alt=""
+              />
+              <img
+                class="hidden"
+                loading="lazy"
+                src={cdn("/assets/headers/3.png")}
+                alt=""
+              />
+              <img
+                class="hidden"
+                loading="lazy"
+                src={cdn("/assets/headers/4.png")}
+                alt=""
+              />
+              <img
+                class="hidden"
+                loading="lazy"
+                src={cdn("/assets/headers/5.png")}
+                alt=""
+              />
+              <img
+                class="hidden"
+                loading="lazy"
+                src={cdn("/assets/headers/6.png")}
+                alt=""
+              />
             </a>
           </div>
 
