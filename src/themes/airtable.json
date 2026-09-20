@@ -42,7 +42,6 @@
   },
   {
     "name": "AnonA-V2 Gizmo2",
-    "authors": "Dragon Tongue",
     "year": "2002",
     "about": "public/themes/attachments/about-att5kgzl9zx6yfobk-image.png",
     "showcase": "public/themes/attachments/showcase-attct3jhj5xefilkq-image.png",
@@ -47826,5 +47825,141 @@
     "ksaSampler": "public/themes/attachments/ksa-sampler-attgib0rffrqxfzsy-image.png",
     "created": "2026-07-30T00:56:52.000Z",
     "archiveFilename": "planets.sit"
+  },
+  {
+    "name": "Blockers II",
+    "year": "1999",
+    "about": "public/themes/attachments/about-atte3vlno4wmffouh-image.png",
+    "showcase": "public/themes/attachments/showcase-atteymu5zlasz9vpp-image.png",
+    "archiveFileName2": "blockersii.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attczzfauq1tfl5mt-image.png",
+    "created": "2026-07-30T01:02:17.000Z",
+    "archiveFilename": "blockersii.sit"
+  },
+  {
+    "name": "Blue Arrows",
+    "year": "1998",
+    "about": "public/themes/attachments/about-attrnat0lej7xt9wk-image.png",
+    "showcase": "public/themes/attachments/showcase-attz0f64w8ns9hgzh-image.png",
+    "archiveFileName2": "bluearrowscarl.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attcsnu3zn73v0esf-image.png",
+    "created": "2026-07-30T01:02:17.000Z",
+    "archiveFilename": "bluearrowscarl.sit"
+  },
+  {
+    "name": "Blue Moon",
+    "authors": "Riverbed Software",
+    "year": "1999",
+    "about": "public/themes/attachments/about-attgtihdphaqjsdqm-image.png",
+    "showcase": "public/themes/attachments/showcase-attdewvdb9ccpbcqz-image.png",
+    "archiveFileName2": "bluemoongem.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attxicnonssjsoimd-image.png",
+    "created": "2026-07-30T01:02:17.000Z",
+    "archiveFilename": "bluemoongem.sit"
+  },
+  {
+    "name": "Carls Gone Crazy",
+    "year": "1998",
+    "about": "public/themes/attachments/about-attgibuhc5arwxncr-image.png",
+    "showcase": "public/themes/attachments/showcase-attkjidrjs5fucav4-image.png",
+    "archiveFileName2": "carlsgonecrazy.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attqfplbmiaok3rzn-image.png",
+    "created": "2026-07-30T01:02:17.000Z",
+    "archiveFilename": "carlsgonecrazy.sit"
+  },
+  {
+    "name": "DT •soft grey Fe",
+    "authors": "Dragon Tongue",
+    "year": "2002",
+    "about": "public/themes/attachments/about-attany0wqzvscqveo-image.png",
+    "showcase": "public/themes/attachments/showcase-attx7g1ioavz3f128-image.png",
+    "archiveFileName2": "dtsoftgreyfe.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attxhrgu3ejhbr2ze-image.png",
+    "created": "2026-09-19T21:59:31.000Z",
+    "archiveFilename": "dtsoftgreyfe.sit"
+  },
+  {
+    "name": "DT •Talmi Gold",
+    "authors": "Dragon Tongue",
+    "year": "2002",
+    "about": "public/themes/attachments/about-attblqefum8c8bzhn-image.png",
+    "showcase": "public/themes/attachments/showcase-attiggairbb7yikba-image.png",
+    "archiveFileName2": "dttalmigold.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-atthlq6lsvdqkvyzx-image.png",
+    "created": "2026-09-19T21:59:35.000Z",
+    "archiveFilename": "dttalmigold.sit"
+  },
+  {
+    "name": "DT •Talmi Green",
+    "authors": "Dragon Tongue",
+    "year": "2002",
+    "about": "public/themes/attachments/about-att5mt6rbze2j8cts-image.png",
+    "showcase": "public/themes/attachments/showcase-attpolfijbzb6juvd-image.png",
+    "archiveFileName2": "dttalmigreenolderthantime.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attlluegi9fuck5mr-image.png",
+    "created": "2026-09-19T21:59:35.000Z",
+    "archiveFilename": "dttalmigreenolderthantime.sit"
+  },
+  {
+    "name": "DT •Talmi Old",
+    "authors": "Dragon Tongue",
+    "year": "2002",
+    "about": "public/themes/attachments/about-atte8xoes86qhyf09-image.png",
+    "showcase": "public/themes/attachments/showcase-attmzfyojybk08kgw-image.png",
+    "archiveFileName2": "dttalmiold.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attrk7mol2hilujr4-image.png",
+    "created": "2026-09-19T21:59:36.000Z",
+    "archiveFilename": "dttalmiold.sit"
+  },
+  {
+    "name": "Funshine",
+    "year": "1999",
+    "about": "public/themes/attachments/about-attl8p0uduzdzd5pu-image.png",
+    "showcase": "public/themes/attachments/showcase-attpvnk0ut8kseko6-image.png",
+    "archiveFileName2": "funshine.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attwq0bwzbmdzwtqy-image.png",
+    "created": "2026-09-19T21:59:36.000Z",
+    "archiveFilename": "funshine.sit"
+  },
+  {
+    "name": "Garden",
+    "authors": "Yasuo \"wyz\" Suzuki",
+    "year": "1998",
+    "about": "public/themes/attachments/about-atteuie1xtitbytfl-image.png",
+    "showcase": "public/themes/attachments/showcase-attnyhnmpkgwmhaq4-image.png",
+    "archiveFileName2": "gardenyasuo.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attfzcqzirdkfmfbi-image.png",
+    "created": "2026-09-19T21:59:36.000Z",
+    "archiveFilename": "gardenyasuo.sit"
+  },
+  {
+    "name": "GG&Y",
+    "year": "1999",
+    "about": "public/themes/attachments/about-attv72bkaigikf1v0-image.png",
+    "showcase": "public/themes/attachments/showcase-attdqsqtszjpzsjy3-image.png",
+    "archiveFileName2": "ggandy.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attbrrpijs7wjylyf-image.png",
+    "created": "2026-09-19T21:59:36.000Z",
+    "archiveFilename": "ggandy.sit"
+  },
+  {
+    "name": "Gold-Blue Mac",
+    "year": "1999",
+    "about": "public/themes/attachments/about-attz86tgxcx1xccke-image.png",
+    "showcase": "public/themes/attachments/showcase-atts9x6ywjtnmgdfj-image.png",
+    "archiveFileName2": "gold-bluemac.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attefnmcoqzxkq1vm-image.png",
+    "created": "2026-09-19T22:07:17.000Z",
+    "archiveFilename": "gold-bluemac.sit"
+  },
+  {
+    "name": "Gold-Blue Mac II",
+    "year": "1999",
+    "about": "public/themes/attachments/about-attueyauuazckvyna-image.png",
+    "showcase": "public/themes/attachments/showcase-attlltlim2ksllexj-image.png",
+    "archiveFileName2": "gold-bluemacii.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attwnxa8nlwihbdks-image.png",
+    "created": "2026-09-19T22:07:17.000Z",
+    "archiveFilename": "gold-bluemacii.sit"
   }
 ]
