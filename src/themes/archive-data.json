@@ -571,6 +571,10 @@
     "md5": "0b9f90210046e63a78567d9cc573dbcb",
     "size": 34405
   },
+  "alliancesuite.sit": {
+    "md5": "2f9dcb7c17d9005a2ebad76046200bab",
+    "size": 148473
+  },
   "allsmiles.sit": {
     "md5": "c383f6095f0701c44d8aec8f6d6e2799",
     "size": 23422
@@ -951,6 +955,10 @@
     "md5": "72ed4310b11fb07263e12bc51c0846c9",
     "size": 81472
   },
+  "appleultratech.sit": {
+    "md5": "df9e357dd1ab11aff4482d8592ad98cb",
+    "size": 21981
+  },
   "appleview.sit": {
     "md5": "659fd2ff29f30f5bf7803c0e9bdd42b9",
     "size": 58647
@@ -978,6 +986,10 @@
   "aquaflux.sit": {
     "md5": "49fdd1e34b979da08231206a9e6355a6",
     "size": 64153
+  },
+  "aquaiii.sit": {
+    "md5": "8a6f2dd2cbed10ef9120b725b1a3916c",
+    "size": 197323
   },
   "aqualight.sit": {
     "md5": "47e20062cc5ec6c558c388a2584ab914",
@@ -3467,6 +3479,10 @@
     "md5": "144c7fe2ee4c2c281d2e0dda63e654e4",
     "size": 12840
   },
+  "coloredseries.sit": {
+    "md5": "d969928d864f626ff4394171896b2c12",
+    "size": 601571
+  },
   "colorized.sit": {
     "md5": "d919c858d7f30ddee2ec02c4a0b9cf3f",
     "size": 33317
@@ -3702,6 +3718,10 @@
   "creamedlimabeans.sit": {
     "md5": "1505599e3030c88b9196c802e81e091b",
     "size": 23293
+  },
+  "creaturesandchaos2.sit": {
+    "md5": "d40426a9f64132f3f66870f41d84affa",
+    "size": 781000
   },
   "crescentnight.sit": {
     "md5": "5db6e79ea17b2e8b08f7c076c87b28be",
@@ -6099,6 +6119,10 @@
     "md5": "e148a0f22a96a20594f5e88f8574be2e",
     "size": 129773
   },
+  "gangtobonoiv.sit": {
+    "md5": "b46712b410eafd8e729c3ee080fcf6ea",
+    "size": 278972
+  },
   "gao.sit": {
     "md5": "1568fa55b06a9ec33b0e918d5765726e",
     "size": 101920
@@ -7064,8 +7088,8 @@
     "size": 259009
   },
   "hauntedhouse.sit": {
-    "md5": "bd06ec95e89a75d786fe626af712b59a",
-    "size": 598341
+    "md5": "b90ae1f3a874d298873fb7d140f333d9",
+    "size": 597665
   },
   "hawaiialoha.sit": {
     "md5": "24a5995699b00ba92c6a853ab3f38d79",
@@ -7466,6 +7490,10 @@
   "iamforgiven.sit": {
     "md5": "73ace9fd135d241f0b0346a03349601b",
     "size": 34114
+  },
+  "iaqua111.sit": {
+    "md5": "6bf0d40741f66fec0b48ba68b73650f3",
+    "size": 293779
   },
   "ibe.sit": {
     "md5": "623e942b6a93885c9277381f77942003",
@@ -8202,6 +8230,10 @@
   "joesample.sit": {
     "md5": "a8a1204c5667123354902549a37d2386",
     "size": 24364
+  },
+  "jonsscheme.sit": {
+    "md5": "79ed5e92736e1c5c23bccfb7e4822031",
+    "size": 133553
   },
   "jorgen.sit": {
     "md5": "47cfb1e000b9cc355221ca72f756b48d",
@@ -10026,6 +10058,10 @@
   "msbookshelfmotif.sit": {
     "md5": "f3aa4eb690a2a91bdd9601699da59ba3",
     "size": 64733
+  },
+  "msi.sit": {
+    "md5": "74b81424bc950e01b4099997193d3938",
+    "size": 324635
   },
   "mstriangle.sit": {
     "md5": "b05095b6a608e241fcfa8c55654c17f3",
@@ -15226,6 +15262,10 @@
   "tubularbondi.sit": {
     "md5": "e3ef0dfbf4b76438a5bc5ffea5eb9db6",
     "size": 141763
+  },
+  "tubularchrome.sit": {
+    "md5": "82500ab4e2f6294b3de197a8bc46e409",
+    "size": 18755
   },
   "tubularii.sit": {
     "md5": "e1466ad6479d03c5267eceaf357ed750",
