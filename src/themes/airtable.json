@@ -47838,6 +47838,7 @@
   },
   {
     "name": "Blue Arrows",
+    "authors": "Carl Pitts",
     "year": "1998",
     "about": "public/themes/attachments/about-attrnat0lej7xt9wk-image.png",
     "showcase": "public/themes/attachments/showcase-attz0f64w8ns9hgzh-image.png",
@@ -47859,6 +47860,7 @@
   },
   {
     "name": "Carls Gone Crazy",
+    "authors": "Carl Pitts",
     "year": "1998",
     "about": "public/themes/attachments/about-attgibuhc5arwxncr-image.png",
     "showcase": "public/themes/attachments/showcase-attkjidrjs5fucav4-image.png",
@@ -47961,5 +47963,443 @@
     "ksaSampler": "public/themes/attachments/ksa-sampler-attwnxa8nlwihbdks-image.png",
     "created": "2026-09-19T22:07:17.000Z",
     "archiveFilename": "gold-bluemacii.sit"
+  },
+  {
+    "name": "Gold Buttons And Blue Bars",
+    "year": "1999",
+    "about": "public/themes/attachments/about-attnhmwwjxj3ffuke-image.png",
+    "showcase": "public/themes/attachments/showcase-attg3bzmbyldmvonj-image.png",
+    "archiveFileName2": "goldbuttonsandbluebars.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attdnjqpouqcgjkp8-image.png",
+    "created": "2026-09-19T22:07:17.000Z",
+    "archiveFilename": "goldbuttonsandbluebars.sit"
+  },
+  {
+    "name": "Golden Breezes",
+    "year": "2000",
+    "about": "public/themes/attachments/about-atteodegvvpzy6lpv-image.png",
+    "showcase": "public/themes/attachments/showcase-attzvqzpzusu8tq1j-image.png",
+    "archiveFileName2": "goldenbreezes.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attbhlrygw1w9jluv-image.png",
+    "created": "2026-09-19T22:07:18.000Z",
+    "archiveFilename": "goldenbreezes.sit"
+  },
+  {
+    "name": "Gold Plate",
+    "authors": "Shurey",
+    "year": "1998",
+    "about": "public/themes/attachments/about-attnvwsa9cuhz7pim-image.png",
+    "showcase": "public/themes/attachments/showcase-attodepto2jyx3gsq-image.png",
+    "archiveFileName2": "goldplate.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attldyawghuqy9x50-image.png",
+    "created": "2026-09-19T22:07:18.000Z",
+    "archiveFilename": "goldplate.sit"
+  },
+  {
+    "name": "Gray Poles",
+    "year": "1999",
+    "about": "public/themes/attachments/about-att3rpszqwcundf1c-image.png",
+    "showcase": "public/themes/attachments/showcase-attxob1nhjayxik0j-image.png",
+    "archiveFileName2": "graypoles.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attcti3nt0ce8dbfq-image.png",
+    "created": "2026-09-20T03:07:38.000Z",
+    "archiveFilename": "graypoles.sit"
+  },
+  {
+    "name": "Gray Poles II",
+    "year": "1999",
+    "about": "public/themes/attachments/about-attldvuxdqrzgl8rf-image.png",
+    "showcase": "public/themes/attachments/showcase-attoyq9thnpy68gxa-image.png",
+    "archiveFileName2": "graypolesii.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-atttft4alam2a899n-image.png",
+    "created": "2026-09-20T03:07:38.000Z",
+    "archiveFilename": "graypolesii.sit"
+  },
+  {
+    "name": "Gray Poles III",
+    "year": "1999",
+    "about": "public/themes/attachments/about-attywi8rchqudv2vk-image.png",
+    "showcase": "public/themes/attachments/showcase-attnbqyibxycz45l9-image.png",
+    "archiveFileName2": "graypolesiii.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attshvgiyhet7vsda-image.png",
+    "created": "2026-09-20T03:07:39.000Z",
+    "archiveFilename": "graypolesiii.sit"
+  },
+  {
+    "name": "Green Land",
+    "year": "1998",
+    "about": "public/themes/attachments/about-attg6hiowswv10hod-image.png",
+    "showcase": "public/themes/attachments/showcase-attqlotxz8wx5wtx8-image.png",
+    "archiveFileName2": "greenland.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attd94zjl1zoivky4-image.png",
+    "created": "2026-09-20T03:07:39.000Z",
+    "archiveFilename": "greenland.sit"
+  },
+  {
+    "name": "Green Mean Mac",
+    "year": "1998",
+    "about": "public/themes/attachments/about-atthk7pedtedhquvp-image.png",
+    "showcase": "public/themes/attachments/showcase-atta67qnfhfce5giq-image.png",
+    "archiveFileName2": "greenmeanmac.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attbmevzxkbk4het2-image.png",
+    "created": "2026-09-20T03:07:39.000Z",
+    "archiveFilename": "greenmeanmac.sit"
+  },
+  {
+    "name": "Grey Bliss",
+    "year": "2000",
+    "about": "public/themes/attachments/about-attgj2pb2oiuvynyg-image.png",
+    "showcase": "public/themes/attachments/showcase-attcjmquvpzyzoaoy-image.png",
+    "archiveFileName2": "greybliss.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attxxznvryvn8xsb9-image.png",
+    "created": "2026-09-20T03:15:58.000Z",
+    "archiveFilename": "greybliss.sit"
+  },
+  {
+    "name": "Gynurasion",
+    "year": "1999",
+    "about": "public/themes/attachments/about-attobfjqd1ryvtg0e-image.png",
+    "showcase": "public/themes/attachments/showcase-attlurzdqpyirvvss-image.png",
+    "archiveFileName2": "gynurasion.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attjhxkupnxeaeuvp-image.png",
+    "created": "2026-09-20T03:15:58.000Z",
+    "archiveFilename": "gynurasion.sit"
+  },
+  {
+    "name": "Gynurasion G4",
+    "year": "1999",
+    "about": "public/themes/attachments/about-att5witg40l1otj0i-image.png",
+    "showcase": "public/themes/attachments/showcase-attvq5vyi7fxdvvsb-image.png",
+    "archiveFileName2": "gynurasiong4.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-att1hnhitsywjgonn-image.png",
+    "created": "2026-09-20T03:15:58.000Z",
+    "archiveFilename": "gynurasiong4.sit"
+  },
+  {
+    "name": "Gynurasion G4.01",
+    "year": "1999",
+    "about": "public/themes/attachments/about-attvqyvs1z8oxqmt4-image.png",
+    "showcase": "public/themes/attachments/showcase-attqzrykijkdmvhab-image.png",
+    "archiveFileName2": "gynurasiong401.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attsesxwlhx4ykg8r-image.png",
+    "created": "2026-09-20T03:15:59.000Z",
+    "archiveFilename": "gynurasiong401.sit"
+  },
+  {
+    "name": "Gynurasion G4/Graph",
+    "year": "1999",
+    "about": "public/themes/attachments/about-attdvqjoavdpkicfe-image.png",
+    "showcase": "public/themes/attachments/showcase-att4zopvhdlejpivb-image.png",
+    "archiveFileName2": "gynurasiong4graph.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attvpueimtkfxbbfs-image.png",
+    "created": "2026-09-20T03:20:30.000Z",
+    "archiveFilename": "gynurasiong4graph.sit"
+  },
+  {
+    "name": "HallOSween",
+    "year": "1999",
+    "about": "public/themes/attachments/about-attlqfd2sd7krw5gn-image.png",
+    "showcase": "public/themes/attachments/showcase-att0sekaiesvuvzsm-image.png",
+    "archiveFileName2": "hallosween.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attitimjrgaa0qeqq-image.png",
+    "created": "2026-09-20T03:20:30.000Z",
+    "archiveFilename": "hallosween.sit"
+  },
+  {
+    "name": "Hard Candy",
+    "authors": "Gwendolyn",
+    "year": "1998",
+    "about": "public/themes/attachments/about-atthgrhpdti5embbn-image.png",
+    "showcase": "public/themes/attachments/showcase-attjxljuee904aucm-image.png",
+    "archiveFileName2": "hardcandygwen.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attgynuva11zbbdyx-image.png",
+    "created": "2026-09-20T03:20:30.000Z",
+    "archiveFilename": "hardcandygwen.sit"
+  },
+  {
+    "name": "Haunted House",
+    "authors": "Martha Royer",
+    "year": "2000",
+    "about": "public/themes/attachments/about-att54brfowwotbeye-image.png",
+    "showcase": "public/themes/attachments/showcase-attezccsimaqbx5oc-image.png",
+    "archiveFileName2": "hauntedhouse.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attxenrvhki82ukax-image.png",
+    "created": "2026-09-20T03:20:31.000Z",
+    "archiveFilename": "hauntedhouse.sit"
+  },
+  {
+    "name": "HD 1.1",
+    "year": "1999",
+    "about": "public/themes/attachments/about-attlbsejglyfezawn-image.png",
+    "showcase": "public/themes/attachments/showcase-attzlehgl2qt8pjzl-image.png",
+    "archiveFileName2": "hd.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attx04lcylmfyffij-image.png",
+    "created": "2026-09-20T03:23:59.000Z",
+    "archiveFilename": "hd.sit"
+  },
+  {
+    "name": "HDRED 1.1",
+    "year": "1999",
+    "about": "public/themes/attachments/about-attokbbh5jraxp7bn-image.png",
+    "showcase": "public/themes/attachments/showcase-attrqfcdzuwyp82jj-image.png",
+    "archiveFileName2": "hdred.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-att9fauxzkszalyg0-image.png",
+    "created": "2026-09-20T03:24:00.000Z",
+    "archiveFilename": "hdred.sit"
+  },
+  {
+    "name": "Hidden",
+    "year": "2000",
+    "about": "public/themes/attachments/about-attrxcqfjdnf9acji-image.png",
+    "showcase": "public/themes/attachments/showcase-attjwxf2t39fplkcb-image.png",
+    "archiveFileName2": "hidden.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-atttjpklnn7ujzusj-image.png",
+    "created": "2026-09-20T03:24:00.000Z",
+    "archiveFilename": "hidden.sit"
+  },
+  {
+    "name": "Hidden Blue",
+    "year": "1998",
+    "about": "public/themes/attachments/about-att23yy9jc8pej4vt-image.png",
+    "showcase": "public/themes/attachments/showcase-att1tgyrvvnbqfn4o-image.png",
+    "archiveFileName2": "hiddenblue.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-att9mzseufz35yx1k-image.png",
+    "created": "2026-09-20T03:24:00.000Z",
+    "archiveFilename": "hiddenblue.sit"
+  },
+  {
+    "name": "Hidden Red",
+    "year": "1998",
+    "about": "public/themes/attachments/about-attqogfdivtbq3h3k-image.png",
+    "showcase": "public/themes/attachments/showcase-attnjxpftg5ffius5-image.png",
+    "archiveFileName2": "hiddenred.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attnwqad4bf4rfzwr-image.png",
+    "created": "2026-09-21T03:45:42.000Z",
+    "archiveFilename": "hiddenred.sit"
+  },
+  {
+    "name": "Hiromi wants to be like Be",
+    "authors": "Chillyday Yosh Kondo",
+    "year": "1999",
+    "about": "public/themes/attachments/about-attfy0n6l1mkhohum-image.png",
+    "showcase": "public/themes/attachments/showcase-attwsbglt3hrijhr0-image.png",
+    "archiveFileName2": "hiromiagain.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-atta25wsygputxohs-image.png",
+    "created": "2026-09-21T03:45:42.000Z",
+    "archiveFilename": "hiromiagain.sit"
+  },
+  {
+    "name": "Ho Ho Ho",
+    "authors": "Carl Pitts",
+    "year": "2000",
+    "about": "public/themes/attachments/about-attg6elupytuhwknr-image.png",
+    "showcase": "public/themes/attachments/showcase-attf8mu2hmkfetkjs-image.png",
+    "archiveFileName2": "hohoho.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attguolf2ridagsan-image.png",
+    "created": "2026-09-21T03:45:43.000Z",
+    "archiveFilename": "hohoho.sit"
+  },
+  {
+    "name": "Holiday Delights",
+    "authors": "Carl Pitts",
+    "year": "1999",
+    "about": "public/themes/attachments/about-attwj0nd9cogeptqy-image.png",
+    "showcase": "public/themes/attachments/showcase-attkxoezemh4s3kcj-image.png",
+    "archiveFileName2": "holidaydelights.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attduknp9xignxw49-image.png",
+    "created": "2026-09-21T03:45:43.000Z",
+    "archiveFilename": "holidaydelights.sit"
+  },
+  {
+    "name": "Holiday Delights II",
+    "authors": "Carl Pitts",
+    "year": "2000",
+    "about": "public/themes/attachments/about-attmbahukkgjmflt1-image.png",
+    "showcase": "public/themes/attachments/showcase-att0uyltyjcfwzsmh-image.png",
+    "archiveFileName2": "holidaydelightsii.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attjmxwmkjte7yyxe-image.png",
+    "created": "2026-09-20T03:24:00.000Z",
+    "archiveFilename": "holidaydelightsii.sit"
+  },
+  {
+    "name": "h O.S.t",
+    "year": "1999",
+    "about": "public/themes/attachments/about-atti0puxyj2oiguep-image.png",
+    "showcase": "public/themes/attachments/showcase-atttdcbiopzlqvgsx-image.png",
+    "archiveFileName2": "host.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attit9eiatezo09nd-image.png",
+    "created": "2026-09-20T03:20:31.000Z",
+    "archiveFilename": "host.sit"
+  },
+  {
+    "name": "h O.S.t 2",
+    "year": "1999",
+    "about": "public/themes/attachments/about-attrzofmdgr6euxam-image.png",
+    "showcase": "public/themes/attachments/showcase-att4fy4kpggcmsu7z-image.png",
+    "archiveFileName2": "host2.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attsyb9ulbj4kzjf9-image.png",
+    "created": "2026-09-20T03:20:31.000Z",
+    "archiveFilename": "host2.sit"
+  },
+  {
+    "name": "Hot and Dry",
+    "year": "1999",
+    "about": "public/themes/attachments/about-attczlfcukqdv106k-image.png",
+    "showcase": "public/themes/attachments/showcase-attc2jfwnehrzbzze-image.png",
+    "archiveFileName2": "hotanddry.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attwwxcks840fh6gd-image.png",
+    "created": "2026-09-20T03:20:31.000Z",
+    "archiveFilename": "hotanddry.sit"
+  },
+  {
+    "name": "Hot and Humid",
+    "year": "1999",
+    "about": "public/themes/attachments/about-attv6az7r0v98kc2o-image.png",
+    "showcase": "public/themes/attachments/showcase-attljnosnrjfgt7tf-image.png",
+    "archiveFileName2": "hotandhumid.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attojqqofzenyq7xy-image.png",
+    "created": "2026-09-20T03:20:32.000Z",
+    "archiveFilename": "hotandhumid.sit"
+  },
+  {
+    "name": "Inca Doo",
+    "year": "1998",
+    "about": "public/themes/attachments/about-attzwtdyqkjzdgr56-image.png",
+    "showcase": "public/themes/attachments/showcase-attw43ra0avvj4jc9-image.png",
+    "archiveFileName2": "incadoo.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attkevrevl6undfuk-image.png",
+    "created": "2026-09-21T03:55:33.000Z",
+    "archiveFilename": "incadoo.sit"
+  },
+  {
+    "name": "Infested OS",
+    "year": "1999",
+    "about": "public/themes/attachments/about-attonc9jgonnsfp82-image.png",
+    "showcase": "public/themes/attachments/showcase-attxatds1god9dpob-image.png",
+    "archiveFileName2": "infestedos.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attb8cvjajuvajfil-image.png",
+    "created": "2026-09-21T03:55:34.000Z",
+    "archiveFilename": "infestedos.sit"
+  },
+  {
+    "name": "Titanium LE",
+    "authors": "Toren Valimir",
+    "year": "2001",
+    "about": "public/themes/attachments/about-attpaz1dglucfqfgz-image.png",
+    "showcase": "public/themes/attachments/showcase-attas2nnong5sxgif-image.png",
+    "archiveFileName2": "iosxtitaniumle.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attokoamwdkdla3gt-image.png",
+    "created": "2026-09-21T03:55:34.000Z",
+    "archiveFilename": "iosxtitaniumle.sit"
+  },
+  {
+    "name": "Jean's Violets-snd",
+    "authors": "Martha Royer",
+    "year": "1998",
+    "about": "public/themes/attachments/about-attm8bvhaqvheu8cl-image.png",
+    "showcase": "public/themes/attachments/showcase-attllyipiv8euntew-image.png",
+    "archiveFileName2": "jeansvioletssound.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-att2ueumrxtkn0e1m-image.png",
+    "created": "2026-09-21T03:55:34.000Z",
+    "archiveFilename": "jeansvioletssound.sit"
+  },
+  {
+    "name": "Love for 3 Oranges1.1",
+    "authors": "Patricia Erigero",
+    "year": "1998",
+    "about": "public/themes/attachments/about-attdkoxgbmhte8lkn-image.png",
+    "showcase": "public/themes/attachments/showcase-attoa67xivaxfmkby-image.png",
+    "archiveFileName2": "lovefor3oranges.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attobkotmlzitao3f-image.png",
+    "created": "2026-09-21T04:07:13.000Z",
+    "archiveFilename": "lovefor3oranges.sit"
+  },
+  {
+    "name": "Love for 3 Oranges1.1 \"Without\"",
+    "authors": "Patricia Erigero",
+    "year": "1998",
+    "about": "public/themes/attachments/about-attlaorrccxxie3xu-image.png",
+    "showcase": "public/themes/attachments/showcase-attxrjxhocgox7nkz-image.png",
+    "archiveFileName2": "lovefor3oranges.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attr39qkyifppuhyd-image.png",
+    "created": "2026-09-21T04:07:13.000Z",
+    "archiveFilename": "lovefor3oranges.sit"
+  },
+  {
+    "name": "Marble (Rose)",
+    "authors": "Kacey Lovelace",
+    "year": "1997",
+    "about": "public/themes/attachments/about-attziz9l3d0yf62fq-image.png",
+    "showcase": "public/themes/attachments/showcase-atte8gnvoe3k6nkvd-image.png",
+    "archiveFileName2": "marbles.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attncwrh8wdxsclos-image.png",
+    "created": "2026-09-21T04:07:13.000Z",
+    "archiveFilename": "marbles.sit"
+  },
+  {
+    "name": "Marble (Moss)",
+    "authors": "Kacey Lovelace",
+    "year": "1997",
+    "about": "public/themes/attachments/about-attjxu91z18mrjs3r-image.png",
+    "showcase": "public/themes/attachments/showcase-attn19sbocjj4l4vs-image.png",
+    "archiveFileName2": "marbles.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attanioxa6p266lqf-image.png",
+    "created": "2026-09-21T04:07:13.000Z",
+    "archiveFilename": "marbles.sit"
+  },
+  {
+    "name": "Marble (Grey)",
+    "authors": "Kacey Lovelace",
+    "year": "1997",
+    "about": "public/themes/attachments/about-attc3tv6jbdrdoaqb-image.png",
+    "showcase": "public/themes/attachments/showcase-attbcqbl904e5noe9-image.png",
+    "archiveFileName2": "marbles.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attpoqav9mpxs5wqp-image.png",
+    "created": "2026-09-21T04:15:49.000Z",
+    "archiveFilename": "marbles.sit"
+  },
+  {
+    "name": "Monolith",
+    "authors": "Stadio yoco",
+    "year": "1998",
+    "about": "public/themes/attachments/about-attmffhkwsa5u5gkz-image.png",
+    "showcase": "public/themes/attachments/showcase-att2xdwsqilyw2pnz-image.png",
+    "archiveFileName2": "monolithkaz.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attjsuz70dfetwji8-image.png",
+    "created": "2026-09-21T04:15:49.000Z",
+    "archiveFilename": "monolithkaz.sit"
+  },
+  {
+    "name": "Montague",
+    "authors": "Martha Royer",
+    "year": "2000",
+    "about": "public/themes/attachments/about-att1hrgenz92gzpof-image.png",
+    "showcase": "public/themes/attachments/showcase-attxoegf5vdhoijji-image.png",
+    "archiveFileName2": "montague.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attqhakv81jywbyl6-image.png",
+    "created": "2026-09-21T04:15:50.000Z",
+    "archiveFilename": "montague.sit"
+  },
+  {
+    "name": "Silver Vines",
+    "authors": "Martha Royer",
+    "year": "2000",
+    "about": "public/themes/attachments/about-attfzu4kvddu6oevk-image.png",
+    "showcase": "public/themes/attachments/showcase-attqhizly4xjpndrc-image.png",
+    "archiveFileName2": "silverminivines.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attmhrzgqp09c6gml-image.png",
+    "created": "2026-09-21T04:15:50.000Z",
+    "archiveFilename": "silverminivines.sit"
+  },
+  {
+    "name": "Tea Rose Lite",
+    "authors": "Andi",
+    "year": "1997",
+    "about": "public/themes/attachments/about-attp3rqvktgok5tbx-image.png",
+    "showcase": "public/themes/attachments/showcase-attg7shilaun5naug-image.png",
+    "archiveFileName2": "tearoselite.sit",
+    "ksaSampler": "public/themes/attachments/ksa-sampler-attco4to2juzgkxg6-image.png",
+    "created": "2026-09-21T04:20:01.000Z",
+    "archiveFilename": "tearoselite.sit"
   }
 ]
