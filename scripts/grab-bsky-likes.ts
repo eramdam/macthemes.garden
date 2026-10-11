@@ -1,5 +1,6 @@
 import fs from "fs-extra";
 import { chunk } from "es-toolkit";
+import async from "async";
 // import lexicons
 import type {} from "@atcute/atproto";
 import type {} from "@atcute/bluesky";
@@ -53,28 +54,33 @@ for (const { collection, rkey, record } of fromUint8Array(data)) {
 }
 
 let likesByThemeIds: Record<string, number> = {};
-
-for (const recordsChunk of chunk(records, 25)) {
-  const { data, ok } = await rpc.get("app.bsky.feed.getPosts", {
-    params: {
-      uris: recordsChunk.map((r) => makeUri(r.rkey)),
-    },
-  });
-  if (ok) {
-    data.posts.forEach((post) => {
-      const themeIdForPost = recordsChunk.find((r) => {
-        return makeUri(r.rkey) === post.uri;
-      })?.themeId;
-
-      if (themeIdForPost) {
-        likesByThemeIds[themeIdForPost] =
-          (likesByThemeIds[themeIdForPost] || 0) +
-          (post.likeCount || 0) +
-          (post.repostCount || 0);
-      }
+const tasks = chunk(records, 25).map((chunk) => {
+  return async () => {
+    const { data, ok, status } = await rpc.get("app.bsky.feed.getPosts", {
+      params: {
+        uris: chunk.map((r) => makeUri(r.rkey)),
+      },
     });
-  }
-}
+    if (ok) {
+      data.posts.forEach((post) => {
+        const themeIdForPost = chunk.find((r) => {
+          return makeUri(r.rkey) === post.uri;
+        })?.themeId;
+
+        if (themeIdForPost) {
+          likesByThemeIds[themeIdForPost] =
+            (likesByThemeIds[themeIdForPost] || 0) +
+            (post.likeCount || 0) +
+            (post.repostCount || 0);
+        }
+      });
+    } else {
+      throw new Error(`getPosts failed: ${status}`);
+    }
+  };
+});
+
+await async.parallelLimit(tasks, 25);
 
 await fs.writeFile(
   new URL(import.meta.resolve("../src/themes/likes-bsky.json")).pathname,
