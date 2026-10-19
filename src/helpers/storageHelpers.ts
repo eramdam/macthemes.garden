@@ -4,7 +4,7 @@ const LIKES_KEY = "macthemes-likes";
 
 const localLikes = z.record(z.string(), z.boolean()).default({});
 
-function getLocalLikes(): z.TypeOf<typeof localLikes> {
+function getLocalLikes(): z.infer<typeof localLikes> {
   const raw = localStorage.getItem(LIKES_KEY);
 
   return localLikes.parse(JSON.parse(raw || "{}"));
