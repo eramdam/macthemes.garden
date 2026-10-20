@@ -1,5 +1,5 @@
 import {
-  type AnchorHTMLAttributes,
+  type AccessibleAnchorHTMLAttributes,
   type ButtonHTMLAttributes,
   type ComponentChildren,
 } from "preact";
@@ -13,7 +13,7 @@ type OS9ButtonProps =
   | ({
       asButton?: false | undefined;
       children: ComponentChildren;
-    } & AnchorHTMLAttributes<HTMLAnchorElement>);
+    } & AccessibleAnchorHTMLAttributes<HTMLAnchorElement>);
 
 export function OS9Button({ children, ...attributes }: OS9ButtonProps) {
   const content = (

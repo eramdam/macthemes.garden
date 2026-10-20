@@ -44,6 +44,8 @@ export async function generateOpenGraphImageForTheme(
           style={{
             position: "absolute",
             inset: 0,
+            width: "100%",
+            height: "100%",
             objectPosition: "top",
             objectFit: "cover",
             filter: "blur(5px) brightness(70%)",
@@ -53,6 +55,7 @@ export async function generateOpenGraphImageForTheme(
       <img
         src={toDataUri(mainThumbnail)}
         style={{
+          position: "relative",
           padding: margin,
           width: "100%",
           height: "100%",
