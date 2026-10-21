@@ -1,9 +1,0 @@
-[phases.setup]
-nixPkgs = ["nodejs_24"]
-
-[phases.install]
-cmds = [
-  "corepack enable",
-  "corepack prepare pnpm@11.5.0 --activate",
-  "pnpm install",
-]
